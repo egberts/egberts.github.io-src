@@ -1,9 +1,9 @@
 Title: Open standard on Data Schema and Serialization
-Tags: research
+Tags: schema, xsd, serialization
 Date: 2015-08-31 05:00
 Modified: 2018-12-20 12:00
 Status: published
-Category: schema, xsd, serialization
+Category: research
 
 Doing a bit of research with regard to data schema and serializaton,
 preferably without being JSON_centric.
