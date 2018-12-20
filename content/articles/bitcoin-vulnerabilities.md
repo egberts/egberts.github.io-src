@@ -1,7 +1,8 @@
 Title: Bitcoin Vulnerabilities
 Date: 2018-08-20 09:43
+Modified: 2018-12-20 15:28
 Tags: bitcoin, vulnerabilities
-Category: research
+Category: security
 summary: Vulnerabilities Found in Bitcoin.
 
 Some errors Satoshi with Bitcoin made are:
