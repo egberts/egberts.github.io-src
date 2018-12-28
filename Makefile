@@ -85,7 +85,7 @@ stopserver:
 	kill -9 `cat srv.pid`
 	@echo 'Stopped Pelican and SimpleHTTPServer processes running in background.'
 
-publish:
+publish: clone
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
 ssh_upload: publish
@@ -110,11 +110,20 @@ cf_upload: publish
 	cd $(OUTPUTDIR) && swift -v -A https://auth.api.rackspacecloud.com/v1.0 -U $(CLOUDFILES_USERNAME) -K $(CLOUDFILES_API_KEY) upload -c $(CLOUDFILES_CONTAINER) .
 
 github: publish
-	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
-	git push origin $(GITHUB_PAGES_BRANCH)
-	git push https://github.com/egberts/egberts.github.io.git origin $(GITHUB_PAGES_BRANCH)
+	@echo Probably want to do the following:
+	@echo     git submodule update --init
+	@echo     cd output
+	@echo     git push origin HEAD:master
+	# ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
+	# git push origin $(GITHUB_PAGES_BRANCH)
+	# git push https://github.com/egberts/egberts.github.io.git origin $(GITHUB_PAGES_BRANCH)
 
 validate: publish
 	html5validator --root $(OUTPUTDIR)
 
-.PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github
+clone: output/sitemap.xml
+	# if missing an output content, user did 'git clone' without --recursion
+	git submodule update --init
+
+
+.PHONY: html help clean clone regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github
