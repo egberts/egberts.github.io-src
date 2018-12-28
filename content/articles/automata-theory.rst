@@ -4,7 +4,7 @@ Automata theory: formal languages and formal grammars
 :Tags: rst, automata, formal language, formal grammar
 :Date: 2018-11-29 10:09
 :Status: published
-:Category: formal
+:Category: research
 
 [jtable]
 Chomsky hierarchy, Grammars, Languages, Abstract machines
