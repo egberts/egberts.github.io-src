@@ -269,6 +269,12 @@ make github
 
 And visit [https://username.github.io/username/](https://username.github.io/username)
 
+A workflow diagram is shown as:
+
+![2-Repo Pelican Git Workflow](/images/pelican-2-git-repos.svg "2-Repo Pelican Git Workflow")
+
+
+
 
 Saving It All To Repositories
 =============================
