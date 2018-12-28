@@ -141,12 +141,14 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
 
 ## HTML layout - sidebar - Social links
 ## Social widget
-SOCIAL_LABELS = (('e-mail', 'fas fa-envelope', 'mailto:me at egbert.net'),
+SOCIAL_LABELS = (
+          # ('e-mail', 'fas fa-envelope', 'mailto:me at egbert.net'),
           ('Twitter', 'fab fa-twitter', 'https://twitter.com/egbertst'),
           ('GitHub', 'fab fa-github-square', 'https://github.com/egberts'),
           ('StackOverflow', 'fab fa-stack-overflow', 'https://stackoverflow.com/users/4379130/egbert-s'),
          )
-SOCIAL = (('fas fa-envelope', 'mailto:me at egbert.net'),
+SOCIAL = (
+          # ('fas fa-envelope', 'mailto:me at egbert.net'),
           ('fab fa-github-square', 'https://github.com/egberts'),
           ('fab fa-stack-overflow', 'https://stackoverflow.com/users/4379130/egbert-s'),
           ('fab fa-linkedin', 'https://www.linkedin.com/in/1dyftm7u')
