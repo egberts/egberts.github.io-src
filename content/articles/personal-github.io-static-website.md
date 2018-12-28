@@ -49,20 +49,21 @@ NOTE: the second repo has a "-src" suffix added to the repo name.
 Click on the green "Create Repository" button.
 
 ```bash
-  # On local machine
+# On local machine
 
-  cd ~/work/websites  # we had those already existing subdirectories
-  git clone https://github.com/<username>/<username>.github.io-src
-  # This is our main git project
-  cd <username>.github.io-src
+cd ~/work/websites  # we had those already existing subdirectories
+git clone https://github.com/<username>/<username>.github.io-src
+
+# This is our main git project
+cd <username>.github.io-src
 ```
 
 Now we add our final-stage repo submodule to our master project
 and call it `output` subdirectory
 
 ```bash
-  # output subdirectory = final-stage static website
-  git submodule add --force \
+# output subdirectory = final-stage static website
+git submodule add --force \
       --branch master  \
       https://github.com/egberts/egberts.github.io.git output
 ```
@@ -80,8 +81,8 @@ Now we can add our static website generator in here.
 I use Pelican, which uses `output` to hold my final-stage website
 
 ```bash
-  cd ~/work/websites/<username>.github.io-src  # note the '-src' suffix
-  pelican-quickstart
+cd ~/work/websites/<username>.github.io-src  # note the '-src' suffix
+pelican-quickstart
 ```
 
 This `pelican-quickstart` utility will ask you a series of questions to make
@@ -200,9 +201,8 @@ its 'output' subdirectory being destroyed.  There is a configuration
 for that;  Edit the `pelicanconf.py` file:
 
 
-```
-    #!bash
-    vim pelicanconf.py
+```bash
+vim pelicanconf.py
 ```
 
 And add (or change) the `DELETE_OUTPUT_DIRECTORY` option to "False".
@@ -247,15 +247,30 @@ Then saved the file as "`content/article/example.md`"
 I then executed:
 
 ```bash
-    make html
+make html
 ```
 
 To view your newly created webpages, start up a local webserver using port
 8000.
 
 ```bash
-    make serve
+make serve
+```
+Using your favorite web browser, visit the [http://localhost:8000/](http://localhost:8000/) and view the result
+of your first static website.
+
+
+Feel confident?  Publish the static web pages onto your GitHub personal website.
+
+```bash
+make publish
+make github
 ```
 
-Using your favorite web browser, visit the 'http://localhost:8000/' and view the result
-of your first static website.
+And visit [https://username.github.io/username/](https://username.github.io/username)
+
+
+Saving It All To Repositories
+=============================
+
+5.  Git-pushed webpages to final-stage website repo
