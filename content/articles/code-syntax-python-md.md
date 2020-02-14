@@ -1,6 +1,6 @@
 Title: Python Code Syntax using Markdown
 Date: 2018-11-15 12:22
-modified: 2018-11-15 12:35
+modified: 2019-02-13 10:50
 Tags: code syntax, pelican, markdown, python, pygments, CSS, fix, HTML
 Category: HOWTO
 slug: code-syntax-python-md
@@ -74,6 +74,7 @@ Also showed one way not to do code syntax highlighting.
 
 Three-colon Python surrounding by three-backticks
 -------------------------------------------------
+Below example are Python without the line numbers:
 
 ```
 :::python
@@ -114,6 +115,7 @@ NOTE: above method breaks vim editor with Markdown syntax highlighting.
 
 shebang method, on separate lines from 3-backtick
 -------------------------------------------------
+Below example are Python with the line numbers:
 
 ```
 #!/usr/bin/python
