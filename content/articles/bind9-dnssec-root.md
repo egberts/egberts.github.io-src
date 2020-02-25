@@ -2,19 +2,19 @@ Title: Bind9 DNSSEC Root
 status: draft
 Date: 2020-01-28 16:14
 Modified: 2020-02-15 07:32
-slug: bind9-dnssec-root
-tags: bind9 dnssec
+tags: bind9, dnssec
 category: research
 summary: Setting up Root DNSSEC for internal use
 save_as: egberts-bind9-dnssec-root.md
 
-How to set up a Root (".") DNSSEC for white-lab use.
+How to set up a Root (".", or top-level) DNSSEC for white-lab use.
 
 WHY DO THIS?
 ============
-I've got a white-lab network.  This White-lab has no access whatsoever to the Internet, for it is air-gapped (no wire/wireless connection).
+My air-gapped (no Internet) white-lab DNS infrastructure needs a DNSSEC for internal testing.
 
-
+White-Lab Description
+---------------------
 White-lab has its own IPv4/v6 subnet, nameservers, as well as its own DHCP, Kerberos, web, messaging, SMTP, IMAP4, and various other servers.  DNS records are populated with these servers' host address and name.
 
 To support a full-featured DNS for such a standalone white-lab network, it must maintain its own cloned set of 13 Root DNS servers.
@@ -35,20 +35,22 @@ dnssec-analyzer.verisignlabs.com DNSSEC validation in Python as well.
 
 Working examples of DNSSEC are:
 
-    dig @9.9.9.9 +dnssec +nocd +all egbert.net.
-    dig +dnssec @156.154.70.1 +dnssec +nocd +all egbert.net.
-    ; Look for 'a'uthenticated 'd'ata ('ad') flag in:
-    ;;; flags: qr rd ra ad; QUERY: 1, ANSWER: 3, AUTHORITY: 4, ADDITIONAL: 4
+```bash
+dig @9.9.9.9 +dnssec +nocd +all egbert.net.
+dig +dnssec @156.154.70.1 +dnssec +nocd +all egbert.net.
+# Look for 'a'uthenticated 'd'ata ('ad') flag in:
+# flags: qr rd ra ad; QUERY: 1, ANSWER: 3, AUTHORITY: 4, ADDITIONAL: 4
 
-    delv @9.9.9.9 +dnssec +nocd +all egbert.net.
-    ' Look for 'fully validated'
-
+delv @9.9.9.9 +dnssec +nocd +all egbert.net.
+# Look for 'fully validated'
+```
 
 Below are all the ISC Bind9.15 options available.  They are organized from
 top-nested down to bottom-nested clause options and many are usable in multiple
 clauses:
 
-  Option clause:
+```editorconfig
+# Option clause:
     managed-keys-directory <dirspec>;
     max-rsa-exponent-size  <0,35-4096>;
     root-delegation-only; // options/view clauses
@@ -59,7 +61,7 @@ clauses:
     sit-secret <hex-value-string>;
     trusted-anchor-telemetry [yes|no];
 
-  Option/View clauses:
+#  Option/View clauses:
     disable-algorithms <algorithm_list>;
     disable-ds-digests <digest_list>;
     dns64 [no|yes];
@@ -73,7 +75,7 @@ clauses:
     filter-aaaa-on-v4 [yes|no|break-dnssec];
     filter-aaaa-on-v6 [yes|no|break-dnssec];
 
-  Option/View/Zone clauses:
+#  Option/View/Zone clauses:
     auto-dnssec [off|allow];
     dnssec-dnskey-kskonly [no|yes];
     dnssec-loadkey-interval <1-1440>; // minute-interval
@@ -87,21 +89,23 @@ clauses:
     sig-validity-interval  <1-1024>;
     update-check-ksk [yes|no];
 
-  Zone clause:
+#  Zone clause:
     inline-signing [yes|no];
     auto-dnssec [off|maintained|allow];
     delegation-only [yes|no]; // hint/stub zones
-
+```
 
 Enabling DNSSEC
 ===============
 Let us turn on DNSSEC in <code>/etc/bind/named.conf</code> with:
 
+```named.conf
   options {
       // ...
       dnssec-enable yes;
       // ...
   };
+```
 
 TLD zone and DNSSEC
 -------------------
@@ -110,18 +114,23 @@ Now for the custom <code>whitelab</code> top-level domain (TLD) name.
 Create the custom TLD zone database file in
 <code>/var/lib/bind/db.whitelab</code>:
 
+```named-zone
     $TTL 86400
     whitelab.                  86400 IN SOA a.myroot-servers.whitelab. (
                                                 hostmaster 1 1d 2h 41d 1h )
     whitelab.                  86400 IN NS  a.myroot-servers.whitelab.
     a.myroot-servers.whitelab. 86400 IN A   @MY_ROOT_DNS_SERVER_IP@
+```
 
 The custom TLD zone database file wll also be signed as well:
 
-    dnssec-keygen -a rsasha256 -b 2048 -n ZONE whitelab
+```bash
+dnssec-keygen -a rsasha256 -b 2048 -n ZONE whitelab
+```
 
 This <code>options</code> contains the following options:
 
+```named.conf
     options {
         dnssec-enable yes;
 
@@ -134,34 +143,41 @@ This <code>options</code> contains the following options:
         recursion no;
         // ...
     };
+```
 
 This <code>zone "root"</code> contains the following options:
 
+```named.conf
     zone "." {
         type master;
         file "root/db.whitelab";  // not in master subdirectory for security
         update-policy local;
         auto-dnssec maintain;
     };
-
+```
 This <code>zone whitelab</code> contains the following options:
 
+```named.conf
 zone "whitelab" {
         type master;
         file "master/db.whitelab";
         update-policy local;
         auto-dnssec maintain;
 };
+```
 Back to Root, let's start with the top-most (or first
 encountered) Bind9 options associated with Root, particularly private root:
 
-  view "local\_view" {
+```named.conf
+  view "local_view" {
     root-delegation-only;  // not at global option clause, but view
   }
+```
 
 Then we add the Root (".") zone:
 
-  view "local\_view" {
+```named.conf
+  view "local_view" {
     root-delegation-only;  // not at global option clause, but view
 
     zone "." {
@@ -170,10 +186,12 @@ Then we add the Root (".") zone:
     };
 
   };
+```
 
 At this point, we want to see that root zone is getting picked up, specifically
 DNSKEY RRs.
 
+```
 #0  ns__query_start (qctx=qctx@entry=0x7ffff51ecf20) at query.c:5296
 #1  0x0000555555617758 in query_setup (client=<optimized out>,
     qtype=qtype@entry=0x30) at query.c:5141
@@ -185,8 +203,9 @@ DNSKEY RRs.
     manager=0x7ffff7f94010) at task.c:1134
 #5  run (queuep=<optimized out>) at task.c:1303
 #6  0x00007ffff761bfa3 in start_thread ()
+```
 
-
+```
 #0  ns_query_done (qctx=qctx@entry=0x7ffff49ebf20) at query.c:10670
 #1  0x0000555555613d91 in query_nxdomain (qctx=qctx@entry=0x7ffff49ebf20,
     empty_wild=empty_wild@entry=0x0) at query.c:8576
@@ -206,10 +225,11 @@ DNSKEY RRs.
     manager=0x7ffff7f94010) at task.c:1134
 #9  run (queuep=<optimized out>) at task.c:1303
 #10 0x00007ffff761bfa3 in start_thread ()
-
+```
 
 Then we add our whitelab TLD zone:
 
+```named.conf
   view "local\_view" {
     root-delegation-only;  // not at global option clause, but view
     zone "." {
@@ -223,6 +243,7 @@ Then we add our whitelab TLD zone:
     };
 
   };
+```
 
 Now, to corral DNS query to `local_view` to just the root for local clients;
 we want any attempt to query the XXXX.local. to just thie `local_view`
@@ -231,106 +252,120 @@ view.
 Root zone and DNSSEC
 ====================
 
-Note: Substitute the MY_ROOT_DNS_SERVER_IP with the IP address of your DNS server.
+NOTE: Substitute the MY_ROOT_DNS_SERVER_IP with the IP address of your DNS server.
 
 DNSSEC Key Subdirectory
 -----------------------
 Key subdirectory must be writeable by its UNIX owner of <code>named</code> daemon. Move to the key subdirectory:
 
-   mkdir -p /var/lib/bind/keys
-   chown bind:root /var/lib/bind/keys
-   chmod 0750 /var/lib/bind/keys
-   cd /var/lib/bind/keys
-
+```bash
+mkdir -p /var/lib/bind/keys
+chown bind:root /var/lib/bind/keys
+chmod 0750 /var/lib/bind/keys
+cd /var/lib/bind/keys
+```
 Creating root-zone key files
 ----------------------------
 Create a new Zone-Signing-Key (ZSK) and Key-Signing-Key (KSK) for the Root ('.') zone:
 
-   dnssec-keygen -a RSASHA256 -b 2048 -n ZONE .
-   dnssec-keygen -a RSASHA256 -b 4096 -n ZONE -f KSK .
-   ls -lC1 K*key
+```bash
+dnssec-keygen -a RSASHA256 -b 2048 -n ZONE .
+dnssec-keygen -a RSASHA256 -b 4096 -n ZONE -f KSK .
+ls -lC1 K*key
+```
 
 Creating root-zone database file
 --------------------------------
 Copy keys to the <code>db.root</code> zone file:
 
-   cat K.+008+*.key > db.root
+```bash
+cat K.+008+*.key > db.root
+```
 
-Create Root zone file:
+Create Root zone file
+---------------------
 
 Root zone file contains the DNS records for its root zone.
 Populate the  <code>/var/lib/bind/db.root</code> file, add the
 following records:
 
+```named.zone
     .                          86400  IN SOA a.myroot-servers.whitelab.
                                              hostmaster.whitelab.
                                              2013122200 1800 900 604800 86400
     .                          518400 IN NS  a.myroot-servers.whitelab.
     whitelab.                  86400  IN NS  a.myroot-servers.whitelab.
     a.myroot-servers.whitelab. 86400  IN A   @MY_ROOT_DNS_SERVER_IP@
-
+```
 
 Sign our own root zone
 ----------------------
 
 Now we can sign our own root ('.') zone.  Origin (<code>-o</code>) is root '.' zone.  Statistics <code>-t</code> get displayed at the end. Remove (<code>-R</code>) any old signatures.  Smart-Signing (<code>-S</code>) is being performed:
 
-    dnssec-signzone -o . -t -R -S  /var/lib/bind/db.root
+```bash
+dnssec-signzone -o . -t -R -S  /var/lib/bind/db.root
+```
 
 This completes the standalone Root DNSSEC aspect.
-
 
 
 Checking all our works
 ----------------------
 It is time to check all of our works:
 
-    named-checkconf -z
-    echo $?
-    ; For a successful check, echo output should be 0.
+```bash
+named-checkconf -z
+echo $?
+# For a successful check, echo output should be 0.
+```
 
-Starting DNS daemon
--------------------
+Restarting DNS daemon
+---------------------
 
-    systemctl stop bind9.service
-    systemctl start bind9.service
-    ;; or
-    killall -KILL named
-    /usr/sbin/named -u bind -f -c /etc/bind/named.conf
+```bash
+systemctl stop bind9.service
+systemctl start bind9.service
+# or
+killall -KILL named
+/usr/sbin/named -u bind -f -c /etc/bind/named.conf
+```
 
-
-
-
-Authoritative only check with -a.
+Authoritative Only check with -a.
 =================================
 
 Only perform shorter authoritative check; check SOA + DNSKEY validation.This will allow confirmation that signing works at the Authoritative DNS server level before actually publishing the DS record and making DNSSEC 'public'
 
-* Grab SOA record and RRSIGs, direct from authoritative NS
- * delv @1.1.1.1 . SOA, or
- * dig @1.1.1.1 . SOA
-   dig @1.1.1.1 . RRSIG
+Grab SOA record and RRSIGs, direct from authoritative NS
 
-* Grab DNSKEY for domain, direct from authoritative NS
- * delv @1.1.1.1 . DNSKEY
-* Validate the above
-* Further validation beyond the authority is not required here
+```bash
+delv @1.1.1.1 . SOA 
+dig @1.1.1.1 . SOA
+dig @1.1.1.1 . RRSIG
+```
+
+Grab DNSKEY for domain, direct from authoritative NS
+```bash
+delv @1.1.1.1 . DNSKEY
+```
+Validates the above
+
+Further validation beyond the authority is not required here
 
 Full check (default, without -a)
 ================================
 
-### (not implemented) Performs full DNSSEC chain validation starting from the root
+; # (not implemented) Performs full DNSSEC chain validation starting from the root
 
-*    (not implemented) current_domain=. (root)
-*    (not implemented) Loop1: while current_domain != checked_domain;
-*    (not implemented) Using NS of current_domain, grab DS record of child zone
-*    (not implemented) Grab DNSKEY assosicated with the DS record's RRSIG's
-*    (not implemented) Validate DNSKEY(child)
-*    (not implemented) Validate DS and DNSKEY(child)
-*    (not implemented) current_domain = child, child = new_child(current_domain)
-*    (not implemented) If: current_domain = child; break
-*    (not implemented) Perform check similar to authoratative (-a), above
-
+* (not implemented) current_domain=. (root)
+* (not implemented) Loop1: while current_domain != checked_domain;
+* (not implemented) Using NS of current_domain, grab DS record of child zone
+* (not implemented) Grab DNSKEY assosicated with the DS record's RRSIG's
+* (not implemented) Validate DNSKEY(child)
+* (not implemented) Validate DS and DNSKEY(child)
+* (not implemented) current_domain = child, child = new_child(current_domain)
+* (not implemented) If: current_domain = child; break
+* (not implemented) Perform check similar to authoratative (-a), above
 
 Bind9 directories
 =================
@@ -391,5 +426,4 @@ directory name, channel name , description
 <code>/var/log/bind/lame-servers.log</code> , <code>lame-servers_file</code> , Lame server events get logged into this file.
 <code>/var/log/bind/delegation-only.log</code> , <code>delegation-only_file</code> , Delegation events get logged into this file.
 <code>/var/log/bind/rate-limit.log</code> , <code>rate-limit_file</code> , Rate limiting events get logged into this file.
-
 [/jtable]
