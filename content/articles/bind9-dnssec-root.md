@@ -1,11 +1,10 @@
 Title: Bind9 DNSSEC Root
-status: draft
+status: published
 Date: 2020-01-28 16:14
 Modified: 2020-02-15 07:32
 tags: bind9, dnssec
 category: research
 summary: Setting up Root DNSSEC for internal use
-save_as: egberts-bind9-dnssec-root.md
 
 How to set up a Root (".", or top-level) DNSSEC for white-lab use.
 
