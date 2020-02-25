@@ -3,7 +3,7 @@ Date: 2018-11-14 08:00
 tags: debugger, malware
 category: research
 status: published
-Debugger Detection/Prevention
+summary: Debugger Detection/Prevention
 slug: anti-debugging-methods
 
 some source in [LordNoteworthy@github]. Most common/interesting ones:
@@ -46,8 +46,6 @@ some source in [LordNoteworthy@github]. Most common/interesting ones:
     * Removing PE Header
     * Messing with debuggers:
         * OutputDebugString Exploit for OllyDbg (TODO: is it still up-to-date?)
-* SoftICE detection (doesn’t make much sense now, esp. if your program is
-* 64-bit, but some ideas might be applicable to other debuggers): lots of
-* discussion in [Crackproof your software]
+* SoftICE detection (doesn’t make much sense now, esp. if your program is 64-bit, but some ideas might be applicable to other debuggers): lots of discussion in [Crackproof your software]
 
 
