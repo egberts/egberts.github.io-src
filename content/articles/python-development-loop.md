@@ -3,6 +3,7 @@ Tags: python
 Date: 2018-12-12 10:45
 Status: published
 Category: research
+Summary: Toward a tigher redevelopment cycle on Python.
 
 Tight Multiversion Python Re-development Cycle
 **********************************************
