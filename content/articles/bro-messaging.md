@@ -1,8 +1,10 @@
 Title: Bro messaging
 Date:  2018-05-16 14:16:28
+Updated:  2020-02-25 19:04:11
 Tags: Bro, API
 Category: research
 Summary: Enabling debug messages of Bro script
+
 Debugging Bro message queues
 ============================
 
