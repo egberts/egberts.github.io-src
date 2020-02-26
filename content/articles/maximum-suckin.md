@@ -1,7 +1,11 @@
-Title: Maximum Suck-In
+Title: One-Time URL
 Date: 2019-12-17T10:35
+Updated: 2020-02-25 19:26
+Status: Published
 Tags: development, engineering, stack, full-stack, web, server
 Category: development
+Summary: New web server design - One-time URL
+
 I was designing a new web server that has the following capabilities:
 
 * web page are one-time, never served again
@@ -15,7 +19,7 @@ Intended audience would be for sales prospectors who wish to send files, content
 
 Might have password-only prompt to prevent email sniffers from successfully visiting the password-protected link.
 
-Some obstecles are:
+Some obstacles are:
 
 * What is the URI format?
 * Is it .NET/CGI argument or is it flat URI?
