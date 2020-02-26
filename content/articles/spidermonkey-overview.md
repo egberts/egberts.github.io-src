@@ -2,6 +2,8 @@ Title: SpiderMonkey Overview
 Date: 2018-09-24T10:35
 Tags: javascript, js engine, browser, mozilla
 Category: javascript
+Summary: SpiderMonkey is a cool JavaScript utility.
+
 SpiderMonkey is a Mozilla Web Browser DOM component that comprises of
 the following functional capabilities:
 
