@@ -3,6 +3,7 @@ Date: 2018-11-22 08:13
 Tags: Rowhammer, ECC, exploit, hardware
 Category: research
 Status: published
+Summary: Performing Rowhammer in ECC memory
 
 # Rowhammer in ECC memory
 
