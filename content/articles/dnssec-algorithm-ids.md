@@ -1,28 +1,26 @@
 Title: DNSSEC Algorithm IDs
 Date: 2020-02-03 06:14
+Updated: 2020-02-25 19:12
 slug: dnssec-algorithm-ids
-tags: bind9 dnssec algorithm
+tags: bind9, dnssec, algorithm
 category: research
 summary: How to use each DNSSEC algorithms
 
-How to use each DNSSEC algorithms.
-
 WHY DO THIS?
 ============
-I've got a white-lab network with a standalone DNSSEC.  It's an exercise for me.
+I've got a white-lab network with a standalone DNSSEC.  Plus it's an exercise for me.
 
 
 What are the algorithms?
 ========================
 
-IETF maintains a list of algorithms which currently (at publication time)
-are:
+IETF maintains a list of algorithms for DNSSEC which currently (at publication time) are:
 
-[jtable]
 DNSSEC algorithm table
+[jtable separator=","]
 <code>Number</code>, <code>Description</code>, Mnemonic, Zone Signing, Trans. Sec.
-0, Delete DS, DELETE, N, N, [RFC4034][RFC4398][RFC8078]
-1, RSA/MD5 (deprecated see 5), RSAMD5, N, Y, [RFC3110][RFC4034]
+0 , Delete DS , DELETE , N , N , [RFC4034][RFC4398][RFC8078]
+1 , RSA/MD5 (deprecated see 5) , RSAMD5 , N , Y , [RFC3110][RFC4034]
 2, Diffie-Hellman, DH, N, Y, [RFC2539][proposed standard] [RFC3755][proposed standard][RFC2536][proposed standard][Federal Information Processing Standards Publication (FIPS PUB) 186]
 3, DSA/SHA1, DSA, Y, Y, Signature Standard; 18 May 1994.][Federal Information Processing Standards Publication (FIPS PUB) 180-1; Secure Hash Standard; 17 April 1995. (Supersedes FIPS PUB 180 dated 11 May 1993.)]
 4, Reserved, , , , [RFC6725]
@@ -46,13 +44,13 @@ DNSSEC algorithm table
 255, Reserved, , , , [RFC4034][proposed standard]
 [/jtable]
 
-Where Is Algorithm ID Used At?
-------------------------------
+Where Is Algorithm ID Found At?
+-------------------------------
+DNSSEC algorithms ID are found in DNS record files and DNSSEC packets.
 
-Using <code>dig</code> utility, the number 5 represents RSA-SHA1 algorithm.
+Example DNS record file below:
 
-The number <code>3</code> below represents DNSSEC.
-
+```named-zone
     dig upenn.edu DNSKEY;; ANSWER SECTION:
     upenn.edu.              7200 IN DNSKEY 256 3 5 (
                                     AwEAAcDt107stSjvoBA/YVPr+2gvB3v33tXr7ROZ/Jqm
@@ -60,8 +58,14 @@ The number <code>3</code> below represents DNSSEC.
                                     5bFofS7MGtd0VvNyq52bgRnusgbm1ME2Lx9+o3fy9ppv
                                     7C6bahGrV3aiq9wNVPj/ccJn5AnZCOsi3grVsj6izCYH
                                     ) ; key id = 46752
+```
 
-The number <code>256</code> (after <code>DNSKEY</code>) in the RRDATA portion is a decimal integer value whose bit representations are:
+In the RRDATA portion, after the DNSKEY keyword, there are three numbers:
+
+* The number <code>256</code> (after <code>DNSKEY</code>) in the RRDATA portion is a decimal integer value whose bit representations are:
+* The number <code>3</code> represents DNSSEC.
+* Using the <code>dig</code> utility, the ID defaults to the number <code>5</code> represents RSA-SHA1 algorithm.  Newer <code>delv</code> also defaults to RSA-SHA1 algorithm.  Number <code>5</code>
+
 
     bit  - description
     1    - SEP flag
@@ -72,7 +76,7 @@ The number <code>256</code> (after <code>DNSKEY</code>) in the RRDATA portion is
 How To Create Algorithm-specific Keys
 =====================================
 
-Utility <code>dnssec-keygen</code> can make most of the algorithms:
+Utility <code>dnssec-keygen</code> can use most of the following algorithms:
 
     RSA | RSAMD5 | DSA | RSASHA1 | NSEC3RSASHA1 | NSEC3DSA |
     RSASHA256 | RSASHA512 | ECCGOST |
@@ -81,7 +85,7 @@ Utility <code>dnssec-keygen</code> can make most of the algorithms:
     HMAC-MD5 | HMAC-SHA1 | HMAC-SHA224 | HMAC-SHA256 |
     HMAC-SHA384 | HMAC-SHA512
 
-To support and generate GOST algorithm, both Bind9 and OpenSSL packages must be compiled with <code>-with-gost</code> option.
+Note: To support and generate GOST algorithm, both Bind9 and OpenSSL packages must be compiled with <code>-with-gost</code> option.
 
 Common Algorithms Used Today
 ----------------------------
@@ -98,7 +102,9 @@ Common Algorithms Used Today
 Creating algorithm keys
 -----------------------
 
-  dnssec-keygen -f KSK -T DNSKEY
+```bash
+dnssec-keygen -f KSK -T DNSKEY
+```
 
 Creating algorithm-specific keys
 --------------------------------
@@ -114,14 +120,18 @@ Default flags for <code>dnssec-keygen</code> are:
 To sign a zone like ".", "net.", or "example.net.", <code>dnssec-keygen</code>
 CLI flags are:
 
-  dnssec-keygen -f KSK -a RSASHA1 -b 512 . # Root DNS
-  dnssec-keygen -f KSK -a RSASHA1 -b 512 net.
-  dnssec-keygen -f KSK -a RSASHA1 -b 512 example.net.
-  dnssec-keygen -f KSK -a RSAMD5 -b 512   # other DNSSEC algorithms
+```bash
+dnssec-keygen -f KSK -a RSASHA1 -b 512 . # Root DNS
+dnssec-keygen -f KSK -a RSASHA1 -b 512 net.
+dnssec-keygen -f KSK -a RSASHA1 -b 512 example.net.
+dnssec-keygen -f KSK -a RSAMD5 -b 512   # other DNSSEC algorithms
+```
 
 To sign a TSIG key to be used for transfers between DNS servers as well as with <code>rndc</code> utility:
 
-  dnssec-keygen -n HOST -T KEY -a HMAC-MD5 -b 512 ns1-to-ns2-tsig
+```bash
+dnssec-keygen -n HOST -T KEY -a HMAC-MD5 -b 512 ns1-to-ns2-tsig
+```
 
 References
 ==========
