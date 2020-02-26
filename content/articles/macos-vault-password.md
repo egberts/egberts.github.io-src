@@ -1,7 +1,9 @@
 Title: Change password to MacOS File Vault
 Date: 2018-07-07T16:43
+Status: published
 Tags: macos, password, file vault
 Category: research
+Summary: How to change a password to MacOS File Vault
 
 How to change FileVault password. This is useful when wanting to have
 two separate passwords; one for the disk and one for the login account.
