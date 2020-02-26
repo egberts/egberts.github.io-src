@@ -1,7 +1,10 @@
 title: Systemd Unit File Load Paths
 date: 2018-10-14T10:14
+updated: 2020-02-25 19:36
+status: published
 category: research
 tags: systemd
+Summary: How to load systemd unit files using Load Paths
 
 Unit File Load Path
 ===================
@@ -11,12 +14,12 @@ described in the two tables below. Unit files found in directories
 listed earlier override files with the same name in directories lower in
 the list.
 
-When the variable $SYSTEMD\_UNIT\_PATH is set, the contents of this
-variable overrides the unit load path. If $SYSTEMD\_UNIT\_PATH ends with
+When the variable `$SYSTEMD_UNIT_PATH` is set, the contents of this
+variable overrides the unit load path. If `$SYSTEMD_UNIT_PATH` ends with
 an empty component (":"), the usual unit load path will be appended to
 the contents of the variable.
 
-Table 1. Load path when running in system mode (--system).
+Table 1. Load path when running in system mode (`--system`).
 
 ```
     Path    Description
@@ -32,7 +35,7 @@ Table 1. Load path when running in system mode (--system).
     /run/systemd/generator.late Generated units with low priority (see late-dir in system.generator(7))
 ```
 
-Table 2. Load path when running in user mode (--user).
+Table 2. Load path when running in user mode (`--user`).
 
 ```
     Path    Description
@@ -65,9 +68,9 @@ Table 2. Load path when running in user mode (--user).
 The set of load paths for the user manager instance may be augmented or
 changed using various environment variables. And environment variables
 may in turn be set using environment generators, see
-systemd.environment-generator(7). In particular, $XDG\_DATA\_HOME and
-$XDG\_DATA\_DIRS may be easily set using
-systemd-environment-d-generator(8). Thus, directories listed here are
+`systemd.environment-generator(7)`. In particular, `$XDG_DATA_HOME` and
+`$XDG_DATA_DIRS` may be easily set using
+`systemd-environment-d-generator(8)`. Thus, directories listed here are
 just the defaults. To see the actual list that would be used based on
 compilation options and current environment use
 
@@ -75,6 +78,6 @@ compilation options and current environment use
 systemd-analyze --user unit-paths
 ```
 
-Moreover, additional units might be loaded into systemd ("linked") from
+Moreover, additional units might be loaded into `systemd` ("linked") from
 directories not on the unit load path. See the link command for
-systemctl(1).
+`systemctl(1)`.
