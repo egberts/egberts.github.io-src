@@ -1,8 +1,9 @@
 Title: Custom Home Router, Verizon
 date: 2018-11-10T14:18
-modified:  2018-11-13T12:55
+modified:  2020-02-25T19:39
 tags: verizon, router, homelan
 category: research
+Summary: Toward a customized home router for use with Verizon FiOS network.
 
 Ethernet via ONT
 ================
@@ -34,7 +35,7 @@ TV, then you will have to clone the MAC address.
 
 If you are strictly an Internet-only household, then no need to clone
 MAC address of Verizon-provided router because you can return it and
-save $12/month.
+save $10 to 12/month.
 
 I used to recommend cloning the MAC address of your FiOS router onto
 your new router. However, one commenter had a pretty terrible time with
