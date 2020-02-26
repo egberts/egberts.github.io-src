@@ -2,8 +2,7 @@ Title: Firefox Sync
 Date: 2017-05-20T16:59
 Tags: firefox, sync
 Category: research
-Summary: Firefox Sync is a built-in web browser add-in application and an
-application network protocol.
+Summary: Firefox Sync is a built-in web browser add-in application and an application network protocol.
 
 Firefox Sync can synchronize between your own Firefox web browsers over
 different devices for the following:
