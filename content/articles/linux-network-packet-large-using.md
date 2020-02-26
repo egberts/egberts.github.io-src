@@ -2,8 +2,9 @@ Title: Using Large Network Packet
 Date: 2018-09-24T09:38
 category: research
 tags: ethernet, packet
-Your customer is using large network packets. And by large packets, this
-means packet size greater than 1514 bytes.
+summary: How to use over-sized Ethernet packets in your home network.
+
+Your customer is using large network packets. And by large packets, this means packet size greater than 1514 bytes.
 
 In computer networking, the maximum transmission unit (MTU) of a
 communications protocol of a layer is the size (in bytes) of the largest
@@ -36,4 +37,4 @@ ethtool -K eth0 gso off
 ```
 
 To make it permanent, edit and insert the above code into
-\`\`\`/etc/rc.local\`\`\` and reboot.
+`/etc/rc.local` and reboot.
