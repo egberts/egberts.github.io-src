@@ -1,10 +1,9 @@
 Title: ISC Bind9 Logging
 Date: 2018-10-17 10:41
+Updated: 2020-02-25 19:00
 Tags: logging, bind9
 Category: research
-summary: Logging Files Used By ISC Bind9
-Editing Bind9 logging Bind9 logging is controlled and ferrated into
-several channels.
+summary: Logging Files Used By ISC Bind9 - Editing Bind9 logging Bind9 logging is controlled and ferrated into several channels.
 
 Functional Log
 --------------
@@ -46,3 +45,154 @@ NS_LOGMODULE_UPDATE, update.c
 NS_LOGMODULE_XFER_OUT, xferout.c
 [/jtable]
 
+Ideal Configuration
+--------------------
+Ideal logging configuration for ISC Bind9 is:
+```named.conf
+logging {
+    channel named_file {
+        file "/var/log/bind/named.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel database_file {
+        file "/var/log/bind/database.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel security_file {
+        file "/var/log/bind/security.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel resolver_file {
+        file "/var/log/bind/resolver.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel transfer_file {
+        file "/var/log/bind/transfer.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel client_file {
+        file "/var/log/bind/client.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel unmatched_file {
+        file "/var/log/bind/unmatched.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel queries_file {
+        file "/var/log/bind/queries.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel query-errors_file {
+        file "/var/log/bind/query-errors.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel network_file {
+        file "/var/log/bind/network.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel update_file {
+        file "/var/log/bind/update.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel update-security_file {
+        file "/var/log/bind/update-security.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel dispatch_file {
+        file "/var/log/bind/dispatch.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel dnssec_file {
+        file "/var/log/bind/dnssec.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel lame-servers_file {
+        file "/var/log/bind/lame-servers.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel delegation-only_file {
+        file "/var/log/bind/delegation-only.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+    channel rate-limit_file {
+        file "/var/log/bind/rate-limit.log" versions 3 size 5m;
+        severity dynamic;
+        print-time yes;
+        print-severity true;
+        print-category true;
+    };
+
+    category default { default_syslog; named_file; };
+    category general { default_syslog; named_file; };
+    category database { database_file; };
+    category security { security_file; };
+    category queries { queries_file; };
+    category config { named_file; };
+
+    category xfer-in { transfer_file; };
+    category xfer-out { transfer_file; };
+    category notify { transfer_file; };
+
+    category resolver { resolver_file; };
+    category client { client_file; };
+    category unmatched { unmatched_file; };
+    category query-errors { query-errors_file; };
+
+    category network { network_file; };
+    category update { update_file; };
+    category update-security { update-security_file; };
+    category dispatch { dispatch_file; };
+    category dnssec { dnssec_file; };
+    category lame-servers { lame-servers_file; };
+    category delegation-only { delegation-only_file; };
+    category rate-limit { rate-limit_file; };
+};
+```
