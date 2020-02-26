@@ -2,6 +2,8 @@ Title: DNSSEC HOWTO
 Date: 2018-08-08T16:25
 Tags: dnssec, bind9, dns
 Category: research
+summary: How to use DNSSEC 
+
 DNSSEC Two Steps
 ================
 
@@ -49,13 +51,15 @@ example.com for this article.
 
 The names and locations of configuration and zone files of BIND different according to the Linux distribution used. Debian/Ubuntu
 
-Service name: bind9
-Main configuration file: /etc/bind/named.conf.options
-Zone names file: /etc/bind/named.conf.local
-Default zone file location: /var/cache/bind/
-CentOS/Fedora Service name: named
-Main configuration and zone names file: /etc/named.conf
-Default zone file location: /var/named/
+[jtable]
+Service name, bind9
+Main configuration file, /etc/bind/named.conf.options
+Zone names file, /etc/bind/named.conf.local
+Default zone file location, /var/cache/bind/
+CentOS/Fedora Service name, named
+Main configuration and zone names file, /etc/named.conf
+Default zone file location, /var/named/
+[/jtable]
 
 These may change if you're using bind-chroot. For this tutorial, I've
 used Debian for the Master NS and CentOS for the Slave NS, so change it
@@ -71,7 +75,7 @@ options{ }
 nano /etc/bind/named.conf.options
 ```
 
-```bind
+```named.conf
     dnssec-enable yes;
     dnssec-validation yes;
     dnssec-lookaside auto;
@@ -97,11 +101,14 @@ key to be generated; otherwise it'll take a very long time. Sample
 output.
 
 ```bash
-root@master# cd /var/cache/bind
-root@master# dnssec-keygen -a NSEC3RSASHA1 \
+cd /var/cache/bind
+dnssec-keygen -a NSEC3RSASHA1 \
                            -b 2048 \
                            -n ZONE \
                            example.com
+```
+which outputs are:
+```
    Generating key pair..................+++ .............+++
    Kexample.com.+007+40400
 ```
@@ -115,12 +122,15 @@ dnssec-keygen -f KSK -a NSEC3RSASHA1 -b 4096 -n ZONE example.com
 Sample output.
 
 ```bash
-root@master# cd /var/cache/bind
-root@master# dnssec-keygen -f KSK \
+cd /var/cache/bind
+dnssec-keygen -f KSK \
                            -a NSEC3RSASHA1 \
                            -b 4096 \
                            -n ZONE \
                            example.com
+```
+which outputs are:
+```
    Generating key pair......................++.............................................................................................................................................................................................................++
    Kexample.com.+007+62910
 ```
@@ -132,7 +142,7 @@ the zone file. The following for loop will do this.
 ```bash
 for key in `ls Kexample.com*.key`
 do
-echo "\$INCLUDE $key">> example.com.zone
+    echo "\$INCLUDE $key">> example.com.zone
 done
 ```
 
@@ -155,7 +165,9 @@ dnssec-signzone -A -3 \
     -N INCREMENT \
     -o example.com \
     -t example.com.zone
-
+```
+which outputs are:
+```
    Verifying the zone using the following algorithms: NSEC3RSASHA1.
    Zone signing complete:
    Algorithm: NSEC3RSASHA1: KSKs: 1 active, 0 stand-by, 0 revoked
@@ -190,7 +202,7 @@ nano /etc/bind/named.conf.local
 
 Change the file option inside the zone { } section.
 
-```bind
+```named.conf
    zone "example.com" IN {
        type master;
        file "example.com.zone.signed";
@@ -216,19 +228,19 @@ Sample output
 ```bash
 cd /var/cache/bind
 dig DNSKEY example.com. @localhost +multiline
-;; Truncated, retrying in TCP mode.
+#; Truncated, retrying in TCP mode.
 
-; <<>> DiG 9.8.4-rpz2+rl005.12-P1 <<>> DNSKEY example.com. @localhost +multiline
-;; global options: +cmd
-;; Got answer:
-;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 43986
-;; flags: qr aa rd; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0
-;; WARNING: recursion requested but not available
+# <<>> DiG 9.8.4-rpz2+rl005.12-P1 <<>> DNSKEY example.com. @localhost +multiline
+#; global options: +cmd
+#; Got answer:
+#; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 43986
+#; flags: qr aa rd; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0
+#; WARNING: recursion requested but not available
 
-;; QUESTION SECTION:
-;example.com.       IN DNSKEY
+#; QUESTION SECTION:
+#example.com.       IN DNSKEY
 
-;; ANSWER SECTION:
+#; ANSWER SECTION:
 example.com.        86400 IN DNSKEY   256 3 7 (
                 AwEAActPMYurNEyhUgHjPctbLCI1VuSj3xcjI8QFTpdM
                 8k3cYrfwB/WlNKjnnjt98nPmHv6frnuvs2LKIvvGzz++
@@ -328,7 +340,7 @@ nano /etc/named.conf
 
 Place these lines inside the options { } section if they don't exist.
 
-```bind
+```named.conf
    dnssec-enable yes;
    dnssec-validation yes;
    dnssec-lookaside auto;
@@ -336,7 +348,7 @@ Place these lines inside the options { } section if they don't exist.
 
 Edit the file option inside the zone { } section.
 
-```bind
+```named.conf
     zone "example.com" IN {
         type slave;
         file "example.com.zone.signed";
@@ -353,11 +365,14 @@ service named reload
 
 Check if there is a new .signed zone file.
 
-```shell
-    $ ls -l /var/named/slaves/
-    total 16
-    -rw-r--r-- 1 named named  472 Nov 27 17:25 example.com.zone
-    -rw-r--r-- 1 named named 9180 Nov 27 18:29 example.com.zone.signed
+```bash
+ls -l /var/named/slaves/
+```
+directory listing output is:
+```
+total 16
+-rw-r--r-- 1 named named  472 Nov 27 17:25 example.com.zone
+-rw-r--r-- 1 named named 9180 Nov 27 18:29 example.com.zone.signed
 ```
 
 Voila! That's it. Just to make sure things are working as they should
@@ -373,6 +388,9 @@ DS records.
 ```bash
 cd /var/cache/bind
 cat dsset-example.com.
+```
+which outputs:
+```
     example.com.        IN DS 62910 7 1 1D6AC75083F3CEC31861993E325E0EEC7E97D1DD
     example.com.        IN DS 62910 7 2
     198303E265A856DE8FE6330EDB5AA76F3537C10783151AEF3577859F FFC3F59D
