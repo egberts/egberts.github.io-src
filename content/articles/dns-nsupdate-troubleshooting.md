@@ -3,7 +3,7 @@ Date: 2018-10-17T20:50
 Status: published
 Tags: nsupdate, dns, troubleshooting
 Category: research
-nsupdate
+Summary: How to troubleshoot DNS issues using nsupdate utiliy.
 
 Protocol/Port
 =============
@@ -42,7 +42,10 @@ Shared secret key (TSIG)
 Generate a secret key for authenticating the updates:
 
 ```bash
-   $ tsig-keygen -r /dev/urandom | tee tsig-key.private
+tsig-keygen -r /dev/urandom | tee tsig-key.private
+```
+outputs are:
+```named.conf
    key "tsig-key" {
        algorithm hmac-sha256;
        secret "7P6HbRZRJCmtauo/lV0jwN9wkMgBTUikhf9JuaTvYT4=";
@@ -56,9 +59,9 @@ for different hosts, each with a unique name in the key "…" field.)
 
 Enable dynamic updates in the zone configuration:
 
-```bind
-   zone … {
-       …
+```named.conf
+   zone ... {
+       ...
        update-policy {
            /* grant <key_name> <policy> <record_types>` */
            grant "tsig-key" name myserver.example.com ANY;
@@ -71,12 +74,15 @@ entire zone, and subdomain dyn.example.com has the obvious meaning.
 
 Perform updates:
 
-```shell
-$ nsupdate -k tsig-key.private
-> zone example.com
-> del myserver.example.com
-> add myserver.example.com 3600 A 100.64.1.1
-> send
+```bash
+nsupdate -k tsig-key.private
+```
+This nsupdate starts an interactive session, enter in:
+```
+zone example.com
+del myserver.example.com
+add myserver.example.com 3600 A 100.64.1.1
+send
 ```
 
 There are various clients capable of automatic updates.
@@ -86,9 +92,12 @@ Public/private key (SIG(0))
 
 Generate a key pair:
 
-```shell
-$ dnssec-keygen -r /dev/urandom -T KEY -n USER myclient.example.com
-$ ls K*
+```bash
+dnssec-keygen -r /dev/urandom -T KEY -n USER myclient.example.com
+ls K*
+```
+Output is:
+```
 Kmyclient.example.com.+005+07399.key
 Kmyclient.example.com.+005+07399.private
 ```
@@ -142,9 +151,12 @@ update failed: NOTAUTH
 
 ```bash
 nsupdate -l -M
-> zone example.net red
-> update delete arca.example.net
-> send`
+```
+This nsupdate starts an interactive session, enter in:
+```
+zone example.net red
+update delete arca.example.net
+send
 update failed: NOTAUTH
 ```
 
@@ -185,7 +197,10 @@ No signing records found
 ------------------------
 
 ```bash
-$ rndc signing -list example.net.
+rndc signing -list example.net.
+```
+which outputs are:
+```
 No signing records found
 ```
 
