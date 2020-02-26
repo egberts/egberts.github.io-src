@@ -1,10 +1,11 @@
-Title: DHCP and Weird Hostnames
+Title: ISC DHCP and Weird Hostnames
 Tags: dhcp, security
 Date: 2019-01-05 08:30
 Status: published
 Category: research
+Summary: ISC DHCP handling of weird hostnames found in Nintendo 3DS and iPods.
 
-Believe it or not, I dusted off my Ninetendo 3DS and Apple iPods.
+Believe it or not, I dusted off my Ninetendo 3DS and very old Apple iPods and tried to join my home network, and it failed.
 
 When it came time to configure it and attach it to my ISC DHCP server, the
 server rejected the devices' DHCP-REQUEST message.
