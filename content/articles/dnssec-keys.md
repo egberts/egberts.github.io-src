@@ -1,9 +1,9 @@
 Title: DNSSEC Keys, ZSK vs KSK
 Date: 2018-08-26T21:40
+Updated: 2020-02-25 19:18
 Tags: dnssec, dns, comparison
 Category: research
-The table below summarizes the usage and frequency of use for each of
-the keys.:
+Summary: The table below summarizes the usage and frequency of use for each of the keys.
 
 
 ZSK vs. KSK Comparison
