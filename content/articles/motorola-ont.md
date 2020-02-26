@@ -2,6 +2,8 @@ Title: Motorola ONT Specification
 Date: 2018-10-15T11:02
 Tags: Verizon, Motorola, ONT, FiOS
 Category: research
+summary: Things I've discovered about Verizon FiOS white box in your basement.
+
 Motorola ONT is an optical network terminal. ONT is commonly found in
 residential unit that connects the ISP's fibre optic network and
 provides Ethernet connectivity to the home.
@@ -73,9 +75,7 @@ Features and Benefits
 
 * Flexibility
     * Revenue growth and building a powerful defense against
-        competitors are key
-
-reasons service providers need to consider the deployment of next
+        competitors are key reasons service providers need to consider the deployment of next
 generation fiber access technologies. Multi-service delivery over a
 single converged FTTP and FTTN platform provides the flexibility to
 offer “triple play” and additional advanced IPTV services. The converged
