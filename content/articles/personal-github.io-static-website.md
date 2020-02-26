@@ -3,6 +3,7 @@ Tags: github, blog
 Date: 2018-12-28 09:25
 Status: published
 Category: HOWTO
+Summary: Creating a personal Github.IO website.
 
 How did I created a GitHub.IO personal website using two-repo/git-submodule
 approach?
