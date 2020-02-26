@@ -1,7 +1,11 @@
 Title: Systemd and ISC DHCP Client
 Date: 2018-10-14T16:23
+Updated: 2020-02-25 19:34
+Status: published
 Tags: dhcp, systemd, isp
 Category: research
+Summary: How to integrate ISC DHCP client into a systemd-based workstation.
+
 This page is about using ISC DHCP client (\`dhclient\`) in
 [systemd](systemd "wikilink") environment.
 
@@ -21,10 +25,10 @@ I executed:
 ```bash
 systemd-analyze dot --order \
     nginx.service network-pre.target network-online.target \
-    network.target system-dhclient.slice
-sys-subsystem-net-devices-eth1.device \
+    network.target system-dhclient.slice \
+    sys-subsystem-net-devices-eth1.device \
     networking.service nss-lookup.target shorewall.service bind9.service \
-    dhclient@eth1.service  ddclient.service resolvconf.service
+    dhclient@eth1.service  ddclient.service resolvconf.service \
     system-dhclient.slice  \
     > /tmp/custom.gv
 ```
@@ -48,8 +52,8 @@ router.
 
 Details in here: <https://github.com/egberts/systemd-dhclient>
 
-/etc/systemd/network/dhclient$.service
-======================================
+<code>/etc/systemd/network/dhclient$.service<code>
+--------------------------------------------
 
 It is also possible to explicitly tell systemd-networkd to ignore a link
 by using Unmanaged=yes option, see systemd.network(5).
