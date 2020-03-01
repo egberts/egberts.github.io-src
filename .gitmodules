@@ -2,3 +2,6 @@
 	path = output
 	url = https://github.com/egberts/egberts.github.io.git
 	branch = master
+[submodule "m.css"]
+	path = m.css
+	url = git://github.com/mosra/m.css
