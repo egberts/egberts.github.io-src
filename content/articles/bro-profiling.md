@@ -9,11 +9,11 @@ Profiling Bro
 =============
 
 This page describes how to run OProfile Get two packages from
-<http://debuginfo.centos.org/6/x86_64/>
+[Debuginfo on CentOS](http://debuginfo.centos.org/6/x86_64/)
 
-* kernel-debuginfo-x86\_64-\`uname -r\`.rpm
-* kernel-debuginfo-common-x86\_64-\`uname -r\`.rpm
-* oprofile
+* `kernel-debuginfo-x86\_64-\`uname -r\`.rpm`
+* `kernel-debuginfo-common-x86\_64-\`uname -r\`.rpm`
+* `oprofile`
 
 Set up the kernel
 -----------------
@@ -46,7 +46,7 @@ Example Reports
 The oprofile reports are largely shaped by the granularity of statistics
 collection in the following groups:
 
-*CPUs
-*Threads
-*NUMAs
+* CPUs
+* Threads
+* NUMAs
 

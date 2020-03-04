@@ -1,7 +1,8 @@
 Title: DNSSEC Keys, ZSK vs KSK
 Date: 2018-08-26T21:40
-Updated: 2020-02-25 19:18
+Updated: 2020-03-04 16:59
 Tags: dnssec, dns, comparison
+Status: published
 Category: research
 Summary: The table below summarizes the usage and frequency of use for each of the keys.
 
@@ -19,5 +20,5 @@ KSK, Public, Used by recursive server to validate DNSKEY RRset Used very frequen
 References
 ==========
 
--   <https://ftp.yz.yamagata-u.ac.jp/pub/network/isc/dnssec-guide/html/dnssec-guide.html#troubleshooting-unable-to-load-keys>
+* [Troubleshooting DNSSEC - Unable to load Key](https://ftp.yz.yamagata-u.ac.jp/pub/network/isc/dnssec-guide/html/dnssec-guide.html#troubleshooting-unable-to-load-keys)
 

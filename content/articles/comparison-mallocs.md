@@ -110,23 +110,23 @@ Comparison of malloc design
 [jtable]
 name , Author , link , repo
 ssmalloc , , <a href="https://apsys2012.kaist.ac.kr/media/papers/apsys2012-final27.pdf">whitepaper</a>,
-jemalloc , Jason Evans (Facebook, FreeBSD) , [whitepaper](https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf) , 
-sfmalloc , "SNU, Korea" , , 
-Streamflow , , , 
-ptmalloc3 , , , 
-nedmalloc-1.02 , , , 
-lockless , , , 
-ptmalloc2 , GNU Libc (dlmalloc-forked) , , 
-Hoard , , , 
-libumem , SMI Solaris , , 
-mtmalloc , , , 
-nedmalloc-1 , , , 
-tcmalloc , Google , , 
-ctmalloc , Google Code , , 
-ptmalloc , GNU Libc (dlmalloc-forked) , , 
+jemalloc , Jason Evans (Facebook, FreeBSD) , [whitepaper](https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf) ,
+sfmalloc , "SNU, Korea" , ,
+Streamflow , , ,
+ptmalloc3 , , ,
+nedmalloc-1.02 , , ,
+lockless , , ,
+ptmalloc2 , GNU Libc (dlmalloc-forked) , ,
+Hoard , , ,
+libumem , SMI Solaris , ,
+mtmalloc , , ,
+nedmalloc-1 , , ,
+tcmalloc , Google , ,
+ctmalloc , Google Code , ,
+ptmalloc , GNU Libc (dlmalloc-forked) , ,
 dlmalloc , "Doug Lea, FreeBSD" , <a href="http://g.oswego.edu/dl/html/malloc.html">blog</a>, <a href="ftp://g.oswego.edu/pub/misc/malloc.c">FTP</a>
-pkmalloc , , <a href="http://www.freebsd.dk/pubs/malloc.pdf">whitepaper</a>, 
-phkmalloc , FreeBSD , , 
+pkmalloc , , <a href="http://www.freebsd.dk/pubs/malloc.pdf">whitepaper</a>,
+phkmalloc , FreeBSD , ,
 malloc , GNU Libc (glibc) , ,
 [/jtable]
 
@@ -156,7 +156,7 @@ nedmalloc-1 ,,,,
 tcmalloc ,,,,
 ctmalloc ,,,,
 ptmalloc ,,,,
-dlmalloc , best-first , Y , Y , Y 
+dlmalloc , best-first , Y , Y , Y
 pkmalloc ,,,,
 phkmalloc ,,,,
 malloc ,,,,
@@ -188,7 +188,7 @@ happen.
 Corruption check: The attacker could overflow a buffer dynamically
 allocated by malloc(3) and:
 
-* overwrite the next contiguous boundary tag ([Netscape browsers exploit](<http://www.openwall.com/advisories/OW-002-netscape-jpeg.txt) or
+* overwrite the next contiguous boundary tag ([Netscape browsers exploit](http://www.openwall.com/advisories/OW-002-netscape-jpeg.txt) or
 * underflow such a buffer and overwrite the boundary tag stored just before [Secure Locate exploit](ftp://maxx.via.ecp.fr/dislocate/)), or
 * cause the vulnerable program to perform an incorrect free(3) call [LBML traceroute exploit](http://www.synnergy.net/downloads/exploits/traceroute-exp.txt), or
 * freeing [multiple frees](ftp://maxx.via.ecp.fr/traceroot/), or

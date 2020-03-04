@@ -50,7 +50,7 @@ And I finally got my very own Linux gateway to be hooked up to the
 Verizon HFC network, instead of using ActionTek wireless broadband
 router.
 
-Details in here: <https://github.com/egberts/systemd-dhclient>
+Details in here: [Github egberts/systemd-dhclient](https://github.com/egberts/systemd-dhclient)
 
 <code>/etc/systemd/network/dhclient$.service<code>
 --------------------------------------------

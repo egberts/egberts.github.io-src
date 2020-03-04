@@ -1,6 +1,8 @@
 Title: Bro-IDS HOWTO
 Date: 2017-11-01 05:11
+Modified: 2020-03-04 17:02
 Category: HOWTO
+Status: published
 Tags: Bro
 summary: How to use Bro IDS.
 
@@ -48,7 +50,7 @@ bro [option] <bro-policy-script-file>
 
 [jtable]
 option, long option, description
-`-a`, `--parse-only`, "Syntax check the policy script files. bro returns 0 if OK, 1 if syntax is invalid (new in Bro 2.3.1)
+`-a`, `--parse-only`, "Syntax check the policy script files. bro returns 0 if OK; 1 if syntax is invalid (new in Bro 2.3.1)
 `-b`, `--bare-mode`, Don't load scripts from the base/ directory. Useful in testing
 `-d`, `--debug-policy`, Activate policy file debugger
 `-e`, `--exec`, augment loaded policies by given script code
@@ -69,7 +71,7 @@ Bro Environment Variables
 
 [jtable]
 environment name , program , environment description
-`BROPATH` , bro , "file search path for Bro policy script; A list of directory, each separated by semicolon, in which profile script files can be searched for."
+`BROPATH` , bro , "file search path for Bro policy script; A list of directory each separated by semicolon in which profile script files can be searched for."
 `BRO_DNS_FAKE` , bro , disable DNS lookups; Determine whether actual DNS lookup occurs or fake DNS data is returned; Valid value: '0' or '1'.
 `BRO_SEED_FILE` , bro , A filespec to a file containing seed number for the Bro's init_random_seed(); useful for ensuring repeatable test runs.
 `BRO_PREFIXES` , bro , add given prefix to policy file resolution; this adds a full or relative directory path to try for each script file given
@@ -89,13 +91,13 @@ UNIX Signal supported
 =====================
 [jtable]
 Signal name , Signal description
-`SIGINT` , "From main process, calls bro_done() events. From main process, kills all threads if SIGINT received the 2nd time. Not used in threads. With -d mode, it caused Bro policy script debugger prompt to appear (requires an active STDIN/STDOUT terminal.)"
-`SIGTERM` , "From main process, calls bro_done() events. From main process, kills all threads if SIGTERM received the 2nd time. Main process may send to child thread for terminating RAW input reader(s). With -dmode, it caused Bro policy script debugger prompt to appear (requires an active STDIN/STDOUT terminal.)"
-`SIGSTOP` , "broctl sends STOP signal firstly to all Bro manager, proxy(s), and workers first time around, then KILL on 2nd try."
-`SIGPIPE` , "With -d mode, this signal gets ignored. RAW input reader(s) inherits main process SIGPIPE in Raw::Execute()."
-`SIGHUP` , "During bro.init(), checkpoints persistent state."
+`SIGINT` , "From main process; calls bro_done() events. From main process; kills all threads if SIGINT received the 2nd time. Not used in threads. With -d mode; it caused Bro policy script debugger prompt to appear (requires an active STDIN/STDOUT terminal.)"
+`SIGTERM` , "From main process; calls bro_done() events. From main process; kills all threads if SIGTERM received the 2nd time. Main process may send to child thread for terminating RAW input reader(s). With -dmode; it caused Bro policy script debugger prompt to appear (requires an active STDIN/STDOUT terminal.)"
+`SIGSTOP` , "broctl sends STOP signal firstly to all Bro manager; proxy(s), and workers first time around; then KILL on 2nd try."
+`SIGPIPE` , "With -d mode; this signal gets ignored. RAW input reader(s) inherits main process SIGPIPE in Raw::Execute()."
+`SIGHUP` , "During bro.init(); checkpoints persistent state."
 `SIGALRM` , Main process uses it monitor for jammed or idle network interface(s). Thread uses to request stats to be sent. sig_handler_log()
-`SIGPROF` , "Thread uses it to request CPU usage statistics to be sent to SocketComm::Log (remote.log) via sig_handler_prof(). If compiled with DEBUG_COMMUNICATION (src/ChunkedIO.h), main process uses it to dump debug data of RemoteSerializer then terminate."
+`SIGPROF` , "Thread uses it to request CPU usage statistics to be sent to SocketComm::Log (remote.log) via sig_handler_prof(). If compiled with DEBUG_COMMUNICATION (src/ChunkedIO.h); main process uses it to dump debug data of RemoteSerializer then terminate."
 `SIGKILL` , Propagates from thread/child to main process.
 `SIGUSR1` , Used to be used for MPatrol debugging hooks. Not used in threads.
 `SIGUSR2` , Used to be used for MPatrol debugging hooks. Not used in threads.
@@ -110,17 +112,17 @@ Signal name , Signal description
 External References
 ===================
 
-1.  Bro Documentation - <http://mailman.icsi.berkeley.edu/mailman/listinfo/bro-announce>
-2.  Bro Support - <https://www.bro.org/support/>
-3.  Bro Contacts - <https://www.bro.org/contact/>
+1.  [Bro Documentation](http://mailman.icsi.berkeley.edu/mailman/listinfo/bro-announce)
+2.  [Bro Support](https://www.bro.org/support/)
+3.  [Bro Contacts](https://www.bro.org/contact/)
 
 Mailing List
 ============
 
-1.  General - <http://mailman.icsi.berkeley.edu/mailman/listinfo/bro>
-2.  Announcement - <http://mailman.icsi.berkeley.edu/mailman/listinfo/bro>
-2.  Twitter - @Bro_IDS
-3.  IRC - Freenode's \#bro channel
-4.  Bro Community - <https://www.bro.org/community/>
-5.  Index to all of Bro website - <https://www.bro.org/sphinx/genindex.html>
+1.  [General](http://mailman.icsi.berkeley.edu/mailman/listinfo/bro)
+2.  [Announcement](http://mailman.icsi.berkeley.edu/mailman/listinfo/bro)
+2.  [Twitter](http://twitter.com/user/Bro_IDS)
+3.  [IRC](irc://freenode.net/bro)
+4.  [Bro Community](https://www.bro.org/community/)
+5.  [Index to all of Bro website](https://www.bro.org/sphinx/genindex.html)
 

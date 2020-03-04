@@ -166,8 +166,8 @@ GPON ONT
 --------
 
 * SFH ONT 612AZ
-* \[<https://www.actiontec.com/products/wifi-routers-gateways/fiber/bhr-rev-i/>
-* Motorola ONT 1400\]
+* [ActionTEC Router datasheet](https://www.actiontec.com/products/wifi-routers-gateways/fiber/bhr-rev-i)
+* Motorola ONT 1400
 
 <table>
 <thead>
@@ -306,21 +306,14 @@ Legend:
 
 Phased out:
 
-* MDU Shared (ONT in Shared Location for Apartments and Condos): A
-    shared ONT
-* is placed in the apartment or condo building. Speeds are limited to
-    anywhere
-* from 15/5 to 75/75, depending on the ONT, and FiOS Digital Voice is
-    not
-* available. There is, however, FiOS Freedom Essentials, which
-    isn't VoIP.
+* MDU Shared (ONT in Shared Location for Apartments and Condos): A shared ONT is placed in the apartment or condo building. Speeds are limited to anywhere from 15/5 to 75/75, depending on the ONT, and FiOS Digital Voice is not available. There is, however, FiOS Freedom Essentials, which isn't VoIP.
 
 Modem Router
 ------------
 
 DOCSIS 3.0 MoCA Modem Routers:
 
-* \[<https://www.actiontec.com/products/wifi-routers-gateways/fiber/bhr-rev-i/>
+* [ActionTec MI424WR](https://www.actiontec.com/products/wifi-routers-gateways/fiber/bhr-rev-i)
 * ActionTec MI424WR\]
 * Fios Quantum Gateway
 
@@ -351,10 +344,10 @@ Terminologies
 References
 ==========
 
-* <https://www.cablelabs.com/specs/>
-* <https://www3.nd.edu/~cpoellab/teaching/cse40815/Chapter6.pdf>
-* <http://www.lightreading.com/cable-video/docsis/docsis-31-targets-10-gig-downstream/d/d-id/699136>
-* <https://apps.fcc.gov/edocs_public/attachmatch/FCC-16-6A1.pdf>
-* <http://www.klonex.com.pl/media/produkty/pdf/motorola-ont1400gt.pdf>
-* <https://forums.verizon.com/t5/Fios-Internet/Using-your-own-router-with-Verizon-FiOS/td-p/851632>
+* [CableLab Specifications](https://www.cablelabs.com/specs)
+* [Norte Dame CSE408 Chapter 6](https://www3.nd.edu/~cpoellab/teaching/cse40815/Chapter6.pdf)
+* [DOCSIS 31 Targets 10G Downstream](http://www.lightreading.com/cable-video/docsis/docsis-31-targets-10-gig-downstream/d/d-id/699136)
+* [FCC Public FCC-16-6A1](https://apps.fcc.gov/edocs_public/attachmatch/FCC-16-6A1.pdf)
+* [Motorola ONT1500GT Datasheet](http://www.klonex.com.pl/media/produkty/pdf/motorola-ont1400gt.pdf)
+* [Using Your Own Router with Verizon FiOS](https://forums.verizon.com/t5/Fios-Internet/Using-your-own-router-with-Verizon-FiOS/td-p/851632)
 

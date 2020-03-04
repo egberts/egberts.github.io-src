@@ -142,5 +142,5 @@ Regulatory Compliance
 References
 ==========
 
-* <http://www.klonex.com.pl/media/produkty/pdf/motorola-ont1400gt.pdf>
+* [Motorola ONT 1400 GT Data Sheet](http://www.klonex.com.pl/media/produkty/pdf/motorola-ont1400gt.pdf)
 

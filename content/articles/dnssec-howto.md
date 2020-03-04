@@ -1,15 +1,16 @@
 Title: DNSSEC HOWTO
 Date: 2018-08-08T16:25
+Modified: 2020-03-04T17:43
 Tags: dnssec, bind9, dns
 Category: research
-summary: How to use DNSSEC 
+summary: How to use DNSSEC
 
 DNSSEC Two Steps
 ================
 
 Signing your domain with DNSSEC involves two components:
 
-1.  The registrar of your domain name needs to be able to accept what are called “Delegation Signor (DS)” records and be able to send those up to the Top-Level-Domain (TLD) for your domain (ex. .com, .org, .net).
+1.  The registrar of your domain name needs to be able to accept what are called “Delegation Signor (DS)” records and be able to send those up to the Top-Level-Domain (TLD) for your domain (ex. `.com`, `.org`, `.net`).
 2.  The DNS hosting provider who operates the DNS name servers for your domain must support DNSSEC and be able to sign (and re-sign) your DNS zone files.
 
 DNSSEC Resource Records
@@ -25,15 +26,15 @@ Likewise DNSSEC too requires several RRs.
 
 * DNSKEY Holds the public key which resolvers use to verify.
 * RRSIG Exists for each RR and contains the digital signature of a record.
-* DS - Delegation Signer – this record exists in the TLD's nameservers. So if example.com was your domain name, the TLD is "com" and its nameservers are a.gtld-servers.net., b.gtld-servers.net. up to m.gtld-servers.net..  The purpose of this record is to verify the authenticity of the DNSKEY itself.
+* DS - Delegation Signer – this record exists in the TLD's nameservers. So if example.com was your domain name, the TLD is "`com`" and its nameservers are `a.gtld-servers.net.`, `b.gtld-servers.net.` up to `m.gtld-servers.net.`.  The purpose of this record is to verify the authenticity of the DNSKEY itself.
 
 Setup Environment
 =================
 
-Domain Name: example.com
+Domain Name: `example.com`
 
 I used a real .COM domain to do this, but have replaced it with
-example.com for this article.
+`example.com` for this article.
 
 ```
     Master Nameserver:
@@ -53,29 +54,27 @@ The names and locations of configuration and zone files of BIND different accord
 
 [jtable]
 Service name, bind9
-Main configuration file, /etc/bind/named.conf.options
-Zone names file, /etc/bind/named.conf.local
-Default zone file location, /var/cache/bind/
-CentOS/Fedora Service name, named
-Main configuration and zone names file, /etc/named.conf
-Default zone file location, /var/named/
+Main configuration file, `/etc/bind/named.conf.options`
+Zone names file, `/etc/bind/named.conf.local`, or `view`/`zone` portion of named.conf
+Default zone file location, `/var/cache/bind/`
+CentOS/Fedora Service name, `named`
+Main configuration and zone names file, `/etc/named.conf`
+Default zone file location, `/var/named/`
 [/jtable]
 
-These may change if you're using bind-chroot. For this tutorial, I've
-used Debian for the Master NS and CentOS for the Slave NS, so change it
-according to your distribution.
+These may change if you're using bind-chroot. For this tutorial, I've used Debian for the Master NS and CentOS for the Slave NS, so change it according to your distribution.
 
 DNSSEC Master Configuration
 ===========================
 
 Enable DNSSEC by adding the following configuration directives inside
-options{ }
+Bind9 `options{ }`.
 
 ```bash
 nano /etc/bind/named.conf.options
 ```
 
-```named.conf
+```cfg
     dnssec-enable yes;
     dnssec-validation yes;
     dnssec-lookaside auto;
@@ -202,7 +201,7 @@ nano /etc/bind/named.conf.local
 
 Change the file option inside the zone { } section.
 
-```named.conf
+```cfg
    zone "example.com" IN {
        type master;
        file "example.com.zone.signed";
@@ -340,7 +339,7 @@ nano /etc/named.conf
 
 Place these lines inside the options { } section if they don't exist.
 
-```named.conf
+```cfg
    dnssec-enable yes;
    dnssec-validation yes;
    dnssec-lookaside auto;
@@ -348,7 +347,7 @@ Place these lines inside the options { } section if they don't exist.
 
 Edit the file option inside the zone { } section.
 
-```named.conf
+```cfg
     zone "example.com" IN {
         type slave;
         file "example.com.zone.signed";
@@ -405,8 +404,10 @@ like this.
 
 GoDaddy's Domain control panel
 
-Here is a breakup of the data in the dsset-example.com. file. DS record
-1:
+Here is a breakup of the data in the `dsset-example.com` file.
+
+```
+DS record 1:
 
 Key tag: 62910 Algorithm: 7 Digest Type: 1 Digest:
 1D6AC75083F3CEC31861993E325E0EEC7E97D1DD
@@ -417,25 +418,26 @@ Key tag: 62910 Algorithm: 7 Digest Type: 2 Digest:
 198303E265A856DE8FE6330EDB5AA76F3537C10783151AEF3577859FFFC3F59D
 
 DS record 2
+```
 
-The second DS record in the dsset-example.com. file had a space in the
+The second DS record in the `dsset-example.com` file had a space in the
 digest, but when entering it in the form you should omit it. Click Next,
 click Finish and Save the records.
 
 It'll take a few minutes for these changes to be saved. To check if the
 DS records have been created query the nameservers of your TLD. Instead
-of finding the TLD's nameservers we can do a dig +trace which is much
+of finding the TLD's nameservers we can do a `dig +trace` which is much
 simpler.
 
-root@master:~\# dig +trace +noadditional DS example.com. @8.8.8.8 | grep
-DS
+```shell
+dig +trace +noadditional DS example.com. @8.8.8.8 | grep DS
 
-&lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.17.rc1.el6\_4.6 &lt;&lt;&gt;&gt; +trace +noadditional DS
-
+<<>> DiG 9.8.2rc1-RedHat-9.8.2-0.17.rc1.el6_4.6 <<>> +trace +noadditional DS
 example.com. @8.8.8.8 example.com. 86400 IN DS 62910 7 2
 198303E265A856DE8FE6330EDB5AA76F3537C10783151AEF3577859F FFC3F59D
 example.com. 86400 IN DS 62910 7 1
 1D6AC75083F3CEC31861993E325E0EEC7E97D1DD
+```
 
 Once this is confirmed, we can check if DNSSEC is working fine using any
 of the following online services.
@@ -458,8 +460,9 @@ Each time you edit the zone by adding or removing records, it has to be
 signed to make it work. So we will create a script for this so that we
 don't have to type long commands every time.
 
-\# nano /usr/sbin/zonesigner.sh
+
 ```bash
+nano /usr/sbin/zonesigner.sh
 
 #!/bin/sh
 PDIR=`pwd`
@@ -487,7 +490,7 @@ editing it run the script by passing the domain name and zone filename
 as parameters.
 
 ```bash
-   root@master# zonesigner.sh example.com example.com.zone
+zonesigner.sh example.com example.com.zone
 ```
 
 You do not have to do anything on the slave nameserver as the
@@ -513,11 +516,11 @@ hacker using rainbow tables can break the hash, though it'll take a long
 time. To prevent this we can recompute this salt at regular intervals,
 which makes a hacker's attempt futile as there is a new salt before
 he/she can find the hash with the old salt. Create a cron job to do this
-for you using the zonesigner.sh script we created previously. If you run
+for you using the `zonesigner.sh` script we created previously. If you run
 the cronjob as root you don't have to worry about file ownership. Or
 else make sure the user under whom you're placing the cron has write
 permission on the zone directory and read permission on the private keys
-(Kexample.com.\*.private).
+(`Kexample.com.\*.private`).
 
 ```bash
 crontab -e
@@ -526,7 +529,7 @@ crontab -e
 And insert in the following:
 
 ```crontab
-    0 0 */3 * * /usr/sbin/zonesigner.sh example.com example.com.zone
+0 0 */3 * * /usr/sbin/zonesigner.sh example.com example.com.zone
 ```
 
 This will sign the zone every 3 days and as a result a new salt will be

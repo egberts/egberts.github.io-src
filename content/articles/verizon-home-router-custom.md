@@ -51,5 +51,5 @@ still holding the ActionTec equipment.
 References
 ==========
 
-* <https://loganmarchione.com/2015/07/use-your-own-router-with-verizon-fios/#comment-152266>
+* https://loganmarchione.com/2015/07/use-your-own-router-with-verizon-fios/#comment-152266
 

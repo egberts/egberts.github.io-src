@@ -1,7 +1,8 @@
 Title: Bitcoin Vulnerabilities
 Date: 2018-08-20 09:43
-Modified: 2018-12-20 15:28
+Modified: 2020-03-04 17:07
 Tags: bitcoin, vulnerabilities
+Status: published
 Category: security
 summary: Vulnerabilities Found in Bitcoin.
 
@@ -24,8 +25,13 @@ Some errors Satoshi with Bitcoin made are:
 * It is also possible to generate a valid 64 bytes transaction that looks like an intermediate node in the Merkle tree, making it possible to lie to **spv** by brute forcing 70bits or so, which isn't considered secure.
 * Verifying signatures was O(n\*m) where n is the number of **checksig** ops and **m** the transaction size. This makes it possible to generate transaction that are absurdly expensive to validate.
 
+Updated
+-------
+* Shour method of encryption then hash will do nothing to protect your privacy.
+  Then again you had little privacy to begin with a typical blockchain.
+
 References
 ==========
 
-* <https://twitter.com/deadalnix/status/1007548856375095296?s=09>
+* [Deadalnix on Twitter](https://twitter.com/deadalnix/status/1007548856375095296?s=09)
 

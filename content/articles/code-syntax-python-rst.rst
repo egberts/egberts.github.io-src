@@ -2,10 +2,11 @@ Python Code Syntax Highlighter using RST format in Pelican
 ##########################################################
 
 :Date: 2018-11-13 18:13
-:modified: 2018-11-13 18:13
+:modified: 2020-03-04 17:11
 :Tags: code syntax, pelican, rst, python, pygments, CSS, fix, HTML
 :slug: code-syntax-python-rst
 :Category: HOWTO
+:status: published
 :authors: Eggie
 :summary: A short version of how to do code syntax for Python
 
@@ -99,4 +100,5 @@ And the above was done using these RST snippet example:
 
 External References
 ===================
-* `REST Syntax <https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html>`_
+
+* [REST Syntax](https://thomas-cokelaer.info/tutorials/sphinx/rest_syntax.html)
