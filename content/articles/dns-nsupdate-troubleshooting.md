@@ -110,7 +110,7 @@ computer. (Actually, copy both files to the client computer.)
 Set up update-policy { } in exactly the same way as with TSIG.
 
 Perform updates also in the same way using nsupdate -k
-<filename>.private.
+\<filename\>.private.
 
 (Note: While TSIG key names are arbitrary, SIG(0) keys are stored in DNS
 and therefore always named like hostnames/subdomains. The key name does

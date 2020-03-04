@@ -30,7 +30,7 @@ some source in [LordNoteworthy@github]. Most common/interesting ones:
 * NB: using Zw* counterparts [TODO – elaborate]
 * Messing with debuggers:
     * BlockInput; not really detection, but…
-    * REP <some-op>
+    * REP \<some-op\>
 * [Kulchytskyy] Most interesting techniques (beyond [Ferrie])
     * NtCreateThreadEx to hide threads
     * Asm to set SEH handlers (32-bit only); on table-based SEH in x64 Windows – see [NTInsider]

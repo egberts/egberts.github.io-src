@@ -30,7 +30,7 @@ file name, named.conf keyword, description
 <code>/etc/bind/rndc.key</code>, , its key is created using <code>rndc-confgen</code> <code>-a</code> looking like this:</p> <p><code>   key &quot;rndc-key&quot; {</code><br /> <code>       algorithm hmac-md5;</code><br /> <code>       secret &quot;XbAxWyZPL74rN1Ti3dTV9a==&quot;;</code><br /> <code>   };</code>
 <code>/var/cache/bind/&#42.jnl</code>, <code>journal</code>, Keeps track of changes being made to the zone databases
 <code>/var/cache/bind/cache\_dump.db</code>, <code>dump-file</code>, "Dumps the DNS cache database into a text file. dump-file is a quoted string defining the absolute path where BIND dumps the database (cache) in response to a rndc dumpdb. If not specified, the default is named_dump.db in the location specified by a directory option. This option may only be specified in a 'global' options statement. "
-<code>/var/lib/bind/dynamic/<hash>.mkeys</code>, maintains all keys in a
+<code>/var/lib/bind/dynamic/\<hash\>.mkeys</code>, maintains all keys in a
 directory defined by <code>managed-keys-directory</code> config item.  Files
 have <code>.mkeys</code> filetype.  If in view-mode, filename is hash value of
 its zone name.

@@ -4,7 +4,7 @@ Tags: debugging, openldap
 Category: research
 Summary: How to set debugging level in OpenLDAP client and server programs.
 
-olcLogLevel: <level> This directive specifies the level at which
+olcLogLevel: \<level\> This directive specifies the level at which
 debugging statements and operation statistics should be syslogged
 (currently logged to the syslogd(8) LOG\_LOCAL4 facility). You must have
 configured OpenLDAP --enable-debug (the default) for this to work
