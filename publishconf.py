@@ -10,14 +10,16 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-# Special live-site-only variables
-SITEURL = 'https://egberts.github.io'
-developing_site = False
-# RELATIVE_URLS = False
+# If your site is available via HTTPS, make sure SITEURL begins with https://
+SITEURL = 'https://egbert.net'
+RELATIVE_URLS = False
 
-# Since output is a separate repo, no need to delete
-DELETE_OUTPUT_DIRECTORY = False
+FEED_ALL_ATOM = 'feeds/all.atom.xml'
+CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 
-FEED_ALL_ATOM = 'atom.xml'
+DELETE_OUTPUT_DIRECTORY = True
 
-# GOOGLE_ANALYTICS = 'UA-527449-5'
+# Following items are often useful when publishing
+
+#DISQUS_SITENAME = ""
+#GOOGLE_ANALYTICS = ""
