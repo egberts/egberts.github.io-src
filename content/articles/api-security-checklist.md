@@ -13,7 +13,7 @@ testing, and releasing your API.
 * Authentication
     * Don't use Basic Auth. Use standard authentication (e.g. JWT, OAuth).
     * Don't reinvent the wheel in Authentication, token generation, password storage.
-    *Use the standards.
+    * Use the standards.
     * Use Max Retry and jail features in Login.
     * Use encryption on all sensitive data.
 * JWT (JSON Web Token)
@@ -63,5 +63,4 @@ testing, and releasing your API.
 
 See also:
 =========
-* yosriady/api-development-tools - A collection of useful resources for building
-RESTful HTTP+JSON APIs.
+* yosriady/api-development-tools - A collection of useful resources for building RESTful HTTP+JSON APIs.

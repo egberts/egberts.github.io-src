@@ -113,7 +113,7 @@ Current Secured Configurations
 
 Current Secured Client Configuration
 ------------------------------------
-```ssh.config
+```cfg
 #
 # ssh_config
 #

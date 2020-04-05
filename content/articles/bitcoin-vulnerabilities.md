@@ -27,8 +27,7 @@ Some errors Satoshi with Bitcoin made are:
 
 Updated
 -------
-* Shour method of encryption then hash will do nothing to protect your privacy.
-  Then again you had little privacy to begin with a typical blockchain.
+* Shour method of encryption then hash will do nothing to protect your privacy.  Then again you had little privacy to begin with a typical blockchain.
 
 References
 ==========

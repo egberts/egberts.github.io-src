@@ -21,7 +21,7 @@ So, some of the basic criteria are:
 
 * User and password login instead of plain HTTP session cookies.
 * HTTP-only over TLS v1.2+ (secured HTTP, HTTPS)
- * ECDSA 1K or better
+    * ECDSA 1K or better
 * SameSite [1]
 * __Host prefix [1]
 * preload HTTP Strict-Transport-Security header line [2]

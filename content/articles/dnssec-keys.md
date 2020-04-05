@@ -11,10 +11,10 @@ ZSK vs. KSK Comparison
 ======================
 [jtable]
 Key, Usage, Frequency of Use
-ZSK, Private, Used by authoritative server to create RRSIG for zone data Used somewhat frequently depending on the zone, whenever authoritative zone data changes or re-signing is needed.
-ZSK, Public, Used by recursive server to validate zone data RRset Used very frequently, whenever recursive server validates a response
-KSK, Private, Used by authoritative server to create RRSIG for ZSK and KSK Public (DNSKEY) Very infrequently, whenever ZSK's or KSK's change (every year or every five years in our examples)
-KSK, Public, Used by recursive server to validate DNSKEY RRset Used very frequently, whenever recursive server validates a DNSKEY RRset
+ZSK, Private, "Used by authoritative server to create RRSIG for zone data Used somewhat frequently depending on the zone, whenever authoritative zone data changes or re-signing is needed."
+ZSK, Public, "Used by recursive server to validate zone data RRset Used very frequently, whenever recursive server validates a response"
+KSK, Private, "Used by authoritative server to create RRSIG for ZSK and KSK Public (DNSKEY) Very infrequently, whenever ZSK's or KSK's change (every year or every five years in our examples)"
+KSK, Public, "Used by recursive server to validate DNSKEY RRset Used very frequently, whenever recursive server validates a DNSKEY RRset"
 [/jtable]
 
 References

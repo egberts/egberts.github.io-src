@@ -45,7 +45,7 @@ Generate a secret key for authenticating the updates:
 tsig-keygen -r /dev/urandom | tee tsig-key.private
 ```
 outputs are:
-```named.conf
+```nginx
    key "tsig-key" {
        algorithm hmac-sha256;
        secret "7P6HbRZRJCmtauo/lV0jwN9wkMgBTUikhf9JuaTvYT4=";
@@ -59,7 +59,7 @@ for different hosts, each with a unique name in the key "…" field.)
 
 Enable dynamic updates in the zone configuration:
 
-```named.conf
+```nginx
    zone ... {
        ...
        update-policy {

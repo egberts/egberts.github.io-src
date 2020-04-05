@@ -2,7 +2,6 @@ Title: Bind9 DNSSEC Root
 status: published
 Date: 2020-01-28 16:14
 Modified: 2020-03-04 18:00
-status: published
 tags: bind9, dnssec
 category: research
 summary: Setting up Root DNSSEC for internal use
@@ -168,7 +167,7 @@ zone "whitelab" {
 Back to Root, let's start with the top-most (or first
 encountered) Bind9 options associated with Root, particularly private root:
 
-```named.conf
+```nginx
   view "local_view" {
     root-delegation-only;  // not at global option clause, but view
   }
@@ -176,7 +175,7 @@ encountered) Bind9 options associated with Root, particularly private root:
 
 Then we add the Root (".") zone:
 
-```named.conf
+```nginx
   view "local_view" {
     root-delegation-only;  // not at global option clause, but view
 
@@ -289,7 +288,7 @@ Root zone file contains the DNS records for its root zone.
 Populate the  `/var/lib/bind/db.root` file, add the
 following records:
 
-```named.zone
+```ini
     .                          86400  IN SOA a.myroot-servers.whitelab.
                                              hostmaster.whitelab.
                                              2013122200 1800 900 604800 86400
@@ -371,7 +370,7 @@ Bind9 directories
 =================
 [jtable]
 directory name, named.conf keyword, description
-/etc/bind, directory, directory is a quoted string defining the absolute path for the server e.g. &quot;/var/named&quot;. All subsequent relative paths use this base directory. If no directory options is specified the directory from which BIND was loaded is used. This option may only be specified in a 'global' options statement.
+`/etc/bind`, `directory`, directory is a quoted string defining the absolute path for the server e.g. &quot;/var/named&quot;. All subsequent relative paths use this base directory. If no directory options is specified the directory from which BIND was loaded is used. This option may only be specified in a 'global' options statement.
 `/etc/bind`, `file`, zone files
 `/etc/bind/keys`, `key-directory`, "key-directory is a quoted string defining the absolute path, for example, &quot;/var/lib/bind/dynamic&quot; where the keys used in the dynamic update of secure zones may be found. Only required if this directory is different from that defined by a directory option. This statement may only be used in a global options clause. `rndc` `loadkeys` and `rndc` `sign` reads from this directory. "
 `/var/lib/bind`, ,

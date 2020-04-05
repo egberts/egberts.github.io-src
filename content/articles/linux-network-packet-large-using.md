@@ -6,13 +6,7 @@ summary: How to use over-sized Ethernet packets in your home network.
 
 Your customer is using large network packets. And by large packets, this means packet size greater than 1514 bytes.
 
-In computer networking, the maximum transmission unit (MTU) of a
-communications protocol of a layer is the size (in bytes) of the largest
-protocol data unit that the layer can pass onwards. MTU parameters
-usually appear in association with a communications interface (NIC,
-serial port, etc.). Standards (Ethernet, for example) can fix the size
-of an MTU; or systems (such as point-to-point serial links) may decide
-MTU at connect time.
+In computer networking, the maximum transmission unit (MTU) of a communications protocol of a layer is the size (in bytes) of the largest protocol data unit that the layer can pass onwards. MTU parameters usually appear in association with a communications interface (NIC, serial port, etc.). Standards (Ethernet, for example) can fix the size of an MTU; or systems (such as point-to-point serial links) may decide MTU at connect time.
 
 Step-by-step guide
 ==================

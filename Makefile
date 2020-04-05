@@ -80,6 +80,9 @@ publish:
 ssh_upload: publish
 	scp $(SCP_OPTION) -P $(SSH_PORT) -r $(OUTPUTDIR)/* $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
 
+validate: publish
+	html5validator --root $(OUTPUTDIR)
+
 rsync_upload: publish
 	rsync -e "ssh -p $(SSH_PORT)" -P -rvzc --cvs-exclude --delete $(OUTPUTDIR)/ $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
 

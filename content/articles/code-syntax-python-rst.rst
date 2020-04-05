@@ -7,7 +7,7 @@ Python Code Syntax Highlighter using RST format in Pelican
 :slug: code-syntax-python-rst
 :Category: HOWTO
 :status: published
-:authors: Eggie
+:authors: egberts
 :summary: A short version of how to do code syntax for Python
 
 Using RST code-block option

@@ -48,7 +48,7 @@ Details on how to verify the signatures with the public key are beyond the scope
 
 When not using the `+short` option with dig, a DNS response is DNSSEC authenticated if the ad flag appears in the response header:
 
-```
+```console
 dig www.cloudflare.com [...] ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 65326
 ;; flags: qr rd ra ad; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1 [...] ;; QUESTION SECTION: ;www.cloudflare.com.        IN  A [...] ;; ANSWER SECTION: www.cloudflare.com. 15  IN  A   198.41.215.162 www.cloudflare.com. 15  IN  A   198.41.214.162
 ```
@@ -68,7 +68,7 @@ dig +short DS cloudflare.com 2371 13 2 32996839A6D808AFE3EB4A795A0E6A7A39A76FC52
 
 When using the +trace option, dig confirms whether an answer is returned by the nameserver for `cloudflare.com` or the nameserver for `.com`.  In this example, the DS record for `cloudflare.com` is returned by `e.gtld-servers.net`:
 
-```
+```bash
 dig DS cloudflare.com +trace [...] cloudflare.com.     86400   IN  DS  2371 13 2 32996839A6D808AFE3EB4A795A0E6A7A39A76FC52FF228B22B76F6D6 3826F2B9 [...] com.            172800  IN  NS  e.gtld-servers.net. [...] ;; Received 1213 bytes from 2001:502:1ca1::30#53(e.gtld-servers.net) in 37 ms
 ```
 

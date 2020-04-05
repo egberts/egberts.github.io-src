@@ -21,7 +21,7 @@ the contents of the variable.
 
 Table 1. Load path when running in system mode (`--system`).
 
-```
+```console
     Path    Description
     /etc/systemd/system.control Persistent and transient configuration created using the dbus API
     /run/systemd/system.control
@@ -37,7 +37,7 @@ Table 1. Load path when running in system mode (`--system`).
 
 Table 2. Load path when running in user mode (`--user`).
 
-```
+```console
     Path    Description
     $XDG_CONFIG_HOME/systemd/user.control or ~/.config/systemd/user.control
     Persistent and transient configuration created using the dbus API
@@ -74,7 +74,8 @@ may in turn be set using environment generators, see
 just the defaults. To see the actual list that would be used based on
 compilation options and current environment use
 
-```bash
+
+```shell
 systemd-analyze --user unit-paths
 ```
 

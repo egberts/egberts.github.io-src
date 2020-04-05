@@ -7,7 +7,7 @@ Category: research
 Summary: Toward a tigher redevelopment cycle on Python.
 
 Tight Multiversion Python Re-development Cycle
-**********************************************
+==============================================
 
 Set up a new Python virtual environment
 ---------------------------------------

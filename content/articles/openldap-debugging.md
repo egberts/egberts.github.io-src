@@ -17,7 +17,7 @@ the table below. The possible values for <level> are:
 Table 5.1: Debugging Levels
 [jtable]
 Level, Keyword, Description
--1, any enable all debugging
+-1, , any enable all debugging
 0, , no,  debugging
 1, (0x1 trace),  trace function calls
 2, (0x2 packets),    debug packet handling

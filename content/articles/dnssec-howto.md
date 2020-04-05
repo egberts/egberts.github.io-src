@@ -55,7 +55,7 @@ The names and locations of configuration and zone files of BIND different accord
 [jtable]
 Service name, bind9
 Main configuration file, `/etc/bind/named.conf.options`
-Zone names file, `/etc/bind/named.conf.local`, or `view`/`zone` portion of named.conf
+Zone names file, "`/etc/bind/named.conf.local`, or `view`/`zone` portion of named.conf"
 Default zone file location, `/var/cache/bind/`
 CentOS/Fedora Service name, `named`
 Main configuration and zone names file, `/etc/named.conf`
@@ -129,7 +129,7 @@ dnssec-keygen -f KSK \
                            example.com
 ```
 which outputs are:
-```
+```console
    Generating key pair......................++.............................................................................................................................................................................................................++
    Kexample.com.+007+62910
 ```
@@ -166,7 +166,7 @@ dnssec-signzone -A -3 \
     -t example.com.zone
 ```
 which outputs are:
-```
+```console
    Verifying the zone using the following algorithms: NSEC3RSASHA1.
    Zone signing complete:
    Algorithm: NSEC3RSASHA1: KSKs: 1 active, 0 stand-by, 0 revoked

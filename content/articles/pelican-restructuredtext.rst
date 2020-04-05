@@ -3,7 +3,7 @@ Example RST markup used in Pelican
 
 :Date: 2017-11-20 16:58
 :Tags: rst
-:Status: draft
+:Status: publish
 :Category: example
 :Slug: rst-example
 :Summary: Example RST for Pelican uses

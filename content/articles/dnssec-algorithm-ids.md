@@ -20,7 +20,7 @@ DNSSEC algorithm table
 [jtable separator=","]
 <code>Number</code>, <code>Description</code>, Mnemonic, Zone Signing, Trans. Sec.
 0 , Delete DS , DELETE , N , N , [RFC4034][RFC4398][RFC8078]
-1 , RSA/MD5 (deprecated see 5) , RSAMD5 , N , Y , [RFC3110][RFC4034]
+1 , "RSA/MD5 (deprecated see 5), RSAMD5" , N , Y , [RFC3110][RFC4034]
 2, Diffie-Hellman, DH, N, Y, [RFC2539][proposed standard] [RFC3755][proposed standard][RFC2536][proposed standard][Federal Information Processing Standards Publication (FIPS PUB) 186]
 3, DSA/SHA1, DSA, Y, Y, Signature Standard; 18 May 1994.][Federal Information Processing Standards Publication (FIPS PUB) 180-1; Secure Hash Standard; 17 April 1995. (Supersedes FIPS PUB 180 dated 11 May 1993.)]
 4, Reserved, , , , [RFC6725]
@@ -50,7 +50,7 @@ DNSSEC algorithms ID are found in DNS record files and DNSSEC packets.
 
 Example DNS record file below:
 
-```named-zone
+```cfg
     dig upenn.edu DNSKEY;; ANSWER SECTION:
     upenn.edu.              7200 IN DNSKEY 256 3 5 (
                                     AwEAAcDt107stSjvoBA/YVPr+2gvB3v33tXr7ROZ/Jqm

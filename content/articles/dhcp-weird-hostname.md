@@ -41,7 +41,7 @@ DHCP for Apple iPod
 For Apple iPod, a specific MAC address subclass is needed here.  Added the
 following to `dhcpd.conf.options`:
 
-```dhcp
+```nginx
 class "iPod" {
         # match hardware;
         match pick-first-value (option dhcp-client-identifier, hardware);
@@ -50,7 +50,7 @@ class "iPod" {
 
 And added the following to `dhcpd.conf.reserved` (or `dhcpd.conf`):
 
-```dhcp
+```nginx
 subclass "iPod" 1:00:23:df:ee:62:53;  # Apple iPod
 
 group blue {

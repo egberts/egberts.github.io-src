@@ -34,12 +34,7 @@ Technical features
 Website
 -------
 
-![](Antipat4.svg "fig:Antipat4.svg")|Library [warrant
-canary](warrant_canary "wikilink") relying on active removal designed by
-[Jessamyn West](Jessamyn_West_(librarian) "wikilink").\]\] The rating of
-the services' websites according to SSL server certificate and HTTP
-cookie test tools. Also listed is whether the websites maintain a
-[warrant canary](warrant_canary "wikilink").
+![](Antipat4.svg "fig:Antipat4.svg")|Library [warrant canary](warrant_canary "wikilink") relying on active removal designed by [Jessamyn West](Jessamyn_West_(librarian) "wikilink").\]\] The rating of the services' websites according to SSL server certificate and HTTP cookie test tools. Also listed is whether the websites maintain a [warrant canary](warrant_canary "wikilink").
 
 <table>
 <thead>

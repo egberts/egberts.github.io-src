@@ -8,6 +8,7 @@ Debugging Bro Core Engine
 =========================
 
 This page covers how to debug the Core Engine of Bro. 
+
 1. Viewing BroString Object 
 2. Breakpoint an Analyzer function
 

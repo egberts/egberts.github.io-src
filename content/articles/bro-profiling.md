@@ -1,11 +1,12 @@
-Title: Profiling Bro
+Title: Profiling Zeek
 Date: 2018-09-24 09:33
-Tags: Bro, profiling
-Slug: bro-profiling
+Modified: 2020-03-11 09:33
+Tags: Zeek, Bro, profiling
+Slug: zeek-profiling
 category: research
-summary: How to run OProfile on Bro IDS
+summary: How to run OProfile on Zeek IDS
 
-Profiling Bro
+Profiling Zeek
 =============
 
 This page describes how to run OProfile Get two packages from

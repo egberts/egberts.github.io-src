@@ -32,9 +32,9 @@ Notice: Any and all changes toward ``preferences.js`` will be blown` aw
 
 [jtable]
 Column, Description
-`prefs.js:user_pref("services.sync.username", johndoe@example.com")`, The Sync account name (maintained by Firefox Account Manager)
-`prefs.js:user_pref("services.sync.declinedEngines", "tabs,addons,passwords,history");`, A list of things to keep track of. Valid options are tabs, addons, passwords, history.
-`prefs.js:user_pref("services.sync.account", "johndoe@example.com");`, client
+"`prefs.js:user_pref(\"services.sync.username\", johndoe@example.com")`", The Sync account name (maintained by Firefox Account Manager)
+"`prefs.js:user_pref(\"services.sync.declinedEngines\", \"tabs,addons,passwords,history\");`", A list of things to keep track of. Valid options are tabs, addons, passwords, history.
+"`prefs.js:user_pref(\"services.sync.account\", \"johndoe@example.com\");`", client
 account name used on Firefox sync, typically in email format.
 `prefs.js:user_pref("services.sync.client.name", "johndoe' Firefox on johndoe-macbook");`, client account label used on Firefox Sync, a simple representation
 [/jtable]

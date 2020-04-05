@@ -4,7 +4,7 @@ modified: 2019-02-13 10:50
 Tags: code syntax, pelican, markdown, python, pygments, CSS, fix, HTML
 Category: HOWTO
 slug: code-syntax-python-md
-authors: Eggie
+authors: egberts
 summary: A short version of how to do code syntax for Python
 
 

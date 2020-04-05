@@ -9,8 +9,8 @@ Summary: New web server design - One-time URL
 I was designing a new web server that has the following capabilities:
 
 * web page are one-time, never served again
- * Age timer starts at first authenticated visit
- * Then gets deleted and returns HTTP 404
+    * Age timer starts at first authenticated visit
+    * Then gets deleted and returns HTTP 404
 
 It wasn't meant to be a one-time delivery mechanism, but only for
 a mutually-assured data exchange (much like Signal auto-delete).

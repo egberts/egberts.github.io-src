@@ -1,40 +1,40 @@
-Title: Bro messaging
+Title: Zeek messaging
 Date:  2018-05-16 14:16:28
-Updated:  2020-02-25 19:04:11
-Tags: Bro, API
+Updated:  2020-03-11 14:04:11
+Tags: Zeek, Bro, API
 Category: research
-Summary: Enabling debug messages of Bro script
+Summary: Enabling debug messages of Zeek script
 
-Debugging Bro message queues
+Debugging Zeek message queues
 ============================
 
-To enable debugging Bro message queues, insert the following into the
-local.bro script in /usr/share/bro/sfa/policy directory. This is also
+To enable debugging Zeek message queues, insert the following into the
+local.zeek script in /usr/share/zeek/sfa/policy directory. This is also
 useful for troubleshooting script-land memory leakage.
 
-```bro
+```zeek
 @load misc/profiling
 redef Log::enable_local_logging = T;
 redef profiling_interval = 10secs;
 redef expensive_profiling_multiple = 2;
 ```
 
-Bro UNIX server created a prof.log file. As a UNIX server, prof.log are
-found in each of the /var/spool/bro/***bro-process-type*** directory.
-Running Bro as standalone puts prof.log in the current working
+Zeek UNIX server created a prof.log file. As a UNIX server, prof.log are
+found in each of the /var/spool/zeek/***zeek-process-type*** directory.
+Running Zeek as standalone puts prof.log in the current working
 directory.
 
 Example output of prof.log:
 
 ```
     0.000000 ------------------------
-    0.000000 Command line: /usr/bin/bro -C -d -B threading -t trace.log -e redef
+    0.000000 Command line: /usr/bin/zeek -C -d -B threading -t trace.log -e redef
     profiling_interval=30secs;
     redef expensive_profiling_multiple=1 ; redef Log::enable_local_logging=T; redef
     Reporter::info_to_stderr =
     T; redef Reporter::errors_to_stderr = T; redef Reporter::warnings_to_stderr = T;
     -r ftp.pcap
-    sfa/policy/local.bro
+    sfa/policy/local.zeek
     0.000000 ------------------------
     0.000000 Memory: total=30160K total_adj=0K malloced: 23126K
     0.000000 Run-time: user+sys=0.0 user=0.0 sys=0.0 real=0.0
@@ -60,7 +60,7 @@ Example output of prof.log:
     0.000000
     0.000000
     0.000000 Threads: current=4
-    0.000000   /var/spool/bro/bv_intel/bv_intel.txt/Input::READER_ASCII in=1 out=1
+    0.000000   /var/spool/zeek/bv_intel/bv_intel.txt/Input::READER_ASCII in=1 out=1
     pending=0/1 (#queue r/w:
     in=1/1 out=0/1)
     0.000000
@@ -126,7 +126,7 @@ The prof.log output continues on (note the timestamp):
     1413471640.952530         ScheduleTimer = 2
     1413471640.952530         TableValTimer = 16
     1413471640.952530 Threads: current=4
-    1413471640.952530   /var/spool/bro/bv_intel/bv_intel.txt/Input::READER_ASCII
+    1413471640.952530   /var/spool/zeek/bv_intel/bv_intel.txt/Input::READER_ASCII
     in=1 out=1 pending=0/0 (#queue
     r/w: in=1/1 out=1/1)
     1413471640.952530
@@ -203,10 +203,10 @@ READER\_ASCII would not leak if it had a perfect one-to-one read/write
 with input portion of Intel reader queue.
 
 ```
-/var/spool/bro/bv_intel/bv_intel.txt/Input::READER_ASCII in=151 out=76527
+/var/spool/zeek/bv_intel/bv_intel.txt/Input::READER_ASCII in=151 out=76527
 pending=0/0 (\#queue r/w: in=151/151 out=76527/76527)
 
-Total memory should be closely paid attention to for Bro Core Engine
+Total memory should be closely paid attention to for Zeek Core Engine
 leakage as it did in this 20-second example:
 
     Memory: total=32608K total_adj=0K malloced: 32478K
@@ -226,7 +226,7 @@ leakage as it did in this 20-second example:
     Memory: total=177040K total_adj=144432K malloced: 139141K
 ```
 
-Checkpointing of memory structures between Bro workers were less than 1K
+Checkpointing of memory structures between Zeek workers were less than 1K
 every 20 seconds as denoted by this prof.log output:
 
 ```

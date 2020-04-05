@@ -11,7 +11,9 @@ Overview
 
 Components, as listed in network order from your PC to the Internet:
 
-<img src="HFC network.png" title="HFC network.png" alt="HFC network.png" width="800" />
+<div class="m-image">
+<img src="/images/HFC-Network.png" title="HFC network.png" alt="HFC-Network.png" width="800" />
+</div>
 
 Home Network
 ============
@@ -25,7 +27,9 @@ Your home network can be connected in one of three ways:
 Ethernet via ONT direct Cat-5 (preferred)
 -----------------------------------------
 
-<img src="Home network via ONT Ethernet.png" title="Home network via ONT Ethernet.png" alt="Home network via ONT Ethernet.png" width="800" />
+<div class="m-image">
+<img src="/images/Home-network-via-ONT-Ethernet.png" title="Home network via ONT Ethernet.png" alt="Home network via ONT Ethernet.png" width="800" />
+</div>
 
 * Personal Computer
 * Cat-5E cabling for 802.3/1000Base-T
@@ -80,7 +84,9 @@ Then to the ISP Network
 
 then
 
-<img src="Verizon ISP network.png" title="Verizon ISP network.png" alt="Verizon ISP network.png" width="800" />
+<div class="m-image">
+<img src="/images/Verizon-ISP-Network.png" title="Verizon ISP network.png" alt="Verizon-ISP-Network.png" width="800" />
+</div>
 
 * Motorola ONT 1400 Single Family Unit (SFU) is an ITU G.984-compliant GPON intelligent optical network terminal (ONT)
 * Fiber cable, Single-Mode (SM), SC connector
@@ -169,140 +175,29 @@ GPON ONT
 * [ActionTEC Router datasheet](https://www.actiontec.com/products/wifi-routers-gateways/fiber/bhr-rev-i)
 * Motorola ONT 1400
 
-<table>
-<thead>
-<tr class="header">
-<th><p>Manufacturer</p></th>
-<th><p>Model</p></th>
-<th><p>Type</p></th>
-<th><p>Style</p></th>
-<th><p>MoCA/Coax</p></th>
-<th><p>Ethernet/VDSL2</p></th>
-<th><p>POTS</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><p>Alcatel</p></td>
-<td><p>I-211M-L</p></td>
-<td><p>SFU</p></td>
-<td><p>Interior Desktop</p>
-<p>Exterior</p></td>
-<td><p>1: MoCA</p></td>
-<td><p>1: 10/100/1G Ethernet</p></td>
-<td><p>2</p></td>
-</tr>
-<tr class="even">
-<td><p>Alcatel</p></td>
-<td><p>O-24121G-A</p></td>
-<td><p>MDU</p></td>
-<td><p>Shared</p></td>
-<td><p>12</p></td>
-<td><p>12: 10/100/1G Ethernet</p></td>
-<td><p>24</p></td>
-</tr>
-<tr class="odd">
-<td><p>Alcatel</p></td>
-<td><p>O-24121V-A</p></td>
-<td><p>MDU</p></td>
-<td><p>Shared</p></td>
-<td><p>12</p></td>
-<td><p>12: VDSL2</p></td>
-<td><p>24</p></td>
-</tr>
-<tr class="even">
-<td><p>Alcatel</p></td>
-<td><p>O-821M-A</p></td>
-<td><p>SOHO</p></td>
-<td><p>Exterior</p></td>
-<td><p>1: MoCA</p></td>
-<td><p>2: 10/100/1G Ethernet</p></td>
-<td><p>8</p></td>
-</tr>
-<tr class="odd">
-<td><p>Motorola</p></td>
-<td><p>1000-GI4</p></td>
-<td><p>SFU</p></td>
-<td><p>Interior</p></td>
-<td><p>1: MoCA</p></td>
-<td><p>1: 10/100/1G Ethernet</p></td>
-<td><p>2</p></td>
-</tr>
-<tr class="even">
-<td><p>Motorola</p></td>
-<td><p>1000-GJ4</p></td>
-<td><p>SFU</p></td>
-<td><p>Interior</p></td>
-<td><p>1: MoCA</p></td>
-<td><p>1: 10/100/1G Ethernet</p></td>
-<td><p>2</p></td>
-</tr>
-<tr class="odd">
-<td><p>Motorola</p></td>
-<td><p>1000-GT4</p></td>
-<td><p>SFU</p></td>
-<td><p>Exterior</p></td>
-<td><p>1: MoCA</p></td>
-<td><p>1: 10/100/1G Ethernet</p></td>
-<td><p>2</p></td>
-</tr>
-<tr class="even">
-<td><p>Motorola</p></td>
-<td><p>14842</p></td>
-<td><p>SOHO</p></td>
-<td><p>Exterior</p></td>
-<td><p>1: MoCA</p></td>
-<td><p>5: 10/100/1G Ethernet</p></td>
-<td><p>8</p></td>
-</tr>
-<tr class="odd">
-<td><p>Motorola</p></td>
-<td><p>6000-GET</p></td>
-<td><p>MDU</p></td>
-<td><p>Shared</p></td>
-<td><p>1: MoCA</p></td>
-<td><p>12: 10/100/1G Ethernet</p></td>
-<td><p>24</p></td>
-</tr>
-<tr class="even">
-<td><p>Motorola</p></td>
-<td><p>6000-GVT</p></td>
-<td><p>MDU</p></td>
-<td><p>Shared</p></td>
-<td><p>1: MoCA</p></td>
-<td><p>12: VDSL2</p></td>
-<td><p>24</p></td>
-</tr>
-</tbody>
-</table>
+[jtable]
+Manufacturer, Model, Type, Style, MoCA/Coax, Ethernet/VDSL2, POTS
+Alcatel, I-211M-L, SFU, Interior Desktop<p>Exterior, MoCA, 10/100/1G Ethernet, 2
+Alcatel, O-24121G-A, MDU, Shared, 12, 12: 10/100/1G Ethernet, 24
+Alcatel, O-24121V-A, MDU, Shared, 12, 12: VDSL2, 24
+Alcatel, O-821M-A, SOHO, Exterior, 1: MoCA, 2: 10/100/1G Ethernet, 8
+Motorola, 1000-GI4, SFU, Interior, 1: MoCA, 1: 10/100/1G Ethernet, 2
+Motorola, 1000-GJ4, SFU, Interior, 1: MoCA, 1: 10/100/1G Ethernet, 2
+Motorola, 1000-GT4, SFU, Exterior, 1: MoCA, 1: 10/100/1G Ethernet, 2
+Motorola, 14842, SOHO, Exterior, 1: MoCA, 5: 10/100/1G Ethernet, 8
+Motorola, 6000-GET, MDU, Shared, 1: MoCA, 12: 10/1000/1G Ethernet, 24
+Motorola, 6000-GVT, MDU, Shared, 1: MoCA, 12: VDSL2, 24
+[/jtable]
 
 Legend:
+-------
 
-* SFU Exterior (ONT Outside of Home): An ONT is installed outside. The
-    battery
-* backup unit (BBU) and power supply (PS) are installed inside. The PS
-    must be
-* within 6 feet of a grounded outlet. The PS can be up to 50 feet from
-    the BBU.
-* SFU Exterior installs are now only done if an SFU Interior is
-    not feasible.
-* SFU Interior (ONT Wall-Mounted Inside of Home): An All-In-One ONT is
-    usually
-* used on house interior installs. The ONT, BBU (if applicable) and PS
-    are in a
-* single enclosure. SFU Interior is the most common type of install.
-* SFU Desktop (ONT Self-Standing Inside of Home): A small ONT is
-    placed inside
-* the house, not wall mounted. This setup is used if wall space
-    is limited.
-* Desktop ONTs can also be wall mounted inside or outside, in
-    an enclosure. This
-* makes them the most versatile, and therefore most common type of
-    ONT used.
-* SOHO Exterior (ONT Outside of Office): Same as SFU Exterior, except
-    the ONT
-* has extra Ethernet and Telephone ports for the
-    Office/Small Business.
+* SFU Exterior (ONT Outside of Home): An ONT is installed outside. The battery backup unit (BBU) and power supply (PS) are installed inside. The PS must be within 6 feet of a grounded outlet. The PS can be up to 50 feet from the BBU.
+* SFU Exterior installs are now only done if an SFU Interior is not feasible.
+* SFU Interior (ONT Wall-Mounted Inside of Home): An All-In-One ONT is usually used on house interior installs. The ONT, BBU (if applicable) and PS are in a single enclosure. SFU Interior is the most common type of install.
+* SFU Desktop (ONT Self-Standing Inside of Home): A small ONT is placed inside the house, not wall mounted. This setup is used if wall space is limited.
+* Desktop ONTs can also be wall mounted inside or outside, in an enclosure. This makes them the most versatile, and therefore most common type of ONT used.
+* SOHO Exterior (ONT Outside of Office): Same as SFU Exterior, except the ONT has extra Ethernet and Telephone ports for the Office/Small Business.
 
 Phased out:
 

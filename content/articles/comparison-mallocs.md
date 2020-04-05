@@ -85,14 +85,10 @@ Backend of the memory allocation system manages the empty, straggling,
 fragmented or no-longer used memory blocks back to the OS (thereby
 reducing RSS).
 
-* Pool semantic: Remote f-list encoding, using Treiber stack), (R.K.
-    Treiber,
-* 1986)
+* Pool semantic: Remote f-list encoding, using Treiber stack), (R.K.  Treiber,  1986)
 * buddy algorithm
 * binary buddy algorithm
-* BIPOP Table (span-based allocator)(S. Schneider, 2006) aka local
-    free list and
-* remote free list
+* BIPOP Table (span-based allocator)(S. Schneider, 2006) aka local free list and remote free list
 * segment queue (Quasi-linearizability, Y. Afek, 2010)
 * multi-core distributed queue (A. Haas, 2013)
 * k-FIFO queue (T.A. Henzinger, 2013)
@@ -100,9 +96,7 @@ reducing RSS).
 Competition
 -----------
 
-There are better ones out there that does not worsen as more
-threads/processes performs memory allocation system calls; they are
-listed in best-to-good performance order​\[seed with source\]:
+There are better ones out there that does not worsen as more threads/processes performs memory allocation system calls; they are listed in best-to-good performance order​\[seed with source\]:
 
 Comparison of malloc design
 ===========================
@@ -110,7 +104,7 @@ Comparison of malloc design
 [jtable]
 name , Author , link , repo
 ssmalloc , , <a href="https://apsys2012.kaist.ac.kr/media/papers/apsys2012-final27.pdf">whitepaper</a>,
-jemalloc , Jason Evans (Facebook, FreeBSD) , [whitepaper](https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf) ,
+jemalloc , Jason Evans ("Facebook, FreeBSD") , [whitepaper](https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf) ,
 sfmalloc , "SNU, Korea" , ,
 Streamflow , , ,
 ptmalloc3 , , ,
@@ -167,9 +161,7 @@ Unit Test Approaches
 
 Malloc testing
 
-Test various patterns of memory allocation, aiming for various levels of
-fragmentation. Perform the tests both in single-threaded and
-multi-threaded environments.
+Test various patterns of memory allocation, aiming for various levels of fragmentation. Perform the tests both in single-threaded and multi-threaded environments.
 
 Checks for correctness:
 
@@ -178,15 +170,11 @@ Checks for correctness:
 * Arguments to calloc which would overflow size\_t when multiplied should result in allocation failure, not under-allocation.
 * Allocating a block so large that subtracting two pointers within that block could overflow ptrdiff\_t should not be possible.
 
-Further implementation-specific correctness checks: checking consistency
-of bookkeeping information before and after each allocated block.
+Further implementation-specific correctness checks: checking consistency of bookkeeping information before and after each allocated block.
 
-Possible quality-of-implementation checks: Attempting to obtain
-pathological fragmentation and allocation failure where it should not
-happen.
+Possible quality-of-implementation checks: Attempting to obtain pathological fragmentation and allocation failure where it should not happen.
 
-Corruption check: The attacker could overflow a buffer dynamically
-allocated by malloc(3) and:
+Corruption check: The attacker could overflow a buffer dynamically allocated by malloc(3) and:
 
 * overwrite the next contiguous boundary tag ([Netscape browsers exploit](http://www.openwall.com/advisories/OW-002-netscape-jpeg.txt) or
 * underflow such a buffer and overwrite the boundary tag stored just before [Secure Locate exploit](ftp://maxx.via.ecp.fr/dislocate/)), or

@@ -21,7 +21,6 @@ I mentioned in the allocation process topic apply here as well.
 
 .. figure:: /images/Dhcprere.png
    :width: 440px
-   :align: center
    :height: 400px
    :alt: DHCP Lease Renewal and Rebinding Process
    :figclass: align-center

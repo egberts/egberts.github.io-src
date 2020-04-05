@@ -6,7 +6,7 @@ import importlib
 
 DEBUG =  True
 
-AUTHOR = 'egbert'
+AUTHOR = 'egberts'
 
 #  SITENAME - Your site name.  Used as {{ SITENAME }} in
 #  templates or during FEED generate_outputs.
@@ -145,6 +145,11 @@ JINJA_ENVIRONMENT = {
 #    JINJA_FILTERS = {'urlencode': urlencode_filter}
 #  See Jinja custom filter documentation.
 #  https://jinja.palletsprojects.com/en/2.11.x/api/#custom-filters
+#
+#  Some keywords are: 'rtrim', 'render_rst', 'expand_link',
+#  'expand_links', 'format_siteurl', 'hyphenate',
+#  'dehyphenate',
+
 #*default*  JINJA_FILTERS = {}
 JINJA_FILTERS = {}
 
@@ -286,6 +291,10 @@ DEFAULT_DATE = None
 #         so no need to specify theme-related files
 #         in EXTRA_PATH_METADATA.
 EXTRA_PATH_METADATA = {
+    'images/*.png$': {'path': '/images/'},  # All images/* get copied to images/
+    'images/*.jpg$': {'path': '/images/'},  # All images/* get copied to images/
+    'images/*.gif$': {'path': '/images/'},  # All images/* get copied to images/
+    'images/*.svg$': {'path': '/images/'},  # All images/* get copied to images/
     'extra/custom.css': {'path': 'css/custom.css'},
     'extra/robots.txt': {'path': './robots.txt'},
     'extra/keybase.txt': {'path': './keybase.txt'},
@@ -691,8 +700,11 @@ MARKDOWN = {
 # XXXXXXXXXXXX
 #  PLUGIN_PATHS - A list of directories where to look
 #  for plugins. See Plugins.
+#  Orderings from left to right determines who gets
+#  loaded firstly.
 #*default*  PLUGIN_PATHS = []
-PLUGIN_PATHS = [ 'plugins', 'm.css/plugins/m' ]
+# PLUGIN_PATHS = [ 'm.css/plugins', 'm.css/plugins/m', 'plugins' ]
+PLUGIN_PATHS = [ 'm.css/plugins', 'plugins' ]
 
 #  PLUGINS - The list of plugins to load.
 #  See Plugins.
@@ -703,8 +715,10 @@ PLUGINS = [
           'sitemap',
           'dateish',
           'tag_cloud',
-          'alias',
-          'htmlsanity',
+          'm.alias',
+          'm.htmlsanity',
+          'm.images',
+          'm.math',
           'just_table',
           'code_include',
 ]
@@ -714,12 +728,32 @@ PLUGINS = [
 ######################################################
 JTABLE_SEPARATOR = ","
 
-TAG_CLOUD_BADGE = True
-TAG_CLOUD_MAX_ITEMS = 100
+#  TAG_CLOUD_SORTING offers several ways to list the
+#  tag cloud: 'alphabetically', 'alphabetically-rev',
+#  'size', 'size-rev', 'random'.
+#*default*  TAG_CLOUD_SORTING = 'random'
 TAG_CLOUD_SORTING = 'size'
+
+#  TAG_CLOUD_MAX_ITEMS is the maximum tag count
+#  in which to display on the HTML page after
+#  TAG_CLOUD_SORTING gets applied.
+TAG_CLOUD_MAX_ITEMS = 100
+
+#  TAG_CLOUD_STEPS provides maximum font size
+#  incremental steps in which to divide the
+#  entire tag cloud with.
+#*default*  TAG_CLOUD_STEPS = 4
 TAG_CLOUD_STEPS = 10
 
-PYGMENTS_STYLE =  'paraiso-dark'
+#  TAG_CLOUD_BADGE puts the numeric counts of each
+#  tag count as a "badge" and makes it available to
+#  be placed next to the tag name.
+TAG_CLOUD_BADGE = True
+
+#  PYGMENTS_RST_OPTIONS - used by Jinja2 to format
+#  codes found in RST-type content data files.
+# See Pygments lexer for more details at:
+#  https://pygments.org/docs/lexers/
 PYGMENTS_RST_OPTIONS = {'linenos': 'table'}
 
 
@@ -816,34 +850,29 @@ STATIC_CHECK_IF_MODIFIED = True
 
 
 ##################################################^^^
+## Below is unorganized and unpositioned variables
+##################################################
 
 
-ARCHIVES_DIRNAME = 'archives'
 ARCHIVES_URL_PATH = 'blog/archives'
 ARCHIVE_SAVE_AS = 'blog/archives/{slug}.html'
 ARCHIVE_URL = 'blog/archives/{slug}.html'
-ARTICLES_DIRNAME = 'articles'
 ARTICLES_URL = 'blog/articles/index.html'
 ARTICLES_URL_PATH = 'blog/articles'
 
-AUTHORS_DIRNAME = 'authors'
 AUTHORS_URL_PATH = 'blog/authors'
 
-CATEGORIES_DIRNAME = 'categories'
 CATEGORIES_TO_COLLATE = ['category-of-interest', 'another-cool-category']
 CATEGORIES_URL_PATH = 'blog/categories'
 # CUSTOM_CSS = 'css/custom.css'
 DESCRIPTION = 'Egbert Networks conducts researches on bleeding edges of malicious behaviors and its applicability toward multiple compiler languages.  Researching for many customers.'
-DRAFTS_DIRNAME = 'drafts'
 DRAFTS_SAVE_AS = 'blog/drafts/index.html'
 DRAFTS_URL = 'blog/drafts/articles/index.html'
 
-DRAFT_ARTICLES_DIRNAME = 'drafts/articles'
 DRAFT_ARTICLES_SAVE_AS = 'blog/drafts/pages/index.html'
 DRAFT_ARTICLES_URL = 'blog/drafts/pages/index.html'
 DRAFT_ARTICLES_URL_PATH = 'blog/drafts/articles'
 
-DRAFT_PAGES_DIRNAME = 'drafts/pages'
 DRAFT_PAGES_SAVE_AS = 'blog/drafts/pages/index.html'
 DRAFT_PAGES_URL = 'blog/drafts/pages/index.html'
 DRAFT_PAGES_URL_PATH = 'blog/drafts/pages'
@@ -851,17 +880,30 @@ DRAFT_PAGES_URL_PATH = 'blog/drafts/pages'
 EACH_SLUG_HAS_SUBDIR = False
 
 MINIBIO =  'Just a high-speed network backend kind of guy doing deep processing of compiler languages, and detection of malwares'
-PAGES_DIRNAME =  'pages'
 PAGES_SAVE_AS =  'blog/pages/index.html'
 PAGES_URL =  'blog/pages/index.html'
 PAGES_URL_PATH =  'blog/pages'
 SITE_DIR =  'blog/'
 SITE_SUBPATH =  'blog'
 SITE_URL_TOP_LVL =  'blog/'
-TAGS_DIRNAME = 'tags'
 TAGS_URL_PATH = 'blog/tags'
 
 SITESUBTITLE = ''
+
+# INTRASITE_LINK_REGEX - takes a full filespec which may have one of
+#  the following metadata in its string.
+#    {static}
+#    {attach}
+#    {author}, {category}, {index}, {tag}
+#  See https://docs.getpelican.com/en/stable/content.html#attaching-static-files
+#  for more details.
+# INTRASITE_LINK_REGEX = ''  # cannot be an empty string
+
+##################################################^^^
+## Above is unorganized and unpositioned variables
+##################################################
+
+
 
 ######################################################
 ##  Bootstrap3-specific                             ##
@@ -877,7 +919,7 @@ if MY_TEMPLATE_IS == 'bootstrap3':
     SITELOGO =  'images/egbert_network_logo.png'
     SITELOGO_SIZE =  100
     #  MENUITEMS display menu items on HTML header section.
-    MENUITEMS = [('Blog', 'blog'),
+    MENUITEMS = [('Motto', 'blog'),
                  ('Articles', 'blog/articles'),
                  ('Tags', 'blog/tags')]
     LINKS = (('Pelican', 'http://getpelican.com/'),
@@ -957,10 +999,12 @@ if MY_TEMPLATE_IS == 'm.css':
     #  M_CSS_FILES used in base_blog.html
     M_CSS_FILES =  [
         # 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600',
+        '../../css/font-awesome.min.css',
         '../../css/m-dark.compiled.css',
         '../../css/pygments-dark.css',
         '../../css/tag_cloud.css',
         '../../css/justtable.css',
+        '../../css/blog-motto.css',
     ]
 
     #  M_THEME_COLOR used in base.html
@@ -983,8 +1027,10 @@ if MY_TEMPLATE_IS == 'm.css':
 
     #  M_LINKS_NAVBAR used in base.html.
     M_LINKS_NAVBAR1 = [
+        ( 'Motto', 'blog/index.html', 'blog', [] ),
         ( 'Articles', 'blog/articles/index.html', 'articles', [] ),
-        ( 'Category', 'blog/categories/index.html', 'categories', [] ),
+        ( 'Categories', 'blog/categories/index.html', 'categories', [] ),
+        ( 'Tags', 'blog/tags/index.html', 'tags', [] ),
         ( 'Archives', 'blog/archives/index.html', 'archives', [] ),
         ( 'Uses', 'blog/pages/uses.html', 'uses', [] ),
         ( 'About', 'blog/pages/about.html', 'about', [] ),
@@ -1004,7 +1050,12 @@ if MY_TEMPLATE_IS == 'm.css':
     # ]
 
     #  M_FINE_PRINT used in base.html.
-    M_FINE_PRINT = None
+    M_FINE_PRINT = SITENAME + """Powered by `Pelican <https://getpelican.com>`_ and `m.css <https://mcss.mosra.cz>`_."""
+
+    ME_FINE_PRINT_CC = [
+        "/images/common-creative-by-nc-sa-80x15.svg",
+        "Common Creative BY NC SA",
+        "https://creativecommons.org/licenses/by-nc-sa/4.0/" ]
 
     #  M_HIDE_ARTICLE_SUMMARY used in article_header.html,
     #  article.html,
@@ -1017,6 +1068,26 @@ if MY_TEMPLATE_IS == 'm.css':
     #  M_NEWS_ON_INDEX used in page.html
     M_NEWS_ON_INDEX = ('Latest rants on our blog', 2)
 
+    M_CODE_FILTERS_PRE = []
+    M_CODE_FILTERS_POST = []
+
+    M_DOT_FONT = 'Source Sans Pro'
+    M_DOT_FONT_SIZE = 16.0
+    M_DOX_TAGFILES = []
+
+#  M_HTMLSANITY_LANGUAGE -
+#*default*  M_HTMLSANITY_LANGUAGE = DEFAULT_LANG
+    M_HTMLSANITY_LANGUAGE = 'en'
+
+#  M_HTMLSANITY_DOCUTILS_SETTINGS -
+#*default*  M_HTMLSANITY_DOCUTILS_SETTINGS = DOCUTILS_SETTINGS
+    M_HTMLSANITY_DOCUTILS_SETTINGS = {}
+
+#  M_HTMLSANITY_FORMATTED_FIELDS -
+#*default*  M_HTMLSANITY_FORMATTED_FIELDS = FORMATTED_FIELDS
+    M_HTMLSANITY_HYPHENATION = False
+    M_HTMLSANITY_SMART_QUOTES = False
+    M_HTMLSANITY_FORMATTED_FIELDS = []
 
 ######################################################
 ##  DOCUTILS-specific                               ##
