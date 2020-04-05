@@ -999,8 +999,8 @@ if MY_TEMPLATE_IS == 'm.css':
     #  M_CSS_FILES used in base_blog.html
     M_CSS_FILES =  [
         # 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600',
-        '../../css/font-awesome.min.css',
         '../../css/m-dark.compiled.css',
+        '../../css/font-awesome.min.css',
         '../../css/pygments-dark.css',
         '../../css/tag_cloud.css',
         '../../css/justtable.css',
