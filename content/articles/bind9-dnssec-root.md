@@ -1,38 +1,56 @@
-Title: Bind9 DNSSEC Root
+Title: Bind9 DNSSEC Root Server
 status: published
 Date: 2020-01-28 16:14
-Modified: 2020-03-04 18:00
+Modified: 2020-06-06 18:05
 tags: bind9, dnssec
 category: research
 summary: Setting up Root DNSSEC for internal use
 
 How to set up a Root ("`.`", or top-level) DNSSEC for white-lab use.
+This article is also good for setting up a custom-selected TLD for private
+home use (such as DNSSEC'ized '.local').
 
 WHY DO THIS?
 ============
-My air-gapped (no Internet) white-lab DNS infrastructure needs a DNSSEC for internal testing.
+My air-gapped (no Internet) white-lab DNS infrastructure needs a 
+DNSSEC for internal testing.  
 
 White-Lab Description
 ---------------------
-White-lab has its own IPv4/v6 subnet, nameservers, as well as its own DHCP, Kerberos, web, messaging, SMTP, IMAP4, and various other servers.  DNS records are populated with these servers' host address and name.
+White-lab has its own Internet infrastructure with IPv4/v6 subnet, 
+DNS nameservers, as well as its own DHCP, Kerberos, web, messaging, 
+SMTP, IMAP4, and various other servers.  
+DNS records are populated with these servers' host names and IP addresses.
 
-To support a full-featured DNS for such a standalone white-lab network, it must maintain its own cloned set of 13 Root DNS servers.
+To support a full-featured DNS for such a standalone white-lab network, 
+it must maintain its own cloned set of 13 Root DNS servers.
 
-Furthermore, this white-lab needs integrity protection of its DNS records, hence it's time to activate DNSSEC on this private network.
+Furthermore, this white-lab needs integrity protection of its DNS 
+records, hence it's time to activate DNSSEC on this private network.
 
-Integrity of a DNS network starts at the top of the DNS tree, which is Root Servers (or "`.`").
+Integrity of a DNS network starts at the top of the DNS tree, 
+which is Root Servers (or "`.`").
 
-Various DNS records also needs DNSSEC protection like `SSHFP`, `IPSECKEY`, `CERT`, `DKIM`, and `TLSA`, to name a few:  These records have public keys.  Public Key too needs that proper DNS protection from against DNS spoofing, misdirection, cache poisoning.
+Various DNS records also needs DNSSEC protection like `SSHFP`, 
+`IPSECKEY`, `CERT`, `DKIM`, and `TLSA`, to name a few:  
+These DNS RDATA records have accompanying public keys.  
+Public Key too needs that proper DNS protection from against 
+DNS spoofing, misdirection, and cache poisoning.
 
-I'm most familiar with ISC Bind 4.8 to 9.15 (and some 10 betas), so familiar that I wrote a complete Python parser to read in the entire configuration of ISC Bind syntax from version 4.8 to 10.0, complete with documentations;  DNSSEC, not so much.
+I'm most familiar with ISC Bind 4.8 to 9.17 (and some 10 betas), so 
+familiar that I wrote a complete Python parser to [read in the 
+entire configuration of ISC Bind syntax](https://github.com/egberts/bind9_parser)
+ from version 4.8 to 
+10.0, complete with documentations;  DNSSEC, not so much.
 
-Hence this ongoing individual trial being documented here.
+Hence this ongoing individual trial are being documented here using
+ISC Bind 9.15.8.
 
-Of all the DNSSEC tools I've encountered, I've settled on ISC `delv`
+Of all the DNSSEC utility tools I've encountered, I've settled on ISC `delv`
 (which is essentially a `dig` replacement.  Also, I'm recreating the
 dnssec-analyzer.verisignlabs.com DNSSEC validation in Python as well.
 
-Working examples of DNSSEC are:
+Examples working command of DNSSEC are:
 
 ```bash
 dig @9.9.9.9 +dnssec +nocd +all egbert.net.
@@ -44,9 +62,9 @@ delv @9.9.9.9 +dnssec +nocd +all egbert.net.
 # Look for 'fully validated'
 ```
 
-Below are all the ISC Bind9.15 options available.  They are organized from
-top-nested down to bottom-nested clause options and many are usable in multiple
-clauses:
+Below are all the DNSSEC-specific option settings found in ISC Bind9.15.8.
+These options are organized from top-nested down to bottom-nested clause 
+options and many are re-usable in multiple clauses:
 
 ```nginx
 # Option clause:
@@ -93,6 +111,457 @@ clauses:
     auto-dnssec [off|maintained|allow];
     delegation-only [yes|no]; // hint/stub zones
 ```
+Getting Started
+===============
+Debian 9 only has Bind v9.11.  We need an upgrade there.  Ditch the old Bind.
+
+First, uninstall any and all Bind-related packages:
+```bash
+apt remove bind9 bind9-dyndb-ldap bind9-host bind9utils 
+apt remove libbind9-161 libbind9-90 
+apt remove bindtools
+```
+
+Cloning ISC Bind
+----------------
+Then clone the ISC Bind9 repository:
+```bash
+git clone https://github.com/isc-projects/bind9.git
+...
+```
+Go into the repo and checkout v9.15.8:
+```bash
+cd bind9
+git tag --list  # view all available tags
+git checkout v9_15_8
+```
+
+Building Bind9 on Debian 9
+--------------------------
+Configure the Bind9:
+```bash
+export ACLOCAL_PATH=/usr/share/aclocal
+autogen.sh  # if you don't have it, pull it off the net.
+# v9.15.8
+./configure \
+	--localstatedir=/var \
+	--sysconfdir=/etc/bind \
+	--enable-full-report \
+	--with-tuning=default \
+	--enable-querytrace \
+	--enable-geoip \
+	--prefix=/usr \
+# or --prefix=/usr/local
+```
+Then build and install the Bind9:
+```bash
+make -j4
+make install
+```
+
+Build Documentation
+-------------------
+It wouldn't be complete without documentation, so let us build that too:
+```bash
+cd doc
+make doc
+```
+
+Once installed, you have an equivalence of the following Debian packages
+installed into `/usr`:
+
+* bind9
+* bind9utils
+* dnsutils
+* bind9-dev
+* bind9-doc
+
+Directory Layout
+================
+Create all the subdirectories, as needed:
+
+```bash
+mkdir /etc/bind
+mkdir /etc/bind/internal
+mkdir /etc/bind/private-hint
+mkdir /etc/bind/keys
+mkdir /var/cache/bind
+mkdir /var/cache/bind/internal
+mkdir /var/cache/bind/private-hint
+mkdir /var/lib/bind
+mkdir /var/lib/bind/internal
+mkdir /var/lib/bind/internal/primary
+mkdir /var/lib/bind/internal/secondary
+mkdir /var/lib/bind/internal/dynamic
+mkdir /var/lib/bind/private-hint
+mkdir /var/lib/bind/private-hint/primary
+mkdir /var/lib/bind/private-hint/secondary
+mkdir /var/lib/bind/private-hint/dynamic
+mkdir /var/log/named
+mkdir /var/log/named/internal
+mkdir /var/log/named/private-hint
+mkdir /var/run/bind
+mkdir /var/run/bind/internal
+mkdir /var/run/bind/private-hint
+
+chmod 2755 /etc/bind
+chown root:bind /etc/bind
+
+chmod 2750 /etc/bind/internal
+chmod 2750 /etc/bind/private-hint
+chmod 4750 /etc/bind/keys
+chown root:bind /etc/bind/private-hint
+chown root:bind /etc/bind/internal
+chown bind:bind /etc/bind/keys   # root shouldn't need keys/
+
+chmod 2750 /var/cache/bind
+chown bind:root /var/cache/bind
+
+chmod 2750 /var/cache/bind/private-hint
+chmod 2750 /var/cache/bind/internal
+chown bind:root /var/cache/bind/internal   # root doesn't need access
+chown bind:root /var/cache/bind/private-hint   # root doesn't need access
+
+chmod 2755 /var/lib/bind
+chown root:bind /var/lib/bind
+
+chmod 3750 /var/lib/bind/internal
+chown bind:root /var/lib/bind/internal
+
+chmod 3750 /var/lib/bind/internal/primary
+chmod 3750 /var/lib/bind/internal/secondary
+chmod 3750 /var/lib/bind/internal/dynamic
+chown bind:root /var/lib/bind/internal/primary
+chown bind:root /var/lib/bind/internal/secondary
+chown bind:root /var/lib/bind/internal/dynamic
+
+chmod 3750 /var/lib/bind/private-hint
+chown root:bind /var/lib/bind/private-hint
+
+chmod 2750 /var/lib/bind/private-hint/primary
+chmod 2750 /var/lib/bind/private-hint/secondary
+chmod 2750 /var/lib/bind/private-hint/dynamic
+chown bind:root /var/lib/bind/private-hint/primary
+chown bind:root /var/lib/bind/private-hint/secondary
+chown bind:root /var/lib/bind/private-hint/dynamic
+
+chmod 2750 /var/log/named   # 2xxx because named generates named_stats.txt
+chown root:bind /var/log/named
+
+# Nothing we can do about bind-user's write-ability so let them have it.
+# But we can block bind-group's write-ability; so, root-group, it is.
+chmod 0750 /var/log/named/internal
+chmod 0750 /var/log/named/private-hint
+chown bind:root /var/log/named/internal
+chown bind:root /var/log/named/private-hint
+
+chmod 2750 /var/run/bind
+chown root:bind /var/run/bind
+
+# allow bind-group writeability (so they can restart named daemons)
+chmod 2750 /var/run/bind/internal
+chmod 2750 /var/run/bind/private-hint
+chown bind:bind /var/run/bind/internal
+chown bind:bind /var/run/bind/private-hint
+```
+
+Default Settings
+----------------
+Need to create default files:
+```bash
+vim /etc/default/bind9-internal
+```
+then fill that `bind9-internal` file with
+```bash
+# run resolvconf?
+RESOLVCONF=no
+
+# startup options for the server
+# OPTIONS="-u bind -d 4095"
+OPTIONS="-u bind -c /etc/bind/named-internal.conf"
+```
+
+Systemd setting
+---------------
+Need to create systemd file:
+```bash
+vim /etc/systemd/system/bind9-internal.service
+```
+and fill it with:
+```systemd
+# File: /etc/systemd/system/bind9-internal.service
+#
+# Internal-facing web server
+#
+# Not to be confused with default bind9.service
+
+#
+# The unit files have no installation config 
+#  (WantedBy=, RequiredBy=, Also=, Alias= settings in 
+#  the [Install] section, and DefaultInstance= for template
+#   units). 
+# This means they are not meant to be enabled using systemctl.
+
+#
+[Unit]
+Description=BIND Domain Name Server (Internal)
+Documentation=man:named(8)
+
+# DHCLIENT SCRIPT will be activating this systemd unit service
+# No dependencies nor startup
+# After=network.target
+# Wants=nss-lookup.target
+# Before=nss-lookup.target
+
+# If a unit has a Conflicts= setting on another unit, starting 
+# the former will stop the latter and vice versa. 
+Conflicts=bind9.service
+
+[Service]
+EnvironmentFile=/etc/default/bind9-internal
+ExecStart=/usr/sbin/named -f $OPTIONS
+ExecReload=/usr/sbin/rndc -p 953 reload
+ExecStop=/usr/sbin/rndc -p 953 stop
+PIDfile=/run/bind/named-internal.pid
+KillMode=process
+Restart=on-failure
+# named needs: CAP_NET_BIND_SERVICE,CAP_SYS_CHROOT,CAP_SETUID,CAP_SETGID,CAP_DAC_READ_SEARCH,CAP_SYS_RESOURCE,CAP_CHOWN
+# # Tried combinations of those:
+#CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+#Capabilities=CAP_NET_BIND_SERVICE+ep
+SecureBits=keep-caps
+AmbientCapabilities=CAP_NET_BIND_SERVICE,CAP_SYS_CHROOT,CAP_SETUID,CAP_SETGID,CAP_DAC_READ_SEARCH,CAP_SYS_RESOURCE,CAP_CHOWN
+# Capabilities=CAP_IPC_LOCK+ep
+# CapabilityBoundingSet=CAP_SYSLOG CAP_IPC_LOCK
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Deactivate any old bind9 service:
+```bash
+systemctl stop bind9
+systemctl disable bind9
+systemctl masked bind9
+```
+and enable our stuff
+```bash
+systemctl enable bind9-internal
+# We will start it later in this article
+```
+
+AppArmor setting
+----------------
+Need to fill in AppArmor settings:
+```bash
+vim /etc/apparmor.d/local/usr.sbin.named
+```
+and prepend or fill it with:
+```
+  # See /usr/share/doc/bind9/README.Debian.gz
+  /etc/bind/internal/** r,
+  /etc/bind/private-hint/** r,
+
+  /var/lib/bind/internal/** rw,
+  /var/lib/bind/private-hint/** rw,
+
+  /var/lib/bind/internal/ rw,
+  /var/lib/bind/private-hint/ rw,
+  /var/lib/bind/ rw,
+
+  /var/cache/bind/private-hint/** lrw,
+  /var/cache/bind/internal/** lrw,
+
+  /var/cache/bind/private-hint/ rw,
+  /var/cache/bind/internal/ rw,
+
+  # Database file used by allow-new-zones
+  /var/cache/bind/internal/_default.nzd-lock rwk,
+  /var/cache/bind/private-hint/_default.nzd-lock rwk,
+
+  /run/bind/internal/named.pid rw,
+  /run/bind/private-hint/named.pid rw,
+```
+
+Log files
+---------
+Need to do auto-rotation of log files:
+```bash
+vim /etc/logrotate.d/named
+```
+and fill it with:
+```
+/var/log/bind/internal/*.log
+{
+  rotate 30
+  daily
+  dateext
+  dateformat _%Y-%m-%d
+  missingok
+  su bind bind
+  create 0660 root bind
+  delaycompress
+  compress
+  notifempty
+  postrotate
+    /bin/systemctl reload bind9-internal
+  endscript
+}
+```
+
+Temporary files
+---------------
+Need to create temporary files, create a tmpfile config file:
+```bash
+vim /etc/tmpfiles.d/bind9.conf
+```
+and fill that file with:
+```console
+#Type Path                 Mode User Group Age Argument
+
+# We set the 2xxx part (g+s) of directories' chmod so
+# that when named/bind9 daemon creates 
+# the PID file, its ownership would be bind:bind.
+
+d  /run/named          0750 root bind  - -
+d  /run/bind           2770 root bind  - -
+d  /run/bind/private-hint    2770 root bind  - -
+d  /run/bind/internal  2770 root bind  - -
+```
+
+```bash
+# to do after all files created
+chmod 0640      /var/lib/bind/internal/*/*
+chown bind:root /var/lib/bind/internal/*/*
+```
+
+Creating Keys
+=============
+It's time to create keys!
+
+Start with RNDC to enable any user with group id 'bind' to use `rndc` utility.
+```bash
+rndc-confgen -a -A HMAC-SHA512 -k rndc-key -c /etc/bind/keys/rndc.key
+```
+
+Creating Bind9 Configurations
+=============================
+Lastly, the Bind9 configuration files.
+
+Master configuration file
+-------------------------
+Execute
+```bash
+vim /etc/bind/named-internal.conf
+```
+and fill it with:
+```nginx
+// File: /etc/bind/internal/named.conf
+//
+// Bind9 configuration
+//
+// Custom settings for internal network
+//
+// This is the primary configuration file for the BIND DNS server named.
+//
+
+// 'include' statement must have an absolute filespec or it will
+// read from current directory ($CWD).
+
+// Please read /usr/share/doc/bind9/README.Debian.gz for information on the 
+// structure of BIND configuration files in Debian, *BEFORE* you customize 
+// this configuration file.
+//
+// If you are just adding zones, please do that in /etc/bind/named.conf.local
+
+//  We can share the ACL amongst private/public zones because it's consistent
+include "/etc/bind/internal/acl-named.conf";
+//
+include "/etc/bind/internal/options-named.conf";
+include "/etc/bind/internal/statistics-named.conf";
+include "/etc/bind/internal/logging-named.conf";
+include "/etc/bind/internal/masters-named.conf";
+include "/etc/bind/internal/local-named.conf";
+
+//  If you used views in local-named.conf/named.conf.local, 
+//  no default-zones needed
+////include "/etc/bind/internal/default_zones-named.conf";
+
+include "/etc/bind/internal/keys/keys-named.conf";
+
+include "/etc/bind/internal/controls-named.conf";
+include "/etc/bind/internal/servers-named.conf";
+
+include "/etc/bind/internal/dnssec-keys-named.conf";
+```
+
+Access Control List
+-------------------
+For access control list (ACL), we started out with:
+```bash
+vim /etc/bind/internal/acl-named.conf
+```
+and fill it with:
+```nginx
+# localnet
+acl localnet_acl {
+        127.0.0.0/8;
+};
+
+# dmz
+acl trusted_real_dmz_acl {
+        172.29.1.0/24;
+        };
+# dmz2
+acl trusted_residential_network_dmz_acl {
+        172.28.128.0/24;
+        };
+# blue
+acl trusted_residential_network_blue_acl {
+        172.28.129.0/24;
+        };
+# special, single-host, GATEWAY
+acl trusted_residential_gateway_acl {
+        172.28.130.1;
+        };
+# green
+acl trusted_residential_network_green_acl {
+        172.28.130.0/24;
+        };
+# white
+acl trusted_residential_network_white_acl {
+        172.28.131.0/24;
+        };
+# vmnet
+acl trusted_residential_network_vmnet_acl {
+        192.168.122.0/24;
+        };
+# rvpn
+acl trusted_remote_vpn_acl {
+        172.30.0.0/16;
+        };
+
+acl trusted_residential_network_acl {
+        trusted_residential_network_dmz_acl;
+        trusted_residential_network_blue_acl;
+        trusted_residential_network_green_acl;
+        trusted_residential_network_white_acl;
+        trusted_residential_network_vmnet_acl;
+        };
+
+acl trusted_all_acl {
+        trusted_real_dmz_acl;
+        trusted_residential_network_dmz_acl;
+        trusted_residential_network_blue_acl;
+        trusted_residential_network_green_acl;
+        trusted_residential_network_white_acl;
+        trusted_residential_network_vmnet_acl;
+        trusted_cablesupport_acl;
+        localnet_acl;
+};
+```
+
 
 Enabling DNSSEC
 ===============
@@ -111,7 +580,7 @@ TLD zone and DNSSEC
 Now for the custom `whitelab` top-level domain (TLD) name.
 
 Create the custom TLD zone database file in
-`/var/lib/bind/db.whitelab`:
+`/var/lib/bind/private-hint/db.whitelab`:
 
 ```named-zone
     $TTL 86400
@@ -124,8 +593,14 @@ Create the custom TLD zone database file in
 The custom TLD zone database file wll also be signed as well:
 
 ```bash
-dnssec-keygen -a rsasha256 -b 2048 -n ZONE whitelab
+dnssec-keygen -P -a rsasha256 -b 2048 -n ZONE whitelab
+dnssec-keygen -P -a rsasha512 -b 2048 -n ZONE whitelab
+dnssec-keygen -f KSK -r /dev/urandom -a RSASHA512 -b 4096 -n ZONE leo
 ```
+
+Then populated the "white" zone data file with content from
+/etc/bind/internal/keys/K
+
 
 This `options` contains the following options:
 
@@ -422,3 +897,15 @@ directory name, channel name , description
 `/var/log/bind/delegation-only.log` , `delegation-only_file` , Delegation events get logged into this file.
 `/var/log/bind/rate-limit.log` , `rate-limit_file` , Rate limiting events get logged into this file.
 [/jtable]
+
+Managing Large Private Networks
+===============================
+If you are hosting multiple internal TLDs, then
+[OpenDNSSEC](https://www.opendnssec.org/) software may
+be useful to you.
+
+References
+==========
+* [a local augumented root-zone with DNSSEC](https://dnsworkshop.de/local-augmented-root-zone.html)
+* [OpenDNSSEC.org](https://www.opendnssec.org/)
+

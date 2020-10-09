@@ -1804,3 +1804,10 @@ PermitUserEnvironment no
 PubkeyAcceptedKeyTypes ecdsa-sha2-nistp256-cert-v01@openssh.com,ecdsa-sha2-nistp384-cert-v01@openssh.com,ecdsa-sha2-nistp521-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521
 
 ```
+
+# External References #
+
+* [Secure Secure Shell](https://stribika.github.io/2015/01/04/secure-secure-shell.html)
+* [grsec](https://grsecurity.net/)
+* [tor-hs](https://www.torproject.org/docs/hidden-services.html.en)
+* [SSH server comparisons](https://ssh-comparison.quendi.de/comparison/cipher.html)

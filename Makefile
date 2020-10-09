@@ -8,11 +8,12 @@ OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
+PORT=8000
 SSH_HOST=vps
 SSH_PORT=2224
 SSH_USER=wolfe
-SSH_TARGET_DIR=/home/wolfe/egbert.net/html
-SCP_OPTION='-p'
+SSH_TARGET_DIR=/srv/htdocs/egbert.net/https/html
+SCP_OPTION=-p
 
 
 DEBUG ?= 0

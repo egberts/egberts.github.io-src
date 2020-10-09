@@ -3,7 +3,7 @@ Date: 2016-04-03 01:14
 tags: hack, vector, methods
 category: research
 status: published
-slug: hack, popular, Windows
+slug: hack-popular-vectors-windows
 summary: Popular hack vectors in Windows
 
 Most Popular Attacks

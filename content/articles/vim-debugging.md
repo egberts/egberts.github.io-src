@@ -2,7 +2,7 @@ title: Debugging Bind9 syntax file of Vim
 date: 2020-03-28 17:49
 modified: 2020-04-03 12:06
 status: published
-tags: bind9, dns,vim, syntax, PCRE, highlight
+tags: bind9, dns, vim, syntax, PCRE, highlight
 category: HOWTO
 summary: How to debug Vim syntax file while incorporating a new syntax.
 
@@ -76,10 +76,12 @@ are (but not limited to):
 * [Patterns](http://vimdoc.sourceforge.net/htmldoc/pattern.html)
 * [Syntax](http://vimdoc.sourceforge.net/htmldoc/syntax.html)
 * [Basic Syntax Highlighting](https://learnvimscriptthehardway.stevelosh.com/chapters/45.html)
+* [Google Vimscript (Heavy) Guide](https://google.github.io/styleguide/vimscriptfull.xml)
+* [Google Vimscript Style Guide](https://google.github.io/styleguide/vimscriptguide.xml)
 * [Advanced Syntax Highlighting](https://learnvimscriptthehardway.stevelosh.com/chapters/46.html)
 * [Even More Advanced Syntax Highlighting](https://learnvimscriptthehardway.stevelosh.com/chapters/47.html)
 
-Those two were really all we need but still woefully inadequate for 
+Last two were really all we need but still woefully inadequate for 
 a rapid startup toward the robust debugging session of its syntax file.
 
 The more changes I made to my copy of the stock Vim syntax file, the more I
