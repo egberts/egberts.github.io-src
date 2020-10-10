@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<clientConfig version="1.1">
+  <emailProvider id="egbert.net">
+    <domain>egbert.net</domain>
+    <displayName>Egbert Networks Mail</displayName>
+    <displayShortName>EgMail</displayShortName>
+    <incomingServer type="imap">
+      <hostname>imap.egbert.net</hostname>
+      <port>993</port>
+      <socketType>SSL</socketType>
+      <authentication>password-encrypted</authentication>
+      <username>%EMAILADDRESS%</username>
+    </incomingServer>
+    <incomingServer type="imap">
+      <hostname>imap.egbert.net</hostname>
+      <port>143</port>
+      <socketType>STARTTLS</socketType>
+      <authentication>password-encrypted</authentication>
+      <username>%EMAILADDRESS%</username>
+    </incomingServer>
+    <outgoingServer type="smtp">
+      <hostname>mx1.egbert.net</hostname>
+      <port>465</port>
+      <socketType>SSL</socketType>
+      <authentication>password-encrypted</authentication>
+      <username>%EMAILADDRESS%</username>
+    </outgoingServer>
+    <outgoingServer type="smtp">
+      <hostname>smtp.egbert.net</hostname>
+      <port>587</port>
+      <socketType>STARTTLS</socketType>
+      <authentication>password-encrypted</authentication>
+      <username>%EMAILADDRESS%</username>
+    </outgoingServer>
+    <documentation url="http://egbert.net/support/email/config/index.html">
+      <descr lang="de">Allgemeine Beschreibung der Einstellungen</descr>
+      <descr lang="en">Generic settings page</descr>
+    </documentation>
+    <documentation url="http://egbert.net/support/email/config/thunderbird/imap-thunderbird/imap/index.html">
+support/email/config/thunderbird/imap-thunderbird/imap/index.html
+
+      <descr lang="de">Thunderbird 68.12.0 IMAP-Einstellungen</descr>
+      <descr lang="en">Thunderbird 68.12.0 IMAP settings</descr>
+    </documentation>
+  </emailProvider>
+</clientConfig>

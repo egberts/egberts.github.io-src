@@ -301,6 +301,10 @@ EXTRA_PATH_METADATA = {
     'extra/ss-css.css': {'path': 'css/ss-css.css'},
     'extra/ss-site.css': {'path': 'css/ss-site.css'},
     'extra/ss-squarespace-font.css': {'path': 'css/ss-squarespace-font.css'},
+
+    # .well-known is in content/.well-known
+    '.well-known': {'path': '.well-known'},
+    'support': {'path': 'support'},
 }
 
 ######################################################
@@ -501,6 +505,8 @@ STATIC_PATHS = [
     'fonts/poppins-medium.woff2',
     'fonts/poppins-bold.woff2',
     'fonts/typekit1.woff2',
+    '.well-known',
+    'support',
 ]
 
 #  STATIC_EXCLUDES - A list of directories to exclude
