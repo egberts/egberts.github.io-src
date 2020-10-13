@@ -2,7 +2,7 @@ title: Vim Syntax File Layout NEW
 date: 2020-04-02 17:35
 status: published
 tags: vim, syntax, file layout
-category: research, syntax
+category: research
 summary: How to organize a Vim syntax file used in highlighting.
 
 DRAFT DRAFT DRAFT

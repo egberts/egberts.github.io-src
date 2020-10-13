@@ -1,7 +1,17 @@
 title: 
 date: 2018-11-15 11:00
+modified: 
 status: hidden published/draft/hidden
 tags: 
 category: research/HOWTO
 summary: 
+slug:
+lang: en
+private: False
 
+
+[jtable caption="This is caption" separator="|" th=0 ai="1"]
+# caption - the table caption
+# separator - default is comma
+# th - table header (=0 means disable)
+# ai - auto-index, adds a column numbering starts at 1

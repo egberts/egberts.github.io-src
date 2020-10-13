@@ -259,9 +259,9 @@ DEFAULT_DATE = None
 #  nested into YYYY/MM/DD-SLUG directories. To
 #  extract metadata from the filename or path, set
 #  FILENAME_METADATA or PATH_METADATA to regular
-#  expressions that use Python’s group name
+#  expressions that use Python's group name
 #  notation (?P<name>...). If you want to attach
-#  additional metadata but don’t want to encode it in
+#  additional metadata but don't want to encode it in
 #  the path, you can set EXTRA_PATH_METADATA:
 #
 # EXTRA_PATH_METADATA = {
@@ -485,8 +485,8 @@ DEFAULT_DATE_FORMAT = '%a %d %B %Y'
 #  without modification. Articles, pages, and other
 #  content source files will normally be skipped, so
 #  it is safe for a directory to appear both here and
-#  in PAGE_PATHS or ARTICLE_PATHS. Pelican’s default
-#  settings include the “images” directory here.
+#  in PAGE_PATHS or ARTICLE_PATHS. Pelican's default
+#  settings include the "images" directory here.
 #
 #  Absolutely need an entry in both STATIC_PATHS and
 #  EXTRA_PATH_METADATA just to relocate a file.
@@ -521,7 +521,7 @@ STATIC_EXCLUDES = []
 #  before version 3.5. It has no effect unless
 #  STATIC_PATHS contains a directory that is also in
 #  ARTICLE_PATHS or PAGE_PATHS. If you are trying to
-#  publish your site’s source files, consider using
+#  publish your site's source files, consider using
 #  the OUTPUT_SOURCES setting instead.
 #*default*  STATIC_EXCLUDE_SOURCES = True
 STATIC_EXCLUDE_SOURCES = True
