@@ -710,7 +710,7 @@ MARKDOWN = {
 #  loaded firstly.
 #*default*  PLUGIN_PATHS = []
 # PLUGIN_PATHS = [ 'm.css/plugins', 'm.css/plugins/m', 'plugins' ]
-PLUGIN_PATHS = [ 'm.css/plugins', 'plugins' ]
+PLUGIN_PATHS = [ 'm.css/plugins/m', 'm.css/plugins', 'plugins' ]
 
 #  PLUGINS - The list of plugins to load.
 #  See Plugins.
@@ -831,7 +831,7 @@ SUMMARY_MAX_LENGTH = 50
 INTRASITE_LINK_REGEX = '[{|](?P<what>.*?)[|}]'
 CACHE_PATH = 'cache'
 GZIP_CACHE = False
-CHECK_MODIFIED_METHOD = 'mtime'
+CHECK_MODIFIED_METHOD = 'md5'
 LOAD_CONTENT_CACHE = False
 WRITE_SELECTED = []
 
