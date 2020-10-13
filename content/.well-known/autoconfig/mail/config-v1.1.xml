@@ -9,7 +9,8 @@
       <hostname>imap.egbert.net</hostname>
       <port>993</port>
       <socketType>SSL</socketType>
-      <authentication>password-encrypted</authentication>
+      <!-- authentication>password-encrypted</authentication -->
+      <authentication>password-cleartext</authentication>
       <username>%EMAILADDRESS%</username>
     </incomingServer>
     <incomingServer type="imap">
