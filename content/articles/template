@@ -1,14 +1,16 @@
 title: 
-date: 2018-11-15 11:00
+date: 2020-10-13 11:00
 modified: 
-status: hidden published/draft/hidden
+status: 
 tags: 
-category: research/HOWTO
+category: 
 summary: 
 slug:
 lang: en
 private: False
 
+
+See https://egbert.net/blog/articles/pelican-metadata.html for details
 
 [jtable caption="This is caption" separator="|" th=0 ai="1"]
 # caption - the table caption
