@@ -191,6 +191,7 @@ Known malloc exploits:
 References
 ==========
 
+* [http://gee.cs.oswego.edu/dl/html/malloc.html]
 * [https://sploitfun.wordpress.com/2015/02/10/understanding-glibc-malloc]
 * Origin of the word malloc is [here](https://www.spinellis.gr/blog/20170914/).
 * History of malloc is \[ here\].
