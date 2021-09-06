@@ -165,7 +165,7 @@ SITEMAP =  {
         'indexes': 'monthly',
         'pages': 'weekly'}}
 
-# PLUGIN - pdf_processor
+# Plugin - pdf_processor
 
 PDF_PROCESSOR =  False
 PDF_STYLE =  ''
@@ -710,7 +710,9 @@ MARKDOWN = {
 #  loaded firstly.
 #*default*  PLUGIN_PATHS = []
 # PLUGIN_PATHS = [ 'm.css/plugins', 'm.css/plugins/m', 'plugins' ]
-PLUGIN_PATHS = [ 'm.css/plugins/m', 'm.css/plugins', 'plugins' ]
+##PLUGIN_PATHS = [ './plugins', 'm.css/plugins' ]  # 4.5.0 err
+##PLUGIN_PATHS = [ './plugins', 'm.css/plugins', 'm.css/plugins/m' ]  # 4.5.0 err
+PLUGIN_PATHS = [ 'plugins', 'm.css/plugins' ]
 
 #  PLUGINS - The list of plugins to load.
 #  See Plugins.
