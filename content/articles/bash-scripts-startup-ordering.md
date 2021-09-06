@@ -1,5 +1,6 @@
 title: Bash Scripts Startup Ordering
 date: 2020-06-03 10:56
+modified: 2020-12-03 15:16
 status: published
 tags: bash, shell, script
 category: HOWTO
@@ -20,15 +21,16 @@ The current (and well-established) ordering of such bash shell scripts are:
     ~/.bash_logout
 
 [jtable]
-Script name, login, UNIX pipe, bash, sh, Debian9
+Script name, login, UNIX pipe, bash, sh, Debian9, note
 `/etc/profile`, Y, Y, Y, Y, Y
-`/etc/profile.d/*.sh`, N, N, N, N, Y
+`/etc/bash.bashrc`, Y, Y, Y, Y, Y, called by `/etc/profile`
+`/etc/profile.d/*.sh`, N, N, N, N, Y, called by `/etc/profile`
 `~/.bash_profile`, Y, ?, ?, ?, ?, ?
 `~/.bashrc`
 `/etc/bashrc`
-`~/.bash\_login`
-`~/.profile`
-`~/.profile.d/*.sh`
+`~/.bash\_login`, Y, n, Y, n, Y
+`~/.profile`, Y, n, Y, Y, Y
+`~/.profile.d/*.sh`, Y, Y, Y, Y, Y
 `~/.bash_logout`
 
 [/jtable]
@@ -111,6 +113,8 @@ else
   fi
 fi
 ```
+Above are also duplicated in KDE SDDM `/etc/sddm/wayland.session` and X11 session
+`/etc/sddm/X11.session`.
 
 When you logout of the interactive shell, following is the 
 execution sequence:

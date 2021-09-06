@@ -26,7 +26,7 @@ Metadata, Description
 `lang`, Two-letter [ISO-639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) code of the language used in this content file.
 `modified`, Modification date of this content file in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (e.g., `YYYY-MM-DD HH:SS`)
 `private`, Exclude such summary of this content file from website's site map.  Used only by `sitemap` plugin.
-`save_as`, Save content to this relative file path
+`save_as`, Save content to this relative file path.  Useful for renaming files into `index.html` or copying to outside of content directory (for example, copying content/pages/website-cover.md to https://website.example/index.html especially if your entire blog is already one-deep (https://website.example/blog/).
 `slug`, Filename identifier that are used in its URL and language translation(s).
 `status`, Status of this content file: `draft`, `hidden`, or `published`.
 `summary`, Brief description of this content file for use by various index pages. Trunction of this summary is set by `SUMMARY_MAX_COUNT` in number of words unit.
