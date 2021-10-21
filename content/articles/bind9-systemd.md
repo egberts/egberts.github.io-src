@@ -75,7 +75,7 @@ name.
 
 'bind' is a subdirectory name chosen by ISC Bind9 project.  That is all it is
 used for, a subdirectory or file name.  It may be used under default
-`/etc/default/bind9`, PID (`/run/bind/bind.PID`), cache (`/var/cache/bind`), or
+`/etc/default/bind9`, PID (`/run/bind/named.PID`), cache (`/var/cache/bind`), or
 long-term across-reboot-persistent storage (`/var/lib/bind`).  Anything else
 would be just confusing.
 
