@@ -174,6 +174,7 @@ With the many-sysconfdir, tree-directory approach, the directory tree would look
 /run/bind/internal/named.pid
 /run/bind/public/named.pid
 /var/cache/bind/internal/named.secroots
+/var/lib/bind/data
 /var/lib/bind/internal/master
 /var/lib/bind/internal/slave
 /var/lib/bind/internal/keys
@@ -218,15 +219,15 @@ A new `RNDC_OPTIONS` introduces support for different configuration files for ea
 
 Control Port to Named
 ---------------------
-To interact with an instance of named daemon, a control port is opened and
-defaults to 953/tcp.  `rndc` is provided as a CLI to named.  `rndc` provides
+`rndc` is provided as a CLI to named.   To interact with an instance of named daemon, a control port is opened and
+defaults to 953/tcp.  `rndc` provides
 control of daemon, zones, statistics, and dumps.
 
 `rndc` uses `/etc/bind/rndc.conf` as its default config file.  `rndc` config
 file contains the crypto hash key, server address, port number, and label
 name of the key.
 
-There are three ways to leverage settings as a default for `rndc` usage.
+There are three ways to leverage settings as a default for a simpler `rndc` usage.
 
 * `/etc/default/bind9`
 * `/etc/bind/rndc.conf`
