@@ -360,16 +360,18 @@ That package name is `bind9`; not `bind`, `named`, `name`, nor `isc-bind` (or th
 
 If a server-class package requires more than one unit, then its unit name get lengthened with a '-<function>' suffix.  The original and first unit name does not need to be lengthened.
 
-Bind9 has only has two primary and lesser functions, so only needs one unique name for a systemd unit: so it is `bind9.service` and `bind9-resolvconf.service`.
+Bind9 has only has a primary and a lesser functions, so only needs one unique name for a systemd unit: `bind9.service` and `bind9-resolvconf.service`.
 
-Unfortunately, all maintainers/distros' current `named.service` only supports one daemon/server.  Furthermore, distro maintainers only supplied one service file, typically in `/lib/systemd/system/named.service`.
+Unfortunately, all maintainers/distros' current `named.service` only supports one daemon/server.  Furthermore, distro maintainers only supplied one service file for this primary function of Bind9, typically in `/lib/systemd/system/named.service`.
 
 Hence, for this expansion and correctness, we will focus on using 'bind9.service' as the current systemd unit name for this ISC Bind9 named daemon.  Templating this new `bind9.service` unit then follows easily afterward.
 
-To do multi-daemon split-horizon, systemd needs to use these different-horizon configuration files.  Systemd comes to the rescue and provides a unit template.  Our current unit file for Bind9 is `bind9.service`.  Templating unit files are denoted by '@' symbol in its template filename like `bind9@.service`.
-t
+To do systemd-multi-instance of multi-daemon split-horizon, systemd needs to use these different-horizon configuration files.  Hardcoding in a n unit service file for each Bind9 instance seems like a folly.
+  
+ Systemd came to the rescue by providing a mechanism for unit templating.  Our current unit file for Bind9 is `bind9.service`.  our new templating unit files are denoted by '@' symbol in its template filename as in `bind9@.service`.
 
-New systemd unit template file for Bind9 is shown below:
+
+New systemd unit template file for Bind9 is now:
 
 File: `/etc/systemd/system/bind9@.service`
 ```
@@ -381,6 +383,8 @@ Wants=nss-lookup.target
 Before=nss-lookup.target
 
 [Service]
+ConditionPathExists=/etc/bind/rndc-%I.conf
+ConditionPathExists=/etc/bind/%I/named.conf
 # EnvironmentFile is mandatory now
 # Example is '/etc/default/bind9-public' from 'bind9@public.service'
 EnvironmentFile=/etc/default/%p-%I
