@@ -1,6 +1,6 @@
 Title: Bind9 Directories and Files
 Date: 2018-10-18 18:56
-Modified: 2020-10-15 12:12
+Modified: 2021-10-21 08:00
 slug: bind9-directories
 tags: bind9
 category: research
@@ -9,24 +9,26 @@ summary: Directories and Files used by ISC Bind9
 Bind9 directories
 =================
 
-The following directories used by Bind9 `named` are listed for various distro filesystem layout.
+The following directories used by Bind9 package and its `named` daemon are listed for various distro filesystem layout.
 
 Autoconf, autoreconf, configure
 -------------------------------
 At the beginning, certain distros places Bind9 into different directories as a Bind9 default.
 
 [jtable]
-Disto name, `prefix`, `sysconfdir`, `localstatedir`, `libdir`, `logdir`
-Redhat, `/`, `/etc/bind`, `/var/run`, `/var/lib/bind`, `/var/log/named`
-Debian 11, `/`, `/etc/bind`, `/run`, `/var/lib/bind`, `/var/log/named`
-Debian 10, `/`, `/etc/bind`, `/run`, `/var/lib`, `/var/log/named`
-Debian 9, `/`, `/etc`, `/var/run`, `/var/lib`, `/var/log`
+Disto name, `prefix`, `sysconfdir`, `localstatedir`, `libdir`
+ISC maintainer, `/usr`, `/etc`, `/var`, `/var/lib/bind`
+Debian 11, `/`, `/etc/bind`, `/run/bind`, `/var`
+Debian 10, `/usr`, `/etc/bind`, `/run`, `/var/lib`
+Debian 9, `/usr`, `/etc`, `/var/run`, `/var/lib`
+Redhat, `/usr`, `/etc`, `/var/run`, `/var/lib/bind`
 [/jtable]
 
-
+`logdir` is not controlled by the `autoconf`/`configure` tool and is left to the
+implementors' discretion as to where its log file should be.
 
 [jtable]
-Directory name, Statement, Description
+Directory name, named.conf Statement, Description
 `/etc/bind`, directory, directory is a quoted string defining the absolute path for the server e.g. &quot;/var/named&quot;. All subsequent relative paths use this base directory. If no directory options is specified the directory from which BIND was loaded is used. This option may only be specified in a 'global' options statement.
 `/var/lib/bind`, ,
 `/var/lib/bind/master`, `file`, zone files
@@ -36,7 +38,6 @@ Directory name, Statement, Description
 `/var/cache/bind`, `key-directory`, Dynamically created keyfiles by named daemon.  It is also the $HOME directory for named process.  
 
 `/var/log/bind`, , logging for DNS `named` daemon.  Used to be `/var/log/named`.
-`/
 [/jtable]
 
 
@@ -61,31 +62,49 @@ Filespec, Derived from, Description
 `named.secroots`, `secroots-file`, Default filename to the the pathname of the file that server dumps security roots into when instructed to do so via 'rndc secroots' command.
 [/jtable]
 
+
 Bind9 logging channels
 ======================
-[jtable]
-directory name, channel name , description
-`/var/log/bind/default.log` , `default_file` , Default events get logged into this file
-`/var/log/bind/general.log` , `general_file` , General events get logged into this file.
-`/var/log/bind/database.log` , `database_file` , Database events get logged into this file.
-`/var/log/bind/security.log` , `security_file` , Security events get logged into this file.
-`/var/log/bind/config.log` , `config_file` , Configuration and any misconfiguration events get logged into this file.
-`/var/log/bind/resolver.log` , `resolver_file` , Resolver events get logged into this file.
-`/var/log/bind/xfer-in.log` , `xfer-in_file` , Transfer DNS records inbound events get logged into this file.
-`/var/log/bind/xfer-out.log` , `xfer-out_file` , Transfer DNS records outbound events get logged into this file.
-`/var/log/bind/notify.log` , `notify_file` , Notify events get logged into this file.
-`/var/log/bind/unmatched.log` , `client_file` , Client events get logged into this file.
-`/var/log/bind/client.log` , `unmatched_file` , Unmatched events get logged into this file.
-`/var/log/bind/unmatched.log` , `unmatched_file` , Unmatched events get logged into this file.
-`/var/log/bind/queries.log` , `queries_file` , Query events get logged into this file.
-`/var/log/bind/query-errors.log` , `query-errors_file` , Query ERROR events get logged into this file.
-`/var/log/bind/network.log` , `network_file` , "Network events get logged into this file. open() close() dropped or downed network interface."
-`/var/log/bind/update.log` , `update_file` , Update events get logged into this file.
-`/var/log/bind/update-security.log` , `update-security_file` , Security update events get logged into this file.
-`/var/log/bind/dispatch.log` , `dispatch_file` , Dispatch events get logged into this file.
-`/var/log/bind/dnssec.log` , `dnssec_file` , DNSSEC events get logged into this file.
-`/var/log/bind/lame-servers.log` , `lame-servers_file` , Lame server events get logged into this file.
-`/var/log/bind/delegation-only.log` , `delegation-only_file` , Delegation events get logged into this file.
-`/var/log/bind/rate-limit.log` , `rate-limit_file` , Rate limiting events get logged into this file.
+The following category names used in logging of named daemon are supported in Bind v9.17.
 
+Actual filespec for each channel's log file is entirely user-definable by using the `file` statement.
+
+Directory path for file-based channel is commonly `/var/log/named`.  
+
+Note: While the conventional directory path should be `/var/log/bind` but many DNS-related log-ingestion programs have been accustomed to `/var/log/named`.
+
+[jtable]
+Category name , Description
+`default` , Logging options for those categories where no specific configuration
+has been defined.
+`general` , Catch-all for many things that still are not classified into categories.
+`database` , Messages relating to the databases used internally by the name server to store zone and cache data.
+`security` , Approval and denial of DNS requests.
+
+`client` , Client requests and events get logged.
+`cname` ,  Name servers that are skipped for being a CNAME instead of an A/AAAA.
+`config` , Configuration file, parse processing, and any misconfiguration events .
+`delegation-only` , Queries that have been forced to NXDOMAIN as a result of delegation-only zone or a delegation-only in `forward`, `hint`, or `stub` zone. 
+`dispatch` , Dispatching of incoming packet to the server modules where they are to be processed.
+`dnssec` , DNSSEC and TSIG protocol processing.
+`dnstap` , The "dnstap" DNS traffic capture system.
+`edns-disable` , "Log queries that have been forced to use plain DNS due to timeouts. This is often due to the remote servers not being :rfc:`1034`-compliant (not always returning FORMERR or similar to EDNS queries and other extensions to the DNS when they are not understood). In other words, this is targeted at servers that fail to respond to DNS queries that they don't understand."
+`lame-servers` , "Misconfigurations in remote servers, discovered by BIND 9 when trying to query those servers during resolution."
+`network` , "Network events get logged. open() close() dropped or downed network interface."
+`notify` , Notify protocols and events.
+`nsid` , "NSID options received from upstream nameservers.
+`queries` , "Location where queries should be logged.  At startup, specifying the category `queries` also enables query logging unless the `querylog` option has been specified."
+`query-errors` , Information about queries that resulted in some failure.
+`rate-limit` , "Start, periodic, and final notices of the rate limiting of a stream of responses that are logged at `info` severity in this category. These messages include a hash value of the domain name of the response and the name itself, except when there is insufficient memory to record the name for the final notice. The final notice is normally delayed until about one minute after rate limiting stops. A lack of memory can hurry the final notice, which is indicated by an initial asterisk (\*). Various internal events are logged at debug level 1 and higher.  Rate limiting of individual requests is logged in the `query-errors` category."
+`resolver` , DNS resolution, such as the recursive lookups performed on behalf
+`rpz`, "Information about errors in response policy zone files, rewritten responses, and, at the highest `debug` levels, mere rewriting attempts.
+`serve-stale` , Indication of whether a stale answer is used following a resolver failure.
+`spill` , "Queries that have been terminated, either by dropping or responding with SERVFAIL, as a result of a fetchlimit quota being exceeded."
+`trust-anchor-telemetry`, Trust-anchor-telemetry requests received by `named`.
+`unmatched` , "Messages that `named` was unable to determine the class of, or for which there was no matching `view`. A one-line summary is also logged to the `client` category. This category is best sent to a file or stderr; by default it is sent to the `null` channel. "
+`update` , Dynamic update events.
+`update-security` , Security update events get logged.
+`xfer-in` , Zone transfers the server is receiving.
+`xfer-out` , Zone transfers the server is sending.
+`zoneload` , Loading of zones and creation of automatic empty zones.
 [/jtable]
