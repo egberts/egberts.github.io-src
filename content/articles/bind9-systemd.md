@@ -110,6 +110,13 @@ Autotool (and ISC) have defaulted to
 *  `/var` (`localstatedir`)
 *  `/var/run` (`runstatedir`)
 
+I cannot stress the confusion made by different distros' maintainers of bind9,
+especially toward the following default settings:
+
+* `prefix` (autotool)
+* `sysconfdir` (autotool)
+* `localstatedir` (autotool)
+
 Distro maintainers have gone off the deep-end (despite their best intentions) as shown in this table below:
 
 [jtable]
@@ -121,6 +128,8 @@ Redhat, `/usr`, `/etc`, `/var/run`, `/var/named`
 OpenSUSE, `/usr`, `/etc`, `/run`, `/var/lib/named`
 ISC maintainer, `/usr`, `/etc`, `/var`, `/var/lib/bind`
 [/jtable]
+
+These three are all over the map and highly inconsistent across distros.  ARGH!
 
 Split-Horizon Instances
 -----------------------
