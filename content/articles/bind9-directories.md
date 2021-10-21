@@ -17,15 +17,18 @@ At the beginning, certain distros places Bind9 into different directories as a B
 
 [jtable]
 Disto name, `prefix`, `sysconfdir`, `localstatedir`, `libdir`
+Debian 11, `/usr`, `/etc/bind`, `/run/bind`, `/var/lib/bind`
+Debian 10, `/usr`, `/etc/bind`, `/run`, `/var/lib/bind`
+Debian 9, `/usr`, `/etc`, `/var/run`, `/var/lib/bind`
+Redhat, `/usr`, `/etc`, `/var/run`, `/var/named`
+OpenSUSE, `/usr`, `/etc`, `/run`, `/var/lib/named`
 ISC maintainer, `/usr`, `/etc`, `/var`, `/var/lib/bind`
-Debian 11, `/`, `/etc/bind`, `/run/bind`, `/var`
-Debian 10, `/usr`, `/etc/bind`, `/run`, `/var/lib`
-Debian 9, `/usr`, `/etc`, `/var/run`, `/var/lib`
-Redhat, `/usr`, `/etc`, `/var/run`, `/var/lib/bind`
 [/jtable]
 
-`logdir` is not controlled by the `autoconf`/`configure` tool and is left to the
-implementors' discretion as to where its log file should be.
+Bind9 Directory Group
+---------------------
+The general set of directories that Bind9 uses are:
+
 
 [jtable]
 Directory name, named.conf Statement, Description
@@ -36,9 +39,12 @@ Directory name, named.conf Statement, Description
 `/var/lib/bind/dynamic`, `managed-keys-directory`, Zone files; filetype is typically `*.mkeys`.
 `/etc/default/bind`, , Default systemd settings for `named` daemon startup (<a href="bind9.service" class="uri" title="wikilink">bind9.service</a>). 
 `/var/cache/bind`, `key-directory`, Dynamically created keyfiles by named daemon.  It is also the $HOME directory for named process.  
-
-`/var/log/bind`, , logging for DNS `named` daemon.  Used to be `/var/log/named`.
 [/jtable]
+
+`logdir` is not controlled by the `autoconf`/`configure` tool: actual filespec for each channel's log file is entirely user-definable by using `file` statement in its `channel` clause.
+
+Note: The `logdir` is historically defined as `/var/log/named`; Future packaging may migrate toward `/var/log/bind` (despite some resistance by various log-ingestion tool providers).
+
 
 
 Bind9 files
