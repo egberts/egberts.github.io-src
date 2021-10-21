@@ -269,16 +269,20 @@ I like the first option (not to use the instance-specific `public` directory) be
 
 
 
-For split-horizon, create both instances of RNDC configuration files:
+For our desired split-horizon setup, create both instances of RNDC configuration files:
 
 ```
 cd /etc/bind
 PORT=953
+mkdir /etc/bind/keys
+chmod 640 /etc/bind/keys
+chown root:bind /etc/bind/keys
 rndc-confgen -A hmac-sha512 \
     -c /etc/bind/rndc-internal.key \
     -s 127.0.0.1 \
     -p $PORT \
-    -u bind
+    -u bind \
+    -k /etc/bind/keys/rndc-internal.key
 mv rndc.conf rndc-internal.conf
 chown root:bind rndc-internal.conf
 chmod 0640 rndc-internal.conf
@@ -288,7 +292,8 @@ rndc-confgen -A hmac-sha512 \
     -c /etc/bind/rndc-public.key \
     -s 127.0.0.1 \
     -p $PORT \
-    -u bind
+    -u bind \
+    -k /etc/bind/keys/rndc-public.key
 mv rndc.conf rndc-public.conf
 chown root:bind rndc-public.conf
 chmod 0640 rndc-public.conf
@@ -302,10 +307,10 @@ error message:
 rndc: neither /etc/bind/rndc.conf nor /etc/bind/rndc.key was found
 ```
 
-There is a reason for this breakage of `rndc`, there is no easy way to determine
-which instance of the many named daemon that we will be running.
+There is a reason for this intentional breakage of `rndc`, there is no easy way to determine
+which instance of the many named daemon that we will be interacting with, especially if we are forgetful after 6 months later.
 
-We want new sets of `rndc` commands to denote which is which side of the horizon.  We can use the `<instance>` name here.
+We want new sets of `rndc` commands to denote which is which part of the horizon.  We can use the `-<instance>` name here.
 
 Also we want to assist systemd with communicating with the correct instance so
 we repurpose the `/etc/default/bind9` into:
