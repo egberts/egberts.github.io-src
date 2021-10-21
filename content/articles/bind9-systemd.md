@@ -116,6 +116,7 @@ especially toward the following default settings:
 * `prefix` (autotool)
 * `sysconfdir` (autotool)
 * `localstatedir` (autotool)
+* `runstatedir` (autotool)
 
 Distro maintainers have gone off the deep-end (despite their best intentions) as shown in this table below:
 
