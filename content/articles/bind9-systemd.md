@@ -130,7 +130,7 @@ OpenSUSE, `/usr`, `/etc`, `/run`, `/var/lib/named`
 ISC maintainer, `/usr`, `/etc`, `/var`, `/var/lib/bind`
 [/jtable]
 
-These three are all over the map and highly inconsistent across distros.  ARGH!
+These settings are all over the map and highly inconsistent across distros.  ARGH!
 
 Split-Horizon Instances
 -----------------------
