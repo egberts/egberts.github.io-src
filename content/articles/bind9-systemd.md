@@ -57,7 +57,7 @@ To fix this shortcoming of this "Multi-View Split-Horizon", we run multiple
 
 Naming Convention
 =================
-A short word from the author to engineers on deviating from the [Linux Filesystem Standard](https://refspecs.linuxfoundation.org/fhs.shtml) in re-naming convention of various parts of
+A short word from the author to Bind9 engineers on deviating from the [Linux Filesystem Standard](https://refspecs.linuxfoundation.org/fhs.shtml) in re-naming convention of various parts of
 Bind9 deployment: STOP!
 
 You designers, maintainers, deployment agents all need to stop moving goalposts
