@@ -93,9 +93,9 @@ Who Defaults the Directories
 ----------------------------
 Settings of directories are done at various places, each step easily overridden by later step.
 
+*  Internal `./configure` defaults
 *  environment variables on command-line to `./configure`.
 *  `./configure` argument settings (ie., `--prefix=/usr`).
-*  Internal `./configure` defaults
 *  Startup configuration file (`/etc/default/named` SysV/s6/OpenRC/systemd)
 *  `named.conf` configuration file
 
