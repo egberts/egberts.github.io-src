@@ -327,6 +327,8 @@ OPTIONS="-c /etc/bind/public/named.conf"
 RNDC_OPTIONS="-c /etc/bind/public/rndc.conf"
 ```
 
+If that makes me a maintainer overlord, bite me.
+
 
 Multi-RNDC 
 ----------
