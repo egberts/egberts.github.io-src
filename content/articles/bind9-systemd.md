@@ -408,14 +408,7 @@ For multiple `named` , it makes sense to have separate subdirectories to hold al
 
 Default Directories
 -------------------
-I cannot stress the confusion made by different distros' maintainers of bind9,
-especially toward the following default settings:
 
-* `prefix` (autotool)
-* `sysconfdir` (autotool)
-* `localstatedir` (autotool)
-
-These three are all over the map and highly inconsistent across distros.  ARGH!
 
 Our new `bind9.service` shall assumes the account's `$HOME` and
 `/etc/default/[named|bind9]` for all of Bind9 default settings.
