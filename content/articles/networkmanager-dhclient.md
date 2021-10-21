@@ -1,6 +1,5 @@
 title: Using complex dhclient in NetworkManager
 date: 2021-09-22 08:00
-modified: 
 status: published
 tags: HOWTO, NetworkManager, dhclient
 category: research
@@ -14,7 +13,7 @@ work from home or just be at home.
 NetworkManager doesn't even seem to handle your highly-customized
 DHCP (`dhclient`) client configurations.
 
-But it can, for the most part;  And I will show you how.  And I 
+But it can, for the most part; and I will show you how.  And I 
 made it work directly and rather well with my ISP finicky 
 (Verizon FiOS) Juniper DHCP server.
 
@@ -89,19 +88,25 @@ What keywords cannot I use?
 ===========================
 In the DHCP client configuration file (`/etc/dhcp/dhclient-*.conf`)...
 
-The following settings are actively being stripped out by the NetworkManager.
+The following settings are actively being stripped out by the NetworkManager:
+
  * `alias` block - Entire blocks are 100% ignored; nothing lifte nor gleaned
  * `lease` block - Entire blocks are 100% ignored; nothing lifte nor gleaned
- * `hostname = gethostname()` - strips it out
  * `also request` - strips it out
  * `timeout`
  * `retry`
  * `reboot`
  * `reject`
  * `retry`  - nmtui/nmcli-configurable
+ * `hostname = gethostname()` - strips out the function, not the keyword. And
+   lets NM sets its hostname.
 
-* Some useful keywords that NetworkManager allows in your `dhclient-*.conf`
+What keyword can I set?
+=======================
+
+Some useful keywords that NetworkManager allows in your `dhclient-*.conf`
 file are:
+
  * `initial-timeout` - nmtui/nmcli-configurable
  * `select-timeout`
  * `backoff-cutoff`
@@ -115,13 +120,40 @@ file are:
  * `bootp` - Use the PXE boot approach (only useful within initrd/initramfs)
  * `interface`  - Another PXE boot setting
  * `filename` - Another PXE boot setting
- * `scripts` - provide your own DHCP dispatch or revert it back 
-   to `/sbin/dhclient-script` for true ISC DHCP client experience;
-   You might lose D-BUS support this way unless you copy these
-   script files over from `/etc/NetworkManager/dispatcher.d/*` and
-   into the `/etc/dhcp/dhclient-enter.d` and `/etc/dhcp/dhclient-exit.d`.
+ * `scripts` - provide your own DHCP dispatch handler or revert it back 
+   to dhclient's very own `/sbin/dhclient-script` for a true ISC DHCP 
+   client experience;
+   You might lose D-BUS support for dynamic network state (CAT-5 disconnect)
+   this way unless you copy these script files over from 
+   `/etc/NetworkManager/dispatcher.d/*` and
+   into the `/etc/dhcp/dhclient-enter.d` and `/etc/dhcp/dhclient-exit.d`;
+   dont forget to check the shell arguments and compensate for this.
+   DHCP dispatch only uses `$1` for its own full-filepath and nothing else.
+   (In case you're wondering, `$0` is `/sbin/dhclient-dispatch`)
+
+Imposing Keywords
+=================
+Some other DHCP keywords used by `dhclient` that are forcibly imposed by
+NetworkManager are:
+
+* `wpad` keyword is one nasty imposition.  I cannot get rid of it.  And it has
+  caused problem with some public WiFi.  I filed a bug report,
+  they won't fix it.
+* `rfc3442-classless-static-route` is another.  I can forsee a few
+scenario that needs to get rid of this but it is very rare.
+* `ms-classless-static-route` - Also needed only by Microsoft DHCP servers.
+Totally useless otherwise.  Is very problematic when some other DHCP 
+server rejects your DHCP-request because of this.  Just take the lump.
+* `root-path` - Should not have been included here as it is only used
+with PXE-boot hosts.
+
+
+Summary
+=======
 
 After all, NetworkManager is just a desktop network connection manager, 
 albiet a full-blown one, if you call it that.
 
-
+I now can enjoy the rich DHCP networking experience that 
+`systemd-networkd`, SysV initd, OpenRC, and s6 cannot 
+offer (notice I didn't say ConMan).
