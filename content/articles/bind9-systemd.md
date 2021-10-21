@@ -134,15 +134,15 @@ These settings are all over the map and highly inconsistent across distros.  ARG
 
 Split-Horizon Instances
 -----------------------
-Instance is a variant.  Instance is often used within unit template provided by systemd.
+Instance is a variant.  Instance is often used within template unit services used by systemd.
 
-Instance are currently used in systemd as:
+In systemd, instances are used as:
 
 * Ethernet (or netdev) interfaces (for netlink devices)
 * User ID (for desktop/console sessions)
 * Device drives (tracking filesystem checks, errors)
 
-And for Bind9, we can extend this to represent the network-side of things like:
+And for Bind9, we can extend this instances to represent our network-side of things like:
 
 * public/private
 * external/internal
@@ -154,7 +154,7 @@ Here we use 'public' and 'internal' for our chosen instance names.  Instance nam
 
 Directory Layouts
 -----------------
-Next step is to place the many files throughout the host system.  We like to use
+Next step is to place the many files of multi-instance Bind9 throughout the host system.  We like to use
 instance name to help distinguish same files but between 'instances'.
 
 For handling multiple-instance of named and its config file, the organizational approach was either using a:
@@ -192,8 +192,8 @@ After using all (and a mixture of many), I've been leaning toward a clean direct
 
 /etc/default
 ------------
-Default (`/etc/default`) subdirectory is used to configure startups of various services and its settings.  Nearly all files found under default directory are stored as UNIX text file.
-Each default file is named after its SysV service.  `bind9` is that service name.  Used to be `named`, but maintainers are going to be a maintainer.
+Default (`/etc/default`) subdirectory is used to configure startups of various services and pass along additional settings.  Nearly all files found under default directory are stored as UNIX text file.
+Each default file is named after its SysV service.  `bind9` is that service name.  Used to be `named`, but maintainers are going to be a maintainer. That includes me as a maintainer because I am going to extended `bind9` to include our many network-labeled instances, such as `/etc/default/bind9-public`.  My bad.
 
 Each default file can have a comment line or a statement line.  Comment line
 begins with '#' symbol.  Statement line is formatted as `NAME=value`.
@@ -212,12 +212,21 @@ OPTIONS="-u bind -U32 -c /etc/bind/named.conf"
 RNDC_OPTIONS="-c /etc/bind/rndc.conf"
 ```
 
-Legacy `RESOLVCONF` setting is for a one-shot service setting and is used only by SysV/s6/OpenRC.  Instead, systemd uses 'bind9-resolvconf.service' whose granularity control is done by `systemctl enable bind9-resolvconf.service` command.
+Legacy `RESOLVCONF` setting is for a one-shot service setting and is used only by SysV/s6/OpenRC.  Instead, systemd uses 'bind9-resolvconf.service' whose granularity control is done by `systemctl enable bind9-resolvconf.service` command.  It wouldnt hurt to leave it in the file as who knows, a sysadmin may want to revert back to OpenRC or SysV from systemd.  
 
-A new `RNDC_OPTIONS` introduces support for different configuration files for
-each instance of systemd unit.  It is common to use different port number, keys, configuration, and server address to control a particular instance of many named daemons.
+A new `RNDC_OPTIONS` introduces support for different configuration files for each instance of systemd unit.  It is common to use different port number, keys, configuration, and server address to control a particular instance of many named daemons.
 
-There are three ways to leverage different settings for `rndc`.
+Control Port to Named
+---------------------
+To interact with an instance of named daemon, a control port is opened and
+defaults to 953/tcp.  `rndc` is provided as a CLI to named.  `rndc` provides
+control of daemon, zones, statistics, and dumps.
+
+`rndc` uses `/etc/bind/rndc.conf` as its default config file.  `rndc` config
+file contains the crypto hash key, server address, port number, and label
+name of the key.
+
+There are three ways to leverage settings as a default for `rndc` usage.
 
 * `/etc/default/bind9`
 * `/etc/bind/rndc.conf`
@@ -236,32 +245,29 @@ These `rndc` options are:
 Alternatively to command line approach, `/etc/default` can hold all four
 settings (key, port, server, config-file) through RNDC\_OPTIONS.
 
-An example `/etc/default/bind9` has:
+A working example `/etc/default/bind9` has:
 
 ```
-RNDC_OPTIONS="-p 954 -s 127.0.0.1 -c /etc/bind/named.conf"
+RNDC_OPTIONS="-p 953 -s 127.0.0.1 -c /etc/bind/rndc.conf"
 ```
 
-Third  approach is to use the `rndc.conf` to hold all three
+Third approach is to use the `rndc.conf` to hold all three
 settings (plus its location of private symmetric key).
 
 The preferred example is to use the `/etc/default/bind9` only for the busiest (or most revealing) nameserver, typically the internal/private ones:
 
-This example `/etc/default/bind9` would contain a portion of this:
+Our working example `/etc/default/bind9-public` would contain a portion of this:
 
 ```
-RNDC_OPTIONS="-c /etc/bind/named-<instance>.conf"
+RNDC_OPTIONS="-c /etc/bind/rndc-public.conf"
+# or
+RNDC_OPTIONS="-c /etc/bind/public/rndc.conf
 ```
 
-Control Port to Named
----------------------
-To interact with an instance of named daemon, a control port is opened and
-defaults to 953/tcp.  `rndc` is provided as a CLI to named.  `rndc` provides
-control of daemon, zones, statistics, and dumps.
+I like the first option (not to use the instance-specific `public` directory) because you can then see all of your rndc-\*.conf files in just one directory.  But instance-specific directory will have its usefulness in the rest of Bind9 multi-horizon implementation.
 
-`rndc` uses `/etc/bind/rndc.conf` as its default config file.  `rndc` config
-file contains the symmetric crypto key, server address, port number, and label
-name of the key.
+
+
 
 For split-horizon, create both instances of RNDC configuration files:
 
