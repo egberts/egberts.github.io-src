@@ -118,7 +118,7 @@ especially toward the following default settings:
 * `localstatedir` (autotool)
 * `runstatedir` (autotool)
 
-Distro maintainers have gone off the deep-end (despite their best intentions) as shown in this table below:
+Distro maintainers (or their distro overlords have ordered them to) have gone off the deep-end (despite their best intentions) as shown in this table below:
 
 [jtable]
 Disto name, `prefix`, `sysconfdir`, `localstatedir`, `libdir`
