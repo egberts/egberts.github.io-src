@@ -225,12 +225,14 @@ control of daemon, zones, statistics, and dumps.
 
 Because we want to limit `rndc` acessibility to just the loopback (127.0.0.1) IP address, port 953/tcp cannot be open-shared by different damon: exactly one port-per-IP-address-per-daemon using a [Request-Reply pattern](https://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/patterns/client_server.html) is limited by its design.
 
+Therefore, we must used different port number for different instance of named daemons.
+
 `rndc` uses `/etc/bind/rndc.conf` as its default config file.  `rndc` config
 file contains the crypto hash key, server address, port number, and label
 name of the key.
 
 There are three ways to leverage settings as a default for a simpler `rndc` usage.
-
+se
 * `/etc/default/bind9`
 * `/etc/bind/rndc.conf`
 * command line options for `rndc`
