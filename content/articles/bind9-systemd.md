@@ -89,7 +89,7 @@ Bind9 is that package name.  Bind would be that ideal non-version package name, 
 The current trending of systemd unit name is to leverage the package name
 (bind9) as the unit name for its server-class.  
 
-Who Defaults the Directories
+Who Defaults the Directory Paths
 ----------------------------
 Settings of directories are done at various places, each step easily overridden by later step.
 
