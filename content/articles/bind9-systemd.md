@@ -22,7 +22,7 @@ the client's geographical location.  Multi-horizon DNS is not covered here.
 
 Variants of Split-Horizon DNS
 -----------------------------
-There are several variants of split-horizon DNS:
+There are several variants of split-horizon DNS, that is to provide different DNS answer to the same DNS query but from different source IP addresss.
 
 * Multi-View, one named, multiple `view` clauses
 * Two(2) named daemons, each with a unique `view` clause.
