@@ -333,7 +333,7 @@ If that makes me a maintainer overlord, bite me.
 
 Multi-RNDC 
 ----------
-Create a bash script to deal with the (many) other instances of `named` daemon:
+Create a bash script to interact with the correct instance of many `named` daemon:
 
 File: `rndc-internal`
 ```
@@ -351,7 +351,7 @@ rndc -c /etc/bind/rndc-public.conf $1 $2 $3 $4 $5 $6 $7 $8 $9
 
     chmod 0750 rndc-[internal|public]
 
-Stick above script into your ~/bin (or `/usr/local/sbin`).
+Stick above scripts into your ~/bin (or `/usr/local/sbin`, if more than one sysadmin uses thrse scripts).
 
 Systemd Bind9.service
 ---------------------
@@ -359,7 +359,7 @@ Package name gets the service name.
 
 That package name is `bind9`; not `bind`, `named`, `name`, nor `isc-bind` (or that infernal `isc-dhcp-server`); once again, package name is `bind9`.  Systemd unit name (both .service and .socket) for bind9 shall be `bind9.service`.
 
-If a server-class package requires more than one unit, then its unit name get lengthened with a '-<function>' suffix.  The original and first unit name does not need to be lengthened.
+If a server-class package requires more than one unit, then additional but related unit name get lengthened with a '-<function>' suffix.  The original and first unit name does not need to be lengthened.
 
 Bind9 has only has a primary and a lesser functions, so only needs one unique name for a systemd unit: `bind9.service` and `bind9-resolvconf.service`.
 
@@ -367,9 +367,9 @@ Unfortunately, all maintainers/distros' current `named.service` only supports on
 
 Hence, for this expansion and correctness, we will focus on using 'bind9.service' as the current systemd unit name for this ISC Bind9 named daemon.  Templating this new `bind9.service` unit then follows easily afterward.
 
-To do systemd-multi-instance of multi-daemon split-horizon, systemd needs to use these different-horizon configuration files.  Hardcoding in a n unit service file for each Bind9 instance seems like a folly.
+To do systemd-multi-instance of multi-daemon split-horizon, systemd needs to use these different-horizon configuration files.  Hardcoding in an unit service file for each Bind9 instance seems like a folly.
   
- Systemd came to the rescue by providing a mechanism for unit templating.  Our current unit file for Bind9 is `bind9.service`.  our new templating unit files are denoted by '@' symbol in its template filename as in `bind9@.service`.
+Systemd came to the rescue by providing a mechanism for unit templating, thus reducing repetitve hardcoding of instamce names.  Our current unit file for Bind9 is `bind9.service`.  our new templating unit files are denoted by '@' symbol in its template filename as in `bind9@.service`.
 
 
 New systemd unit template file for Bind9 is now:
@@ -390,8 +390,8 @@ ConditionPathExists=/etc/bind/%I/named.conf
 # Example is '/etc/default/bind9-public' from 'bind9@public.service'
 EnvironmentFile=/etc/default/%p-%I
 ExecStart=/usr/sbin/named -f $OPTIONS
-ExecReload=/usr/sbin/rndc $RNDC\_OPTIONS reload
-ExecStop=/usr/sbin/rndc $RNDC\_OPTIONS stop
+ExecReload=/usr/sbin/rndc $RNDC_OPTIONS reload
+ExecStop=/usr/sbin/rndc $RNDC_OPTIONS stop
 Restart=on-failure
 
 [Install]
@@ -401,16 +401,4 @@ Alias=named.service
 ```
 
 
-Named Configuration Organization
---------------------------------
-For multiple `named` , it makes sense to have separate subdirectories to hold all its configuration files.  
-
-
-
-Default Directories
--------------------
-
-
-Our new `bind9.service` shall assumes the account's `$HOME` and
-`/etc/default/[named|bind9]` for all of Bind9 default settings.
 
