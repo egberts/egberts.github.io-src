@@ -219,7 +219,7 @@ A new `RNDC_OPTIONS` introduces support for different configuration files for ea
 
 Control Port to Named
 ---------------------
-`rndc` is provided as a CLI to named.   To interact with an instance of named daemon, a control port is opened and
+[`rndc`](https://bind.isc.org/doc/arm/9.11/man.rndc.html) is provided as a CLI to named.   To interact with an instance of named daemon, a control port is opened and
 defaults to [953/tcp](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=rndc).  `rndc` provides
 control of daemon, zones, statistics, and dumps.
 
