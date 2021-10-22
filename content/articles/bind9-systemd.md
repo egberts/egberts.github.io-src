@@ -188,7 +188,7 @@ Multi-subdirectory approaches keeps the `named.conf` out of the `/etc/bind` whic
 Also they both support `include "<config-file>"` clauses so that is better
 compartmentalization and easier management.
 
-After using all (and a mixture of many), I've been leaning toward a clean directory partitions using the 'multi-subdirectory multi-sysconfdir' approach.  Subdirectory can keep files separately from other horizons.  I like the fact that `named.conf` wasn't bastardized, otherwise most tools can use any filename for a named.conf.
+After using all (and a mixture of many), I've been leaning toward the "cleanly-separated directory" approach by selecting the 'multi-subdirectory multi-sysconfdir' organizational style.  Subdirectory can keep files separately from other horizons.  I like the fact that `named.conf` wasn't being bastardized, otherwise most tools can use any filename for and as a named.conf.
 
 
 /etc/default
