@@ -10,7 +10,7 @@ private: False
 Systemd for Bind9 has been redesigned here for allowing multiple instances of named
 daemon.
 
-This systemd template unit is only for running multiple instances, commonly
+This [systemd template unit](https://www.freedesktop.org/software/systemd/man/systemd.service.html) is only for running multiple instances, commonly
 found in "Multi-Daemon Split-Horizon" DNS setup.
 
 What is Split-Horizon DNS?
@@ -220,8 +220,10 @@ A new `RNDC_OPTIONS` introduces support for different configuration files for ea
 Control Port to Named
 ---------------------
 `rndc` is provided as a CLI to named.   To interact with an instance of named daemon, a control port is opened and
-defaults to 953/tcp.  `rndc` provides
+defaults to [953/tcp](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=rndc).  `rndc` provides
 control of daemon, zones, statistics, and dumps.
+
+Because we want to limit `rndc` acessibility to just the loopback (127.0.0.1) IP address, port 953/tcp cannot be open-shared by different damon: exactly one port-per-IP-address-per-daemon using a [Request-Reply pattern](https://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/patterns/client_server.html) is limited by its design.
 
 `rndc` uses `/etc/bind/rndc.conf` as its default config file.  `rndc` config
 file contains the crypto hash key, server address, port number, and label
