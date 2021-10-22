@@ -371,7 +371,7 @@ Hence, for this expansion and correctness, we will focus on using 'bind9.service
 
 To do systemd-multi-instance of multi-daemon split-horizon, systemd needs to use these different-horizon configuration files.  Hardcoding in an unit service file for each Bind9 instance seems like a folly.
   
-Systemd came to the rescue by providing a mechanism for unit templating, thus reducing repetitve hardcoding of instamce names.  Our current unit file for Bind9 is `bind9.service`.  our new templating unit files are denoted by '@' symbol in its template filename as in `bind9@.service`.
+Systemd came to the rescue by providing a mechanism for unit templating, thus reducing repetitve hardcoding of instance names.  Our current unit file for Bind9 is `bind9.service`.  our new templating unit files are denoted by '@' symbol in its template filename as in `bind9@.service`.
 
 
 New systemd unit template file for Bind9 is now:
