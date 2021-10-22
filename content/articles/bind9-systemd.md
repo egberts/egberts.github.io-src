@@ -91,7 +91,7 @@ The current trending of systemd unit name is to leverage the package name
 
 Who Defaults the Directory Paths
 ----------------------------
-Settings of directories are done at various places, each step easily overridden by later step.
+Definition of default directories are set at various places, each step easily overridden by later step.
 
 *  Internal `./configure` defaults
 *  environment variables on command-line to `./configure`.
