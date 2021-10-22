@@ -17,8 +17,8 @@ What is Split-Horizon DNS?
 --------------------------
 Split-horizon DNS is providing two different answers to a DNS query, depending on where the request is coming from; the public-side or the private-side of its network.
 
-Note: There is a type of multi-horizon DNS which is used for different answers based on
-the client's geographical location.  Multi-horizon by geographical-based DNS is not covered here (but you can search on about GeoIP elsewhere).
+Note: There is a type of multi-horizon DNS that provides different DNS answers based on
+the client's geographical location.  Multi-horizon by geographical-based DNS is not covered here (but you can learn about GeoIP by searching elsewhere).
 
 Variants of Split-Horizon DNS
 -----------------------------
