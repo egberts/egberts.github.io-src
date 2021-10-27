@@ -203,7 +203,7 @@ For Bind9, `OPTIONS` and `RESOLVCONF` environment name are used to configure sta
 For a systemd-controlled host, it is common to put the following settings:
 
 File: `/etc/default/bind9`
-```
+```bash
 # -ubind = Username is 'bind'
 # -U32 = 32 listeners 
 # -c = reads /etc/bind/named.conf file
@@ -245,9 +245,10 @@ These `rndc` options are:
 Alternatively to command line approach, `/etc/default` can hold all four
 settings (key, port, server, config-file) through RNDC\_OPTIONS.
 
-A working example `/etc/default/bind9` has:
+An example default file for Bind9:
 
-```
+File: `/etc/default/bind9`
+```bash
 RNDC_OPTIONS="-p 953 -s 127.0.0.1 -c /etc/bind/rndc.conf"
 ```
 
@@ -256,9 +257,10 @@ settings (plus its location of private symmetric key).
 
 The preferred example is to use the `/etc/default/bind9` only for the busiest (or most revealing) nameserver, typically the internal/private ones:
 
-Our working example `/etc/default/bind9-public` would contain a portion of this:
+Our working example would contain a portion of this:
 
-```
+File: `/etc/default/bind9-public`
+```bash
 RNDC_OPTIONS="-c /etc/bind/rndc-public.conf"
 # or
 RNDC_OPTIONS="-c /etc/bind/public/rndc.conf
@@ -267,11 +269,10 @@ RNDC_OPTIONS="-c /etc/bind/public/rndc.conf
 I like the first option (not to use the instance-specific `public` directory) because you can then see all of your rndc-\*.conf files in just one directory.  But instance-specific directory will have its usefulness in the rest of Bind9 multi-horizon implementation.
 
 
-
-
 For our desired split-horizon setup, create both instances of RNDC configuration files:
 
-```
+File: `rndc-setup-multi-instance.sh`
+```bash
 cd /etc/bind
 PORT=953
 mkdir /etc/bind/keys
@@ -303,6 +304,7 @@ chmod 0640 rndc-public.conf
 
 Now whenever the command `rndc` gets (accidentially) evoked, you will get an
 error message:
+
 ```
 rndc: neither /etc/bind/rndc.conf nor /etc/bind/rndc.key was found
 ```
@@ -316,18 +318,19 @@ Also we want to assist systemd with communicating with the correct instance so
 we repurpose the `/etc/default/bind9` into:
 
 File: `/etc/default/bind9-internal`
-```
+```bash
 OPTIONS="-c /etc/bind/internal/named.conf"
 RNDC_OPTIONS="-c /etc/bind/internal/rndc.conf"
 ```
 
 File: `/etc/default/bind9-public`
-```
+```bash
 OPTIONS="-c /etc/bind/public/named.conf"
 RNDC_OPTIONS="-c /etc/bind/public/rndc.conf"
 ```
 
-If that makes me a maintainer overlord, bite me.
+If that makes me a maintainer overlord (for using an extension to the consistent
+package name), bite me.
 
 
 Multi-RNDC 
@@ -335,14 +338,14 @@ Multi-RNDC
 Create a bash script to deal with the (many) other instances of `named` daemon:
 
 File: `rndc-internal`
-```
+```bash
 #!/bin/bash
 # Could uses default /etc/bind/rndc.conf with just `rndc`
 rndc -c /etc/bind/rndc-internal.conf $1 $2 $3 $4 $5 $6 $7 $8 $9
 ```
 
 File: `rndc-public`:
-```
+```bash
 #!/bin/bash
 # Does NOT use default /etc/bind/rndc.conf
 rndc -c /etc/bind/rndc-public.conf $1 $2 $3 $4 $5 $6 $7 $8 $9
@@ -374,7 +377,7 @@ To do systemd-multi-instance of multi-daemon split-horizon, systemd needs to use
 New systemd unit template file for Bind9 is now:
 
 File: `/etc/systemd/system/bind9@.service`
-```
+```ini
 [Unit]
 Description=BIND Domain Name Server (for %I)
 Documentation=man:named(8)
@@ -385,16 +388,54 @@ Before=nss-lookup.target
 [Service]
 ConditionPathExists=/etc/bind/rndc-%I.conf
 ConditionPathExists=/etc/bind/%I/named.conf
+AssertFileIsExecutable=/usr/sbin/named
+AssertFileIsExecutable=/usr/sbin/rndc
 # EnvironmentFile is mandatory now
 # Example is '/etc/default/bind9-public' from 'bind9@public.service'
 EnvironmentFile=/etc/default/%p-%I
-ExecStart=/usr/sbin/named -f $OPTIONS
-ExecReload=/usr/sbin/rndc $RNDC\_OPTIONS reload
-ExecStop=/usr/sbin/rndc $RNDC\_OPTIONS stop
+
+# resources
+DeviceAllow=/dev/random r
+DeviceAllow=/dev/urandom r
+DeviceAllow=/dev/poll rw
+
+# TmpFiles
+# root:bind
+PrivateTmp=/run/bind/%I
+RuntimeDirectory=/run/bind/%I
+ConditionPathExists=/run/bind/%I 
+ConditionPathIsDirectory=/run/bind/%I 
+ConditionPathIsReadWrite=/run/bind/%I 
+
+# $HOME directory
+# bind:bind
+WorkingDirectory=/var/cache/bind/%I
+CacheDirectory=/var/cache/bind/%I
+CacheDirectoryMode=0022
+ConditionPathExists=/var/cache/bind/%I 
+ConditionPathIsDirectory=/var/cache/bind/%I 
+ConditionPathIsReadWrite=/var/cache/bind/%I 
+
+# State directories
+# bind:bind
+StateDirectory=/var/lib/bind/%I
+StateDirectoryMode=0027
+ConditionPathExists=/var/lib/bind/%I
+ConditionPathIsDirectory=/var/lib/bind/%I
+ConditionPathIsReadWrite=/var/lib/bind/%I
+
+
+# Execution
+PIDfile=/run/bind/%I/named.PID
+ExecStart=/usr/sbin/named -f -c /etc/bind/%I/named.conf $NAMED_OPTIONS
+ExecReload=/usr/sbin/rndc -c /etc/bind/rndc-%I.conf $RNDC_OPTIONS reload
+ExecStop=/usr/sbin/rndc -c /etc/bind/rndc-%I.conf $RNDC_OPTIONS stop
 Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
+
+# Use the word 'default' in case one is missing
 DefaultInstance=default
 Alias=named.service
 ```

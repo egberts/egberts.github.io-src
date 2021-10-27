@@ -81,8 +81,7 @@ Note: While the conventional directory path should be `/var/log/bind` but many D
 
 [jtable]
 Category name , Description
-`default` , Logging options for those categories where no specific configuration
-has been defined.
+`default` , Logging options for those categories where no specific configuration has been defined.
 `general` , Catch-all for many things that still are not classified into categories.
 `database` , Messages relating to the databases used internally by the name server to store zone and cache data.
 `security` , Approval and denial of DNS requests.
