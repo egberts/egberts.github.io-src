@@ -11,6 +11,7 @@ Domain DNSSEC
 * [VeriSign Labs](https://dnssec-analyzer.verisignlabs.com/egbert.net)
 * [DNS Name & Shame](https://dnssec-name-and-shame.com/domain/egbert.net)
 * [ZoneMaster France](https://www.zonemaster.fr/domain_check)
+* [DNS Google (JSON format)](https://dns.google/query?name=egbert.net)
 
 End-User DNSSEC
 ---------------
