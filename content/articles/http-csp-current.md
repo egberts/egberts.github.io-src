@@ -22,7 +22,7 @@ The currently best secured policy for HTTP CSP is currently:
 ```nginx
 default-src 'none';
 base-uri 'none';
-script-src 'strict-dynamic' 'report-sample';
+script-src 'nonce-r@nd0m' 'strict-dynamic' cdn.example.com 'self';default-src 'self' 'report-sample';
 object-src 'none';
 style-src 'self' 'report-sample';
 img-src https://egbert.net/favicon.ico https://egbert.net/images/ https://egbert.net/blog/articles/*/images/*.png data:;
@@ -51,6 +51,7 @@ You can check them out at [Google CSP online checker](https://csp-evaluator.with
 References
 ==========
 * https://blog.rapidsec.com/10-tips-to-build-a-content-security-policy-csp-without-breaking-your-site/
+* https://content-security-policy.com/strict-dynamic/
 * [Content-Security-Policy (Mozilla)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy)
 * [Multiple CSP (Mozilla)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy?utm_source=mozilla&utm_medium=devtools-netmonitor&utm_campaign=default#Multiple_content_security_policies)
 * [Web Security (Mozilla](https://infosec.mozilla.org/guidelines/web_security#Examples_5)
