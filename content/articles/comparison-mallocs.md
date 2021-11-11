@@ -1,6 +1,6 @@
 Title: Comparison of Memory Allocation Methods
 Date: 2017-10-20T12:53
-Modified: 2018-07-07T20:42
+Modified: 2021-11-09T11:51
 Tags: comparison, malloc
 Category: research
 summary: A comparison of memory allocation libraries.
@@ -191,6 +191,7 @@ Known malloc exploits:
 References
 ==========
 
+* [GrapheneOS hardened\_malloc](https://github.com/GrapheneOS/hardened_malloc])
 * [http://gee.cs.oswego.edu/dl/html/malloc.html]
 * [https://sploitfun.wordpress.com/2015/02/10/understanding-glibc-malloc]
 * Origin of the word malloc is [here](https://www.spinellis.gr/blog/20170914/).
