@@ -2,7 +2,7 @@ title: Pulse-Width Covert Channel
 date: 2004-02-01 01:03
 updated: 2020-03-11 11:21
 status: published
-tags: pulse-width, covert channel, modulation, BER, TCP
+tags: pulse-width, covert channel, modulation, BER, TCP, algorithm
 category: research
 summary: How to communicate across without changing one bit in payload.
 

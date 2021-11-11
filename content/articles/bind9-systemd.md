@@ -7,22 +7,22 @@ lang: en
 private: False
 
 
-Systemd for Bind9 has been redesigned for allowing multiple instances of named
+Systemd for Bind9 has been redesigned here for allowing multiple instances of named
 daemon.
 
-This systemd template unit is only for running multiple instances, commonly
+This [systemd template unit](https://www.freedesktop.org/software/systemd/man/systemd.service.html) is only for running multiple instances, commonly
 found in "Multi-Daemon Split-Horizon" DNS setup.
 
 What is Split-Horizon DNS?
 --------------------------
 Split-horizon DNS is providing two different answers to a DNS query, depending on where the request is coming from; the public-side or the private-side of its network.
 
-Note: There is multi-horizon DNS which is used for different answers based on
-the client's geographical location.  Multi-horizon DNS is not covered here.
+Note: There is a type of multi-horizon DNS that provides different DNS answers based on
+the client's geographical location.  Multi-horizon by geographical-based DNS is not covered here (but you can learn about GeoIP by searching elsewhere).
 
 Variants of Split-Horizon DNS
 -----------------------------
-There are several variants of split-horizon DNS:
+There are several variants of split-horizon DNS, that is to provide a different DNS answer to the same DNS query but from different source IP addresses.
 
 * Multi-View, one named, multiple `view` clauses
 * Two(2) named daemons, each with a unique `view` clause.
@@ -89,14 +89,14 @@ Bind9 is that package name.  Bind would be that ideal non-version package name, 
 The current trending of systemd unit name is to leverage the package name
 (bind9) as the unit name for its server-class.  
 
-Who Defaults the Directories
+Who Defaults the Directory Paths
 ----------------------------
-Settings of directories are done at various places, each step easily overridden by later step.
+Definition of default directories are set at various places, each step easily overridden by later step.
 
 *  Internal `./configure` defaults
 *  environment variables on command-line to `./configure`.
 *  `./configure` argument settings (ie., `--prefix=/usr`).
-*  Startup configuration file (`/etc/default/named` SysV/s6/OpenRC/systemd)
+*  Default SysV service startup configuration file (`/etc/default/named` SysV/s6/OpenRC/systemd)
 *  `named.conf` configuration file
 
 As you can see, several different types of folks introduce different default
@@ -174,6 +174,7 @@ With the many-sysconfdir, tree-directory approach, the directory tree would look
 /run/bind/internal/named.pid
 /run/bind/public/named.pid
 /var/cache/bind/internal/named.secroots
+/var/lib/bind/data
 /var/lib/bind/internal/master
 /var/lib/bind/internal/slave
 /var/lib/bind/internal/keys
@@ -187,7 +188,7 @@ Multi-subdirectory approaches keeps the `named.conf` out of the `/etc/bind` whic
 Also they both support `include "<config-file>"` clauses so that is better
 compartmentalization and easier management.
 
-After using all (and a mixture of many), I've been leaning toward a clean directory partitions using the 'multi-subdirectory multi-sysconfdir' approach.  Subdirectory can keep files separately from other horizons.  I like the fact that `named.conf` wasn't bastardized, otherwise most tools can use any filename for a named.conf.
+After using all (and a mixture of many), I've been leaning toward the "cleanly-separated directory" approach by selecting the 'multi-subdirectory multi-sysconfdir' organizational style.  Subdirectory can keep files separately from other horizons.  I like the fact that `named.conf` wasn't being bastardized, otherwise most tools can use any filename for and as a named.conf.
 
 
 /etc/default
@@ -218,16 +219,20 @@ A new `RNDC_OPTIONS` introduces support for different configuration files for ea
 
 Control Port to Named
 ---------------------
-To interact with an instance of named daemon, a control port is opened and
-defaults to 953/tcp.  `rndc` is provided as a CLI to named.  `rndc` provides
+[`rndc`](https://bind.isc.org/doc/arm/9.11/man.rndc.html) is provided as a CLI to named.   To interact with an instance of named daemon, a control port is opened and
+defaults to [953/tcp](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=rndc).  `rndc` provides
 control of daemon, zones, statistics, and dumps.
+
+Because we want to limit `rndc` acessibility to just the loopback (127.0.0.1) IP address, port 953/tcp cannot be open-shared by different damon: exactly one port-per-IP-address-per-daemon using a [Request-Reply pattern](https://learning-0mq-with-pyzmq.readthedocs.io/en/latest/pyzmq/patterns/client_server.html) is limited by its design.
+
+Therefore, we must used different port number for different instance of named daemons.
 
 `rndc` uses `/etc/bind/rndc.conf` as its default config file.  `rndc` config
 file contains the crypto hash key, server address, port number, and label
 name of the key.
 
-There are three ways to leverage settings as a default for `rndc` usage.
-
+There are three ways to leverage settings as a default for a simpler `rndc` usage.
+se
 * `/etc/default/bind9`
 * `/etc/bind/rndc.conf`
 * command line options for `rndc`
@@ -335,7 +340,7 @@ package name), bite me.
 
 Multi-RNDC 
 ----------
-Create a bash script to deal with the (many) other instances of `named` daemon:
+Create a bash script to interact with the correct instance of many `named` daemon:
 
 File: `rndc-internal`
 ```bash
@@ -353,7 +358,7 @@ rndc -c /etc/bind/rndc-public.conf $1 $2 $3 $4 $5 $6 $7 $8 $9
 
     chmod 0750 rndc-[internal|public]
 
-Stick above script into your ~/bin (or `/usr/local/sbin`).
+Stick above scripts into your ~/bin (or `/usr/local/sbin`, if more than one sysadmin uses thrse scripts).
 
 Systemd Bind9.service
 ---------------------
@@ -361,7 +366,7 @@ Package name gets the service name.
 
 That package name is `bind9`; not `bind`, `named`, `name`, nor `isc-bind` (or that infernal `isc-dhcp-server`); once again, package name is `bind9`.  Systemd unit name (both .service and .socket) for bind9 shall be `bind9.service`.
 
-If a server-class package requires more than one unit, then its unit name get lengthened with a '-<function>' suffix.  The original and first unit name does not need to be lengthened.
+If a server-class package requires more than one unit, then additional but related unit name get lengthened with a '-<function>' suffix.  The original and first unit name does not need to be lengthened.
 
 Bind9 has only has a primary and a lesser functions, so only needs one unique name for a systemd unit: `bind9.service` and `bind9-resolvconf.service`.
 
@@ -369,9 +374,9 @@ Unfortunately, all maintainers/distros' current `named.service` only supports on
 
 Hence, for this expansion and correctness, we will focus on using 'bind9.service' as the current systemd unit name for this ISC Bind9 named daemon.  Templating this new `bind9.service` unit then follows easily afterward.
 
-To do systemd-multi-instance of multi-daemon split-horizon, systemd needs to use these different-horizon configuration files.  Hardcoding in a n unit service file for each Bind9 instance seems like a folly.
+To do systemd-multi-instance of multi-daemon split-horizon, systemd needs to use these different-horizon configuration files.  Hardcoding in an unit service file for each Bind9 instance seems like a folly.
   
- Systemd came to the rescue by providing a mechanism for unit templating.  Our current unit file for Bind9 is `bind9.service`.  our new templating unit files are denoted by '@' symbol in its template filename as in `bind9@.service`.
+Systemd came to the rescue by providing a mechanism for unit templating, thus reducing repetitve hardcoding of instance names.  Our current unit file for Bind9 is `bind9.service`.  our new templating unit files are denoted by '@' symbol in its template filename as in `bind9@.service`.
 
 
 New systemd unit template file for Bind9 is now:
@@ -393,6 +398,7 @@ AssertFileIsExecutable=/usr/sbin/rndc
 # EnvironmentFile is mandatory now
 # Example is '/etc/default/bind9-public' from 'bind9@public.service'
 EnvironmentFile=/etc/default/%p-%I
+<<<<<<< HEAD
 
 # resources
 DeviceAllow=/dev/random r
@@ -430,6 +436,15 @@ PIDfile=/run/bind/%I/named.PID
 ExecStart=/usr/sbin/named -f -c /etc/bind/%I/named.conf $NAMED_OPTIONS
 ExecReload=/usr/sbin/rndc -c /etc/bind/rndc-%I.conf $RNDC_OPTIONS reload
 ExecStop=/usr/sbin/rndc -c /etc/bind/rndc-%I.conf $RNDC_OPTIONS stop
+||||||| 524e238
+ExecStart=/usr/sbin/named -f $OPTIONS
+ExecReload=/usr/sbin/rndc $RNDC\_OPTIONS reload
+ExecStop=/usr/sbin/rndc $RNDC\_OPTIONS stop
+=======
+ExecStart=/usr/sbin/named -f $OPTIONS
+ExecReload=/usr/sbin/rndc $RNDC_OPTIONS reload
+ExecStop=/usr/sbin/rndc $RNDC_OPTIONS stop
+>>>>>>> 3dbd2dc454156197e313ae8a2096966336781127
 Restart=on-failure
 
 [Install]
@@ -441,16 +456,4 @@ Alias=named.service
 ```
 
 
-Named Configuration Organization
---------------------------------
-For multiple `named` , it makes sense to have separate subdirectories to hold all its configuration files.  
-
-
-
-Default Directories
--------------------
-
-
-Our new `bind9.service` shall assumes the account's `$HOME` and
-`/etc/default/[named|bind9]` for all of Bind9 default settings.
 

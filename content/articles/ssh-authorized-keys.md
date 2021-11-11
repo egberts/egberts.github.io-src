@@ -1,5 +1,5 @@
-title: Fine-tuning SSH authorized\_keys
-date: 2020-10-26 08:00
+title: Fine-tuning SSH authorized_keys
+date: 2021-10-26 08:00
 status: published
 tags: SSH
 category: HOWTO
