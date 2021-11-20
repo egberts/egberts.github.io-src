@@ -12,7 +12,7 @@ Overview
 Components, as listed in network order from your PC to the Internet:
 
 <div class="m-image">
-<img src="/images/HFC-Network.png" title="HFC network.png" alt="HFC-Network.png" width="800" />
+<img src="/images/HFC-Network.png" title="HFC network.png" alt="HFC Network" width="800" />
 </div>
 
 Home Network
@@ -28,7 +28,7 @@ Ethernet via ONT direct Cat-5 (preferred)
 -----------------------------------------
 
 <div class="m-image">
-<img src="/images/Home-network-via-ONT-Ethernet.png" title="Home network via ONT Ethernet.png" alt="Home network via ONT Ethernet.png" width="800" />
+<img src="/images/Home-network-via-ONT-Ethernet.png" alt="Home network via ONT" title="Home network via ONT Ethernet.png" width="800" />
 </div>
 
 * Personal Computer
@@ -85,7 +85,7 @@ Then to the ISP Network
 then
 
 <div class="m-image">
-<img src="/images/Verizon-ISP-Network.png" title="Verizon ISP network.png" alt="Verizon-ISP-Network.png" width="800" />
+<img src="/images/Verizon-ISP-Network.png" alt="Verizon ISP Network" title="Verizon ISP network" width="800" />
 </div>
 
 * Motorola ONT 1400 Single Family Unit (SFU) is an ITU G.984-compliant GPON intelligent optical network terminal (ONT)
