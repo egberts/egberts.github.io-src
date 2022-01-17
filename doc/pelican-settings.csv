@@ -1,0 +1,194 @@
+Archive Class,Article Class,Author Class,Cache Class,Category Class,Config Class,Draft Class,ExtensionClass,Feed Class,Output Class,Page Class,Tag Class,URL Class,`--print-settings`,Class,Setting name,Value Type,Default Value,Description
+y,,,,,,,,,y,,,,,"Archive, Output",`ARCHIVE_SAVE_AS`,filespec , `'archives/{slug}.html'`,Location of archive subdirectory within the  `OUTPUT` directory in which to contain older articles and pages.  It is common to use {slug} to construct this filespec.
+y,,,,,,,,,,,,y,,"Archive, URL",`ARCHIVE_URL`,url_path, `'archives/{slug}.html'`,URL to use in the HTML \<src=\> attribute to store a page or article as an archive file.  It is common to use  {slug} to  construct this URL.
+y,,,,,,,,,y,y,,,,"Archives, Output",`ARCHIVES_SAVE_AS`,filespec , `'archives/index.html'`,Directory path to store this all-archives HTML index file within the  `OUTPUT` directory.  It is common to use {slug} to construct this filespec.
+y,,,,,,,,,,,,,,Archives,`ARCHIVES_URL_PATH`,string, `'archives'`,
+y,,,,,,,,,,,,y,,"Archives, URL",`ARCHIVES_URL`,url_path, `'archives/index.html'`,"What URL to use, in the HTML \<src=\> attribute, to store this all-archives HTML index file.  It is common to use  {slug} to  construct this URL."
+,y,,,,,,,,y,,,,y,"Article, Output",`ARTICLE_EXCLUDES`,list of dirspec , `['pages']`,The subdirectory name under \$PATH where selected directories are to be excluded from chronological indexing.  Pelican will also seed this from `PAGE_PATHS`.
+,y,,,,,,,,y,,,,y,"Article, Output",`ARTICLE_LANG_SAVE_AS`,filespec , `'{slug}-{lang}.html'`,Where to put an language-specific article content within the  `OUTPUT` directory.  It is common to use {slug} to construct this filespec.
+,y,,,,,,,,,,,y,y,"Article, URL",`ARTICLE_LANG_URL`,url_path, `'{slug}-{lang}.html'`,What URL to use in the HTML \<src=\> attribute to store a language-specific page or article file.  It is common to use  {slug} to  construct this URL.
+,y,,,,,,,,,,,,y,Article,`ARTICLE_ORDER_BY`,string , `'reversed-date'`,"The choices of how are articles organized by are: `'reversed-date'`,  `'reversed-prefix`', `'prefix`', `'basename'`. Defines how the articles (articles_page.object_list in the template) are sorted. Valid options are: metadata as a string (use reversed- prefix the reverse the sort order) then special option 'basename' which will use the basename of the file (without path) or a custom function to extract the sorting key from articles. The default value 'reversed-date' will sort articles by date in reverse order (i.e. newest article comes first)."
+,y,,,,,,,,,,,,y,Article,`ARTICLE_PATHS`,list of dirspec,`['']`,A list of subdirectory(s) to ignore as well as ignoring `PAGE_PATHS`.
+,y,,,,,,,,,,,,y,Article,`ARTICLE_PERMALINK_STRUCTURE`,string , `''`,
+,y,,,,,,,,y,,,,y,"Article, Output",`ARTICLE_SAVE_AS`,filespec , `'{slug}.html'`,Location of an article file within the  `OUTPUT` directory.  Only for default language. It is common to use {slug} to construct this filespec.
+,y,,,,,,,,,,,,y,Article,`ARTICLE_TRANSLATION_ID`,varname , `'slug'`,
+,y,,,,,,,,,,,y,y,"Article, URL",`ARTICLE_URL`,url_path, `'{slug}.html'`,URL location to use in the HTML \<src=\> attribute to store an article file.  Only for default language.  It is common to use  {slug} to  construct this URL.
+,y,,,,,,,,,,,,,Articles,`ARTICLES_URL_PATH`,filespec ,`''`,
+,y,,,,,,,,,,,y,,"Articles, URL",`ARTICLES_URL`,url_path,`'index.html'`,URL location to use in the HTML \<src=\> attribute to store all article files.  Only for default language.  It is common to use  {slug} to  construct this URL.
+,,y,,,,,,y,,,,,y,"Author, Feed",`AUTHOR_FEED_ATOM`,filespec ,`'feeds/{slug}.atom.xml'`,Where to put the author Atom feeds in the `OUTPUT` directory
+,,y,,,,,,y,,,,,y,"Author, Feed",`AUTHOR_FEED_RSS`,filespec ,`'feeds/{slug}.rss.xml'`,Where to put the author RSS feeds in the  `OUTPUT` directory
+,,y,,,,,,,,,,,,Author,`AUTHOR_REGEX_SUBSTITUTIONS`,list of tuple of regex ,`None`,"Substitutions to make prior to stripping out non-alphanumerics when generating author(s). Specified as a list of 2-tuples of (from,  to) which are applied in order."
+,,y,,,,,,,y,,,,y,"Author, Output",`AUTHOR_SAVE_AS`,filespec ,`'authors/{slug}.html'`,Location of author file within the  `OUTPUT` directory.  Only for default language. It is common to use {slug} to construct this filespec.
+,,y,,,,,,,,,,y,y,"Author, URL",`AUTHOR_URL`,url_path,"`'authors/{slug}.html?and&in&url=""""'`",URL location to use in the HTML \<src=\> attribute to store an author file.  It is common to use  {slug} to  construct this URL.
+,,y,,,,,,,,,,,,Author,`AUTHOR`,string ,(must define) ,Default author (put your name)
+,,y,,,,,,,y,,,,,"Author, Output",`AUTHORS_SAVE_AS`,filespec ,`'authors/index.html'`,Location of an all-authors file within the  `OUTPUT` directory.  Only for default language. It is common to use {slug} to construct this filespec.
+,,y,,,,,,,,,,,,Author,`AUTHORS_URL_PATH`,url_path,`'authors'`,
+,,y,,,,,,,,,,y,,"Author, URL",`AUTHORS_URL`,url_path,`'authors/index.html'`,URL location to use in the HTML \<src=\> attribute to store an all-authors file.  It is common to use  {slug} to  construct this URL.
+,,,y,,,,,,,,,,,Cache,`AUTORELOAD_IGNORE_CACHE`,string,  ,Deprecated.  Now ignored.
+,,,,,y,,,,,,,,y,Config,`BIND`,ip_address ,`127.0.0.1`,"When starting Pelican in webserver mode, what IP address to bind with during local viewing of the `OUTPUT` directory.  Pelican CLI option is `--bind` or `-b`."
+,,,y,,,,,,,,,,y,Cache,`CACHE_CONTENT`,boolean ,`False`,"If `True`,  saves content in caches. See [Reading only modified content](https://docs.getpelican.com/en/3.6.3/settings.html#reading-only-modified-content) for details about caching."
+,,,y,,,,,,,,,,y,Cache,`CACHE_PATH`,abs_filespec ,`${PWD}/cache`,Directory in which to store cache files.  Pelican CLI option is `--cache-path`.
+,,,,y,,,,,y,,,,,"Categories, Output",`CATEGORIES_SAVE_AS`,filespec ,`'categories/index.html'`,Location of an all-category index HTML file within the  `OUTPUT` directory.  Only for default language. It is common to use {slug} to construct this filespec.
+,,,,y,,,,,,,,,,Categories,`CATEGORIES_TO_COLLATE`,list of string ,"`['category-of-interest', 'another-cool-category']`",
+,,,,y,,,,,,,,,,Categories,`CATEGORIES_URL_PATH`,filespec ,`'categories'`,
+,,,,y,,,,,y,,,,,"Categories, URL",`CATEGORIES_URL`,url_path,`'categories/index.html'`,URL location to use in the HTML \<src=\> attribute to store an all-category index HTML file.  It is common to use  {slug} to  construct this URL.
+,,,,y,,,,y,,,,,,"Category, Feed, Atom",`CATEGORY_FEED_ATOM_URL`,url_path,`'feeds/{slug}.atom.xml'`,What URL to use in the HTML \<src=\> attribute for the category part of Atom feed.  It is common to use  {slug} to  construct this URL.
+,,,,y,,,,y,,,,,y,"Category, Feed, Atom",`CATEGORY_FEED_ATOM`,filespec ,`'feeds/{slug}.atom.xml'`,Where to put this category Atom feed into the  `OUTPUT` directory.  It is common to use {slug} to construct this filespec.
+,,,,y,,,,y,,,,,,"Category, Feed, RSS",`CATEGORY_FEED_RSS_URL`,url_path,`None`,
+,,,,y,,,,y,,,,,,"Category, Feed, RSS",`CATEGORY_FEED_RSS`,filespec ,`None`, Where to put the category RSS feeds.
+,,,,y,,,,,y,,,,y,"Category, Output",`CATEGORY_SAVE_AS`,filespec ,`'category/{slug}.html'`, The location to save a category.
+,,,,y,,,,,,,,y,,"Category, URL",`CATEGORY_URL`,url_path,`'category/{slug}.html'`, The URL to use for a category.
+,,,y,,,,,,,,,,y,Cache,`CHECK_MODIFIED_METHOD`,string ,`'mtime'`," What checksum methods to use when checking wether a file has been modified or not.  `'mtime'` uses your filesystem modified time of the file in question.  Otherwise,  not specifying `'mtime'` will attempt to consult your specified function name of `hashlib` module.  At this moment using Python3.8 the additional available options are: `'blake2b'`,  `'blake2s'`,  `'md5'`,  `'pbkdf2_hmac'`  `'sha1'`  `'sha224'`  `'sha256'`  `'sha384'`  `'sha3_224'`  `'sha3_256'`  `'sha3_384'`  `'sha3_512'`  `'sha512'`  `'shake_128'`  `'shake_256'`.  "
+,,,,,y,,,,,,,,,Config,`CLEAN_URLS`,string,  ,Deprecated.  Now ignored.
+,,,y,,,,,,,,,,y,Cache,`CONTENT_CACHING_LAYER`,string ,`'reader'`,"Two depths of cache mechanism, only one can be used: `'reader'` or `'generator'`.  If set to `'reader'` then save only the raw content and metadata returned by readers. If set to `'generator'` then save processed content objects."
+,,,,,y,,,,,,,,y,Config,`CSS_FILE`, filename ,`'main.css'`, Specify the CSS file you want to load.  The filename of CSS used by this theme (`$THEME`).
+,,,,,y,,,,,,,,y,Config,`DATE_FORMATS`,dict of string ,`{}`,"  A dictionary of string of date format whose key is in by two-char country code.  If left blank,  [ISO-8601](https://www.w3.org/TR/NOTE-datetime) is used.  If you manage multiple languages,  you can set the date formatting here. "
+y, , , ,,,,,,y,,,,y,"Archive, Output",`DAY_ARCHIVE_SAVE_AS`,filespec ,`''`, The location to save per-day archives of your posts.
+y, , , ,,,,,,,,,y,y,"Archive, URL",`DAY_ARCHIVE_URL`,url_path,`''`, The URL to use per-day archives of your posts.
+,,,,,y,,,,,,,,y,Config,`DEBUG`,boolean,`False`,The Pelican CLI options for debug are `-D` or `--debug`.  Both take debug level number as an argument.
+,,,,y,,,,,,,,,y,Category,`DEFAULT_CATEGORY`,string ,`'misc'`,  The category name to use if a content file did not have `category: ` metadata in its file.      The default category to fall back on.
+,,,,,y,,,,,,,,,Config,`DEFAULT_CONFIG_NAME`,string,,
+,,,,,y,,,,,,,,,Config,`DEFAULT_CONFIG`,string,  ,
+,,,,,y,,,,,,,,y,Config,`DEFAULT_DATE_FORMAT`,string,'%a %d %B %Y' , the date format to use that is located before the summary line  of each chronological (article) contents.  The default date format you want to use.
+,,,,,y,,,,,,,,,Config,`DEFAULT_DATE`,string,`None`,"  The default date format for all two-char country code,  unless overriden by `DATE_FORMATS`.  If `fs` is specified then modified timestamp of file is used.  The default date you want to use. If 'fs'  Pelican will use the file system timestamp information (mtime) if it can't get date information from the metadata. If set to a tuple object the default datetime object will instead be generated by passing the tuple to the `datetime.datetime()` constructor."
+,,,,,y,,,,,,,,y,Config,`DEFAULT_LANG`,string,`'en'`, The default language to use.  
+,,,,,y,y,,,,,,,y,"Config, Draft",`DEFAULT_METADATA`,dict of string ,`{}`," If your articles should be automatically published as a draft (to not accidentally publish an article before it is finished) include the status in the `DEFAULT_METADATA`.  Key name is the metadata label and its key value is the metadata value (e.g. `DEFAULT_METADATA = { 'status': 'draft',  }`."
+,,,,,y,,,,,,,,y,Config,`DEFAULT_ORPHANS`,integer,`0`, The minimum number of articles allowed on the last page. Use this when you don't want the last page to only contain a handful of articles.
+,,,,,y,,,,,,,,,Config,`DEFAULT_PAGINATION`,boolean,`False`," The maximum number of articles to include on a page,  not including orphans. False to disable pagination.  Numbers of chronological (article) content to list per page."
+,,,,,,,,,y,,,,,Output,`DELETE_OUTPUT_DIRECTORY`,boolean,`True`," Every time that Pelican is executed,   purge the output directory before starting anew.  Delete the output directory and all of its contents before generating new files. This can be useful in preventing older unnecessary files from persisting in your output. However this is a destructive setting and should be handled with extreme care.  Pelican CLI option is `--delete-output-directory`."
+,,,,,y,,,,,,,,,Config,`DESCRIPTION`,string,(must define),
+,,,,y,y,,,,,,y,,y,"Config, Category, Tag",`DIRECT_TEMPLATES`,list of string,"`['index',  'categories',   'tags',  'archives', 'authors']`"," List of templates that are used directly to render content. Typically direct templates are used to generate index pages for collections of content (e.g.,  tags and category index pages). If the tag and category collections are not needed then set `DIRECT_TEMPLATES = ['index', 'archives']`"
+,,,,y,,,,,,y,,,y,Categories,`DISPLAY_CATEGORIES_ON_MENU`,boolean,`True`, Put the `Categories` on primary navigation menu. You can use the `DISPLAY_PAGES_ON_MENU` setting to control whether all those pages are displayed in the primary navigation menu.  Whether to display categories on the menu of the template. Templates may or not honor this setting.
+,,,,,,,,,,y,,,y,Pages,`DISPLAY_PAGES_ON_MENU`,boolean,`True`, Put the `Pages` on navigation menu. Whether to display pages on the menu of the template. Templates may or may not honor this setting.
+,,,,,y,,,,,,,,y,Config,`DOCUTILS_SETTINGS`,dict of string,`{}`, Extra configuration settings for the docutils publisher (applicable only to reStructuredText). See [Docutils Configuration settings](https://docutils.sourceforge.io/docs/user/config.html) for more details.
+,y,,,,,y,,,y,,,,,"Draft, Articles, Output",`DRAFT_ARTICLES_SAVE_AS`,filespec ,`'drafts/articles/index.html'`,
+,y,,,,,y,,,,,,,,"Draft, Articles",`DRAFT_ARTICLES_URL_PATH`,filespec ,`'drafts/articles'`,
+,y,,,,,y,,,,,,y,,"Draft, Articles, URL",`DRAFT_ARTICLES_URL`,url_path,`'drafts/articles/index.html'`,
+,,,,,,y,,,y,,,,y,"Draft, Output",`DRAFT_LANG_SAVE_AS`,filespec ,`'drafts/{slug}-{lang}.html'`,Location of a language-specific draft page file within the  `OUTPUT` directory.  It is common to use {slug} to construct this filespec.
+,,,,,,y,,,,,,y,y,"Draft, URL",`DRAFT_LANG_URL`,url_path,`'drafts/{slug}-{lang}.html'`,URL location to use in the HTML \<src=\> attribute to store a language-specific draft page file.  It is common to use  {slug} to  construct this URL.
+,,,,,,y,,,y,y,,,y,"Draft, Page, Output",`DRAFT_PAGE_LANG_SAVE_AS`,filespec ,`'drafts/pages/{slug}-{lang}.html'`, {lang} denotes the two-letter country code
+,,,,,,y,,,,y,,y,y,"Draft, Page, URL",`DRAFT_PAGE_LANG_URL`,url_path,`'drafts/pages/{slug}-{lang}.html'`, {lang} denotes the two-letter country code
+,,,,,,y,,,y,y,,,y,"Draft, Page, Output",`DRAFT_PAGE_SAVE_AS`,filespec ,`'drafts/pages/{slug}.html'`,
+,,,,,,y,,,,y,,y,y,"Draft, Page, URL",`DRAFT_PAGE_URL`,url_path,`'drafts/pages/{slug}.html'`,ê
+,,,,,,y,,,y,y,,,,"Draft, Pages, Output",`DRAFT_PAGES_SAVE_AS`,filespec ,`'drafts/pages/index.html'`,Location of draft page file within the  `OUTPUT` directory.  Only for default language. It is common to use {slug} to construct this filespec.
+,,,,,,y,,,,y,,,,"Draft, Pages",`DRAFT_PAGES_URL_PATH`,url_path,`'drafts/pages'`,
+,,,,,,y,,,,y,,y,,"Draft, Pages, URL",`DRAFT_PAGES_URL`,filespec ,`'drafts/pages/index.html'`,URL location to use in the HTML \<src=\> attribute to store a draft page file.  It is common to use  {slug} to  construct this URL.
+,,,,,,y,,,y,,,,y,Output,`DRAFT_SAVE_AS`,filespec ,`'drafts/{slug}.html'`, The place where we will save an article draft.
+,,,,,,y,,,,,,y,,"Draft, URL",`DRAFT_URL`,url_path,`'drafts/{slug}.html'`, The URL to refer to an article draft.
+,,,,,,y,,,y,,,,,"Drafts, Output",`DRAFTS_SAVE_AS`,filespec ,`'drafts/index.html'`,
+,,,,,,y,,,,,,y,y,"Drafts, URL",`DRAFTS_URL`,url_path,`'drafts/index.html'`,
+,,,,,y,,,,,,,,,Slug,`EACH_SLUG_HAS_SUBDIR`,boolean,`False`," Instead of a markdown file,  you could have a slug subdirectory and put all your related images under that subdir."
+,,,,,y,,,,,,,,y,Metadata,`EXTRA_PATH_METADATA`, dict of items ,`{}`, Extra metadata dictionaries keyed by relative path. Relative paths require correct OS-specific directory separators (i.e. / in UNIX and \ in Windows) unlike some other Pelican file settings. See Path metadata.
+,,,,,y,,,,,,,,,Template,`EXTRA_TEMPLATES_PATHS`, list of dirspec ,'`[]`' ,Deprecated.  Now ignored.  Use `THEME_TEMPLATES_OVERRIDES` instead.
+,,,,,,,,y,,,,y,,"Feed, Atom, URL",`FEED_ALL_ATOM_URL`,url_path,`'feeds/atom.xml'`,
+,,,,,,,,y,y,,,,y,"Feed, Atom, Output",`FEED_ALL_ATOM`,filespec ,`feeds/all.atom.xml`, Relative URL to output the all-posts Atom feed: this feed will contain all posts regardless of their language.
+,,,,,,,,y,,,,y,,"Feed, RSS, URL",`FEED_ALL_RSS_URL`,url_path,`''`,
+,,,,,,,,y,y,,,,,"Feed, RSS, Output",`FEED_ALL_RSS`,filespec ,`''`, Relative URL to output the all-posts RSS feed: this feed will contain all posts regardless of their language.
+,,,,,,,,y,,,,,,"Feed, Atom",`FEED_ATOM`,string ,`''`, Relative URL to output the Atom feed.
+,,,,,y,,,y,,,,,y,Feed,`FEED_DOMAIN`,string ,(must define)," The domain prepended to feed URLs. Since feed URLs should always be absolute,  it is highly recommended to define this (e.g. `'http://feeds.example.com'`). If you have already explicitly defined `SITEURL` (see above) and want to use the same domain for your feeds then you can just set: `FEED_DOMAIN = SITEURL`."
+,,,,,,,,y,,,,,y,Feed,`FEED_MAX_ITEMS`,string , `''`, Maximum number of items allowed in a feed. Feed item quantity is unrestricted by default.
+,,,,,,,,y,,,,y,,"Feed, RSS, URL",`FEED_RSS_URL`,url_path,`''`,
+,,,,,,,,y,y,,,,,"Feed, RSS, Output",`FEED_RSS`,filespec ,`''`, Relative URL to output the RSS feed.
+,,,,,y,,,,,,,,y,Config,`FILENAME_METADATA`,string ,`'(?P<date>\\d{4}-\\d{2}-\\d{2}).*'`," You can also extract any metadata from the filename through a regular expression to be set in the `FILENAME_METADATA` setting. All named groups that are matched will be set in the metadata object. The default value for the `FILENAME_METADATA` setting will only extract the date from the filename. For example,  if you would like to extract both the date and the slug,  you could set something like: `'(?P<date>\d{4}-\d{2}-\d{2})_(?P<slug>.*)'`"
+,,,,,y,,,,,,,,y,Config,`FORMATTED_FIELDS`, list ofstring ,`['summary'],A list of metadata fields found in reST/Markdown content that are to be parsed and translated into HTML.
+,,,y,,,,,,,,,,y,Cache,`GZIP_CACHE`,boolean,`True`,"Enables gzipping of cache.  If `True`,  use gzip to (de)compress the cache files."
+,,,,,,,,,y,,,,y,Output,`IGNORE_FILES`,list of string,`['.#*']`,"Files to skip during processing.  A list of glob patterns. Files and directories matching any of these patterns will be ignored by the processor. For example,  the default `['.#*']` will ignore emacs lock files,  and `['__pycache__']` would ignore Python 3's bytecode caches."
+,,,,,y,,,,y,,,,y,"Index, Output",`INDEX_SAVE_AS`,filespec ,`'index.html'`,The location to save the list of all articles.
+,,,,,y,,,,,,y,,y,Config,`INTRASITE_LINK_REGEX`,string ,"`'[{,](?P<what>.*?)[}]'`",Regular expression that is used to parse internal links. Default syntax when linking to internal files tags etc. is to enclose the identifier let us say filename in `{}` or ``. Identifier between `{` and `}` goes into the what capturing group. For details see [Linking to internal content](https://docs.getpelican.com/en/3.6.3/content.html#ref-linking-to-internal-content).
+,,,,,,,y,,,,,,y,Jinja,`JINJA_ENVIRONMENT`,dict of items,"`{'trim_blocks': True, 'lstrip_blocks': True}`",A dictionary of custom Jinja2 environment variables you want to use. This also includes a list of extensions you may want to include. See `Jinja Environment documentation`_.
+,,,,,,,y,,,,,,,Jinja,`JINJA_EXTENSIONS`,dict of items,n/a,Deprecated.  Now ignored.  Use `JINJA_ENVIRONMENT`.
+,,,,,,,y,,,,,,y,Jinja,`JINJA_FILTERS`,dict of items,`'{}'`,A dictionary of custom Jinja2 filters you want to use.  The dictionary should map the filtername to the filter function.
+,,,y,,,,,,,,,,y,Cache,`LOAD_CONTENT_CACHE`,boolean,`False`,"If `True`,  load unmodified content from caches.  When experimenting with different settings (especially the metadata ones) caching may interfere and the changes may not be visible. In such cases disable caching with `LOAD_CONTENT_CACHE = False` or use the `--ignore-cache` command-line switch."
+,,,,,y,,,,,,,,y,Config,`LOCALE`,list of string,`['']`,
+,,,,,y,,,,,,y,,y,Config,`LOG_FILTER`,list of string,`[]`,"A list of tuples containing the logging level (up to warning) and the message to be ignored. For example: `[(logging.WARN,  'TAG_SAVE_AS is set to False')]`"
+,,,,,,,y,,,,,,y,Markdown,`MARKDOWN`,dict of dict of items,*,Extra configuration settings for the Markdown processor. Refer to the Python Markdown documentation's `Options section <https://python-markdown.github.io/reference/#markdown>`_ for a complete list of supported options. The ``extensions`` option will be automatically computed from the ``extension_configs`` option.
+,,,,,,,y,,,,,,,Markdown,`MD_EXTENSIONS`,list of string,`['.md',"Deprecated.  No replacement used.  Falling back to internal Pelican defaults of  '.markdown',  '.mkd',  or '.mdown'`,  the Markdown filetype extension(s) for its content file to be recognized by a Markdown reader."
+,,y,,,y,,,,,,,,,Config,`MINIBIO`,string ,`None`,a minibiography about the author
+y,,,,,,,,,y,,,,y,"Archive, Output",`MONTH_ARCHIVE_SAVE_AS`,filespec ,`''`,The location to save per-month archives of your posts.
+y,,,,,,,,,,,,y,y,"Archive, URL",`MONTH_ARCHIVE_URL`,url_path,`''`,The URL to use per-month archives of your posts.
+y, , , ,,,,,,,,,y,y,"Archives, URL",`NEWEST_FIRST_ARCHIVES`,boolean,`True`,Order archives by newest first by date. (`False`: orders by date with older articles first.)
+,,,,,,,,,y,,,,y,Output,`OUTPUT_PATH`,dirspec,`'output'`,"The output directory that contains the fully-formatted generated HTML pages, and is ready for uploading to websites or viewing by a local webbrowser directly.  Pelican CLI options is  `--output=` or `-o`."
+,,,,,,,,,y,,,,y,Output,`OUTPUT_RETENTION`,list of string,`[]`,"A list of outputted files that you want to keep despite `$DELETE_OUTPUT_DIRECTORY` being enabled.  A list of filenames that should be retained and not deleted from the output directory. One use case would be the preservation of version control data. For example: preserving versioning control files `["".hg"",  "".git"",  "".bzr""]`."
+,,,,,,,,,y,,,,y,"Output, Sources",`OUTPUT_SOURCES_EXTENSION`, filetype , `'.text'`,"Add this filetype toward its filename of all original,  untranslated contents."
+,,,,,,,,,y,,,,y,"Output, Sources",`OUTPUT_SOURCES`,boolean, False ,"Put all of the original, untranslated contents into the output directories for later export to the website.  Any such directory must be added to both STATIC_PATHS and PAGE_PATHS (or STATIC_PATHS and ARTICLE_PATHS).  Set to `True` if you want to copy the articles and pages in their original format (e.g. Markdown or reStructuredText) to the specified OUTPUT_PATH."
+,,,,,,,,,y,y,,,y,"Page, Output",`PAGE_EXCLUDES`,list of dirspec, `['']`,A list of subdirectory(s) to ignore as well as ignoring `ARTICLE_PATHS`.
+,,,,,,,,,y,y,,,y,"Page, Output",`PAGE_LANG_SAVE_AS`,filespec , `pages/{slug}-{lang}.html'`,The location we will save the page which doesn't use the default language. {lang} denotes the two-letter country code
+,,,,,,,,,,y,,y,y,"Page,  URL",`PAGE_LANG_URL`,url_path, `pages/{slug}-{lang}.html'`,The URL we will use to link to a page which doesn't use the default language. {lang} denotes the two-letter country code
+,,,,,,,,,,y,,,y,Page,`PAGE_ORDER_BY`,string ,`'basename'`,How do you want your pages sorted by at the 'Pages' menu?  Defines how the pages (PAGES variable in the template) are sorted. Options are same as `ARTICLE_ORDER_BY`. The default value `'basename'` will sort pages by their basename.
+,,,,,,,,,,y,,,y,Page,`PAGE_PATHS`,list of dirspec,`['pages']`,A list of subdirectory names where all content pages (non-chronological content) files are to be processed from.  Pelican will also seed this with `ARTICLE_EXCLUDES`..  `CONTENT` is appe gets appended to this.
+,,,,,,,,,y,y,,,y,"Page, Output",`PAGE_SAVE_AS`,filespec ,`'pages/{slug}.html'`,Location of a page file within the  `OUTPUT` directory.  Only for default language. It is common to use {slug} to construct this filespec.
+,,,,,,,,,,y,,,y,Page,`PAGE_TRANSLATION_ID`, varname ,`'slug'`,
+,,,,,,,,,,y,,y,y,"Page, URL",`PAGE_URL`,url_path,`'pages/{slug}.html'`,URL location to use in the HTML \<src=\> attribute to store a page file.  Only for default language.  It is common to use  {slug} to  construct this URL.
+,,,,,,,,,y,y,,,,"Pages, Output",`PAGES_SAVE_AS`,filespec ,`'pages/index.html'`,Location of page file within the  `OUTPUT` directory.  Only for default language. It is common to use {slug} to construct this filespec.
+,,,,,,,,,,y,,,,Pages,`PAGES_URL_PATH`,string,`'pages'`,
+,,,,,,,,,,y,,y,,"Pages, URL",`PAGES_URL`,url_path,`'pages/index.html'`,URL location to use in the HTML \<src=\> attribute to store a page file.  It is common to use  {slug} to  construct this URL.
+,,,,,y,,,,,,,,,"Templates, Config",`PAGINATED_DIRECT_TEMPLATES`,list of filename,`['index']`,Deprecated.  Use `PAGINATED_TEMPLATES` instead.
+,,,,,y,,,,,,,,y,"Templates, Config",`PAGINATED_TEMPLATES`,dict of items,`{}`,Provides the direct templates that should be paginated.
+,,,,,y,,,,,,,,y,Config,`PAGINATION_PATTERNS`,list of tuples,`[]` ,A set of patterns that are used to determine advanced pagination output.
+,,,,,y,,,,,,,,,Config,`PATH_KEY`,  ,  ,
+,,,,,y,,,,,,,,y,Config,`PATH_METADATA`,string ,`''`,"Like `FILENAME_METADATA`,  but parsed from a page's full path relative to the content source directory. See Path metadata."
+,,,,,y,,,,,,,,y,Config,`PATH`,dirspec,`.`,"Where you keep all your original, unformatted website contents at (mostly Markdowns/RST/images documents)."
+,,,,,,,y,,,,,,,PDF,`PDF_PROCESSOR`,boolean,`False`,
+,,,,,,,y,,,,,,,PDF,`PDF_STYLE_PATH`,string ,`''`,
+,,,,,,,y,,,,,,,PDF,`PDF_STYLE`,string ,`''`,
+,,,,,y,,,,,,,,y,Config,`PELICAN_CLASS`,module,`'pelican.Pelican'`,
+,,,,,y,,y,,,,,,y,"Config, Plugins",`PLUGIN_PATHS`,list of abs_filespec,(must define),Directory location(s) of where the plugins are.  The list of plugins to load. See [Plugins](https://docs.getpelican.com/en/3.6.3/plugins.html#plugins).
+,,,,,y,,y,,,,,,y,"Config, Plugins",`PLUGINS`,list of string,`None`,Deprecated.  Use `PLUGIN_PATHS`.
+,,,,,y,,,,,,,,y,"Config, Webserver",`PORT`,integer,`8000`,Port number of TCP socket to use.  Pelican CLI option is `-p` or `--port`.
+,,,,,,,y,,,,,,y,Pygments,`PYGMENTS_RST_OPTIONS`,dict of items,`{}`,A list of default Pygments settings for your reStructuredText code blocks. See [Syntax highlighting](https://docs.getpelican.com/en/3.6.3/content.html#internal-pygments-options) for a list of supported options.
+,,,,,y,,,,,,,,y,Config,`READERS`,dict of string,`{'html': None}`,"A list of special readers, keyed by filetype. A list of file extensions / Reader classes for Pelican to process or ignore. For example  to avoid processing '`.html`' files  set: `READERS = {'html': None}`. To add a custom reader for the foo extension  set: `READERS = {'foo': FooReader}`   "
+,,,,,y,,,,,,,,y,Config,`RELATIVE_URLS`,boolean,`False`,Defines whether Pelican should use document-relative URLs or not. Only set this to `True` when developing/testing and only if you fully understand the effect it can have on links/feeds.  Never used in publish mode.
+,,,,y,,,,,,,,,y,Category,`REVERSE_CATEGORY_ORDER`,boolean,`False`,"Reverse the category order. (`True`: lists by reverse alphabetical order,  default lists alphabetically.)"
+,,,,,,,,y,,,,,y,"RSS, Feed",`RSS_FEED_SUMMARY_ONLY`,boolean,`True`,RSS outputs only the summary of chronological ('articles') contents.
+,,,,,y,,,,,,,,,Config,`SITE_DIR`,dirname,(must define),
+,,,,,y,,,,,,,,,Config,`SITE_SUBPATH`,dirname,`$SITE_DIR/`,
+,,,,,y,,,,,,,,,Config,`SITEMAP`,dict of items, ,
+,,,,,y,,,,,,,,,Config,`SITENAME`,string ,(must define),The formal name of your website
+,,,,,y,,,,,,,,,Config,`SITESUBTITLE`, dict of items , ,
+,,,,,y,,,,,,,,y,Config,`SITEURL`, url ,(must define),"The top-level part of the destination URL. Base URL of your website. Not defined by default,  so it is best to specify your `SITEURL`,  if you do not then feeds will not be generated with properly-formed URLs. You should include http:// and your domain along with no trailing slash at the end. Example: `SITEURL = 'http://mydomain.com'`.  No ending slash '/' permitted here."
+,,,,,y,,,,,,,,y,"Slug, Config",`SLUG_REGEX_SUBSTITUTION`, list of tuples,`[]`,"Substitutions to make prior to stripping out non-alphanumerics when generating slug(s). Specified as a list of 2-tuples of (from,  to) which are applied in order."
+,,,,,y,,,,,,,,,"Slug, Config",`SLUG_SUBSTITUTIONS`,,,Deprecated. Use `SLUG_REGEX_SUBSTITUTION` instead.
+,,,,,y,,,,,,,,y,"Slug, Source, Config",`SLUGIFY_SOURCE`,string ,`'title'`,The process of turning a content file into a slug name is based on one of two options: `'basename'` or `'title'`.  Specifies where you want the slug to be automatically generated from. Can be set to title to use the `Title:` metadata tag or `basename` to use the article's file name when creating this slug.
+,,,y,,y,,,,,,,,y,"Static, Cache, Config",`STATIC_CHECK_IF_MODIFIED`,boolean,`False`,"If set to ``True``, and ``STATIC_CREATE_LINKS`` is ``False``, compare mtimes of content and output files, and only copy content files that are newer than existing output files."
+,,,,,y,,,,,,,,y,"Static, URL, Config",`STATIC_CREATE_LINKS`,boolean,`False`,"Create links instead of copying files. If the content and output directories are on the same device, then create hard links.  Falls back to symbolic links if the output directory is on a different filesystem. If symlinks are created, don't forget to add the ``-L`` or ``--copy-links`` option to rsync when uploading your site."
+,,,,,y,,,,,,,,y,"Static, Source",`STATIC_EXCLUDE_SOURCES`,boolean,`True`,"Ignore the source files.  If set to False, content source files will not be skipped when copying files found in ``STATIC_PATHS``. This setting is for backward compatibility with Pelican releases before version 3.5.  It has no effect unless ``STATIC_PATHS`` contains a directory that is also in ``ARTICLE_PATHS`` or ``PAGE_PATHS``. If you are trying to publish your site's source files, consider using the ``OUTPUT_SOURCES`` setting instead."
+,,,,,y,,,,,,,,y,"Static, Config",`STATIC_EXCLUDE`,list of filespec,`''`,A list of files to be excluded if found in `STATIC_PATHS`.
+,,,,,y,,,,,,,,y,"Static, Config",`STATIC_PATHS`,list of dirspec,`['images']`,"A list of relative subdirectory(s) that are not to be pre-processed and copied as-is.  A list of directories (relative to `$PATH`) in which to look for static files. Such files will be copied to the output directory without modification. Articles,  pages,  and other content source files will normally be skipped,  so it is safe for a directory to appear both here and in `PAGE_PATHS` or `ARTICLE_PATHS`. Pelican's default settings include the ""`images`"" directory here."
+,,,,,y,,,,y,,,,y,"Static, Output",`STATIC_SAVE_AS`,dirspec, `'{path}'`,(Per-file save\_as and url overrides can still be set in `EXTRA_PATH_METADATA`.)
+,,,,,y,,,,,,,y,y,"Static, URL, Config",`STATIC_URL`,dirspec, `'{path}'`,(Per-file save\_as and url overrides can still be set in `EXTRA_PATH_METADATA`.)
+,,,,,y,,,,,,,,y,Config,`SUMMARY_MAX_LENGTH`,integer, `50`,"If you do not explicitly specify summary metadata for a given post,  the `SUMMARY_MAX_LENGTH` setting can be used to specify how many words from the beginning of an article are used as the summary.  When creating a short summary of an article then this will be the default length (measured in words) of the text created. This only applies if your content does not otherwise specify a summary. Setting to `None` will cause the summary to be a copy of the original content."
+,,,,,,,,,,,y,,y,Tag,`TAG_CLOUD_BADGE`,boolean,`False`,
+,,,,,,,,,,,y,,y,Tag,`TAG_CLOUD_MAX_ITEMS`,integer,`100`,The maximum number of tags to show.  Its selection is based on TAG_CLOUD_SORTING and 
+,,,,,,,,,,,y,,y,Tag,`TAG_CLOUD_SORTING`,string ,`random`,"Valid choices to sort the Tag Cloud are: `'alphabetically'`, `'alphabetically-rev'`, `'size'`, `'size-rev'`, and `'random'`."
+,,,,,,,,,,,y,,y,Tag,`TAG_CLOUD_STEPS`,integer,`4`,The total amount of font sizes to use for Tag Cloud.  Pelican will choose font sizes based on its `THEME`.
+,,,,,,,,y,,,y,y,,"Tag, Feed, Atom, URL",`TAG_FEED_ATOM_URL`,url_path,`None`,
+,,,,,,,,y,y,,y,,,"Tag, Feed, Atom, Output",`TAG_FEED_ATOM`,dirspec,`None`,"Relative URL to output the tag Atom feed. It should be defined using a `""%s""` match in the tag name."
+,,,,,,,,y,,,y,y,,"Tag, Feed, RSS, URL",`TAG_FEED_RSS_URL`,url_path,`None`,
+,,,,,,,,y,y,,y,,,"Tag, Feed, RSS, Output",`TAG_FEED_RSS`,dirspec,`None`,"Relative URL to output the tag RSS feed. It should be defined using a `""%s""` match in the tag name."
+,,,,,,,,,,,,,,Tag,`TAG_REGEX_SUBSTITUTION`,list of tuples,`[]`,"Substitutions to make prior to stripping out non-alphanumerics when generating tag(s). Specified as a list of 2-tuples of (from,  to) which are applied in order."
+,,,,,,,,,y,,y,,y,"Tag, Output",`TAG_SAVE_AS`,dirspec,`'tags/{slug}.html'`,The location to save the tag page.
+,,,,,,,,,,,y,y,y,"Tag, URL",`TAG_URL`,url_path,`'tags/{slug}.html'`,The URL to use for a tag.  
+,,,,,,,,,y,,y,,,"Tags, Output",`TAGS_SAVE_AS`,dirspec,`'tags/index.html'`,The location to save the tag list.
+,,,,,,,,,,,y,y,,"Tags, URL",`TAGS_URL_PATH`,string,`'tags'`,The file path to use inside HTML links.
+,,,,,,,,,,,y,y,,"Tags, URL",`TAGS_URL`,url_path,`'tags/index.html'`,The URL to use the tag list.
+,,,,,y,,,,,,,,y,Template,`TEMPLATE_EXTENSIONS`,list of string,`['html']`,
+,,,,,y,,,,,y,,,y,"Template, Pages",`TEMPLATE_PAGES`,dict of items,`{}`,Useful for a different styled home page.  A mapping containing template pages that will be rendered with the blog entries. See [Template](https://docs.getpelican.com/en/3.6.3/settings.html#template-pages) pages.
+,,,,,y,,,,y,,,,y,"Theme, Static, Output",`THEME_STATIC_DIR`,dirpath,`'theme'`,Destination directory in the output path where Pelican will place the files collected from THEME_STATIC_PATHS. Default is theme.
+,,,,,y,,,,y,,,,y,"Theme, Static, Output",`THEME_STATIC_PATHS`,list of dirspec,`['static']`,"Static theme paths you want to copy. Default value is static,  but if your theme has other static paths then you can put them here. If files or directories with the same names are included in the paths defined in this settings then they will be progressively overwritten."
+,,,,,y,,,,,,,,y,"Theme, Template",`THEME_TEMPLATES_OVERRIDES`,list of filespec,`[]`,"A list of paths you want your selection of extenions  (e.g., Jinja2) to search for templates. Can be used to separate templates from the theme. Example:, projects,  resume,  profile ... These templates need to use `DIRECT_TEMPLATES` setting."
+,,,,,y,,,,,,,,,"Theme, Template",`THEME_TEMPLATES`,  ,  ,
+,,,,,y,,,,,,,,y,"Config, Theme",`THEME`,dirpath,`'/usr/lib/python3/dist-packages/pelican/themes'`,"Directory location of a selected theme. Theme to use to produce the output. Can be a relative or absolute path to a theme folder,   or the name of a default theme or a theme installed via pelican-themes.  Pelican CLI option is `--theme-path` or `-t`."
+,,,,,y,,,,,,,,,Config,`TIMEZONE`,string,(must define) ,"The timezone used in the date information,   to generate Atom and RSS feeds. See the Timezone section below for more info."
+,,,,,y,,,,y,,,,,"Translation, Feed, Atom",`TRANSLATION_FEED_ATOM`,filespec ,`None`,Where to put the Atom feed for translations.
+,,,,,y,,,,y,,,,,"Translation, Feed, Atom",`TRANSLATION_FEED_ATOM_URL`,url_path,`None`,Where to put the Atom feed for translations.
+,,,,,y,,,,,,,y,,"Translation, Feed, RSS, HTML",`TRANSLATION_FEED_RSS_URL`,filespec ,`None`,{lang} denotes the two-letter ISO country
+,,,,,y,,,,y,,,,,"Translation, Feed, RSS",`TRANSLATION_FEED_RSS`,url_path,`None`,Where to put the RSS feed for translations.
+,,,,,,,y,,,,,,y,Typogrify,`TYPOGRIFY_IGNORE_TAGS`,list of string,"`['pre',  'code']`",A list of tags for Typogrify to ignore. By default Typogrify will ignore `pre` and `code` tags. This requires that Typogrify version 2.0.4 or later is installed
+,,,,,,,y,,,,,,y,Typogrify,`TYPOGRIFY`,boolean,`False`,"Perform spelling correction and proper hypenation.  If set to `True`,  several typographical improvements will be incorporated into the generated HTML via the Typogrify library  which can be installed via: `pip install typogrify`"
+,,,,y,,,,,y,,,,y,"Category, Output",`USE_FOLDER_AS_CATEGORY`,boolean,`True`,"If you would like to organize your files in other ways where the name of the subfolder would not be a good category name,  you can set the setting USE_FOLDER_AS_CATEGORY to False.   When you don't specify a category in your post metadata  set this setting to True  and organize your articles in subfolders,  the subfolder will become the category of your post. If set to False  DEFAULT_CATEGORY will be used as a fallback.               "
+,,,,,y,y,,,,,,,y,"Config, Draft",`WITH_FUTURE_DATES`,boolean,`True`,"If `False`,  contents with metadata date that are in the future will get a default status of ""`draft`"". See [Reading only modified content](https://docs.getpelican.com/en/3.6.3/settings.html#reading-only-modified-content) for caveats."
+,,,,,,,,,y,,,,y,Output,`WRITE_SELECTED`,list of string,`[]`,If this list is not empty then only output files with their paths in this list get written into the output directory. Paths should be either absolute or relative to the current Pelican working directory. For possible use cases see [Writing only selected content](https://docs.getpelican.com/en/3.6.3/settings.html#writing-only-selected-content).  Any relative filespec will be converted to absolute (full-path) filespec.  Pelican CLI option is `--write-selected`.
+y,,,,,,,,,y,,,,y,"Archive, Output",`YEAR_ARCHIVE_SAVE_AS`,dirspec,`''`,Location to save per-year archives of your posts.
+y,,,,,,,,,,,,y,y,"Archive, URL",`YEAR_ARCHIVE_URL`,url_path,`''`,URL to use per-year archives of your posts.
+,,,,,,,,,,,,,,,,,,
+Version: pelican 4.0.1,,,,,,,,,,,,,,,,,,
