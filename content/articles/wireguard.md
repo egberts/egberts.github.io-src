@@ -1,6 +1,6 @@
 title: Wireguard, Systemd, Netfilter
 date: 2020-08-30 08:01
-status: draft
+status: published
 tags: wireguard, systemd, netfilter
 category: HOWTO
 summary: How to set up WireGuard using systemd and netfilter.

@@ -1,6 +1,6 @@
 title: Debugging Detection & Prevention
-date: 2018-11-14
-status: draft
+date: 2018-11-14T12:00
+status: published
 category: research
 research tags: debugger, malware
 summary: Detection and Prevention of Debuggers

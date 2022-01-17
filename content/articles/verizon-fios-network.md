@@ -1,7 +1,7 @@
 Title: Overview of Verizon FiOS Network
 date: 2018-11-10T13:28
-modified: 2018-11-13T12:56
-tags: verizon, isp
+modified: 2022-01-14T09:31
+tags: verizon, isp, FiOS
 status: published
 category: research
 Summary: Overview of Verizon FiOS Backend Infrastructure.
@@ -54,8 +54,6 @@ Ethernet via Modem Router MoCA coaxial (common)
 
 Most commonly used method by Verizon installer is:
 
-![](Home network via Modem Router MoCA coaxial.png "Home network via Modem Router MoCA coaxial.png")
-
 * Personal Computer
 * Cat-5E cabling for 802.3/1000Base-T
 * Your firewall
@@ -81,6 +79,10 @@ or that rarely used Ethernet port behind the Set-Top Box
 
 Then to the ISP Network
 -----------------------
+
+<div class="m-image">
+<img src="/images/fios.jpg" alt="Verizon FiOS ISP Network" title="Verizon FiOS ISP network" width="800" />
+</div>
 
 then
 
