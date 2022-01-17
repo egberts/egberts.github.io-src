@@ -97,7 +97,7 @@ validate: publish
 	html5validator --root $(OUTPUTDIR)
 
 rsync_upload: publish
-	rsync ${RSYNC_OPTION} -e "ssh -p $(SSH_PORT)" -P -rvzc --cvs-exclude --delete $(OUTPUTDIR)/ $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
+	rsync ${RSYNC_OPTION} -e "ssh -p $(SSH_PORT)" -P -rvzc --delete $(OUTPUTDIR)/ $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
 
 
 .PHONY: html help clean regenerate serve serve-global devserver publish ssh_upload rsync_upload
