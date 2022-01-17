@@ -9,7 +9,9 @@ CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 
 FILE_GROUP=www-data
-FILE_PERM=0750
+FILE_PERM=0640
+DIR_GROUP=www-data
+DIR_PERM=0750
 PORT=8000
 SSH_HOST=vps
 SSH_PORT=2224
@@ -83,11 +85,15 @@ publish:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 ifdef FILE_GROUP
 	@echo find ${OUTPUTDIR} -type d -exec chgrp -R ${FILE_GROUP} {} \;
-	find ${OUTPUTDIR} -type d -exec chgrp -R ${FILE_GROUP} {} \;
+	find ${OUTPUTDIR} -exec chgrp -R ${FILE_GROUP} {} \;
+endif
+ifdef DIR_PERM
+	@echo find ${OUTPUTDIR} -type d -exec chmod -R ${DIR_PERM} {} \;
+	find ${OUTPUTDIR} -type d -exec chmod -R ${DIR_PERM} {} \;
 endif
 ifdef FILE_PERM
-	@echo find ${OUTPUTDIR} -type d -exec chmod -R ${FILE_PERM} {} \;
-	find ${OUTPUTDIR} -type d -exec chmod -R ${FILE_PERM} {} \;
+	@echo find ${OUTPUTDIR} -type f -exec chmod -R ${FILE_PERM} {} \;
+	find ${OUTPUTDIR} -type f -exec chmod -R ${FILE_PERM} {} \;
 endif
 
 ssh_upload: publish
@@ -97,7 +103,7 @@ validate: publish
 	html5validator --root $(OUTPUTDIR)
 
 rsync_upload: publish
-	rsync ${RSYNC_OPTION} -e "ssh -p $(SSH_PORT)" -P -rvzc --delete $(OUTPUTDIR)/ $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
+	rsync ${RSYNC_OPTION} -e "ssh -p $(SSH_PORT)" -P -rvz --delete $(OUTPUTDIR)/ $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
 
 
 .PHONY: html help clean regenerate serve serve-global devserver publish ssh_upload rsync_upload
