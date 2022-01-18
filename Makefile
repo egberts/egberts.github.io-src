@@ -95,6 +95,7 @@ ifdef FILE_PERM
 	@echo find ${OUTPUTDIR} -type f -exec chmod -R ${FILE_PERM} {} \;
 	find ${OUTPUTDIR} -type f -exec chmod -R ${FILE_PERM} {} \;
 endif
+	cp $(OUTPUTDIR)/images/favicon.ico $(OUTPUTDIR)/
 
 ssh_upload: publish
 	sg - www-data -c "scp $(SCP_OPTION) -P $(SSH_PORT) -r $(OUTPUTDIR)/* $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)"

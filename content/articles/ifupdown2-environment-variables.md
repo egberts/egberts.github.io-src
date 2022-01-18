@@ -12,11 +12,7 @@ routines of ipupdown tool suite which covers `ifup` and `ifdown`.
 
 
 [jtable caption="Environment variables of ipupdown" separator="|" th=1]
-# caption - the table caption
-# separator - default is comma
-# th - table header (=0 means disable)
-# ai - auto-index, adds a column numbering starts at 1
-interfaces command, shell environment variable name
+interfaces command, shell environment variable name, description
 (any), `ADDRFAM`, protocol family (`inet` or `inet6`)
 (any), `IFACE`, name of netdev 
 (any), `LOGICAL`, formal name of interface

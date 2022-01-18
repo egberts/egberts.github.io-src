@@ -4,6 +4,8 @@ status: published
 tags: ArchLinux, Proxmox, QEMU, MS-DOS, grub
 category: HOWTO
 lang: en
+slug: proxmox-qemu-image-msdos
+summary: To directly access the QEMU image having MS-DOS partitions within Proxmox ...
 private: False
 
 You fired up the QEMU image of ArchLinux distro within a Proxmox server.
