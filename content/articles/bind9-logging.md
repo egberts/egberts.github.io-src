@@ -1,6 +1,6 @@
 Title: ISC Bind9 Logging
 Date: 2018-10-17 10:41
-Updated: 2020-03-04 17:52
+Modified: 2022-02-24 08:24
 Tags: logging, bind9
 status: published
 Category: research

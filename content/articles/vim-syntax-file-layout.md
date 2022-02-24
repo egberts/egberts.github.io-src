@@ -1,5 +1,6 @@
 title: Vim Syntax File Layout
 date: 2020-04-02 17:35
+modified: 2022-02-24 08:01
 status: published
 tags: vim, syntax, file layout
 category: research
@@ -45,15 +46,15 @@ grep contained /usr/share/vim/vim81/syntax/* | wc -l
 
 
 produces a list:
-[jtable]
-Vim syntax file, numbers of `contained` keywords
-neomuttrc.vim, 523
-redif.vim, 447
-muttrc.vim, 321
-nsis.vim, 276
-postscr.vim, 260
-css.vim, 259
-php.vim, 248
+[jtable separator="|"]
+Vim syntax file| numbers of `contained` keywords
+neomuttrc.vim| 523
+redif.vim| 447
+muttrc.vim| 321
+nsis.vim| 276
+postscr.vim| 260
+css.vim| 259
+php.vim| 248
 [/jtable]
 
 So,  you can see that I've gone a bit past Vim's limitation there.  
@@ -498,21 +499,21 @@ Let us make a table, an annotation table to codify all these
 statements and save me some strong typing (and maybe avert carpal-tunnel
 syndrome, or something.)
 
-[jtable]
-Annotated letter(s), Bind named config statement 
-A, `acl`
-C, `controls`
-Ch, `channels`
-K, `keys`
-M, `masters`
-Mk, `managed-keys`
-O, `options`
-P, `plugin`
-S, `server`
-Sc, `statistics-channels`
-T, `trusted-keys`
-V, `view`
-Z, `zone`
+[jtable separator="|"]
+Annotated letter(s)| Bind named config statement 
+A| `acl`
+C| `controls`
+Ch| `channels`
+K| `keys`
+M| `masters`
+Mk| `managed-keys`
+O| `options`
+P| `plugin`
+S| `server`
+Sc| `statistics-channels`
+T| `trusted-keys`
+V| `view`
+Z| `zone`
 [/jtable]
 
 So, with less typing, we will condense that to 
@@ -553,16 +554,16 @@ can be found in `syncolor.vim` in `/usr/share/vim/vim81/syntax/` directory.
 
 They are but not limited to:
 
-[jtable]
-Color, Description
-cyan, `Comment`
-magenta, `Constant`; `String`; `Number`
-yellow, `Statement`
-light cyan, `Identifier`
-orange, `Special`
-light blue, `PreProc, Include
-light green, Type
-light blue, Underlined
+[jtable separator="|"]
+Color| Description
+cyan| `Comment`
+magenta| `Constant`; `String`; `Number`
+yellow| `Statement`
+light cyan| `Identifier`
+orange| `Special`
+light blue| `PreProc`, Include
+light green| Type
+light blue| Underlined
 [/jtable]
 
 To prevent disruption by other syntax files, I would add aliases

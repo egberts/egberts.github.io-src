@@ -1,6 +1,6 @@
 Title: Bind9 Keys
 Date: 2018-11-13 12:54
-Updated: 2020-02-25 18:59
+Modified: 2020-02-25 18:59
 Tags: DNSSEC, dns, bind9
 Category: research
 slug: bind9-keys

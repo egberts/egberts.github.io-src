@@ -18,7 +18,9 @@ SSH_PORT=2224
 SSH_USER=wolfe
 SSH_TARGET_DIR=/srv/htdocs/egbert.net/https/html
 SCP_OPTION=-p
-RSYNC_OPTION=-pg
+
+# rsync requires both '-g' AND '--chown' to make effective the group name change remotely
+RSYNC_OPTION=-g -P --chown=wolfe:www-data
 
 
 DEBUG ?= 0
@@ -108,3 +110,4 @@ rsync_upload: publish
 
 
 .PHONY: html help clean regenerate serve serve-global devserver publish ssh_upload rsync_upload
+

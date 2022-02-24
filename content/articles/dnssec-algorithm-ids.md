@@ -1,6 +1,6 @@
 Title: DNSSEC Algorithm IDs
 Date: 2020-02-03 06:14
-Updated: 2020-09-16 11:40
+Modified: 2020-09-16 11:40
 slug: dnssec-algorithm-ids
 tags: bind9, dnssec, algorithm
 category: research

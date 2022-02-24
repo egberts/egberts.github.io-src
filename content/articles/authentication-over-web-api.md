@@ -1,6 +1,6 @@
 Title: Authentication for API
 Date: 2018-12-28 06:30
-Updated: 2020-02-25 01:34
+Modified: 2020-02-25 01:34
 Status: published
 Tags: API, CORS, JWT, Authentication, Auth0, Fusion, Gluu
 Category: research

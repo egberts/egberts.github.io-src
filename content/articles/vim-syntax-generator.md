@@ -1,5 +1,6 @@
 title: Vim Syntax Generator using Bison graph
 date: 2020-10-05 17:00
+modified: 2022-02-24 08:008:03
 status: published
 tags: vim, bison, graph, nftables
 category: HOWTO
@@ -39,14 +40,14 @@ so is the comparison).
 
 I've compiled our next smallest parser-size as:
 
-[jtable]
-Code,        Parser-Size
-nftables,    1,412
-Bind9 named, 1,082\*
-GNU gdb-c,     440
-lua,           418
-GNU c,         392\*
-nmap,          293 
+[jtable separator="|"]
+Code|        Parser-Size
+nftables|    1,412
+Bind9 named| 1,082\*
+GNU gdb-c|     440
+lua|           418
+GNU c|         392\*
+nmap|          293 
 [/jtable]
 
 You can obtain parser-size by taking a `.y` (or `.yacc`) file 
@@ -341,12 +342,12 @@ We have two disparate sets of terminologies, Vim and Bison.
 
 Now, putting it all together.
 
-[jtable]
-LR-parser, DOT graph, graphviz Python Type, Vim syntax, description
-shift, solid line using integer Node ID, Edge, shift
-reduce, solid line with a 'R' in NodeID, Edge, reduce
-"go to", dashed, n/a, Edge, advance to the next state
-state, Node, a state transition 
+[jtable separator="|"]
+LR-parser| DOT graph| graphviz Python Type| Vim syntax| description
+shift| solid line using integer Node ID| Edge| shift
+reduce| solid line with a 'R' in NodeID| Edge| reduce
+"go to"| dashed| n/a| Edge| advance to the next state
+state| Node| a state transition 
 
 [/jtable]
 

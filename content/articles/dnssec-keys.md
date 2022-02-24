@@ -1,6 +1,6 @@
 Title: DNSSEC Keys, ZSK vs KSK
 Date: 2018-08-26T21:40
-Updated: 2020-03-04 16:59
+Modified: 2020-03-04 16:59
 Tags: dnssec, dns, comparison
 Status: published
 Category: research
