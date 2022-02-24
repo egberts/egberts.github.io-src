@@ -1,8 +1,8 @@
 Title: Systemd and ISC DHCP Client
 Date: 2018-10-14T16:23
-Updated: 2020-02-25 19:34
+Modified: 2022-02-24 12:13
 Status: published
-Tags: dhcp, systemd, isp
+Tags: dhclient, DHCP, systemd, ISP
 Category: research
 Summary: How to integrate ISC DHCP client into a systemd-based workstation.
 
