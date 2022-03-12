@@ -64,3 +64,4 @@ testing, and releasing your API.
 See also:
 =========
 * yosriady/api-development-tools - A collection of useful resources for building RESTful HTTP+JSON APIs.
+* https://r.bluethl.net/how-to-design-better-apis
