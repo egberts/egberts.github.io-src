@@ -1,6 +1,6 @@
 Title: Comparison of Memory Allocation Methods
 Date: 2017-10-20T12:53
-Modified: 2021-11-09T11:51
+Modified: 2022-03-14T04:53
 Tags: comparison, malloc
 Category: research
 summary: A comparison of memory allocation libraries.
@@ -103,6 +103,7 @@ Comparison of malloc design
 
 [jtable]
 name , Author , link , repo
+snmalloc, Marthew Parkinson of Microsoft, , https://github.com/microsoft/snmalloc
 ssmalloc , , <a href="https://apsys2012.kaist.ac.kr/media/papers/apsys2012-final27.pdf">whitepaper</a>,
 jemalloc , Jason Evans ("Facebook, FreeBSD") , [whitepaper](https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf) ,
 sfmalloc , "SNU, Korea" , ,
