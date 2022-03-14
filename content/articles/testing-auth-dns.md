@@ -34,7 +34,7 @@ monitor the byte size after "`udp: `".
 ;example.invalid.
 ```
 
-Detailed test explainations are:
+Detailed test explanations are:
 
 Plain DNS
 ---------

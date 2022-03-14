@@ -1,7 +1,7 @@
 title: Using complex dhclient in NetworkManager
 date: 2021-09-22 08:00
 status: published
-tags: HOWTO, NetworkManager, dhclient
+tags: NetworkManager, dhclient, DHCP
 category: research
 lang: en
 private: False

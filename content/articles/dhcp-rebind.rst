@@ -1,9 +1,13 @@
-DHCP Lease Renewal and Rebinding Processes
-##########################################
-
-:Tags: dhcp
+:title: DHCP client Lease Renewal and Rebinding Process
 :Date: 2018-10-14 16:31
-:Category: research
+:Modified: 2022-02-24 15:11
+:status: published
+:tags: DHCP, dhclient
+:category: research
+:summary: DHCP client Lease Renewal and Rebinding Process
+:lang: en
+:private: False
+
 
 DHCP Lease Renewal and Rebinding Processes
 ==========================================

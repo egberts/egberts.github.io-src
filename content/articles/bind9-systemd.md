@@ -456,4 +456,19 @@ Alias=named.service
 ```
 
 
+UPDATE
+==================
+So, I have created a script file to track all those inconsistencies such as:
 
+* user name
+* group name
+* `/etc` package-specific subdirectory name
+* `/var` package-specific subdirectory name
+* systemd unit name(s)
+* rc startup script name
+* `/etc/default` config name
+* `/var/run` package-specific subdirectory path
+
+They are now located in:
+
+* [Github.com/egberts/easy-admin/distro-os.sh](https://github.com/egberts/easy-admin/blob/main/distro-os.sh)
