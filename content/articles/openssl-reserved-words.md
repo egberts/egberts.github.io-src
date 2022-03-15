@@ -331,3 +331,6 @@ The test suite also uses the following shell environment names as well:
   - `VERBOSE`
   - `V`
 
+USAGE
+========
+The above enabled me to create parseable CA blocks for my test network having many CA certificates.  And I wrote all the comolicated parts in bash SHELL scripts.  You can find them here [github.com/egberts/tls-ca-manage](https://github.com/egberts/tls-ca-manage)
