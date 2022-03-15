@@ -1,7 +1,7 @@
 title: Fine-tuning SSH authorized_keys
 date: 2021-10-26 08:00
 status: published
-tags: SSH
+tags: ssh, OpenSSH
 category: HOWTO
 summary: How to restrict SSH session using options in `~/.ssh/authorized_keys`.
 lang: en

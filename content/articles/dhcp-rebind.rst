@@ -1,4 +1,6 @@
-:title: DHCP client Lease Renewal and Rebinding Process
+DHCP client Lease Renewal and Rebinding Process
+###############################################
+
 :Date: 2018-10-14 16:31
 :Modified: 2022-02-24 15:11
 :status: published
@@ -9,11 +11,8 @@
 :private: False
 
 
-DHCP Lease Renewal and Rebinding Processes
-==========================================
-
-Lease Renewal/Rebinding Process Steps
--------------------------------------
+Lease Renewal/Rebinding Process Steps:
+======================================
 
 The following steps summarize the renewal/rebinding process. Obviously,
 the exact sequence of operations taken by a client depends on what

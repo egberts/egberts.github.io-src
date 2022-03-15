@@ -1,8 +1,8 @@
-Title: SSH Overview
+Title: OpenSSH Overview
 Date: 2016-09-24T12:08
-Tags: ssh
+Tags: ssh, OpenSSH
 Category: research
-Summary: An overview of SSH server and client.
+Summary: An overview of OpenSSH server and client.
 This page details the hardening of SSH.
 
 * [SSH client](SSH_client "wikilink")
