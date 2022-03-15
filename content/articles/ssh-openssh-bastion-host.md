@@ -1,5 +1,5 @@
 title: How to Set Up a Bastion SSH Server
-date: 2022-04-15T0619
+date: 2022-04-15 0619
 status: published
 tags: ssh, OpenSSH
 category: HOWTO
