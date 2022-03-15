@@ -1,5 +1,5 @@
 title: How to Set Up a Bastion SSH Server
-date: 2022-04-15 06190
+date: 2022-04-15T0619
 status: published
 tags: ssh, OpenSSH
 category: HOWTO
@@ -36,17 +36,19 @@ Some example uses of bastion SSH server are:
 
 How Is It Different than SSH Jump Server?
 -----------------------------------------
-This is a marked difference from a SSH Jump Server
+A Jump Server is intended to breach the gap between two security zones.
+The intended purpose here is to have a gateway to access something inside of the security zone, from the DMZ.
+
+A SSH Jump Server is
 where a user can login onto the host and then
-forward on to another (but internal) SSH server:
+forward on to another (but internal) SSH server.
 
-- a bastion host makes use of two separate SSH processes (as a security feature)
-- whereas a SSH Jump host leverages a single SSH process to receive then forward a SSH connection without making a use of any local TTY device.  
 
-The key difference here is whether such user will get drop down to a shell or not:
+The key difference here is whether such a SSH user will get drop down to a shell or not:
 
-- Bastion, drops down to a shell (to allow use of outbound `ssh` client
-- Jump, no shell, TCP connection only, one way, often one-way-only.
+- bastion host gets user a shell, and makes use of two separate SSH processes (as a security feature).  This is the only (yet extremely powerful) way to get to be able to use a `ssh` client.
+- jump host gets no shell, by leveraging a single SSH process to receive then forward a SSH connection without making a use of any local TTY device.  Downside is that there is often poor auditing of internal SSH connections being multiplexed through its main SSH TCP connection.
+
 
 Audit, Logging, Compliance
 ==========================
@@ -61,7 +63,7 @@ Primary purpose of bastion SSH server is to have its
 main SSH daemon do that extra process-forking of a new 
 SSH user session with each inbound SSH connection.
 
-This process-forking comes with assured auditing of its activities; with SSH Forwarding, not so much.
+This process-forking comes with assured auditing of its SSH-multiplexed activities; doing this with SSH Forwarding, not so much.
 
 
 SSH Daemon Configuration
@@ -109,3 +111,9 @@ have the following attributes:
 - Templates are destroyed and rebuilt every 8 hours
 
 Enjoy.
+
+
+References
+==========
+
+* 
