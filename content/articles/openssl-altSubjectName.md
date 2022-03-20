@@ -1,5 +1,5 @@
 title: Use altSubjectName in OpenSSL
-date: 2022-03-20 12:37
+date: 2022-03-20 11:37
 status: published
 tags: OpenSSL, X509.3
 category: HOWTO

@@ -243,7 +243,12 @@ There are many X509v3 extensions.  Most are commonly used and are listed here wi
 * `crlDistributionPoint` (CDP)
 * `proxyCertInfo` (PCI)
 
-What X509v3 extension settings to use for each type of certificates are detailedin [{filename}openssl-x509v3.md]
+What X509v3 extension settings to use for each type of certificates are detailedin [{filename}openssl-x509v3-cert-type.md]
+
+basicConstraints (BC)
+---------------------
+
+A certificate is deemed as capable of being used to issue new certificates if it contains an X.509v3 basicConstraints extension with the cA boolean set to true.
 
 authorityInfoAccess (AIA) 
 -------------------------
