@@ -4,7 +4,7 @@ Example RST markup used in Pelican
 :Date: 2017-11-20 16:58
 :Tags: rst
 :Status: published
-:Category: example
+:Category: HOWTO
 :Slug: rst-example
 :Summary: Example RST for Pelican uses
 

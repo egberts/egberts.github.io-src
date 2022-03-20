@@ -13,22 +13,68 @@ The basic layout of the openssl.cnf file are as given below but with respect to 
 Generic section:
 ----------------
 
-* `[default]`
-* `[ca]`
-* `[req]`
+* `[ default ]`
+* `[ ca ]`
+* `[ req ]`
 
-[default] attributes:
--------------------
+`[ default ]` Attributes
+========================
 Default attributes may start at the beginning of the `openssl.cnf` configuration file before any section (as denoted by a pair of square-brackets `[ xxxx ]`) begins or be clustered together under a `[default]` section, or across both.
 
+`[ default ]` Directories
+-------------------------
 [jtable]
 Attribute, Description, Section
 `HOME`, file specification of a current working directory for all the files referenced later therewithin, [default]
+[/jtable]
+
+`[ default ]` Files
+-------------------------
+[jtable]
+Attribute, Description, Section
 `RANDFILE`, file specification of a file holding the random seed (good for recreating unit tests); typically set to `$ENV::HOME/.rnd` or `$dir/private.rand`, [default,ca,req]
-`default_conf`, reads the `/usr/lib/ssl/openssl.cnf` and seeds your configuration with., [default]
 `oid_file`, file specification to a file containing the OID attribute settings; uses `$ENV::HOME/.oid` file as a default?, [default,ca]
+[/jtable]
+
+`[ default ]` Section Assignment
+-------------------------
+[jtable]
+Attribute, Description, Section
+`openssl_conf`, the top-most section name to take in new settings at a new OpenSSL-wide scoping level; including all OpenSSL modules such as TLS/SSL, [default]
+`ssl_conf`, section name to take in new settings for TLS/SSL module; Used only by `openssl s_client` or `openssl s_server`, [default]
+`engines`, section name to the `engine` module, [default]
+`stbl_section`, section name to the ASN.1 module, [default]
 `oid_section`, section name to a new section containing the oid-related attribute settings, [default]
+`alg_section`, section name to the EVP module, [default]
 `asn1`, section name to a new section containing the selected ASN1 attributes; used only by `openssl asn1pars` command., [default,asn1pars]
+[/jtable]
+
+`[ ssl_conf ]` Attributes 
+-------------------------
+[jtable]
+Attribute, Description, Section
+`system_default`, section name to a new section containing the TLS/SSL-relatd attribute settings such as `MinProtocol=TLSv1.3`, `CipherSuites`, or `Options=-SessionTicket,MiddleboxCompat`, [ssl]
+[/jtable]
+
+See man page `SSL_CONF_cmd_value_type.3ssl` for more TLS/SSL options under `[ ssl_conf ]` section.
+
+`[ engine ]` Attributes 
+-------------------------
+[jtable]
+Attribute, Description, Section
+`engine_id`, name of the FIPS engine, [engine]
+`soft_load`, alternate name of the FIPS engine, [engine]
+`dynamic_path`, alternate name of the FIPS engine, [engine]
+`default_algorithms`, a CSV string of the name of desired (but supported) algorithms to use with the FIPS, [engine]
+[/jtable]
+
+Other `engine` keyvalues encountered are `SO_PATH`, `LIST_ADD`, `LOAD`, `EMPTY`, `init`. 
+
+`[ default ]` Attributes - EVP
+-------------------------
+[jtable]
+Attribute, Description, Section
+`fips_mode`, `yes`/`no`, [engine]
 [/jtable]
 
 Found in '[ca]':
