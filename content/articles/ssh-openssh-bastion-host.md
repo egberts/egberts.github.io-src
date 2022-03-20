@@ -1,5 +1,6 @@
 title: How to Set Up a Bastion SSH Server
-date: 2022-04-15 0619
+date: 2022-03-15 0619
+modified: 2022-03-19 04:38
 status: published
 tags: ssh, OpenSSH
 category: HOWTO
@@ -7,6 +8,40 @@ summary: A bastion SSH server allows a work-from-home user to login onto the com
 lang: en
 private: False
 
+The following are the best practices while configuring a bastion host
+
+1. Never place your SSH private keys within a bastion hosts/ server. As suggested, use SSH Agent Forwarding for this task to connect first to the bastion host then to other instances on the private subnets. This lets you keep the private keys only with your servers.
+2. Make sure the security group on the bastion host to allow SSH (port 22) to connect only from your trusted hosts and never from 0.0.0.0/0 mask
+3. Always have more than one bastion. For example, having a bastion host for each Availability Zone (AZ).
+4. Make sure to configure security groups on private subnets to accept SSH traffic only from the bastion hosts.
+
+SSH Bastion Server is the most secured of any SSH server configuration: SSH Jump Server or SSH Proxy Server are most useful when used within the enterprise network or non-Internet part of your network (e.g. HomeLAN, small-medium-business network).
+
+Well, maybe except for the proprietary Cloudflare SSH server which also boast secured logging of any and all SSH commands that goes through such a SSH bastion server.
+
+Typical interaction with a SSH bastion server:
+
+
+Step 1: Adding the private key (PEM file) to the key chain. This allows the user to access the private instances without copying to the bastion host. This adds an additional layer of security.
+```console
+$ ssh-add -k <PEM_file_name>
+```
+Step 2: Check whether the private key is properly added to the key chain
+```console
+$ ssh-add -L
+```
+The above will list all the keys added to the chain. Check whether the key you added is listed there.
+
+Step 3: Access the Bastion Host (Public instance)
+```console
+$ ssh -A [email protected]<bastion-host-elastic-ip>
+```
+[Here ec2-user is the user for the Linux instance]
+
+Step 4: Access the private instance
+```console
+$ ssh [email protected]<private-instance-ip>
+```
 
 How to Set Up a Bastion SSH Host
 ================================

@@ -33,48 +33,8 @@ BACK UP A BIT
 But before we go further into `openssl.cnf`, we have to consider who the external influencers are toward the `openssl` binary: shell environment variables.
 
 I've identified the following shell environment names used by `openssl` 
-(by scanning for `getenv()` functions and few other code review tricks):
-
-  - `CN`
-  - `CTLOG_FILE_EVP`
-  - `LEGACY_GOST_PKCS12`
-  - `HOME`
-  - `http_proxy`
-  - `https_proxy`
-  - `no_proxy`
-  - `NO_PROXY`
-  - `OPENSSL`
-  - `OPENSSL_armcap`
-  - `OPENSSL_CONF`, util/wrap.pl
-  - `OPENSSL_CONFIG`, app/CA.pl
-  - `OPENSSL_CONF_INCLUDE`, util/wrap.pl
-  - `OPENSSL_DEBUG_DECC_INIT`
-  - `OPENSSL_ENGINES`, util/wrap.pl
-  - `OPENSSL_ia32cap`
-  - `OPENSSL_MALLOC_FAILURES`
-  - `OPENSSL_MALLOC_FD`
-  - `OPENSSL_MODULES`, util/wrap.pl
-  - `OPENSSL_HTTP_PROXY`
-  - `OPENSSL_NO_PROXY`
-  - `OPENSSL_ppccap`
-  - `OPENSSL_s390xcap`
-  - `OPENSSL_sparcv9cap`
-  - `OPENSSL_TEST_LIBCTX`
-  - `OPENSSL_TRACE`
-  - `RANDFILE`
-  - `SSL_CIPHER`
-  - `TEMP`
-  - `TMP`
-  - `TSGET`
-
-NOTE: Above list are derived from `openssl` version 1.1.1k (11/18/2021).
-
-Yeah, a lot of environment names there, accidential or not, to watch out for while using `openssl`.  
-
-WARNING:  If you defined any envvar that OpenSSL extracts, the executable binary will NOT tell you that these envars got used.
-
-As long as your shell doesn't define any of the above, you should be good to go
-and not be surprised by any 'mysterious' behaviors of your configuration settings.
+(by scanning for `getenv()` functions and few other code review tricks)
+and listed them in here [/openssl-envvars.html].
 
 With that out of the way, now we can delve into OpenSSL configuration file and
 all its simplicity.
@@ -180,6 +140,8 @@ Only for TLS network connections, the built-in section names in `openssl.cnf` co
   - `[ verification ]`, optional
   - `[ commands ]`, optional
   - `[ enrollment ]`, optional
+
+For more details in [OpenSSL config by section names]({filename}openssl-conf-by-section.md)
 
 Request section
 =====================
