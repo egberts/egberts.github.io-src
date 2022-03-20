@@ -1,9 +1,3 @@
-Obsoleted.
-
-Now maintained in 
-new source: https://egbert.net/blog/openssl-variables.html
-old source: https://github.com/egberts/tls-ca-manage/doc/VARIABLES.md
-
 title: Using Variables in a OpenSSL Config File
 date: 2022-03-20 11:04
 status: published
