@@ -549,13 +549,13 @@ FEED_DOMAIN =  'egbert.net'
 #  FEED_MAX_ITEMS - Maximum number of items allowed
 #  in a feed. Feed item quantity is unrestricted by
 #  default.
-FEED_MAX_ITEMS = ''
+FEED_MAX_ITEMS = 30
 
 RSS_FEED_SUMMARY_ONLY = True
 
 FEED_ATOM = None
 FEED_ATOM_URL = None
-FEED_RSS = None
+FEED_RSS = 'feeds/all.xml'
 FEED_RSS_URL = None
 
 #  FEED_ALL_ATOM used in most templates' base.html to
@@ -563,7 +563,7 @@ FEED_RSS_URL = None
 #  Type: FileSpec
 FEED_ALL_ATOM = 'atom.xml'
 
-FEED_ALL_RSS = None
+FEED_ALL_RSS = 'rss.xml'
 
 ARTICLE_ORDER_BY = 'reversed-date'
 

@@ -170,7 +170,7 @@ keywords are:
   - `req_extensions`
   - `x509_extensions`  # aka V3 extension
 
-Keywords under `*_extensions` are:
+Some keywords under `*_extensions` are:
 
   - `countryName` (or `C`)
   - `organizationName` (or `O`)
@@ -185,7 +185,7 @@ The `openssl ca` command evokes the `[ca]` section.
 Keywords under `ca` and `*_ca` are:
 
   - `cert_opt` - Holds the name, often to `ca_default` (ENV_CERTOPT)
-  - `certificate`  (ENV_CERTIFICATE)
+  - `certificate` - file specification to a PEM-format file; used in `-spkac` and `-gencrl`. (ENV_CERTIFICATE)
   - `copy_extensions` (ENV_EXTCOPY)
   - `crl_extensions` (ENV_CRLEXT)
   - `crlnumber` - positive integer for CRL serial number (ENV_CRLNUMBER)
@@ -199,7 +199,7 @@ Keywords under `ca` and `*_ca` are:
   - `default_startdate` - positive integer of when to certify for (ENV_DEFAULT_STARTDATE)
   - `msie_hack` (ENV_MSIE_HACK)
   - `name_opt` (ENV_NAMEOPT)
-  - `new_certs_dir` - dirspec of new certificates; used by `openssl new`
+  - `new_certs_dir` - dirspec of new certificates; used by `openssl new` (ENV_NEW_CERTS_DIR)
   - `oid_file` - filespec to OIDs
   - `policy` - The CA policy section to support - CLI '-policy' option (ENV_POLICY)
   - `preserve` - Keep passed DN ordering (ENV_PRESERVE)
