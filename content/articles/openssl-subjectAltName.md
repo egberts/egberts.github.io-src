@@ -1,10 +1,11 @@
-title: Use altSubjectName in OpenSSL
+title: Use subjectAltName (SAN) in OpenSSL
 date: 2022-03-20 11:37
+modified: 2022-03-24 06:21
 status: published
 tags: OpenSSL, X509.3
 category: HOWTO
-summary: How to use `altSubjectName` correctly in a OpenSSL configuration file.
-slug: openssl-altSubjectName
+summary: How to use `subjectAltName` correctly in a OpenSSL configuration file.
+slug: openssl-subjectAltName
 lang: en
 private: False
 
@@ -13,15 +14,15 @@ Alternative Subject Name
 
 Alternative Subject Name (ASN) is a X509v3 extension field used during issuing of PKI certificates.
 
-In X509v3 parlance, the attribute name is `altSubjectName`.
+In X509v3 parlance, the attribute name is `subjectAltName`.
 
-`altSubjectName` attributes are defined only under the scope of `[req]` section or its `req`-related sections, preferably under its own renamed `req` section.
+`subjectAltName` attributes are defined only under the scope of `[req]` section or its `req`-related sections, preferably under its own renamed `req` section.
 
 
 Who Uses ASN?
 =============
 
-`altSubjectName` is frequently used by `serverAuth` and `clientAuth` (non-CA) certificates.  
+`subjectAltName` is frequently used by `serverAuth` and `clientAuth` (non-CA) certificates.  
 
 `serverAuth` and `clientAuth` are extended key usages and are found in `extKeyUsage` of the certificate or `openssl.cnf` config file.
 
@@ -38,7 +39,7 @@ and look for `Extended X509v3 Key Usage:`.  If it is missing, there is no `serve
 What Goes Into ASN?
 ===================
 
-The `altSubjectName` extension (if declared) MUST contain at least one entry; this is only true for any certificate that is using `serverAuth` (or `clientAuth`) such as a "web servers". 
+The `subjectAltName` extension (if declared) MUST contain at least one entry; this is only true for any certificate that is using `serverAuth` (or `clientAuth`) such as a "web servers". 
 
 `serverAuth` Certificates
 -------------------------
@@ -71,16 +72,16 @@ DNS also MUST NOT have any of the following:
 CA Certificates
 ---------------
 
-CA certificate should not use `altSubjectName`; It didn't say MUST NOT, so they can and have been used.  
+CA certificate should not use `subjectAltName`; It didn't say MUST NOT, so they can and have been used.  
 
-`altSubjectName` for CA certificates are not used in the same way that "web servers" expect them to be used.  
+`subjectAltName` for CA certificates are not used in the same way that "web servers" expect them to be used.  
 
 Often times, it is just a simply description inserted by CA administrator of their own choosing.
 
 Other Certificates
 ------------------
 
-Other certificates NOT having the `serverAuth` nor `clientAuth` in their `extKeyUsage=` MAY use the `altSubjectName` at their discretion.  
+Other certificates NOT having the `serverAuth` nor `clientAuth` in their `extKeyUsage=` MAY use the `subjectAltName` at their discretion.  
 
 It is much like a `nsComment` where short notation describing the function of the certificate might be helpful to others.
 
@@ -125,7 +126,7 @@ So, break out those sections to insulate yourself from this seemingly quirk.
 Tricks with SAN (subjectAltName)
 ================================
 
-Duplicating commonName into altSubjectName
+Duplicating commonName into subjectAltName
 -------------------------------------------
 Using '`${req_dn::commonName}`' to reference the '`[ req_dn ]`' section
 (containing distinguished names for `openssl req` command) being set as a FQDN
