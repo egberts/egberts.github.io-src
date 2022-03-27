@@ -1,5 +1,5 @@
 title: SSHFP DNS resource record
-date: 2022-03-24 10:54
+date: 2022-03-24 09:54
 status: published
 tags: DNS, SSHFP
 category: HOWTO
@@ -61,6 +61,8 @@ Note: Sometimes `ssh-keygen` will ask for the location of the public certificate
 Security Consideration
 ======================
 Protection of SSHFP is only assured by a properly signed resource record by DNSSEC but, But ... BUT most people (and many ISPs) do not instruct their DNS resolver to only return back a valid DNS record as determined by DNSSEC; having mentioned that, the possibility of SSHFP being hijacked remains.
+
+The problem here is not the confidentiality of the public key (it isn’t confidential). The problem we have is the integrity of the public key. If not distributed securely (via DNSSEC), it can be tampered with or replaced with another key. If a faked SSH CA server has the wrong public key configured (whose private key is in the hands of someone else), the client is trusting that someone else.
 
 Reference
 =========
