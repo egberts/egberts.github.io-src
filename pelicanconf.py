@@ -22,7 +22,8 @@ SITENAME = 'Egbert Networks'
 #  domain, with no trailing slash at the end.
 #  Example: SITEURL = 'https://example.com'
 #  Used in most themed template files.
-SITEURL = 'https://egbert.net'
+# SITEURL = 'https://egbert.net'
+SITEURL = ''
 
 #  PATH - Path to content directory to be processed
 #  by Pelican. If undefined, and content path is not
@@ -157,13 +158,13 @@ JINJA_FILTERS = {}
 SITEMAP =  {
     'format': 'xml',
     'priorities': {
-        'articles': 0.5,
+        'articles': 1.0,
         'indexes': 0.5,
         'pages': 0.5},
     'changefreqs': {
-        'articles': 'monthly',
+        'articles': 'weekly',
         'indexes': 'monthly',
-        'pages': 'weekly'}}
+        'pages': 'yearly'}}
 
 # Plugin - pdf_processor
 
@@ -180,11 +181,12 @@ PDF_STYLE_PATH =  ''
 #  in your output. However, this is a destructive
 #  setting and should be handled with extreme care.
 #*default*  DELETE_OUTPUT_DIRECTORY = False
-DELETE_OUTPUT_DIRECTORY = False
+DELETE_OUTPUT_DIRECTORY = True
 
 # OUTPUT_PATH - Where to output the generated files.
 #*default*  OUTPUT_PATH = 'output/'
-OUTPUT_PATH = '/home/steve/work/github/egberts.github.io-src/output'
+#OUTPUT_PATH = '/home/steve/work/github/egberts.github.io-src/output'
+OUTPUT_PATH = 'output/'
 
 #  OUTPUT_RETENTION - A list of filenames that should
 #  be retained and not deleted from the output
@@ -291,20 +293,26 @@ DEFAULT_DATE = None
 #         so no need to specify theme-related files
 #         in EXTRA_PATH_METADATA.
 EXTRA_PATH_METADATA = {
+    'extra/robots.txt': {'path': './robots.txt'},
+
     'images/*.png$': {'path': '/images/'},  # All images/* get copied to images/
     'images/*.jpg$': {'path': '/images/'},  # All images/* get copied to images/
     'images/*.gif$': {'path': '/images/'},  # All images/* get copied to images/
     'images/*.svg$': {'path': '/images/'},  # All images/* get copied to images/
+
+    # used by front page
     'extra/custom.css': {'path': 'css/custom.css'},
-    'extra/robots.txt': {'path': './robots.txt'},
-    'extra/keybase.txt': {'path': './keybase.txt'},
     'extra/ss-css.css': {'path': 'css/ss-css.css'},
     'extra/ss-site.css': {'path': 'css/ss-site.css'},
     'extra/ss-squarespace-font.css': {'path': 'css/ss-squarespace-font.css'},
+    # 'extra/keybase.txt': {'path': './keybase.txt'},
 
-    # .well-known is in content/.well-known
-    '.well-known': {'path': '.well-known'},
-    'support': {'path': 'support'},
+    #'m-dark.compiled.css': {'path': '/theme/css/m-dark.compiled.css'},
+    # 'fontawesome.min.css': {'path': 'theme/css/fontawesome.min.css'},
+    # 'pygments-dark.css': {'path': 'theme/css/pygments-dark.css'},
+    # 'tag_cloud.css': {'path': 'theme/css/tag_cloud.css'},
+    # 'justtable.css': {'path': 'theme/css/justtable.css'},
+    # 'blog-motto.css': {'path': 'theme/css/blog-motto.css'},
 }
 
 ######################################################
@@ -381,7 +389,11 @@ PAGE_EXCLUDES = ['articles']
 #  DEFAULT_METADATA - The default metadata you want
 #  to use for all articles and pages.
 #*default*  DEFAULT_METADATA = {}
-DEFAULT_METADATA = {}
+# Safely mark it as 'draft' 
+# (not indexed by website, but in a separate folder, yet placed on website)
+DEFAULT_METADATA = {
+    'status': 'draft',
+}
 
 ######################################################
 #  PagesGenerator.generate_content_generators.read_file.path_metadata()
@@ -493,20 +505,22 @@ DEFAULT_DATE_FORMAT = '%a %d %B %Y'
 #*default*  STATIC_PATHS = [ 'images' ]
 STATIC_PATHS = [
     'images',
-#    'static/images',
-    'extra/robots.txt',
-    'extra/keybase.txt',
+    'extra/robots.txt',  # anti-SEO-thingie
+
+    '.well-known',  # referenced by various email auto-discover
+    'support',  # referenced by various email auto-discover
+
     'extra/egbert.net.gpg',
-    'extra/ss-css.css',
-    'extra/ss-site.css',
-    'extra/ss-squarespace-font.css',
+
+    'extra/ss-css.css',  # front-page
+    'extra/ss-site.css',  # front-page
+    'extra/ss-squarespace-font.css',  # front-page
+
     'fonts/poppins-regular.woff2',
     'fonts/poppins-light.woff2',
     'fonts/poppins-medium.woff2',
     'fonts/poppins-bold.woff2',
     'fonts/typekit1.woff2',
-    '.well-known',
-    'support',
 ]
 
 #  STATIC_EXCLUDES - A list of directories to exclude
@@ -544,38 +558,41 @@ FORMATTED_FIELDS = ['summary', 'description', 'landing']
 
 #  FEED_DOMAIN used in most templates' base.html as
 #  URL in hyperlink reference (href=)
-FEED_DOMAIN =  'egbert.net'
+#  May use 'rel="self"'.
+# FEED_DOMAIN =  'feeds'
+FEED_DOMAIN = 'egbert.net'
 
 #  FEED_MAX_ITEMS - Maximum number of items allowed
 #  in a feed. Feed item quantity is unrestricted by
 #  default.
-FEED_MAX_ITEMS = 30
+FEED_MAX_ITEMS = 15
 
 RSS_FEED_SUMMARY_ONLY = True
 
-FEED_ATOM = None
-FEED_ATOM_URL = None
-FEED_RSS = 'feeds/all.xml'
-FEED_RSS_URL = None
+FEED_ATOM = 'feeds/atom.xml'
+FEED_ATOM_URL = 'https://egbert.net/feeds'
+FEED_RSS = 'feeds/rss.xml'
+FEED_RSS_URL = 'https://egbert.net/feeds'
 
 #  FEED_ALL_ATOM used in most templates' base.html to
 #  contain all ATOMs used within a template.
 #  Type: FileSpec
-FEED_ALL_ATOM = 'atom.xml'
+FEED_ALL_ATOM = 'feeds/all.atom.xml'
 
-FEED_ALL_RSS = 'rss.xml'
+FEED_ALL_RSS = 'feeds/all.rss.xml'
 
 ARTICLE_ORDER_BY = 'reversed-date'
 
 #  FEED_ALL_ATOM_URL used in most templates' base.html
 #  to contain an URL of all ATOMs.
 #  Type: FileSpec
-FEED_ALL_ATOM_URL = 'feeds/atom.xml'
+FEED_ALL_ATOM_URL = 'feeds/all.atom.xml'
 
-FEED_ALL_RSS_URL = None
+# FEED_ALL_RSS_URL = None
+FEED_ALL_RSS_URL = 'feeds/all.rss.xml'
 
-CATEGORY_FEED_ATOM = '{slug}.atom.xml'
-CATEGORY_FEED_ATOM_URL = '/feeds/{slug}.atom.xml'
+CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
+CATEGORY_FEED_ATOM_URL = 'feeds/{slug}.atom.xml'
 CATEGORY_FEED_RSS = None
 CATEGORY_FEED_RSS_URL = None
 AUTHOR_FEED_ATOM = None
@@ -661,12 +678,14 @@ AUTHORS_URL = 'blog/authors/index.html'
 #  settings, they will be progressively overwritten.
 #*default*  THEME_STATIC_PATHS = ['static']
 # THEME_STATIC_PATHS = ['static/images', 'static/js', 'static/css', 'static/media', 'static/fonts']
+THEME_STATIC_PATHS = ['static']
+#THEME_STATIC_PATHS = ['static/images', 'static/js', 'static/css', 'static/media', 'static/fonts']
 
 #  THEME_STATIC_DIR - Destination directory in the
 #  output path where Pelican will place the files
 #  collected from THEME_STATIC_PATHS.'
 #*default*  THEME_STATIC_DIR = 'theme'
-THEME_STATIC_DIR = ''
+THEME_STATIC_DIR = 'theme'
 
 #  READERS - A dictionary of file extensions / Reader
 #  classes for Pelican to process or ignore.
@@ -781,8 +800,8 @@ HTML_META_NAMES = {
     ('theme-color', '#419a1c'),
     ('google', 'nositelinksearchbox'),
     ('google-site-verification', 'not-given'),
-    ('twitter:card', 'summary'),
-    ('twitter:site:id', '12345678'),
+    # ('twitter:card', 'summary'),
+    # ('twitter:site:id', '12345678'),
 }
 
 #  OUTPUT_SOURCES_EXTENSION = '.text'
@@ -952,15 +971,15 @@ if MY_TEMPLATE_IS == 'bootstrap3':
     SEARCH_EXTERNAL_URL = 'https://google.com/search?q=site:egbert.net+{query}'
     DUCKDUCKGO_CUSTOM_SEARCH_SIDEBAR = True
     GOOGLE_ANALYTICS = ''
-    TWITTER_USERNAME = 'egbertst'
+    # TWITTER_USERNAME = 'egbertst'
     SOCIAL = (
         ('fab fa-github-square', 'https://github.com/egberts'),
-        ('fab fa-stack-overflow', 'https://stackoverflow.com/users/4379130/egbert-s')
+        ('fab fa-gitlab-square', 'https://gitlab.com/egberts7'),
     )
     SOCIAL_LABELS = (
-        ('Twitter', 'fab fa-twitter', 'https://twitter.com/egbertst'),
+        ('GitLab', 'fab fa-gitlab-square', 'https://gitlab.com/egberts7'),
         ('GitHub', 'fab fa-github-square', 'https://github.com/egberts'),
-        ('StackOverflow', 'fab fa-stack-overflow', 'https://stackoverflow.com/users/4379130/egbert-s'))
+        )
 
 ######################################################
 ##  M.CSS-specific                                  ##
@@ -999,30 +1018,30 @@ if MY_TEMPLATE_IS == 'm.css':
     M_FAVICON = ('images/favicon.ico', 'image/x-icon')
 
     #  M_SHOW_AUTHOR_LIST used in base_blog.html
-    M_SHOW_AUTHOR_LIST = True
+    M_SHOW_AUTHOR_LIST = False
 
     #  M_DISABLE_SOCIAL_MEDIA_TAGS used in base_blog.html
     M_DISABLE_SOCIAL_META_TAGS = True
 
     #  M_CSS_FILES used in base_blog.html
+    # This is the primary loader of themed CSS
     M_CSS_FILES =  [
-        # 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600',
-        '../../css/m-dark.compiled.css',
-        '../../css/font-awesome.min.css',
-        '../../css/pygments-dark.css',
-        '../../css/tag_cloud.css',
-        '../../css/justtable.css',
-        '../../css/blog-motto.css',
+        '/theme/css/m-dark.compiled.css',
+        '/theme/css/font-awesome.min.css',
+        '/theme/css/pygments-dark.css',
+        '/theme/css/tag_cloud.css',
+        '/theme/css/justtable.css',
+        '/theme/css/blog-motto.css',
     ]
 
     #  M_THEME_COLOR used in base.html
     M_THEME_COLOR =  '#419a1c'
 
     #  M_SOCIAL_TWITTER_SITE used in base.html
-    M_SOCIAL_TWITTER_SITE = '@egbertst'
+    # M_SOCIAL_TWITTER_SITE = '@egbertst'
 
     #  M_SOCIAL_TWITTER_SITE_ID used in base.html
-    M_SOCIAL_TWITTER_SITE_ID = '123123123'
+    # M_SOCIAL_TWITTER_SITE_ID = '123123123'
 
     #  M_HTML_HEADER used in base.html
     #  M_HTML_HEADER = ''
@@ -1049,6 +1068,8 @@ if MY_TEMPLATE_IS == 'm.css':
     #  M_LINKS_FOOTER1 used in base.html.
     M_LINKS_FOOTER1 = [
         ( 'Privacy', 'blog/pages/privacy.html' ),
+        # Sitemap is broken
+        # ( 'Site Map', 'sitemap.xml' ),
     ]
 
     #  M_LINKS_FOOTER2 used in base.html.
