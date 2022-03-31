@@ -19,21 +19,22 @@ What does SSHFP records look like?
 
 SSHFP records consist of three things:
 
-    Public key algorithm
-    Fingerprint type
-    Fingerprint (in hex)
-
+* Public key algorithm
+* Fingerprint type
+* Fingerprint (in hex)
+<p></p>
 Public key algorithm
 --------------------
 
 There are five different algorithms defined in SSHFP as of 2021. Each algorithm is represented by an integer. The algorithms are:
 
-    1 - RSA
-    2 - DSA
-    3 - ECDSA
-    4 - Ed25519
-    6 - Ed448
-
+| AlgoID | Name |
+| 1 | RSA |
+| 2 | DSA |
+| 3 | ECDSA |
+| 4 | Ed25519 |
+| 6 | Ed448 |
+<p></p>
 Fingerprint type
 ----------------
 
@@ -41,14 +42,14 @@ Two fingerprint types are defined in SSHFP as of 2012. Each fingerprint type is 
 
     1 - SHA-1
     2 - SHA-256
-
+<p></p>
 How do I generate SSHFP records?
 ================================
 
-You can use ssh-keygen to generate the records using the -r parameter, followed by the hostname (which does not affect the fingerprints so you can specify whatever you like instead)
+The `ssh-keygen` utility generates the records using the `-r` parameter, followed by the hostname (which does not affect the fingerprints so you can specify whatever you like instead)
 Example
 
-Using ssh-keygen and CentOS:
+Using `ssh-keygen` and CentOS:
 
 ```
 [root@localhost ~]# ssh-keygen -r my.domain.com
@@ -62,7 +63,13 @@ Security Consideration
 ======================
 Protection of SSHFP is only assured by a properly signed resource record by DNSSEC but, But ... BUT most people (and many ISPs) do not instruct their DNS resolver to only return back a valid DNS record as determined by DNSSEC; having mentioned that, the possibility of SSHFP being hijacked remains.
 
-The problem here is not the confidentiality of the public key (it isn’t confidential). The problem we have is the integrity of the public key. If not distributed securely (via DNSSEC), it can be tampered with or replaced with another key. If a faked SSH CA server has the wrong public key configured (whose private key is in the hands of someone else), the client is trusting that someone else.
+The problem here is not the confidentiality of the public key (it isn’t confidential).
+
+The problem we have is the integrity of the public key. 
+
+If not distributed securely (via DNSSEC), it can be tampered with or replaced with another key. 
+
+If a faked SSH CA server has the wrong public key configured (whose private key is in the hands of someone else), the client is trusting that someone else.
 
 Reference
 =========

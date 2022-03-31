@@ -26,7 +26,7 @@ The open-source MTAs covered and reviewed for this article are:
 Ideally, my selected email server (MTA, mail transport agent)
 would be able to handle and break down this "local part" of the email address.
 
-Specifically the local part being after the '+' (or '-') 
+Specifically, the local part being after the '+' (or '-') 
 symbol but before the '@' symbol:
 
 ```
@@ -36,8 +36,8 @@ symbol but before the '@' symbol:
 
 Definitions
 -----------
-With regard to the 'local-part' portion of the email address, I'm sadden 
-to say that the official definitions of 'local-part' has been muddled by
+With regard to the 'local-part' portion of the email address, I'm saddened
+to say that the official definitions of 'local-part' have been muddled by
 various open source MTAs.   More on this
 [here](https://wordtothewise.com/2017/08/local-part-semantics/).
 
@@ -50,7 +50,7 @@ domain, domain, domain, domain, domain, domain
 username, user, username, user, username, user
 other local part, local\_part, local-part, detail, n/a, address extension
 separator, recipient\_delimiter, , , , 
-separator used, [+-=_!%$], +, +, +/-/=, +
+separator used, `[+-=_!%$]`, +, +, +/-/=, +
 [/jtable]
 
 
@@ -70,7 +70,7 @@ be constructed as:
 username+otherlocalpart@domain.tld (ie., Google, Apple)
 username-otherlocalpart@domain.tld (ie., Yahoo)
 ```
-For awhile, some MTAs have changable separator symbol between username
+For awhile, some MTAs have a changable separator symbol between username
 and other local part such as period or underscore.  The downside 
 of this configurable separator is that many website cannot validate
 this unique non-positive/non-negative separator symbol.
