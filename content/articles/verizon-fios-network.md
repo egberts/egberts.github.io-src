@@ -1,7 +1,7 @@
 Title: Overview of Verizon FiOS Network
 date: 2018-11-10T13:28
 modified: 2022-02-24T08:00
-tags: verizon, isp, FiOS
+tags: Verizon, ISP, FiOS
 status: published
 category: research
 Summary: Overview of Verizon FiOS Backend Infrastructure.

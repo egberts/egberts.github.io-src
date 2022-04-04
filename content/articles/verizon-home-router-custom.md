@@ -1,7 +1,7 @@
 Title: Custom Home Router, Verizon
 date: 2018-11-10T14:18
 modified:  2020-02-25T19:39
-tags: verizon, router, homelan
+tags: Verizon, router, homelan
 category: research
 Summary: Toward a customized home router for use with Verizon FiOS network.
 

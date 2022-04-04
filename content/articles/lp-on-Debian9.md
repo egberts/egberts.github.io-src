@@ -1,7 +1,8 @@
 title: Setting up UNIX lp on Debian9 for Brother HL-D5470DW laser printer
 date: 2020-07-08 13:55
+date: 2022-04-04 10:36
 status: published
-tags: lp, printer, laster printer, Brother
+tags: lpr, printer, Brother
 slug: unix-lp-brother-hl-d5470DW
 category: HOWTO
 summary: How to set up an lp queue to Brother HL-DS470DW laser printer on Debian

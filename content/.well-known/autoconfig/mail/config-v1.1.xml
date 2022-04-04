@@ -34,15 +34,13 @@
       <authentication>password-encrypted</authentication>
       <username>%EMAILADDRESS%</username>
     </outgoingServer>
-    <documentation url="http://egbert.net/support/email/config/index.html">
+    <documentation url="https://egbert.net/pages/support-email-config.html">
       <descr lang="de">Allgemeine Beschreibung der Einstellungen</descr>
       <descr lang="en">Generic settings page</descr>
     </documentation>
-    <documentation url="http://egbert.net/support/email/config/thunderbird/imap-thunderbird/imap/index.html">
-support/email/config/thunderbird/imap-thunderbird/imap/index.html
-
-      <descr lang="de">Thunderbird 68.12.0 IMAP-Einstellungen</descr>
-      <descr lang="en">Thunderbird 68.12.0 IMAP settings</descr>
+    <documentation url="https://egbert.net/pages/support-email-config-thunderbird.html">
+      <descr lang="de">Thunderbird v91.7.0 IMAP-Einstellungen</descr>
+      <descr lang="en">Thunderbird v91.7.0 IMAP settings</descr>
     </documentation>
   </emailProvider>
 </clientConfig>

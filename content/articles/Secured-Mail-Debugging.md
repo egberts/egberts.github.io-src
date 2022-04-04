@@ -1,7 +1,8 @@
 title: Secured Mail and DNS debugging
 date: 2020-05-12 09:03
+modified: 2022-04-04 10:31
 status: published
-tags: TLSA, DANE, DNSSEC, smtp, mail, submissions, imaps, OPENPGPKEY, DKIMv1
+tags: TLSA, DANE, DNSSEC, SMTP, mail, submissions, IMAP, OPENPGPKEY, DKIMv1
 category: HOWTO
 summary: How to debug secured e-mail transport and delivery
 

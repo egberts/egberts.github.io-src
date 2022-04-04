@@ -1,6 +1,6 @@
 title: Popular Hack Vectors on Windows
 Date: 2016-04-03 01:14
-tags: hack, vector, methods
+tags: hack, vectors, methods
 category: research
 status: published
 slug: hack-popular-vectors-windows

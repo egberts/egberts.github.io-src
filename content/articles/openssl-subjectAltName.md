@@ -1,8 +1,8 @@
 title: Use subjectAltName (SAN) in OpenSSL
 date: 2022-03-20 11:37
-modified: 2022-03-24 06:21
+modified: 2022-04-04 10:28
 status: published
-tags: OpenSSL, X509.3
+tags: OpenSSL, X509v3
 category: HOWTO
 summary: How to use `subjectAltName` correctly in a OpenSSL configuration file.
 slug: openssl-subjectAltName

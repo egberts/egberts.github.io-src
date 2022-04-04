@@ -1,7 +1,8 @@
 title: Double `conf.conf` filetype in Exim4 Config File
 date: 2022-03-23 03:58
+modified: 2022-04-04 10:34
 status: published
-tags: Exim4, smtp
+tags: Exim4, SMTP
 category: HOWTO
 summary: Why is the Exim4 configuration file have a strange filetype of `.conf.conf`?
 slug:

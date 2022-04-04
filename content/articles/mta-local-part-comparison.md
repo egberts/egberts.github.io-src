@@ -1,7 +1,8 @@
 title: Comparison of Local Part in MTAs
 date: 2020-09-06 18:22
+modified: 2022-04-04 10:33
 status: published
-tags: mta, exim, sendmail, opensmtpd, postfix
+tags: MTA, Exim4, Sendmail, OpenSMTPd, Postfix
 category: research
 summary: Comparison of MTAs with regard to Local Part of Email Address
 

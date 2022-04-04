@@ -293,7 +293,10 @@ DEFAULT_DATE = None
 #         so no need to specify theme-related files
 #         in EXTRA_PATH_METADATA.
 EXTRA_PATH_METADATA = {
-    'extra/robots.txt': {'path': './robots.txt'},
+    'extra/robots.txt': {'path': 'robots.txt'},
+    'image/favicon.ico': {'path': './favicon.ico'},
+
+    '.well-known': {'path': './.well-known'},
 
     'images/*.png$': {'path': '/images/'},  # All images/* get copied to images/
     'images/*.jpg$': {'path': '/images/'},  # All images/* get copied to images/
@@ -305,14 +308,7 @@ EXTRA_PATH_METADATA = {
     'extra/ss-css.css': {'path': 'css/ss-css.css'},
     'extra/ss-site.css': {'path': 'css/ss-site.css'},
     'extra/ss-squarespace-font.css': {'path': 'css/ss-squarespace-font.css'},
-    # 'extra/keybase.txt': {'path': './keybase.txt'},
 
-    #'m-dark.compiled.css': {'path': '/theme/css/m-dark.compiled.css'},
-    # 'fontawesome.min.css': {'path': 'theme/css/fontawesome.min.css'},
-    # 'pygments-dark.css': {'path': 'theme/css/pygments-dark.css'},
-    # 'tag_cloud.css': {'path': 'theme/css/tag_cloud.css'},
-    # 'justtable.css': {'path': 'theme/css/justtable.css'},
-    # 'blog-motto.css': {'path': 'theme/css/blog-motto.css'},
 }
 
 ######################################################
@@ -516,11 +512,11 @@ STATIC_PATHS = [
     'extra/ss-site.css',  # front-page
     'extra/ss-squarespace-font.css',  # front-page
 
-    'fonts/poppins-regular.woff2',
-    'fonts/poppins-light.woff2',
-    'fonts/poppins-medium.woff2',
-    'fonts/poppins-bold.woff2',
-    'fonts/typekit1.woff2',
+    'fonts/poppins-regular.woff2',  # front-page
+    'fonts/poppins-light.woff2',  # front-page
+    'fonts/poppins-medium.woff2',  # front-page
+    'fonts/poppins-bold.woff2',  # front-page
+    'fonts/typekit1.woff2',  # front-page
 ]
 
 #  STATIC_EXCLUDES - A list of directories to exclude

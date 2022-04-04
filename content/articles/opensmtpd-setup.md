@@ -1,7 +1,8 @@
 title: OpenSMTPD, Dovecot, Debian
 date: 2020-09-01 08:01
+modified: 2022-04-04 10:35
 status: published
-tags: opensmtpd, dovecot, debian
+tags: OpenSMTPd, Dovecot, Debian
 category: HOWTO
 summary: How to set up OpenSMTPD  with Dovecot on Debian 10.4.
 note: Aborted in favor of exim4
