@@ -1,6 +1,6 @@
 title: Setting up UNIX lp on Debian9 for Brother HL-D5470DW laser printer
 date: 2020-07-08 13:55
-date: 2022-04-04 10:36
+modified: 2022-04-04 10:36
 status: published
 tags: lpr, printer, Brother
 slug: unix-lp-brother-hl-d5470DW

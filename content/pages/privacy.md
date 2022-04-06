@@ -1,5 +1,6 @@
 Title: Privacy
 Date: 2020-02-19 10:28
+Status: published
 Summary: What privacy of yours are being respected.
 
 Only thing I can track is your IP address.

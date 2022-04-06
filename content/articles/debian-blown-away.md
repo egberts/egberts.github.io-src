@@ -1,8 +1,9 @@
 title: Debian Blown Away!
 date: 2020-04-22 12:23
+modified: 2022-04-04 11:10
 status: published
-tags: debian, HOWTO, recovery
-category: development
+tags: debian, recovery
+category: HOWTO
 summary: So you downgraded something and lost your Linux kernel.
 
 For the life of me, I somehow entered in "Yes, I want to delete!" 

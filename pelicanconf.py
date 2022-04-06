@@ -503,8 +503,8 @@ STATIC_PATHS = [
     'images',
     'extra/robots.txt',  # anti-SEO-thingie
 
-    '.well-known',  # referenced by various email auto-discover
-    'support',  # referenced by various email auto-discover
+    '.well-known',  # referenced by email clients auto-discover/auto-config
+    'support',  # referenced by email clients auto-discover/auto-config
 
     'extra/egbert.net.gpg',
 
@@ -557,6 +557,7 @@ FORMATTED_FIELDS = ['summary', 'description', 'landing']
 #  May use 'rel="self"'.
 # FEED_DOMAIN =  'feeds'
 FEED_DOMAIN = 'egbert.net'
+FEED_DOMAIN = 'https://egbert.net/feeds'
 
 #  FEED_MAX_ITEMS - Maximum number of items allowed
 #  in a feed. Feed item quantity is unrestricted by
@@ -911,7 +912,7 @@ SITE_SUBPATH =  'blog'
 SITE_URL_TOP_LVL =  'blog/'
 TAGS_URL_PATH = 'blog/tags'
 
-SITESUBTITLE = ''
+SITESUBTITLE = 'Blog'
 
 # INTRASITE_LINK_REGEX - takes a full filespec which may have one of
 #  the following metadata in its string.
