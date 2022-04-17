@@ -1,6 +1,6 @@
 title: Disabling MTA-STS for Your Mail Server
 date: 2022-04-14 11:13
-status: draft
+status: published
 tags: MTA-STA, SMTP, mail
 category: research
 summary: Was curious about MTA-STS and how it is used for a SMTP mail transport agent (MTA).
@@ -92,4 +92,7 @@ We are done.
 
 
 
-#
+# References
+
+* [STARTTLS - Vulnerabilities](https://nostarttls.secvuln.info/)
+* [IETF RFC 8314](https://datatracker.ietf.org/doc/html/rfc8314)

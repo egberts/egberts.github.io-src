@@ -10,24 +10,26 @@ private: False
 
 So your mail server is up and running?  People who received your emails compliment you?  Pat yourself on the back.  This is just the beginning.
 
-One recipient may comment to you that a logo is missing next to your sent-email on their phone-based mail clients.  After you've spent 35 years of digesting some 400 IETF and its drafts, countless SMTP specifications, and onerous hidden protocol specs from various mail client vendors, you say "WHAT? What dastardly new feature is it this time?  This logo next to my emails?".
+One recipient may comment to you that a logo is missing next to your sent-email on their phone-based mail clients.  You've spent 35 years of digesting some 400-off IETF Request For Comments (RFCs) and its drafts, countless of SMTP specifications, and many onerous hidden protocol tweaks by various mail client vendors, you say "WHAT? What dastardly new feature is it this time?  This logo next to my emails?".
 
 BIMI, stands for Brand Indicator for Message Notification. It has been percolating around since 2017 and officially appeared in ([2018 IETF Draft](https://datatracker.ietf.org/doc/html/draft-chuang-bimi-certificate-00)).
 
-BIMI is now being used entirely by the 'elite' mail clients apps;  Google Mail (Android/iPhone/Web-based) client and Apple Mail client both make use of BIMI logo; many online webmail too, such as Fastmail and Yahoo!.
+BIMI is now being used entirely by certain Mail User Agents (MUA, that is, mail clients apps and webmails).  Google Mail (Android/iPhone/Web-based) client app/webmail and Apple Mail client app both make use of their own BIMI logo; so does Fastmail and Yahoo! webmail providers.
 
-Of course, BIMI has nothing to do with your mail server (MTA); it's all about the billions of mail client apps (MUA) and webmails out there.
+Of course, BIMI has nothing to do with your mail server (MTA); it's all about the billions of mail client apps (MUA) and webmails out there viewing your chosen logo placed next to your sent emails.
 
 The thing about having a BIMI for your own domain is, you have to jump precariously through many hoops to get this logo BIMI images of yours working ... perfectly (and spend quite a bit of $$$).  
 
-And this article will show you how, without making use of expensive Adobe Acrobat tools or stumbling over various HOWTOs and to generate the PKI certificates, to have a working BIMI without shoveling a shitload of money toward CA registry ... each year.
+And this article will show you how to do this BIMI.  And without making use of expensive Adobe Acrobat tools or stumbling over various HOWTOs and to generate the PKI certificates, to have a working BIMI without shoveling a shitload of money toward CA registry ... each year.
 
-For this article, you can replace `example.test.` with your domain name in question.
+For this article, you can replace the `example.test.` with your domain name in question.
 
-Also replace `ns1.example.test.` with the hostname of your primary (master) name server that holds the original zone file of your domain.
+Also replace the `ns1.example.test.` with the hostname of your primary (master) name server that holds the original zone file of your domain.
+
 
 # Security Ramification
-There is a security ramification of NOT using BIMI:  Other senders would (not may, would) be able to impersonate you.  Ideally, you too will want to turn this BIMI off (whether your domain has a mail server or not).
+
+There is a security ramification to NOT using this BIMI feature.  Other senders would (not 'may', would) be able to impersonate you.  Ideally, you too will want to be able to disable this BIMI (whether your domain has a mail server or not).
 
 Nevermind the fact that SPF and DKIM can too be impersonated if not properly secured.
 

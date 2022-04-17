@@ -65,11 +65,20 @@ Protection of SSHFP is only assured by a properly signed resource record by DNSS
 
 The problem here is not the confidentiality of the public key (it isn’t confidential).
 
-The problem we have is the integrity of the public key. 
+The problem we have is the integrity of the dns record holding this public key. 
 
-If not distributed securely (via DNSSEC), it can be tampered with or replaced with another key. 
+If not distributed securely (via DNSSEC), such SSHFP DNS records can be tampered with or replaced with another key. 
 
-If a faked SSH CA server has the wrong public key configured (whose private key is in the hands of someone else), the client is trusting that someone else.
+If a faked SSH CA server has the wrong public key configured (whose private key is in the hands of someone else), the client ends up by trusting that someone else.
+
+Caution: Improper use of SSHFP records can have serious security consequences; follow these rules to avoid creating security vulnerabilities:
+
+* Do not create SSHFP records in a zone that is not DNSSEC-secured.
+* Never configure SSH clients to use SSHFP for a domain that is not DNSSEC-secured.
+* Never configure SSH clients to use SSHFP unless they validate DNSSEC or use a validating resolver, such as Google Public DNS.
+
+Not following these rules could allow adversaries to create spoofed SSHFP records for your servers to impersonate them, making SSH connections to the servers insecure and vulnerable to attacks.
+
 
 Reference
 =========
@@ -77,3 +86,4 @@ Reference
 * [Using DNS to Securely Publish Secure Shell Key Fingerprints](https://datatracker.ietf.org/doc/html/rfc4255)
 * [Use of SHA-256 Algorithm with RSA, DSA and ECDSA in SSHFP Resource Records](https://datatracker.ietf.org/doc/html/draft-os-ietf-sshfp-ecdsa-sha2)
 * [Using DNS to Securely Publish Secure Shell Key Fingerprints](https://datatracker.ietf.org/doc/html/rfc4255)
+* [Google Cloud DNS/SSHFP](https://cloud.google.com/dns/docs/dnssec-advanced)
