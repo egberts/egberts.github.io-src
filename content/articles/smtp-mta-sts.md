@@ -59,14 +59,14 @@ It is very much like DMARC and SPF config settings.  A one-liner in your domain'
 
 If you operate the name server of your domain, locate the text-based DNS zone file having the origin of your domain name, edit the file.  For Bind9 admins, this primary zone file is specified in your domain's `zone` clause `file` statement of `/etc/named.conf` or roughly under `/var/lib/bind/master/` subdirectory.
 
-At any rate, insert the following DNS record into your domain's DNS zone file
+At any rate, insert the relevant aspects of the following DNS record into your domain's DNS zone file
 ```dns
 _mta-sts	TXT	"v=STS1; mode=none;"
 ```
 
 ## Test the DNS Records
 
-Just before exiting that `$EDITOR` session of your `example.test` zone file, do not forget to bump up the serial number found in that domain's `SOA` record (near the beginning of the file).
+Just before exiting that `$EDITOR` session of your `example.test` zone file, do not forget to bump up the serial number found in that domain's `SOA` record (near the beginning of the file). If otherwise on a web-based GUI, save it.
 
 Then reload (or restart) your name server daemon.
 
