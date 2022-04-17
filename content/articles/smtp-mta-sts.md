@@ -19,7 +19,7 @@ This means that the TCP connection for SMTP is not always encrypted, depending o
 
 Furthermore, it became apparent that STARTTLS is falling out of favor.  There is even a [command injection exploit for STARTTLS](https://blog.apnic.net/2021/11/18/vulnerabilities-show-why-starttls-should-be-avoided-if-possible/).
 
-What was commonly used is called 'Implicit TLS' (using STARTTLS mechanism):  IMAP4, POP3, and few other protocols make uses of STARTTLS.
+What was commonly used is called 'Implicit TLS' (using STARTTLS mechanism):  IMAP4, POP3, and few other protocols make uses of STARTTLS (although its configred as always Explicit TLS).
 
 What we should be using is 'Explicit TLS' (just do it; TLS, directly; do not bother with plaintext protocol).
 
