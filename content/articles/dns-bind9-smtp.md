@@ -221,13 +221,6 @@ filespec, description
 
 ## Bind9 `key` Clause
 
-Execute:
-
-```
-cd /var/lib/bind
-dnssec-keygen -a HMAC-SHA512 -b 512 -n USER arca.example.test
-```
-
 This filespec is `/etc/bind/key-named.conf` and contains the following:
 
 ```nginx
@@ -1430,8 +1423,7 @@ controls {
     #    owner 11 
     #    group 101 
     #    keys { 
-    #        rndc_key_name1; 
-    #        rndc_key_name2; 
+    #        rndc-key; 
     #        }; 
     #    }; 
 
@@ -2087,7 +2079,7 @@ zone "example.test" IN
         !{ !{ localhost; }; any; };
         # Only localhost get past this point here
 
-        key rndc_key;  # only `rndc` can use localhost via rndc_key key
+        key rndc-key;  # only `rndc` can use localhost via rndc-key key
 
         none;
         };
@@ -2219,6 +2211,31 @@ version        CH    TXT    "Microsoft DNS 6.0.6100 (2AEF76E)"
 authors        CH    TXT    "Microsoft" 
 ```
 
+# Key for RNDC Utility
+
+Now for the `rndc` utility, create the keys for the administrative control channel
+so that only `rndc` can control the ISC Bind9 `named` daemon.
+
+Execute:
+
+```
+cd /var/lib/bind
+rndc-confkey -A hmac-sha512 -b 512 arca.example.test
+```
+The output is in three parts/sections:
+
+* Cut-n-paste the `rndc.conf` portion into `/etc/bind/rndc.conf`.
+* Cut-n-paste the `key` clause portion into `/etc/bind/key-named.conf`.
+* Cut-n-paste the `controls` clause portion into `/etc/bind/controls-named.conf`.
+
+
+# Key for AXFR/IXFR Zone Data Transfers
+
+Create the keys that will be used to authenticate the AFXR/IFXR zone data transfer from this master to your secondary name servers.
+
+```bash
+dnssec-keygen -a HMAC-SHA512 -b 512 -n USER arca.egbert.net.
+```
 
 # Files And Directories
 
@@ -2245,6 +2262,11 @@ DNS_USER="bind"  # I've seen 'named' in older Linux distros, 'bind9' in others
 DNS_GROUP="bind"
 
 cd /etc/bind
+# rndc utility can only be run from root account
+# The rndc-key needs file protection in this rndc.conf file.
+chmod 0640 rndc.conf
+chown root:${DNS_GROUP} rndc.conf
+
 chmod 0640 named.conf
 chown root:${DNS_GROUP} named.conf
 
