@@ -47,19 +47,27 @@ The basic of `rndc` is covered here firstly.
 For Bind9 split-file configuration mode, the `controls` clause can be found elsewhere
 in a different file (ie., `/etc/bind/controls-named.conf`).
 
-At this writing, there are only two methods for `rndc` to communicate 
-with `named` daemon:
+At this writing, the methods to communicate 
+with the `named` daemon are:
 
+* disabled
 * `inet` - IPv4/IPv6 network channel
 * `unix` - UNIX file-based channel (not used by `rndc`; used by `nsupdate`)
 
-To completely disable this `rndc`, insert into `controls` clause the following:
+Only `rndc` uses `inet` method.
+
+
+## Disable `rndc` Channel
+
+To completely disable this `rndc` utility, insert into `controls` clause the following:
 
 ```
 controls { };
 ```
 
 Failure to include above settings will have `named` daemon perform an opening of the network port to only 127.0.0.1 port 953/udp.  This above setting is useful for Internet-bordering host.  Such public-facing host is where an admin really should be logging into this host before talking with its `named` daemon and should not be accessing this host from a faraway place.
+
+It is useful as a security precaution to disable `rndc` especially if the name server is not going to be visited frequently.
 
 
 ## IP-based - Control Channel
@@ -80,7 +88,7 @@ There are two ways to do this `localhost`/`127.0.0.1`:
 * Do not include any `controls` clause in the `named` config file(s). (default)
 * Explicitly define the `controls` clause.
 
-To explicitly defined `rndc` to be restrict to just localhost for 
+To explicitly defined `rndc` to be restrict to just the `localhost` for 
 only observational purpose:
 
 ```nginx
@@ -99,7 +107,7 @@ controls {
     };
 ```
 
-`read-only` if true will restrict `rndc` commands to:
+`read-only` if true will restrict the `rndc` to the following commands:
 
 * `nta-dump`, 
 * `null`, 
@@ -108,15 +116,15 @@ controls {
 * `testgen`, and 
 * `zonestatus`
 
-Adding more keys will enable a finer revocability of a single-key to the issued users.
+Adding more keys will enable a finer revocability of a single-key made to each of the issued administrator/lab-users.
 
-Of course, any other IPv4 address or IPv6 address will expand the reachablility from remote.
+Of course, any other or additional IPv4 address or IPv6 address will merely expand the `rndc` reachablility remotely.
 
 
 ## UNIX-Socket-based - Control Channel
 
 UNIX-based BSD socket is not used by `rndc`.  However, `nsupdate` makes good
-use of BSD socket here.  So this section details how its configured for `nsupdate`
+use of this BSD socket here.  So this slightly unrelated section details how its configured for `nsupdate`
 and other ISC-related tools.
 
 An example of a `named` setting for this no-network access to `named` daemon.
