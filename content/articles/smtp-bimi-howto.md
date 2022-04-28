@@ -45,9 +45,9 @@ Much in the same way as SPF and DKIM being forced as disabled, you would not wan
 ## Validation of BIMI Image
 I've seen a BIMI Logo appear next to a sender's email address that CLEARLY do not belong to each other (this is spam).  
 
-Google protects their BIMI logo from being used by spammers by mandating a signed PKI certificate.
+Google protects their BIMI logo from being used by spammers by mandating a signed PKI certificate which is embedded inside the BIMI SVG-formatted image file. 
 
-<!-- and have their own Google Mail app check each domain's BIMI for a signed Validate Mark Certificate that is found inserting its URL into their BIMI (logo) image.  -->
+<!-- and have their own Google Mail app check each domain's BIMI for a signed Validate Mark Certificate (PKI) that is found inserting its URL into their BIMI (logo) image.  -->
 
 # Jumping Through Hoops
 
