@@ -89,7 +89,7 @@ Send the image through [https://image2svg.com/](https://image2svg.com/).
 
 The name of the saved image file name can be `logo.svg`, `bimi1_logo_corporate_trademark_standard_240x240.svg` or even `a.svg`; whatever makes your boat floats.
 
-Rename the image file as `bimi1_image.svg` as this article's HOWTO.
+Rename the image file as `bimi1_image.svg` for this article's HOWTO.
 
 Save the image file.
 
