@@ -1,9 +1,10 @@
-title: Hurricane Electric DNS as a Slave Nameserver
+title: Hurricane Electric DNS as a Secondary Nameserver
 date: 2022-04-15 13:29
 status: published
 tags: ISP, DNS
 category: HOWTO
 summary: How to add Hurricane Electric as a secondary name server
+slug: isp-he-dns-secondary
 lang: en
 private: False
 
@@ -183,5 +184,67 @@ WARNING: Do not click on the BLUE BUTTON.  If you do, you would need to delete t
       max-height=100% max-width=100% />
 </div>
 
-You should have a working secondary nameserver now.
+# Validate DNS Transfer
+
+To validate that secondary DNS is actually receiving from your master nameserver, 
+we need to start logging this `info` severity level for any and all AXFR/IXFR 
+transfer activities.
+
+## Finding Channel Name
+
+To locate this `severity` setting in `/etc/bind/named.conf` (or `/etc/bind/logging-named.conf`, in my case), we need to find the correct logging category. 
+This depends on whether you used the `category xfer-in` statement or not.
+
+## Category `xfer-in` Used
+
+If the `category xfer-in` statement is found, then note the names of logging channel
+inside its curly-braces block.
+
+```nginx
+   category xfer-in { xfer-in_file };
+```
+
+In this example, `xfer-in_file` is the lone channel name.
+
+
+## Category `default` Used
+
+If the `xfer-in` category is not being used (nor found) amongst the config files,
+then `category default` is our focus for this logging of DNS zone transfers.
+
+```nginx
+   category default { default_file };
+```
+
+## Channel Name
+
+Once you identified the channel name (`xfer-in_file` or `default-file`), 
+locate the `channel xfer-in_file` (or `channel default_file`, 
+if `xfer-in` is not found).
+
+In your selected `channel` statement, there should be a `severity` option
+in that curly-braces block.  If not, add a `severity notice` option.
+
+```nginx
+    channel xfer-in_file {
+        file "/var/log/named/xfer-in";
+        severity notice;
+        print-time yes;
+        print-severity true;
+        print-category true;
+        };
+```
+
+Restart `named` daemon, if a change was made there.
+
+In the `/var/log/named`, 
+Then check out the log files for the following log message:
+
+```console
+17-Sep-2020 09:15:51.377 xfer-out: info: client @0x7fa60c03c1b0 216.218.133.2#55905/key <YOUR-KEY-NAME> (example.test): view public: transfer of 'example.test/IN': AXFR started: TSIG <YOUR-KEY-NAME> secondary (serial 2020091852)
+```
+The example log message above shows that the Hurricane Electric secondary nameserver
+has successfully retrieved your master zone data file for `example.test`.
+
+Congratulations, you have a working secondary nameserver now.
 
