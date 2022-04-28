@@ -51,7 +51,7 @@ Google protects their BIMI logo from being used by spammers by mandating a signe
 
 # Jumping Through Hoops
 
-So, you still want your logo plastered and viewed next to each email that your domain sent?  To do BIMI? In billions of mail clients out there?
+So, you still want your logo plastered and viewed next to each email that your domain sent?  To do BIMI? For billions of mail clients out there?
 
 Some of the hoops that we have to jump through depend on whether a  mail client support BIMI and how intensely they validate BIMI.
 
