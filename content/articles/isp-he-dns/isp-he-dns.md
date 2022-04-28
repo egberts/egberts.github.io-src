@@ -10,15 +10,15 @@ private: False
 
 This article details how to incorporate Hurricane Electric (HE.NET) DNS as the secondary name servers for your public authoritative name server.
 
-In this article, all instances of `example.test` can be replaced with your domain name.  Graphical screenshots may have `egbert.net`, of which you too can replace with your domain name.
+All instances of `example.test` are to be replaced with your own domain name.  Graphical example screenshots may have `egbert.net`, of which you too can replace with your own domain name.
 
 # Generate TSIG Key 
 
 TSIG stands for Transaction SIGnature and is defined in [IETF RFC 2845](https://datatracker.ietf.org/doc/html/rfc8945).
 
-First, generate the TSIG key that HE.NET will need to access the zone data via AXFR transfer from your primary authoritative name server.
+First, generate the TSIG key that the HE.NET secondary nameservers will need to access zone of your domain name; secondaries extract zone data using AXFR/IXFR transfer from your primary authoritative name server.
 
-NOTE: Older Bind9 versions used `ddns-confgen` tool, but now it is `tsig-keygen`.
+NOTE: Older Bind9 versions used `ddns-confgen` tool, but now it is called `tsig-keygen`.
 
 ```bash
 $ tsig-keygen -a hmac-sha512 axfr-request-to-primary-server-from-public-secondaries
@@ -37,12 +37,12 @@ acl acl_grant_axfr_to_trusted_3rd_party_downstream_secondaries {
         };
 ```
 
-The ACL clause defined  allows AXFR records to be sent to the desired HE.NET secondary name server) upon requests.
+The ACL clause defined allows your primary nameserver to send AXFR/IXFR records to the desired HE.NET secondary name servers upon requests.
 
 
 # Key Clauses
 
-Copy the output created by `tsig-keygen` containing the 'key' clause into the named config (`/etc/bind/named.conf`) and place it after the last of any `acl` clauses at the beginning of the file.
+Copy the output created by `tsig-keygen` command.  The output containing the 'key' clause are inserted (or replacing) into the named config (`/etc/bind/named.conf`) and place it after the last of any `acl` clauses which is typically the first group of clauses near the beginning of the file.
 
 ```nginx
 key "axfr-request-to-primary-server-from-public-secondaries" {
@@ -51,12 +51,12 @@ key "axfr-request-to-primary-server-from-public-secondaries" {
 };
 ```
 
-This shared secret key value and `hmac-sha512` will also later on go into HE.NET web dialog of DNS SLAVE setup forms.
+The shared secret key value and `hmac-sha512` will also later on go into the HE.NET web dialog during its DNS SLAVE (Secondary) setup forms.
 
 
-# Allow AXFR to HE.NET SLAVES
+# Allow Transfer to HE.NET Secondaries
 
-Insert/update/replace the following `allow-transfer` statement into this same `zone` clause.
+Inside the `zone` clause block of your domain name, insert/update/replace the following `allow-transfer` statement:
 
 ```nginx
 allow-transfer {
@@ -70,9 +70,9 @@ allow-transfer {
 };
 ```
 
-# Allow AXFR to other (Bin9) secondary name servers
+# Allow Transfer to other (Bind9) secondary nameservers
 
-If there are other secondary name servers that runs Bind9, you can insert the following in their `/etc/bind/named.conf` file.
+If there are any other secondary name servers that runs Bind9, you can insert the following into their `/etc/bind/named.conf` file:
 
 
 ```nginx
@@ -82,6 +82,7 @@ server 10.1.2.3 {
     };
 };
 ```
+The above example is taken (and IP-anonymized) from my whitelab.
 
 # Secondary DNS Providers
 
@@ -173,7 +174,7 @@ It takes about 3600 seconds to fully sync up.
 
 Click on the green "validate" botton.
 
-WARNING: Do not click on the BLUE BUTTON.  If you do, you would need to delete the entire settings of your domain and start all over again.  Yeah, be careful there.
+WARNING: Do not click on the BLUE BUTTON.  If you do blick on that blue buutton, you would need to delete the entire settings of your domain and start all over again.  So, yeah, be careful there.
 
 <div class="m-image">
 
