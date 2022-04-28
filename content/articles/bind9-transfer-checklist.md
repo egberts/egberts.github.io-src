@@ -1,7 +1,7 @@
 title: Bind9 XFER Checklist
 date: 2020-06-07 09:46
 status: published
-tags: bind9, axfr, ixfr, checklist
+tags: Bind9, axfr, ixfr, checklist
 category: HOWTO
 summary: Troubleshooting Bind9 AXFR and IXFR
 

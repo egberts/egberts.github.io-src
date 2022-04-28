@@ -1,7 +1,7 @@
 title: Lint and Code Checking Python
 date: 2020-05-04 17:00
 status: published
-tags: python, lint, static analyzer
+tags: Python, lint, static analyzer
 category: HOWTO
 summary: How to lint and code check Python codes
 

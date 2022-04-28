@@ -1,7 +1,7 @@
 title: Split-Horizon, Bind9-style
 date: 2021-10-15 08:13
 status: published
-tags: bind9, dns, split-horizon
+tags: Bind9, DNS, split-horizon
 category: research
 lang: en
 private: False

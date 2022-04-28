@@ -1,7 +1,7 @@
 Title: Python Code Syntax using Markdown
 Date: 2018-11-15 12:22
 modified: 2019-02-13 10:50
-Tags: code syntax, pelican, markdown, python, pygments, CSS, fix, HTML
+Tags: code syntax, Pelican, markdown, Python, Pygments, CSS, fix, HTML
 Category: HOWTO
 slug: code-syntax-python-md
 authors: egberts

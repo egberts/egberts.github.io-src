@@ -1,5 +1,5 @@
 Title: ISC DHCP and Weird Hostnames
-Tags: dhcp, security, dhcpd
+Tags: DHCP, security, dhcpd
 Date: 2019-01-05 08:30
 Modified: 2022-02-24 13:55
 Category: research

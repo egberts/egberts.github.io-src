@@ -3,7 +3,7 @@ Date: 2017-11-01 05:11
 Modified: 2020-03-04 17:02
 Category: HOWTO
 Status: published
-Tags: Bro
+Tags: Zeek, Bro
 summary: How to use Bro IDS.
 
 How to use Bro

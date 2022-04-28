@@ -1,7 +1,7 @@
 Title: Bind9 RCodes
 Date: 2020-07-01 11:48
 status: published
-tags: bind9
+tags: DNS, Bind9
 category: research
 summary: RCodes for Bind9 network message
 

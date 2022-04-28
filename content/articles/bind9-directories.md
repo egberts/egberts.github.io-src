@@ -2,7 +2,7 @@ Title: Bind9 Directories and Files
 Date: 2018-10-18 18:56
 Modified: 2022-02-24 09:13
 slug: bind9-directories
-tags: bind9
+tags: Bind9
 category: research
 summary: Directories and Files used by ISC Bind9
 

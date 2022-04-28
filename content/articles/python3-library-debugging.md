@@ -2,8 +2,8 @@ title: Debugging Python executable and libraries
 date: 2020-10-13 12:00
 status: published
 category: HOWTO
-tags: python, debug, pelican
-keywords: pelican, python
+tags: Python, debug, Pelican
+keywords: Pelican, Python
 summary: How to debug package-installed Python executable and libraries.
 lang: en
 private: False

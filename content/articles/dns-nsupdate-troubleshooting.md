@@ -1,7 +1,7 @@
 Title: nsupdate Troubleshooting
 Date: 2018-10-17T20:50
 Status: published
-Tags: nsupdate, dns, troubleshooting
+Tags: nsupdate, DNS, troubleshooting
 Category: research
 Summary: How to troubleshoot DNS issues using nsupdate utiliy.
 

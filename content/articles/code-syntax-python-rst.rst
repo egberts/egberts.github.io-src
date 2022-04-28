@@ -3,7 +3,7 @@ Python Code Syntax Highlighter using RST format in Pelican
 
 :Date: 2018-11-13 18:13
 :modified: 2020-03-04 17:11
-:Tags: code syntax, pelican, rst, python, pygments, CSS, fix, HTML
+:Tags: code syntax, Pelican, RST, Python, Pygments, CSS, fix, HTML
 :slug: code-syntax-python-rst
 :Category: HOWTO
 :status: published

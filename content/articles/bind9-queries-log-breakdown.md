@@ -1,7 +1,7 @@
 title: ISC Bind9 Queries Log Breakdown
 date: 2020-10-09 14:00
 status: published
-tags: bind9, dns
+tags: Bind9, DNS
 category: HOWTO
 summary: How to interpret ISC Bind9 queries.log files 
 

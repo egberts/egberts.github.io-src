@@ -2,7 +2,7 @@ Title: Bind9 DNSSEC Root Server
 status: published
 Date: 2020-01-28 16:14
 Modified: 2022-02-24 08:14
-tags: bind9, dnssec
+tags: Bind9, DNSSEC
 category: research
 summary: Setting up Root DNSSEC for internal use
 

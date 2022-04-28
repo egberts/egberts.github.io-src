@@ -1,7 +1,7 @@
 Title: Public Nameservers with DNSSEC support
 Date: 2018-11-20 15:11
 Modified: 2020-03-04 17:44
-Tags: DNSSEC, dns
+Tags: DNSSEC, DNS
 Status: published
 Category: HOWTO
 Summary: An authoritative list of public name servers supporting DNSSEC.

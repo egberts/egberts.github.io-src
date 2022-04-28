@@ -1,5 +1,5 @@
 Title: API security checklist
-Tags: api, security, checklist, REST, SOAP, XML
+Tags: API, security, checklist, REST, SOAP, XML
 Date: 2018-11-25 06:07
 Status: published
 Category: research

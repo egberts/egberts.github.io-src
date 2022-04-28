@@ -1,6 +1,6 @@
 Title: DNSSEC Testing
 Date: 2018-11-12T12:15
-Tags: dns, dnssec, testing
+Tags: DNS, DNSSEC, testing
 Category: research
 Summary: Testing the DNSSEC
 

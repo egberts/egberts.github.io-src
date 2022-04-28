@@ -1,7 +1,7 @@
 title: How to verify DNS Root's DNSSEC
 date: 2020-09-07 12:16
 status: published
-tags: dnssec, bind9, verification
+tags: DNSSEC, Bind9, verification
 category: HOWTO
 summary: How to verify DNSSEC of a DNS Root Server
 

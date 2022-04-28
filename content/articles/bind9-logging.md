@@ -1,7 +1,7 @@
 Title: ISC Bind9 Logging
 Date: 2018-10-17 10:41
 Modified: 2022-02-24 08:24
-Tags: logging, bind9
+Tags: logging, Bind9
 status: published
 Category: research
 summary: Logging Files Used By ISC Bind9

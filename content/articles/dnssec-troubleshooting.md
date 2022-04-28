@@ -1,7 +1,7 @@
 Title: DNSSEC Troubleshooting
 Date: 2020-02-19 21:33
 modified: 2020-03-04T17:47
-Tags: dnssec
+Tags: DNSSEC
 status: published
 Category: research
 Summary: How to troubleshoot DNSSEC.

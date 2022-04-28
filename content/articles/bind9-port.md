@@ -1,7 +1,7 @@
 Title: Bind9 Network Ports
 Date: 2011-07-11 06:31
 Modified: 2020-02-20 19:03
-Tags: network, port, bind9
+Tags: network, port, Bind9
 Category: research
 summary: Network port numbers used by ISC Bind9. -  Network port numbers used by [Bind9](Bind9 "wikilink").
 
