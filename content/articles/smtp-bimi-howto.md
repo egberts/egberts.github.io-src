@@ -22,7 +22,7 @@ The thing about having a BIMI for your own domain is, you have to jump precariou
 
 And this article will show you how to do this BIMI.  And without making use of expensive Adobe Acrobat tools or stumbling over various HOWTOs and to generate the PKI certificates, to have a working BIMI without shoveling a shitload of money toward CA registry ... each year.
 
-For this article, you can replace the `example.test.` with your domain name in question.
+You can replace the `example.test.` with your domain name in question.
 
 Also replace the `ns1.example.test.` with the hostname of your primary (master) name server that holds the original zone file of your domain.
 
