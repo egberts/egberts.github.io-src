@@ -1,7 +1,7 @@
 title: CA Certificates rebuild on Debian
 date: 2021-11-20 11:00
 status: published
-tags: certificate authority, Debian
+tags: OpenSSL, PKI, certificate authority, Debian
 category: research
 lang: en
 private: False
@@ -13,9 +13,11 @@ Debian package.
 Also it details what my current thoughts are regarding the auditable aspect of
 Root CA, its intermediate CA, trusted CA and blacklisting CAs.
 
-Executing the `update-ca-certificates --fresh` using `strace -f` has enabled me
-to compile a list of files read and written.
+For the first round of audit, by executing the `update-ca-certificates --fresh` using `strace -f`, the output has compile a list of files read and written by `update-ca-certificates`.
 
+```bash
+strace -f update-ca-certificates -f | grep openat
+```
 
 The list of files that are opened and read-only are in the following order:
 
@@ -58,7 +60,7 @@ The list of files that are opened and read-only are in the following order:
 37.  `/usr/sbin/openssl`  (VERY STRANGE ordering of /usr/[local/][s]bin/
 
 
-Writes to the following text files:
+and writes to the following text files:
 
 1. `$CWD/ca-certificates.txt`
 2. `/etc/ssl/certs/java/cacerts`
@@ -70,23 +72,40 @@ AUDITABLE OBSERVATION
 OpenSSL binary, misordered lookup sequence of
 ---------------------------------------------
 
-Observation of update-ca-certificates.
-
-I noticed a very strange ordering of looking for the `openssl` binary.
+In observing the "finding" of the OpenSSL binary by `update-ca-certificates`,
+I noticed a very strange lookup ordering of looking for this `openssl` binary.
 
 Probably should have been something in the (re)order of:
 
 1. $CWD/openssl  (probably should NOT have this entry)
-2. /usr/local/sbin/openssl
 2. /usr/local/bin/openssl
-2. /usr/sbin/openssl
-2. /usr/bin/openssl
+3. /usr/local/sbin/openssl
+4. /usr/bin/openssl
+5. /usr/sbin/openssl
+
+From an auditor's perspective, one could argue that the `sbin`-variant always have precedence over `bin`-variant.
+
+Arguably, I would like to see this ordering, instead:
+
+1. /usr/local/sbin/openssl
+2. /usr/local/bin/openssl
+3. /usr/sbin/openssl
+4. /usr/bin/openssl
 
 Auditable Impact Toward CA Certificates
 ---------------------------------------
+Then there are three groups of certificates.
 
-Probably should OUTPUT various 'modules' being touched up during the rebuilding
-of CA certificates:
+Now, I would normally raise an eye-brow about the inclusion of the two groups
+outside of OpenSSL.
+
+However this is the open-source community (and not the enterprise-based
+ones), and different inclusion mechanism are in play; it resulted in
+the addition of two additional groups (MONO and OpenJDK).
+
+When auditing, the output of `update-ca-certificates` probably 
+should show various 'modules' being referred to during the rebuilding
+of CA certificates pool:
 
 1.  MONO
 2.  OpenJDK Java 11
@@ -98,17 +117,24 @@ then
 
 Auditable Output of CA Certificates
 -----------------------------------
-Probably should OUTPUT what various CREATION of files:
+Also for writing the output file, it should probably show various 
+CREATION of files (or PKI Subject, or both) that are found in:
 
 
 1. `$CWD/ca-certificates.txt`
-1. `/etc/ssl/certs/java/cacerts`
+2. `/etc/ssl/certs/java/cacerts`
+
+This would enable auditors to do tracibility matrix against this.  
+
+A singular JSON output file would be a plus.
+
 
 Better Summarization
 --------------------
 
-Probably should indicate those summarization AT THE END of its output, broken
-down by CA-CERTIFICATE MODULES.  Like:
+Also `update-ca-certificates` should probably indicate those 
+summarization by group AT THE END of its output, broken
+down by CA-CERTIFICATE MODULES.  Into something like this:
 
 ```
       OS System:
@@ -137,3 +163,5 @@ down by CA-CERTIFICATE MODULES.  Like:
 
 Will try and find appropriate package maintainer and/or author to let them know
 of these findings.
+
+
