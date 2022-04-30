@@ -17,12 +17,13 @@ This `.config` is a text-based INI-format file
 that many Windows and Linux sysadmin comes to 
 love (no section needs apply there).
 
-It file format comprises of `#` for a commentline and a simple syntax of:
+Its file format comprises of `#` for a commentline and a simple syntax of:
 ```bnf
 variable_name=value
 ```
 
-And there are shell scripts maintained by Linux development team to deal with
+And there are shell scripts maintained by the Linux development 
+team to deal with
 their INI-formatted `.config` file that can be used as well for 
 your own config files.
 
@@ -46,9 +47,9 @@ drwxrwxr-x 21 root root 4096 Apr 13 14:03 ..
 
 Now, I need to do removal of `initramfs`, some hardening
 efforts, and an inclusion of a
-motherboard-specific hardware-wide settings.
+motherboard-specific hardware-wide settings.  This article only details the mechanism to using Linux kernel scripts.
 
-Then I would take that config text file and fold them into a `.config` of the latest Linux kernel.
+One would take that config text file and fold them into a `.config` of the latest Linux kernel.
 
 All in one-go.
 

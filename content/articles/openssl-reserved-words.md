@@ -3,6 +3,7 @@ date: 2021-11-18 11:00
 status: published
 tags: OpenSSL
 category: research
+slug: pki-openssl-reserved-words
 summary: 15 years of barely ignoring this file, I've finally detailed the `openssl.cnf` file.
 lang: en
 private: False
@@ -34,7 +35,7 @@ But before we go further into `openssl.cnf`, we have to consider who the externa
 
 I've identified the following shell environment names used by `openssl` 
 (by scanning for `getenv()` functions and few other code review tricks)
-and listed them in here [/openssl-envvars.html].
+and listed them in this [OpenSSL Environment Variables]({filename}openssl-envvars.md) article.
 
 With that out of the way, now we can delve into OpenSSL configuration file and
 all its simplicity.
