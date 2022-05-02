@@ -222,4 +222,8 @@ The ordering
 
 Under the `/etc/exim4/conf.d`, there are five subdirectories.  These subdirectories hold config files containing a one or few settings.
 
-F
+# Summary
+
+I do not know why the Exim upstream are hard up on not supporting multi-file config approach which would totally obviate the need for extra Debian maintainer overhead and completely discharge this entire article.  
+
+Until then, Exim4 is in for a hard road in adoption rate.  
