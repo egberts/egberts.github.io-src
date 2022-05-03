@@ -81,7 +81,7 @@ Caution: Improper use of SSHFP records can have serious security consequences; f
 
 Not following these rules could allow adversaries to create spoofed SSHFP records for your servers to impersonate them, making SSH connections to the servers insecure and vulnerable to attacks.
 
-If you must require absolute DNSSEC verified queries for all your DNS needs, you could insert the following into your `/etc/resolv.conf` (if you have libresolv v2.38 or later):
+If you must require absolute DNSSEC verified queries for all your DNS needs, you could insert the following into your `/etc/resolv.conf` (if you have glibc v2.38 or later):
 
 File: `/etc/resolv.conf`
 ```
