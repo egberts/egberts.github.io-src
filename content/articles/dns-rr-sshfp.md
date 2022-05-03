@@ -77,8 +77,23 @@ Caution: Improper use of SSHFP records can have serious security consequences; f
 * Never configure SSH clients to use SSHFP for a domain that is not DNSSEC-secured.
 * Never configure SSH clients to use SSHFP unless they validate DNSSEC or use a validating resolver, such as Google Public DNS.
 * most importantly, always, always perform `delv ssh.domain.tld.` and check that first line for `; fully validated` output.  
+
+
 Not following these rules could allow adversaries to create spoofed SSHFP records for your servers to impersonate them, making SSH connections to the servers insecure and vulnerable to attacks.
 
+If you must require absolute DNSSEC verified queries for all your DNS needs, you could insert the following into your `/etc/resolv.conf` (if you have libresolv v2.38 or later):
+
+File: `/etc/resolv.conf`
+```
+.
+.
+.
+options edns0
+options trust-ad
+.
+.
+.
+```
 
 Reference
 =========
