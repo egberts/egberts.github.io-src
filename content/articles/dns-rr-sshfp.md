@@ -76,7 +76,7 @@ Caution: Improper use of SSHFP records can have serious security consequences; f
 * Do not create SSHFP records in a zone that is not DNSSEC-secured.
 * Never configure SSH clients to use SSHFP for a domain that is not DNSSEC-secured.
 * Never configure SSH clients to use SSHFP unless they validate DNSSEC or use a validating resolver, such as Google Public DNS.
-
+* most importantly, always, always perform `delv ssh.domain.tld.` and check that first line for `; fully validated` output.  
 Not following these rules could allow adversaries to create spoofed SSHFP records for your servers to impersonate them, making SSH connections to the servers insecure and vulnerable to attacks.
 
 
