@@ -3,6 +3,7 @@ status: published
 Date: 2020-01-28 16:14
 Modified: 2022-02-24 08:14
 tags: Bind9, DNSSEC
+slug: dnssec-bind9-root
 category: research
 summary: Setting up Root DNSSEC for internal use
 

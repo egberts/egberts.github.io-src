@@ -1,8 +1,8 @@
 title: How to maintain small multiple configs for Linux kernels
 date: 2022-04-27 04:10
 status: published
-tags: HOWTO
-category: Linux, kernel
+tags: Linux, kernel
+category: HOWTO
 summary: Making minute changes of Linux kernel easier with various scripts
 slug: linux-kernel-config-parts
 lang: en
