@@ -1,0 +1,39 @@
+WHOA!
+
+`make publish rsync_upload` does not copy any CSS files.  Very bad.
+
+Figure out a way to not only UPLOAD but preserve some of the following CSS files:
+
+-rw-r-----  1 wolfe www-data  91063 Mar 25 19:51 m-dark.compiled.css
+-rw-r-----  1 wolfe www-data 540169 Jan 18 10:05 ss-site.css
+-rw-r-----  1 wolfe www-data 539660 Jan 18 10:00 landing_site.css
+-rw-r-----  1 wolfe www-data  98775 Jun  9  2020 m-dark+documentation.compiled.css
+-rw-r-----  1 wolfe www-data   9001 Jun  9  2020 m-dark.documentation.compiled.css
+-rw-r-----  1 wolfe www-data  88302 Jun  9  2020 m-light.compiled.css
+-rw-r-----  1 wolfe www-data  96016 Jun  9  2020 m-light+documentation.compiled.css
+-rw-r-----  1 wolfe www-data   9007 Jun  9  2020 m-light.documentation.compiled.css
+-rw-r-----  1 wolfe www-data  37402 Jun  9  2020 font-awesome.css
+-rw-r-----  1 wolfe www-data  30988 Jun  9  2020 font-awesome.min.css
+-rw-r-----  1 wolfe www-data   5587 Apr  5  2020 m-theme-dark.css
+-rw-r-----  1 wolfe www-data   4213 Mar  8  2020 blog-motto.css
+-rw-r-----  1 wolfe www-data  30679 Mar  8  2020 m-layout.css
+-rw-r-----  1 wolfe www-data   4191 Mar  4  2020 pygments-codehilite.css
+-rw-r-----  1 wolfe www-data   4403 Mar  4  2020 pygments-dark.css
+-rw-r-----  1 wolfe www-data   8073 Mar  4  2020 pygments.css
+-rw-r-----  1 wolfe www-data   4086 Mar  3  2020 ss-css.css
+-rw-r-----  1 wolfe www-data 152868 Feb 26  2020 ss-squarespace-font.css
+-rw-r-----  1 wolfe www-data  10577 Feb 25  2020 m-documentation.css
+-rw-r-----  1 wolfe www-data   8148 Feb 25  2020 postprocess.py
+-rw-r-----  1 wolfe www-data    461 Feb 25  2020 postprocess.sh
+-rw-r-----  1 wolfe www-data  58465 Feb 20  2020 m-components.css
+-rw-r-----  1 wolfe www-data   1476 Feb 18  2020 justtable.css
+-rw-r-----  1 wolfe www-data    810 Feb 18  2020 tag_cloud.css
+-rw-r-----  1 wolfe www-data    190 Feb 18  2020 typogrify.css
+-rw-r-----  1 wolfe www-data   4019 Feb 18  2020 paraiso-dark.css
+-rw-r-----  1 wolfe www-data   1389 Feb 18  2020 m-dark.css
+-rw-r-----  1 wolfe www-data   3228 Feb 18  2020 m-debug.css
+-rw-r-----  1 wolfe www-data  12958 Feb 18  2020 m-grid.css
+-rw-r-----  1 wolfe www-data   1387 Feb 18  2020 m-light.css
+-rw-r-----  1 wolfe www-data   5509 Feb 18  2020 m-theme-light.css
+-rw-r-----  1 wolfe www-data   1719 Feb 18  2020 pygments-console.css
+

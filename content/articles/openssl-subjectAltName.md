@@ -19,7 +19,7 @@ In X509v3 parlance, the attribute name is `subjectAltName`.
 `subjectAltName` attributes are defined only under the scope of `[req]` section or its `req`-related sections, preferably under its own renamed `req` section.
 
 
-Who Uses ASN?
+Who Uses SAN?
 =============
 
 `subjectAltName` is frequently used by `serverAuth` and `clientAuth` (non-CA) certificates.  
@@ -36,7 +36,7 @@ and look for `Extended X509v3 Key Usage:`.  If it is missing, there is no `serve
 
 
 
-What Goes Into ASN?
+What Goes Into SAN?
 ===================
 
 The `subjectAltName` extension (if declared) MUST contain at least one entry; this is only true for any certificate that is using `serverAuth` (or `clientAuth`) such as a "web servers". 
@@ -66,7 +66,7 @@ Entries in the `DNS` MUST be in the "preferred name syntax", as specified in RFC
 DNS also MUST NOT have any of the following: 
 
 * `localhost`, `invalid`, `example`, `test` as a standalone word in any parts of the domain name, or 
-* any reserved IP address mapped to `.in-addr.arpa.` or `.in-addr6.arpa.`.
+* any reserved IP address mapped to `.in-addr.arpa.` or `.ip6.arpa.`.
 
 
 CA Certificates
