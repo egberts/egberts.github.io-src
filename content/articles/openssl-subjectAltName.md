@@ -151,19 +151,21 @@ By appending custom attribute settings to the end of openssl.cnf,
 you can introduce various settings this way, even overwriting
 pre-existing setting too!
 
-
-openssl req -new -sha256 \
+```console
+$ openssl req -new -sha256 \
     -key domain.key \
     -subj "/C=US/ST=CA/O=Acme, Inc./CN=example.com" \
     -reqexts SAN \
     -config <(cat /etc/ssl/openssl.cnf \
         <(printf "\n[SAN]\nsubjectAltName=DNS:example.com,DNS:www.example.com")) \
     -out domain.csr
+```
 
 
 Leverage -extfile for adding to a read-only OpenSSL.cnf file.
 -------------------------------------------------------------
 
+```console
     openssl genrsa -out ca.key 2048
     openssl req -new -x509 -days 365 -key ca.key \
         -subj "/C=CN/ST=GD/L=SZ/O=Acme, Inc./CN=Acme Root CA" -out ca.crt
@@ -173,7 +175,7 @@ Leverage -extfile for adding to a read-only OpenSSL.cnf file.
     openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial \
         -extfile <(printf "subjectAltName=DNS:example.com,DNS:www.example.com")\
         -days 365 -out server.crt
-
+```
 
 References
 ==========

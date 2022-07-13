@@ -844,59 +844,59 @@ Full check (default, without -a)
 
 Bind9 directories
 =================
-[jtable separator="|"]
-directory name | named.conf keyword | description
-`/etc/bind` | `directory` | directory is a quoted string defining the absolute path for the server e.g. &quot;/var/named&quot;. All subsequent relative paths use this base directory. If no directory options is specified the directory from which BIND was loaded is used. This option may only be specified in a 'global' options statement.
-`/etc/bind` | `file` | zone files
-`/etc/bind/keys` | `key-directory` | "key-directory is a quoted string defining the absolute path, for example, &quot;`/var/lib/bind/dynamic`&quot; where the keys used in the dynamic update of secure zones may be found. Only required if this directory is different from that defined by a directory option. This statement may only be used in a global options clause. `rndc` `loadkeys` and `rndc` `sign` reads from this directory. "
-`/var/lib/bind` |  |
-`/var/lib/bind/dynamic` | `managed-keys-directory` | Zone files; filetype is typically `*.mkeys`.
-`/etc/default/bind` |  | Default systemd settings for `named` daemon startup (<a href="bind9.service" class="uri" title="wikilink">bind9.service</a>)
-`/var/cache/bind` | `key-directory` | Dynamically created keyfiles
-`/var/log/bind` |  | logging for DNS `named` daemon
+[jtable separator=","]
+directory name , named.conf keyword , description
+`/etc/bind` , `directory` , directory is a quoted string defining the absolute path for the server e.g. &quot;/var/named&quot;. All subsequent relative paths use this base directory. If no directory options is specified the directory from which BIND was loaded is used. This option may only be specified in a 'global' options statement.
+`/etc/bind` , `file` , zone files
+`/etc/bind/keys` , `key-directory` , "key-directory is a quoted string defining the absolute path, for example, &quot;`/var/lib/bind/dynamic`&quot; where the keys used in the dynamic update of secure zones may be found. Only required if this directory is different from that defined by a directory option. This statement may only be used in a global options clause. `rndc` `loadkeys` and `rndc` `sign` reads from this directory. "
+`/var/lib/bind` ,  ,
+`/var/lib/bind/dynamic` , `managed-keys-directory` , Zone files; filetype is typically `*.mkeys`.
+`/etc/default/bind` ,  , Default systemd settings for `named` daemon startup (<a href="bind9.service" class="uri" title="wikilink">bind9.service</a>)
+`/var/cache/bind` , `key-directory` , Dynamically created keyfiles
+`/var/log/bind` ,  , logging for DNS `named` daemon
 [/jtable]
 
 
 Bind9 files
 ===========
-[jtable separator="|"]
-file name | named.conf keyword | description
-`/var/run/named/named.pid` | `pid-file` | "PID number of the master named process in text-format. pid-file is a quoted string and allows you to define where the pid (Process Identifier) used by BIND is written. If not present it is distribution or OS specific typically /var/run/named.pid or /etc/named.pid. It may be defined using an absolute path or relative to the directory parameter. This statement may only be used in a global options clause. "
-`/etc/bind/rndc.conf` |  | "Used by `rndc` utility. Manually created and often formatted like:</p> `   # Start of rndc.conf`<br /> `   include &quot;/etc/bind/rndc.key&quot;;`<br /> `   options {`<br /> `       default-key &quot;rndc-key&quot;;`<br /> `       default-server 127.0.0.1;`<br /> `       default-port 953;`<br /> `   };`<br /> `   # End of rndc.conf`"
-`/etc/bind/rndc.key` |  | its key is created using `rndc-confgen` `-a` looking like this:</p> <p>`   key &quot;rndc-key&quot; {`<br /> `       algorithm hmac-md5;`<br /> `       secret &quot;XbAxWyZPL74rN1Ti3dTV9a==&quot;;`<br /> `   };`
-`/var/cache/bind/&#42.jnl` | `journal` | Keeps track of changes being made to the zone databases
+[jtable separator=","]
+file name , named.conf keyword , description
+`/var/run/named/named.pid` , `pid-file` , "PID number of the master named process in text-format. pid-file is a quoted string and allows you to define where the pid (Process Identifier) used by BIND is written. If not present it is distribution or OS specific typically /var/run/named.pid or /etc/named.pid. It may be defined using an absolute path or relative to the directory parameter. This statement may only be used in a global options clause. "
+`/etc/bind/rndc.conf` ,  , "Used by `rndc` utility. Manually created and often formatted like:</p> `   # Start of rndc.conf`<br /> `   include &quot;/etc/bind/rndc.key&quot;;`<br /> `   options {`<br /> `       default-key &quot;rndc-key&quot;;`<br /> `       default-server 127.0.0.1;`<br /> `       default-port 953;`<br /> `   };`<br /> `   # End of rndc.conf`"
+`/etc/bind/rndc.key` ,  , its key is created using `rndc-confgen` `-a` looking like this:</p> <p>`   key &quot;rndc-key&quot; {`<br /> `       algorithm hmac-md5;`<br /> `       secret &quot;XbAxWyZPL74rN1Ti3dTV9a==&quot;;`<br /> `   };`
+`/var/cache/bind/&#42.jnl` , `journal` , Keeps track of changes being made to the zone databases
 `/var/cache/bind/cache_dump.db`, `dump-file`, "Dumps the DNS cache database into a text file. dump-file is a quoted string defining the absolute path where BIND dumps the database (cache) in response to a rndc dumpdb. If not specified the default is `named_dump.db` in the location specified by a directory option. This option may only be specified in a 'global' options statement. "
-`/var/log/bind/named_stats.txt` | `statistics-file` | Dumps the statistics into a file. This statement defines the file-name to which data will be written when the command rndc stats is issued. May be an absolute or relative (to directory) path. If the parameter is not present the information is written to named.stats in the path defined by directory or its default. This statement may only be used in a global options clause.
-`/var/log/mem-statistics.log`  | `memstatistics-file`  | This statement defines the file-name to which BIND memory usage statistics will be written when it exits. May be an absolute or relative (to directory) path. If the parameter is not present the stats are written to `named.memstats` in the path defined by directory or its default. This statement may only be used in a global options clause.
-`/etc/bind/named.iscdlv.key`  | `bindkeys-file`  | OBSOLETED. Holds the DLV (now discontinued as of Feb 2017). Used to be `/etc/bind.keys`
+`/var/log/bind/named_stats.txt` , `statistics-file` , Dumps the statistics into a file. This statement defines the file-name to which data will be written when the command rndc stats is issued. May be an absolute or relative (to directory) path. If the parameter is not present the information is written to named.stats in the path defined by directory or its default. This statement may only be used in a global options clause.
+`/var/log/mem-statistics.log`  , `memstatistics-file`  , This statement defines the file-name to which BIND memory usage statistics will be written when it exits. May be an absolute or relative (to directory) path. If the parameter is not present the stats are written to `named.memstats` in the path defined by directory or its default. This statement may only be used in a global options clause.
+`/etc/bind/named.iscdlv.key`  , `bindkeys-file`  , OBSOLETED. Holds the DLV (now discontinued as of Feb 2017). Used to be `/etc/bind.keys`
 [/jtable]
 
 Typical Bind9 logging channels
 ======================
-[jtable separator="|"]
-directory name | channel name  | description
-`/var/log/bind/default.log`  | `default_file`  | Default events get logged into this file
-`/var/log/bind/general.log`  | `general_file`  | General events get logged into this file.
-`/var/log/bind/database.log`  | `database_file`  | Database events get logged into this file.
-`/var/log/bind/security.log`  | `security_file`  | Security events get logged into this file.
-`/var/log/bind/config.log`  | `config_file`  | Configuration and any misconfiguration events get logged into this file.
-`/var/log/bind/resolver.log`  | `resolver_file`  | Resolver events get logged into this file.
-`/var/log/bind/xfer-in.log`  | `xfer-in_file`  | Transfer DNS records inbound events get logged into this file.
-`/var/log/bind/xfer-out.log`  | `xfer-out_file`  | Transfer DNS records outbound events get logged into this file.
-`/var/log/bind/notify.log`  | `notify_file`  | Notify events get logged into this file.
-`/var/log/bind/unmatched.log`  | `client_file`  | Client events get logged into this file.
-`/var/log/bind/client.log`  | `unmatched_file`  | Unmatched events get logged into this file.
-`/var/log/bind/unmatched.log`  | `unmatched_file`  | Unmatched events get logged into this file.
-`/var/log/bind/queries.log`  | `queries_file`  | Query events get logged into this file.
-`/var/log/bind/query-errors.log`  | `query-errors_file`  | Query ERROR events get logged into this file.
-`/var/log/bind/network.log`  | `network_file`  | "Network events get logged into this file. open() close() dropped or downed network interface."
-`/var/log/bind/update.log`  | `update_file`  | Update events get logged into this file.
-`/var/log/bind/update-security.log`  | `update-security_file`  | Security update events get logged into this file.
-`/var/log/bind/dispatch.log`  | `dispatch_file`  | Dispatch events get logged into this file.
-`/var/log/bind/dnssec.log`  | `dnssec_file`  | DNSSEC events get logged into this file.
-`/var/log/bind/lame-servers.log`  | `lame-servers_file`  | Lame server events get logged into this file.
-`/var/log/bind/delegation-only.log`  | `delegation-only_file`  | Delegation events get logged into this file.
-`/var/log/bind/rate-limit.log`  | `rate-limit_file`  | Rate limiting events get logged into this file.
+[jtable separator=","]
+directory name , channel name  , description
+`/var/log/bind/default.log`  , `default_file`  , Default events get logged into this file
+`/var/log/bind/general.log`  , `general_file`  , General events get logged into this file.
+`/var/log/bind/database.log`  , `database_file`  , Database events get logged into this file.
+`/var/log/bind/security.log`  , `security_file`  , Security events get logged into this file.
+`/var/log/bind/config.log`  , `config_file`  , Configuration and any misconfiguration events get logged into this file.
+`/var/log/bind/resolver.log`  , `resolver_file`  , Resolver events get logged into this file.
+`/var/log/bind/xfer-in.log`  , `xfer-in_file`  , Transfer DNS records inbound events get logged into this file.
+`/var/log/bind/xfer-out.log`  , `xfer-out_file`  , Transfer DNS records outbound events get logged into this file.
+`/var/log/bind/notify.log`  , `notify_file`  , Notify events get logged into this file.
+`/var/log/bind/unmatched.log`  , `client_file`  , Client events get logged into this file.
+`/var/log/bind/client.log`  , `unmatched_file`  , Unmatched events get logged into this file.
+`/var/log/bind/unmatched.log`  , `unmatched_file`  , Unmatched events get logged into this file.
+`/var/log/bind/queries.log`  , `queries_file`  , Query events get logged into this file.
+`/var/log/bind/query-errors.log`  , `query-errors_file`  , Query ERROR events get logged into this file.
+`/var/log/bind/network.log`  , `network_file`  , "Network events get logged into this file. open() close() dropped or downed network interface."
+`/var/log/bind/update.log`  , `update_file`  , Update events get logged into this file.
+`/var/log/bind/update-security.log`  , `update-security_file`  , Security update events get logged into this file.
+`/var/log/bind/dispatch.log`  , `dispatch_file`  , Dispatch events get logged into this file.
+`/var/log/bind/dnssec.log`  , `dnssec_file`  , DNSSEC events get logged into this file.
+`/var/log/bind/lame-servers.log`  , `lame-servers_file`  , Lame server events get logged into this file.
+`/var/log/bind/delegation-only.log`  , `delegation-only_file`  , Delegation events get logged into this file.
+`/var/log/bind/rate-limit.log`  , `rate-limit_file`  , Rate limiting events get logged into this file.
 [/jtable]
 
 Managing Large Private Networks

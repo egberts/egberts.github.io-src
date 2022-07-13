@@ -1,7 +1,7 @@
 title: OpenSSH Environment Variables (v8.8)
 date: 2022-03-14 13:19
 status: published
-tags: OpenSSH, ssh
+tags: OpenSSH, ssh, environment variables
 category: research
 summary: List of OpenSSH Environment Variables (v8.8p1)
 lang: en

@@ -1,7 +1,7 @@
 title: How to read a OpenSSL configuration file
 date: 2021-11-18 11:00
 status: published
-tags: OpenSSL
+tags: OpenSSL, environment variables
 category: research
 slug: pki-openssl-reserved-words
 summary: 15 years of barely ignoring this file, I've finally detailed the `openssl.cnf` file.

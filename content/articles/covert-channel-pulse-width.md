@@ -8,7 +8,7 @@ summary: How to communicate across without changing one bit in payload.
 
 Historical Timeline
 ===================
-I was in a large satellite project working on the [post-Vegas-variant](images/tcp-evolution.png) of TCP network protocol.
+I was in a large satellite project working on the [post-Vegas-variant]({filename}tcp-evolution/tcp-evolution.md) of TCP network protocol.
 
 We were struggling with not only single-bit loss of the TCP channel, but those multi-bit and burst-bits data loss that is commonly found in a typical satellite links.
 

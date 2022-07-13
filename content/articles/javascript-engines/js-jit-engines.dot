@@ -1,0 +1,168 @@
+
+digraph JavaScript_Engine {
+    Netscape [color="#007c84"];
+    Mozilla [color="#e66000"];
+    Netscape -> Mozilla
+
+    Javagator [color="#007c84"];
+    Rhino [color="#007c84"];
+    Netscape -> Javagator -> Rhino 
+      Rhino -> JDK8
+      Rhino -> JDK15
+      Rhino -> Nashorn -> JDK14
+
+    Opera [color="#e20012"];
+    Presto [color="#e20012"];
+    LinearA [color="#e20012"];
+    LinearB [color="#e20012"];
+    Futhark [color="#e20012"];
+    Carakan [color="#e20012"];
+      Presto -> LinearA -> Opera4
+      Presto -> LinearB -> Opera7
+      Presto -> Futhark 
+        Futhark-> Kestrel -> Opera9_5
+        Futhark-> Peregrine -> Opera10
+      Presto -> Carakan
+        Carakan -> Evenes -> Opera10_5
+        Carakan -> Kjevik -> Opera11_0
+        Carakan -> Barracuda -> Opera11_1
+        Carakan -> Swordfish -> Opera11_5
+        Carakan -> Tunny -> Opera11_6
+        Carakan -> Wahoo -> Opera12
+        Carakan -> Marlin -> Opera12_10
+    Opera4 -> Opera7 -> Opera8 -> Opera9_5 -> Opera10 
+    Opera10 -> Opera10_5
+    Opera10_5 -> Opera11_0
+    Opera11_0 -> Opera11_1
+    Opera11_1 -> Opera11_5
+    Opera11_5 -> Opera11_6
+    Opera11_6 -> Opera11_10
+    Opera11_10 -> Opera12
+    Opera12 -> Opera12_10
+    Opera12_10 -> Opera
+
+    Mozilla -> MethodJIT
+    Mozilla -> IonMonkey
+    Mozilla -> OdinMonkey
+    Mozilla -> WarpMonkey
+    Mozilla -> TraceMonkey
+    Mozilla -> IronMonkey
+    IronMonkey -> IronPython
+    Mozilla  -> ScreamingMonkey;
+    ScreamingMonkey -> Internet_Explorer [style=dotted];
+    Mozilla -> Firefox1
+    TraceMonkey -> JagerMonkey -> Firefox3;
+    MethodJIT ->JagerMonkey -> Firefox4
+    IonMonkey -> Firefox18;
+    OdinMonkey -> Firefox22;
+    WarpMonkey -> Firefox84;
+    Firefox1 -> Firefox3 -> Firefox4 -> Firefox18 -> Firefox22 -> Firefox84 -> Firefox;
+
+    Microsoft [color="#00A4EF"];
+    Microsoft -> Chakra;
+
+    Internet_Explorer [color="#00A4EF"];
+    Microsoft_Edge [color="#00A4EF"];
+
+    Chakra [color="#00A4EF"];
+    Chakra -> Internet_Explorer
+
+    Microsoft -> ChakraCore
+    ChakraCore [color="#00A4EF"];
+    ChakraCore -> Microsoft_Edge
+
+
+    Sun_Microsystems -> Java_HotSpot_VM
+    Java_HotSpot_VM -> V8
+
+    WebKit4 -> Blink4
+
+    Crankshaft [color="#1aa260"];
+    Crankshaft -> Blink8
+
+    Blink4 -> Blink8
+    Blink8 -> Blink28
+    Blink28 -> Blink41
+
+    Blink41 -> Blink48
+
+    TurboFan [color="#1aa260"];
+    TurboFan -> Blink41
+
+    Blink48 -> Blink49
+
+    Ignition [color="#1aa260"];
+    Ignition -> Blink49
+    Blink49 -> Blink81
+
+    Blink81 -> Blink
+
+    SparkPlug [color="#1aa260"];
+    SparkPlug -> Blink81
+    V8 [color="#1aa260"];
+    Chrome [color="#1aa260"];
+      V8 -> Chrome
+      V8 -> Chromium
+        Chromium -> Brave
+        Chromium -> Opera8
+        Chromium -> Vivaldi
+        Chromium -> Microsoft_Edge
+    Couchbase [color="#1aa260"];
+      Couchbase -> V8
+    Deno [color="#1aa260"];
+      Deno -> V8
+    Electron [color="#1aa260"];
+      Electron -> V8
+        Electron -> Atom
+        Electron -> Visual_Studio
+      V8 -> MarkLogic
+      V8 -> NativeScript
+      V8 -> Node_js
+      V8 -> Qt_Quick
+    Blink -> V8
+
+    KHTML [color="#0068C6"];
+    KJS [color="#0068C6"];
+    KHTML -> KJS
+    Konqueror [color="#0068C6"];
+    KJS -> Konqueror
+    JavaScriptCore [color="#0068C6"];
+    KJS -> JavaScriptCore
+
+    JavaScriptCore -> WebKit48
+
+    WebKit48 -> WebKit524
+
+    SquirrelFish [color="#0FB5EE"];
+    SquirrelFish -> WebKit524
+    WebKit524 -> WebKit526
+
+    WebKit526 -> WebKit530
+
+    Nitro [color="#0FB5EE"];
+    Nitro -> WebKit530
+    WebKit530 -> WebKit533
+
+    WebKit533 -> WebKit536
+
+    SquirrelFish_Extreme [color="#0FB5EE"];
+    JavaScriptCore -> SquirrelFish_Extreme
+    SquirrelFish_Extreme -> WebKit536
+
+    Safari  [color="#0FB5EE"];
+    WebKit536 -> Safari
+
+    Adobe [color="#cf302a"];
+    Adobe -> AVM2
+
+    Tamarin [color="#cf302a"];
+    FlashPlayer [color="#cf302a"];
+
+    AVM2 [color="#cf302a"];
+    AVM2 -> Tamarin
+    AVM2 -> FlashPlayer
+    Tamarin -> NanoJIT
+
+    NanoJIT -> Firefox3
+    
+}

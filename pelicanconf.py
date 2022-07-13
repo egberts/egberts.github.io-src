@@ -36,7 +36,7 @@ PATH = 'content'
 MY_TEMPLATE_IS = 'm.css'
 
 
-TIMEZONE = 'America/Los_Angeles'
+TIMEZONE = 'America/Chicago'
 
 #  DEFAULT_LANG used in base.html as <html lang=> declarector value.
 DEFAULT_LANG = 'en'

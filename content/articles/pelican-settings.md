@@ -54,7 +54,7 @@ suffix , value type , description
 The common suffixes found in most Pelican's Python-based configuration key
 names are:
 
-[jtable caption="Pelican Settings" separator=u',']
+[jtable caption="Pelican Settings" separator=',']
 Setting name,Value Type,Description
 `ARCHIVE_SAVE_AS`,filespec ,Location of archive subdirectory within the  `OUTPUT` directory in which to contain older articles and pages.  It is common to use {slug} to construct this filespec.
 `ARCHIVE_URL`,url\_path,URL to use in the HTML \<src=\> attribute to store a page or article as an archive file.  It is common to use  {slug} to  construct this URL.
@@ -249,7 +249,7 @@ Setting name,Value Type,Description
 `YEAR_ARCHIVE_URL`,url\_path,URL to use per-year archives of your posts.
 [/jtable]
 
-[jtable caption="Pelican Settings" separator=u',']
+[jtable caption="Pelican Settings" separator=',']
 Setting name,Value Type,Description,Default Value
 `ARCHIVE_SAVE_AS`,filespec ,Location of archive subdirectory within the  `OUTPUT` directory in which to contain older articles and pages.  It is common to use {slug} to construct this filespec., `'archives/{slug}.html'`
 `ARCHIVE_URL`,url\_path,URL to use in the HTML \<src=\> attribute to store a page or article as an archive file.  It is common to use  {slug} to  construct this URL., `'archives/{slug}.html'`

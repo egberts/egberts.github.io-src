@@ -1,7 +1,7 @@
 title: Many Ways to Pass a Password to OpenSSL
 date: 2022-03-19 07:32
 status: published
-tags: OpenSSL
+tags: OpenSSL, environment variables
 category: HOWTO
 summary: See here the many ways to pass a password to the openssl command line.
 slug: openssl-password

@@ -1,7 +1,7 @@
 title: Which Certificate Uses What X509v3 Extensions
 date: 2022-03-19 07:18
 status: published
-tags: OpenSSL, X509v3
+tags: OpenSSL, X509v3, environment variables
 category: research
 summary: So you want to make a blank-type of PKI certificate but unsure of what X509v3 extensions to use.
 lang: en

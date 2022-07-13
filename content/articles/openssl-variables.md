@@ -1,7 +1,7 @@
 title: Using Variables in a OpenSSL Config File
 date: 2022-03-20 11:04
 status: published
-tags: OpenSSL
+tags: OpenSSL, environment variables
 category: HOWTO
 summary: How to specify variable names and reference them in OpenSSL configuration file.
 slug: openssh-variables

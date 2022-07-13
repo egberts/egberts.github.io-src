@@ -1,7 +1,7 @@
 title: Environment Variables for OpenSSL
 date: 2022-03-16 11:20
 status: published
-tags: OpenSSL
+tags: OpenSSL, environment variables
 category: research
 summary: Here are the list of environment variables used by OpenSSL
 lang: en

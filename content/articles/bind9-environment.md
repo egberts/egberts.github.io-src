@@ -2,7 +2,7 @@ Title: ISC Bind9 Environment Names
 Date: 2018-10-17 13:16
 Modified: 2022-02-24 08:41
 Status: published
-Tags: Bind9
+Tags: Bind9, environment variables
 Category: research
 summary: Environment Name Used by ISC Bind9
 
