@@ -87,7 +87,7 @@ to the TLD admin of `example` zone.  Ad naseum, but not quite ad infinitium.
 
 Execuse the ripped-off slogan: my domain, my choice;
 it should be possible to deploy DNSSEC throughout the enteprise, small-medium
-businesses and home labs.  But this is not happening ... for private TLD ... yet.
+businesses and home labs.  But this is not happening ... for private LAN/TLD ... yet.
 
 The idea of continual extension of DNSSEC below your owned `mydomain.tld`
 is already technically practical, and it is in fact commonly deployed.
