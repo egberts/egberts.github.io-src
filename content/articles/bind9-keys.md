@@ -1,6 +1,7 @@
 Title: Bind9 Keys
 Date: 2018-11-13 12:54
 Modified: 2022-04-17 10:43
+Status: published
 Tags: DNSSEC, DNS, Bind9, TSIG
 Category: research
 slug: bind9-keys

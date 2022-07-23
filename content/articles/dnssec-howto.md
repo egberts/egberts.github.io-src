@@ -1,6 +1,7 @@
 Title: DNSSEC HOWTO
 Date: 2018-08-08T16:25
 Modified: 2020-03-04T17:43
+status: published
 Tags: DNSSEC, Bind9, DNS
 Category: research
 summary: How to use DNSSEC

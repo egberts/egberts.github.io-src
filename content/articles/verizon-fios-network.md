@@ -177,18 +177,18 @@ GPON ONT
 * [ActionTEC Router datasheet](https://www.actiontec.com/products/wifi-routers-gateways/fiber/bhr-rev-i)
 * Motorola ONT 1400
 
-[jtable separator="|"]
-Manufacturer| Model| Type| Style| MoCA/Coax| Ethernet/VDSL2| POTS
-Alcatel| I-211M-L| SFU| Interior Desktop<p>Exterior| MoCA| 10/100/1G Ethernet| 2
-Alcatel| O-24121G-A| MDU| Shared| 12| 12: 10/100/1G Ethernet| 24
-Alcatel| O-24121V-A| MDU| Shared| 12| 12: VDSL2| 24
-Alcatel| O-821M-A| SOHO| Exterior| 1: MoCA| 2: 10/100/1G Ethernet| 8
-Motorola| 1000-GI4| SFU| Interior| 1: MoCA| 1: 10/100/1G Ethernet| 2
-Motorola| 1000-GJ4| SFU| Interior| 1: MoCA| 1: 10/100/1G Ethernet| 2
-Motorola| 1000-GT4| SFU| Exterior| 1: MoCA| 1: 10/100/1G Ethernet| 2
-Motorola| 14842| SOHO| Exterior| 1: MoCA| 5: 10/100/1G Ethernet| 8
-Motorola| 6000-GET| MDU| Shared| 1: MoCA| 12: 10/1000/1G Ethernet| 24
-Motorola| 6000-GVT| MDU| Shared| 1: MoCA| 12: VDSL2| 24
+[jtable separator=","]
+Manufacturer, Model, Type, Style, MoCA/Coax, Ethernet/VDSL2, POTS
+Alcatel, I-211M-L, SFU, Interior Desktop<p>Exterior, MoCA, 10/100/1G Ethernet, 2
+Alcatel, O-24121G-A, MDU, Shared, 12, 12: 10/100/1G Ethernet, 24
+Alcatel, O-24121V-A, MDU, Shared, 12, 12: VDSL2, 24
+Alcatel, O-821M-A, SOHO, Exterior, 1: MoCA, 2: 10/100/1G Ethernet, 8
+Motorola, 1000-GI4, SFU, Interior, 1: MoCA, 1: 10/100/1G Ethernet, 2
+Motorola, 1000-GJ4, SFU, Interior, 1: MoCA, 1: 10/100/1G Ethernet, 2
+Motorola, 1000-GT4, SFU, Exterior, 1: MoCA, 1: 10/100/1G Ethernet, 2
+Motorola, 14842, SOHO, Exterior, 1: MoCA, 5: 10/100/1G Ethernet, 8
+Motorola, 6000-GET, MDU, Shared, 1: MoCA, 12: 10/1000/1G Ethernet, 24
+Motorola, 6000-GVT, MDU, Shared, 1: MoCA, 12: VDSL2, 24
 [/jtable]
 
 Legend:

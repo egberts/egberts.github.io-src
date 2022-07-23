@@ -1,5 +1,6 @@
 Title: OpenLDAP Debugging Levels
 Date: 2018-01-14T19:26
+Status: published
 Tags: debugging, openldap
 Category: research
 Summary: How to set debugging level in OpenLDAP client and server programs.

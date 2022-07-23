@@ -1,5 +1,5 @@
 title: Parsing in Python Compendium
-date: 2020-12-29 12:27EST
+date: 2020-12-29 12:27
 status: published
 tags: parsing, python
 category: research

@@ -1,6 +1,7 @@
 Title: Machine Learning Checklist
 Date: 2018-02-21T11:49
 Modified: 2020-02-25T19:23
+Status: published
 Tags: ml, checklist
 Category: research
 summary: A checklist for Machine Learning.

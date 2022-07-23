@@ -1,6 +1,6 @@
 title: Setting up Postfix on Debian
 date: 2022-04-16 14:24
-status: draft
+status: published
 tags: Postfix, SMTP, MTA
 category: HOWTO
 summary: How to Set Up a Postfix Mail Transport Agent

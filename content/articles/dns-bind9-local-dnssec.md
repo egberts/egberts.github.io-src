@@ -1,6 +1,6 @@
 title: Current State with Private Subnets and DNSSEC
 date: 2022-05-08 06:42
-status: draft
+status: published
 tags: DNSSEC, Bind9, DNS
 category: HOWTO
 summary: What's the current situation of DNSSEC and private subnets?
@@ -8,17 +8,16 @@ slug: dns-dnssec-private
 lang: en
 private: False
 
-It would seem like a good thing for administrators of an enterprise 
-or their homelab to set up DNSSEC for their private subnets or 
+It would seem like a good thing for administrators of private LAN (e.g., an enterprise or a homelab) to set up DNSSEC for their private subnets or 
 even private top-level domain names.
 
-But the story of DNSSEC is that this concept far from deployable and
+But the story of DNSSEC for private LAN uses is that this concept is far from deployable and
 does not bode well for its struggling but continuing adoption rate of DNSSEC.
 
-In 2017 and 2018, the DNSSEC adoption rate measured by APNIC.NET actually [declined](https://blog.apnic.net/2019/03/14/the-state-of-dnssec-validation/).  Althou, its adoption rate is still slowly climbing, but still way [too slow](https://blog.apnic.net/2020/03/02/dnssec-validation-revisited/).
+In 2017 and 2018, the DNSSEC adoption rate measured by APNIC.NET actually [declined](https://blog.apnic.net/2019/03/14/the-state-of-dnssec-validation/).  Although, its adoption rate is still slowly climbing, but still way [too slow](https://blog.apnic.net/2020/03/02/dnssec-validation-revisited/).
 
 Even Tony Finch and Evan Hunts discussed this ['private local DNSSEC'](https://fanf.dreamwidth.org/125531.html) for
-enterprise (and implicitly last-mile use such as HomeLab) usages.
+enterprise (and implicitly last-mile use such as HomeLab) usage.
 
 Here is a good recap of what Tony (and most of us) wanted:
 
@@ -35,37 +34,38 @@ I want:
     anchor distribution mechanism
 ```
 
-It is this last point that nearly all enterprise deployers wanted.  
+It is this last point that nearly all (except for probably ISP) DNS admins wanted.  
 Noticed that we got the first one in form of DNS-over-HTTPS (DoH) and 
 DNS-over-TLS (DoT).  Side-note, DoT has better overall security but
 DoH has easier adoption.
 
-So what's the current state of affair ... after 4 years ... for this local private DNSSEC?
+Second item is an ongoing state of integration.
+
+So what's the current state of affair ... after 5 years ... for the third: this local private DNSSEC?
 
 
 # Current State
 
 So far, DLV for Root has been removed from Bind v9.16.  But no 
-suitable replacement is on the horizion as far as we can see.
+suitable replacement is on the horizon as far as we can see.
 Not even the latest Bind 9.20 has it.
 
-In latest Bind 9.16+, there is this new `trust-anchors` clause.
+In the latest Bind 9.16+, there is this new `trust-anchors` clause.
 
-`trust-anchors` clause is only but a general overall setting.  
+`trust-anchors` clause is only a general overall setting.  
 I might even add that it is nearly useless outside of the 13 
 Root DNS (unless you're 
-into erecting a thinly veil of querying privacy by doing this 'in-house').
+into erecting a thin veil of querying privacy by doing this 'in-house').
 
-Take for example the `.test` (or even the newly created [`home.arpa`](https://datatracker.ietf.org/doc/html/rfc8375) domain that is available for 
+Take, for example, the `.test` (or even the newly created [`home.arpa`](https://datatracker.ietf.org/doc/html/rfc8375) domain that is available for 
 anyone to use: DNSSEC would not YET work in those 'private' zone trees.
 
-How did DNSSEC ever stop working for those 'private' zone trees? It didn't
-stop working; just that it was never workable for an enterprise/homelab in the 
-first place.  
+How did DNSSEC ever stop working on those 'private' zone trees? It didn't
+ever stop working; just that it was never workable for a private LAN (enterprise/homelab) in the first place.  
 
-DNSSEC is designed such that valid public-key chaining of each name 
-part of the FQDN is going from top of the zone (`.`) downward to the 
-bottom (your hostname) zone; unbroken links of a chain.
+DNSSEC is designed such that the chaining of valid public-key over each name 
+part of the FQDN is going from the top of the zone (`.`) downward to the 
+bottom (your hostname) zone; unbroken links of a verifiable chain.
 
 To support this public-key chaining, each maintainer of its 
 downward zone name (`myhomelab` in `myhomelan.mydomain.example.com`) must 
@@ -74,26 +74,26 @@ to the owner of `mydomain.example.com.`.
 
 Of course, if you own both the `mydomain` as well as `myhomelan`, 
 then it is no problem to make `myhomelab`
-DNSSEC being valid EXCEPT that you must continue validating the chain 
+DNSSEC is valid, EXCEPT that you must continue validating the chain 
 linkages toward higher zone names.  
 You must repeat the same `DS` RR delivery for each
-zone name until you no longer own that zone name which is 
+zone name until you no longer own that zone name, which is 
 invariably always its TLD or someone else's zone (domain) name.
 
-Next chain link is the DS RR of `mydomain` zone must be sent 
+The next chain link is the DS RR of `mydomain` zone must be sent 
 to the TLD admin of `example` zone.  Ad naseum, but not quite ad infinitium.
 
 # MyDomain, MyChoice
 
 Execuse the ripped-off slogan: my domain, my choice;
-it should be possible to deploy DNSSEC throughout the enteprrise, small-medium
+it should be possible to deploy DNSSEC throughout the enteprise, small-medium
 businesses and home labs.  But this is not happening ... for private TLD ... yet.
 
 The idea of continual extension of DNSSEC below your owned `mydomain.tld`
-is already technically practical, in fact is commonly deployed.
+is already technically practical, and it is in fact commonly deployed.
 
 However, consider this common story; some top-secret corporate lab does 
-not want their DNSSEC to be leaked out to the net, what can 
+not want their DNSSEC to be leaked out onto the net; what can 
 a DNS administrator do?
 
 There are a couple of basic choices today:
@@ -106,12 +106,12 @@ There are a couple of basic choices today:
 It is painfully evident that the first two choices are not protective enough
 alone for the requisite DNSSEC and privacy combined.
 
-First one requires a separate view.  No, `validate-except { mydomain.tld; };`
+The first one requires a separate view.  No, `validate-except { mydomain.tld; };`
 statement setting doesn't cut the mustard, instead it just 
 leaves DNSSEC broken (via un-validated answer).
 
-Second one helps to stem the privacy leakage but one can make an interference
-if given enough depth of zone names of its hostname.  Sure that `deny-answer-aliases` statement setting may help but this solves only half of the privacy in the query-answer exchange.  It still breaks the DNSSEC chain.
+The second one helps to stem the privacy leakage caused, but one can make interference past this weak privacy veil
+if given enough depth the zone names of its hostname.  Sure that `deny-answer-aliases` statement setting may help, but this solves only half of the privacy in the query-answer exchange.  It still breaks the DNSSEC chain.
 
 The third choice isn't even possible with today's DNSSEC validators. 
 The closest nameserver vendor to support DNSSEC of private TLD 
@@ -122,25 +122,25 @@ today's constraints of un-obsoleted IETF RFC specifications).
 # DNS Validator
 
 So why is today's DNSSEC validators not capable of doing this zone cut
-of DNSSEC?  I mean, the validator have this DNS zone cut mechanism, why
+of DNSSEC?  I mean, the validator has this DNS zone cut mechanism. Why
 not a DNSSEC zone cut?
 
 # Zone Cut
 
 What is this "zone cut"?  Zone cut is the boundary between
 authoritative zones.  It also represents the seeking of
-the next authoritative zone.  `SOA` RR is that authoritative DNS record 
+the next authoritative zone.  `SOA` RR is the authoritative DNS record 
 for its parent (next) zone name.
 
 Note: Keep in mind, multiple zone names may be served by the 
 same authoritative nameserver; `mypersonallab.myhomelab.mydomain.tld`
 may have its `myworkstation.mypersonallab.myhomelab.mydomain` all served by
 the same but single authoritative nameserver, so a `myworkstation`
-could still be singularily zone cut as `mydomain`.
+could still be zone cut as `mydomain` singularily.
 
 During a zone cut where a nameserver finds its next authoritative zone
-up the chain, it take the `myhomelab.mydomain.tld`
-and "zone-cut" the `myhomelab` name off leaving us with 
+up the chain, it takes the `myhomelab.mydomain.tld`
+and "zone-cut" the `myhomelab` name off, leaving us with 
 just the `mydomain.tld` remaining.  Then the next step
 is to find the `SOA` for this new `mydomain.tld`.  In turn, you receive 
 an answer containing its nameserver (`NS` RR) for that zone 
@@ -149,13 +149,13 @@ the validator logic of a resolving nameserver.
 
 # DNSSEC Zone Cut
 
-Surely that we could have DNSSEC zone cut in much exactly the same way 
+Surely we could have the DNSSEC zone cut in much exactly the same way 
 as DNS zone cut, no?
 Except that validation is being done with retrieving the
 `DS` RR of its parent zone name in addition to query retrieval of
 its `SOA` RR answer.
 
-Lookup sequence of DNSSEC validator is almost identical to DNS validator
+The lookup sequence of DNSSEC validator is almost identical to DNS validator
 except that it has to go out-of-zone to retrieve the `DS` RR 
 from its parent zone's authoritative nameserver before saying anything
 about the original zone and its cryptographically-proven validity
@@ -200,17 +200,17 @@ it DNSSEC'd based on our own public key.
 * `10.in-addr.arpa.`
 * `whatevermydesiredtldisgoingtobe.`
 
-By having this non-root trust-anchors, we could 
+By having these  non-root trust-anchors, we could 
 have a controlled set of RFC-compliant DNS resolvers herding 
-all the query from its internal net, and still DNSSEC-validate all
+all the queries from its internal net, and still DNSSEC-validate all
 the answers related to the inside.
 
 What needs to change is how the validator logic of an RFC-compliant DNS
  resolver would operate and do this DNSSEC validation.
 
-Such validator logic need not to be a (major) design change nor 
+Such validator logic needs not to be a (major) design change nor 
 a (major) code change; 
-it could be a configuration enhancement in form of a single-logic 
+it could be a configuration enhancement in the form of a single-logic 
 being inserted.
 
 This single logic is the terminator of a chain link and where to
@@ -230,15 +230,15 @@ have to validate the entire DNSSEC chain before declaring the crypto-money
 valid.
 
 Arguably, a full-stop break on a sub-TLD domain trusted key by the 
-DNSSE validator chain loop processing is an OK option for a privately-rolled 
-DNS tree, but never as a publically-available option.  
+DNSSEC validator chain loop processing is an OK option for a privately-rolled 
+DNS tree, but never as a publicly-available option.  
 Until we solve the technical issues of publically-available option, 
 we shouldn't deploy the private TLD DNSSEC yet, despite my trekking
-the desert for 8 years and the need to quench my parched throat for
+the desert for 8 years and the need to quench my parched throat because of
 this.
 
 What if I could make this concept available now, using Bind v9.19?
-I am going to say this just one: 
+I am going to say just this one thing: 
 
     DO NOT DO THIS ON THE INTERNET.
 
@@ -247,7 +247,7 @@ behind a NAT, behind a split-tri-horizon DNS, behind an RPZ firewall,
 for a total of some four-layered DNS craziness and I have 
 my own private Root DNSSEC.
 
-It is really an ongoing effort to do a reductive of the current 9 
+It is really an ongoing effort to make a reductive of the current 9 
 instances of `named` processes that help me to create a 
 fake `168.192.in-addr.arpa` and `home.` zones that works well 
 with the real-world of DNSSEC-secured `168.192.in-addr.arpa` and `home.`; 
@@ -256,7 +256,7 @@ DNSSEC-validated records for anything on the Internet
 (that is DNSSEC-secured) as well as having all my private DNS and 
 its reverse IP also to be all DNSSEC-validated.
 
-Our end-goal should be simple: to have a a workstation with DNSSEC validation 
+Our end-goal should be simple: to have a workstation with DNSSEC validation 
 enabled as "absolutely always" that works for home, enterprise and
 Internet Cafe.  (Keep in mind, no ISP providers want this).
 
@@ -266,16 +266,16 @@ if not DNSSEC-secured, then return any DNS answer as-is."
 
 # Where's the Beef?
 
-The key thing here is to modifying the resolver's behavior so that
+The key thing here is to modifythe resolver's behavior so that
 it can do the faking of `DS` record of the parent zone, then
 keep faking after each zone cut, and keep faking all the way up to your 
 very-own (fake) Root DNS.  That is about as concise as I can make it.
 
 Faking of the `DS` needs not to be a dynamic on-the-fly thing; you create
 the public/private key, insert the public key into the parent zone, 
-and repeat for each zone name until you reach the root zone ... of your own.
+and repeat each zone name until you reach the root zone ... of your own.
 
-Can ISC Bind9 do all this?  Yeah, it can.  But I had spread the 
+Can ISC Bind9 do all this?  Yeah, it can.  But I have spread the 
 functionality of this concept of a private TLD over many separate processes
 of `named` daemon. 
 
@@ -288,13 +288,13 @@ and supply a working DS public key
 # 
 
 
-Such feasibility would massively restart DNSSEC adoption rate at a clippier
+Such feasibility would massively restart DNSSEC adoption rate at a faster
 rate: not only in deployment rate but also in training of general admins
-to using complex DNSSEC alongside with the DNSSEC deployment artists.
+to use complex DNSSEC alongside with the DNSSEC deployment artists.
 
-What are the downside to doing this DNSSEC-fake-zone-cut?
+What are the downsides to doing this DNSSEC-fake-zone-cut?
 
-In chime the cybersecurity and protocol experts, would repeatedly say:
+In chime, the cybersecurity and protocol experts would repeatedly say:
 
 * Man-in-the-Middle (MitM) 
 * Faked DNSSEC
@@ -305,7 +305,7 @@ In chime the cybersecurity and protocol experts, would repeatedly say:
 Would it surprise you to learn that nearly ALL workstations 
 do not make use of DNSSEC?  Even Linux? Probably most IoT too?
 
-Let me stop you there, do not start enforcing DNSSEC at your workstation
+Let me stop you there. Do not just be starting the enforcing of DNSSEC in your workstation
 by inserting the following settings into your 
 `/etc/resolv.conf` file ... yet:
 
@@ -314,28 +314,28 @@ edns0 yes
 options trust-ad
 ```
 
-I did warned ya.  Problem there is that there is only about 20% adoption
-rate of DNSSEC out in the Internet.  Your web browsing experience will surely
-suffer, if you do not heed my warning.
+I did warn ya.  The problem there is that there is only about 20% adoption
+rate of DNSSEC on the Internet.  Your web browsing experience will surely
+suffer if you do not heed my warning.
 
 So, why is this a potential MitM for DNSSEC at workstation-level?  It isn't.
-It is not even an issue whether the workstation has only-DNSSEC,
-also-DNS-validated or no-DNSSEC option.
+It is not even an issue whether the workstation has the option of `only-DNSSEC`,
+`also-DNS-validated` or `no-DNSSEC` option.
 
 Think about that:  
 
 * If DNSSEC is (mostly) turned off at nearly every
-workstations, what do you care if DNSSEC is not validated or not; 
-it is ignoring DNSSEC completely and still getting to any working
+workstation, what do you care if DNSSEC is not validated or not? 
+It is ignoring DNSSEC completely and still getting to working
 websites ... as usual.  
 
-* If your workstation DNSSEC is always-enforcing, 
+* If your workstation DNSSEC is `always-enforcing`, 
 then you simply would not be able to visit those DNSSEC-protected 
 that got hijacked or even any other non-DNSSEC websites;
 that's a security feature and a plus for DNSSEC.  For end-user
 experience, not so much.
 
-* If also-DNS-validated; you also can still visit other websites who 
+* If `also-DNS-validated`; you also can still visit other websites who 
 are still not using DNSSEC.  End-user experience would still be
 the same kind of awesome and perhaps ever more safer so now 
 that hijacked DNSSEC websites will get blocked by DNS clients.
@@ -356,20 +356,20 @@ new DNSSEC zone cut.
 
 The DNS-related MitM is usually the domain of 
 a broken-in/unpatched nameservers or app/libresolv/libresolver 
-of workstations; but not the DNSSEC-protocol-layer when it comes to
+of workstation; but not the DNSSEC-protocol-layer when it comes to
 attempting MitM (at its protocol layer).
 
 In short, DNSSEC is a subset of DNS: to do DNS MitM at protocol-layer 
 is hard, but not impossible; to do DNSSEC MitM at protocol-layer is next 
-to impossible, of course this is assuming a deployment of
+to impossible. Of course this is assuming a deployment of
 properly-hardened, currently-patched nameservers.
 
 
 # Faked DNSSEC
 
-For Faked DNSSEC scenario, you still are required to carefully chose your
+For Faked DNSSEC scenario, you are still required to carefully choose your
 resolver, preferably the resolvers that you maintain and control.
-Faking DNSSEC via network protocol is still solely at the
+Faking DNSSEC via network protocol is still solely in the
 realm of where the zone cut is made; if it is under the fewest
 number of authoritative controllers, the better the 
 security of its resolver.
@@ -385,8 +385,8 @@ Ideally, you would like that private-key stored inside a
 Hardware Security Module (HSM).
 
 The Root DNS Servers has an elaborate but heavily audited
-procedure of its public/private key generation 
-and store its generated key in a vault and distrbuted toward 
+procedure for its public/private key generation 
+and stores its generated key in a vault and distributed toward 
 a PCI-based HSM card at each of the 13 Root nameservers.
 
 The `.com` (and a few others') private key is stored in 
@@ -401,7 +401,7 @@ stored as a file in your nameserver's filesystem; most
 Fortune-500 businesses will use an HSM PCI card right there
 for their own domain names.
 
-At DNSSEC protocol level, this is pretty well hardened by the
+In DNSSEC protocol level, this is pretty well hardened by the
 virtue of its public-key/private-key scheme and its 
 security of where each zone-cut private-key is stored at.  
 
@@ -432,10 +432,10 @@ whereas TLD `.home` requires DNSSEC.  Can we all do an
 Many "talking-cans"/VoIP/cable/ISP providers need to deal with 
 many different gateway routers/modem manufacturers
 and yet have this consistent domain name.  That is
-what their marketing folks are saying but in reality these 
-providers are basically trying to avoid DNSSEC deployment; 
-Doesn't bode well for a unify goal of DNSSEC deployment
-but still, I am going off the rail here a little.
+what their marketing folks are saying, but in reality these 
+providers are basically trying to avoid DNSSEC deployment. 
+Doesn't bode well for a unified goal of DNSSEC deployment
+but, I am going off the rail here a little.
 
 
 
@@ -452,10 +452,10 @@ trust-anchors {
 ```
 
 This `trust-anchors` won't buy you any useful functionality other than 
-just to save a query from going out to the network (but it 
+just to save a query from going out of the network (but it 
 remains a good privacy setting to have).
 
-Historical: Bind v9.15.1 had introduced a new `trust-anchors` clause
+Historical: Bind v9.15.1 introduced a new `trust-anchors` clause
 that  had its obsoleted `trusted-keys` and `managed-keys` clauses merged 
 together and replaced with.  Also, `dnssec-keys` clause was the 
 shortest-lived keyword which got introduced in v9.15.2 and 
@@ -469,7 +469,7 @@ new, old, description
 [/jtable]
 
 `trust-anchors` is not only a top-level clause but can also be found 
-within the block of a `view` or a `server` clauses.
+within the block of a `view` or a `server` clause.
 
 
 

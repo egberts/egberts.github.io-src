@@ -1,6 +1,7 @@
 Title: Using Large Network Packet
 Date: 2018-09-24T09:38
 category: research
+status: published
 tags: ethernet, packet
 summary: How to use over-sized Ethernet packets in your home network.
 

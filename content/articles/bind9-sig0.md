@@ -1,6 +1,7 @@
 Title: Bind9 SIG(0)
 Date: 2022-04-16 03:30
 Tags: Bind9, DNS
+Status: published
 Category: research
 summary: How to use SIG(0) instead of TSIG.
 

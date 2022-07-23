@@ -1,8 +1,12 @@
 
 digraph JavaScript_Engine {
+    // rankdir=LR;
     Netscape [color="#007c84"];
+
+  subgraph cluster_mozilla {
+    label = "Mozilla";
     Mozilla [color="#e66000"];
-    Netscape -> Mozilla
+    Netscape -> Firefox1
 
     Javagator [color="#007c84"];
     Rhino [color="#007c84"];
@@ -10,6 +14,11 @@ digraph JavaScript_Engine {
       Rhino -> JDK8
       Rhino -> JDK15
       Rhino -> Nashorn -> JDK14
+
+  }
+
+  subgraph cluster_opera {
+    label = "Opera";
 
     Opera [color="#e20012"];
     Presto [color="#e20012"];
@@ -40,17 +49,19 @@ digraph JavaScript_Engine {
     Opera11_10 -> Opera12
     Opera12 -> Opera12_10
     Opera12_10 -> Opera
+  }
 
-    Mozilla -> MethodJIT
-    Mozilla -> IonMonkey
-    Mozilla -> OdinMonkey
-    Mozilla -> WarpMonkey
-    Mozilla -> TraceMonkey
-    Mozilla -> IronMonkey
+  subgraph cluster_firefox {
+    label = "Mozilla Firefox";
+    // Mozilla -> MethodJIT
+    // Mozilla -> IonMonkey
+    // Mozilla -> OdinMonkey
+    // Mozilla -> WarpMonkey
+    // Mozilla -> TraceMonkey
+    // Mozilla -> IronMonkey
     IronMonkey -> IronPython
-    Mozilla  -> ScreamingMonkey;
-    ScreamingMonkey -> Internet_Explorer [style=dotted];
-    Mozilla -> Firefox1
+    ScreamingMonkey;
+    // Mozilla -> Firefox1
     TraceMonkey -> JagerMonkey -> Firefox3;
     MethodJIT ->JagerMonkey -> Firefox4
     IonMonkey -> Firefox18;
@@ -58,24 +69,36 @@ digraph JavaScript_Engine {
     WarpMonkey -> Firefox84;
     Firefox1 -> Firefox3 -> Firefox4 -> Firefox18 -> Firefox22 -> Firefox84 -> Firefox;
 
-    Microsoft [color="#00A4EF"];
-    Microsoft -> Chakra;
+  }
 
+  subgraph cluster_microsoft {
+    label = "Microsoft";
+
+
+    ScreamingMonkey -> Internet_Explorer [style=dotted];
     Internet_Explorer [color="#00A4EF"];
-    Microsoft_Edge [color="#00A4EF"];
 
     Chakra [color="#00A4EF"];
     Chakra -> Internet_Explorer
 
-    Microsoft -> ChakraCore
+    Chakra -> ChakraCore
+
+    Microsoft_Edge [color="#00A4EF"];
+
     ChakraCore [color="#00A4EF"];
     ChakraCore -> Microsoft_Edge
 
+  }
+
 
     Sun_Microsystems -> Java_HotSpot_VM
-    Java_HotSpot_VM -> V8
+    Java_HotSpot_VM -> WebKit4
 
     WebKit4 -> Blink4
+
+  subgraph cluster_v8_google {
+    label = "Google Chrome";
+
 
     Crankshaft [color="#1aa260"];
     Crankshaft -> Blink8
@@ -100,27 +123,31 @@ digraph JavaScript_Engine {
     SparkPlug [color="#1aa260"];
     SparkPlug -> Blink81
     V8 [color="#1aa260"];
-    Chrome [color="#1aa260"];
-      V8 -> Chrome
-      V8 -> Chromium
-        Chromium -> Brave
-        Chromium -> Opera8
-        Chromium -> Vivaldi
-        Chromium -> Microsoft_Edge
-    Couchbase [color="#1aa260"];
-      Couchbase -> V8
-    Deno [color="#1aa260"];
-      Deno -> V8
-    Electron [color="#1aa260"];
-      Electron -> V8
-        Electron -> Atom
-        Electron -> Visual_Studio
-      V8 -> MarkLogic
-      V8 -> NativeScript
-      V8 -> Node_js
-      V8 -> Qt_Quick
+    // Chrome [color="#1aa260"];
+      // V8 -> Chrome
+      // V8 -> Chromium
+        // Chromium -> Brave
+        // Chromium -> Opera8
+        // Chromium -> Vivaldi
+        // Chromium -> Microsoft_Edge [style="dotted"];
+    // Couchbase [color="#1aa260"];
+      // V8 -> Couchbase;
+    // Deno [color="#1aa260"];
+      // V8 -> Deno
+    // Electron [color="#1aa260"];
+      // V8 -> Electron
+        // Electron -> Atom
+        // Electron -> Visual_Studio
+      // V8 -> MarkLogic
+      // V8 -> NativeScript
+      // V8 -> Node_js
+      // V8 -> Qt_Quick
     Blink -> V8
 
+  }
+
+  subgraph cluster_kde {
+    label = "KDE Konquerer";
     KHTML [color="#0068C6"];
     KJS [color="#0068C6"];
     KHTML -> KJS
@@ -129,7 +156,14 @@ digraph JavaScript_Engine {
     JavaScriptCore [color="#0068C6"];
     KJS -> JavaScriptCore
 
-    JavaScriptCore -> WebKit48
+  }
+
+    JavaScriptCore -> WebKit4
+    WebKit4 -> WebKit48
+
+  subgraph cluster_apple {
+    label = "Apple Safari";
+
 
     WebKit48 -> WebKit524
 
@@ -146,11 +180,15 @@ digraph JavaScript_Engine {
     WebKit533 -> WebKit536
 
     SquirrelFish_Extreme [color="#0FB5EE"];
-    JavaScriptCore -> SquirrelFish_Extreme
+    //JavaScriptCore -> SquirrelFish_Extreme
     SquirrelFish_Extreme -> WebKit536
 
     Safari  [color="#0FB5EE"];
     WebKit536 -> Safari
+  }
+
+  subgraph cluster_adobe {
+    label = "Adobe Flashplayer";
 
     Adobe [color="#cf302a"];
     Adobe -> AVM2
@@ -164,5 +202,6 @@ digraph JavaScript_Engine {
     Tamarin -> NanoJIT
 
     NanoJIT -> Firefox3
+  }
     
 }

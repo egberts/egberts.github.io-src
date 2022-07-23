@@ -1,6 +1,7 @@
 Title: Comparison of Memory Allocation Methods
 Date: 2017-10-20T12:53
 Modified: 2022-03-14T04:53
+Status: published
 Tags: comparison, malloc
 Category: research
 summary: A comparison of memory allocation libraries.

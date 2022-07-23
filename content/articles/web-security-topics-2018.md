@@ -1,5 +1,6 @@
 Title: Web Security Advanced Topic 2018
 Date: 2018 Nov 22
+Status: published
 Tags: http, security, exploit
 Category: research
 Summary: Advanced exploits of web security in 2018

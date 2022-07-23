@@ -1,6 +1,6 @@
 title: Setting up Bind9 for a Mail Server
 date: 2022-04-16 14:24
-status: draft
+status: published
 tags: Bind9, DNS
 category: HOWTO
 summary: How to Set Up a Bind9 for a Mail Transport Agent on Debian Bullseye

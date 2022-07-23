@@ -1,4 +1,4 @@
-title: JavaScript Interperter Analysis, Mozilla Unified
+title: JavaScript Interpreter Analysis, Mozilla Unified
 date: 2022-07-04 09:14
 status: published
 tags: JavaScript, Firefox

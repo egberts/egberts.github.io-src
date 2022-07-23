@@ -1,6 +1,7 @@
 Title: Bind9 Directories and Files
 Date: 2018-10-18 18:56
 Modified: 2022-02-24 09:13
+status: published
 slug: bind9-directories
 tags: Bind9
 category: research

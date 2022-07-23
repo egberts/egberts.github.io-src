@@ -1,5 +1,6 @@
 Title: SpiderMonkey Overview
 Date: 2018-09-24T10:35
+Status: published
 Tags: javascript, js engine, browser, mozilla
 Category: javascript
 Summary: SpiderMonkey is a cool JavaScript utility.

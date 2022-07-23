@@ -1,8 +1,8 @@
 Title: Bro-IDS HOWTO
 Date: 2017-11-01 05:11
 Modified: 2020-03-04 17:02
-Category: HOWTO
 Status: published
+Category: HOWTO
 Tags: Zeek, Bro, environment variables
 summary: How to use Bro IDS.
 

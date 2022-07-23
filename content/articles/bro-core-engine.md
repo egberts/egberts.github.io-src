@@ -1,5 +1,6 @@
 title: Bro Core Engine
 date:  2018-05-16T14:20:12
+status: published
 tags: bro, debugging
 category: research
 summary: How to debug the Core Engine of Bro-IDS.

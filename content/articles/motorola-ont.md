@@ -1,5 +1,6 @@
 Title: Motorola ONT Specification
 Date: 2018-10-15T11:02
+Status: published
 Tags: Verizon, Motorola, ONT, FiOS
 Category: research
 summary: Things I've discovered about Verizon FiOS white box in your basement.

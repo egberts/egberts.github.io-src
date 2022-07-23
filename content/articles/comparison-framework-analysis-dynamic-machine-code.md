@@ -1,6 +1,7 @@
 Title: Comparison of dynamic analysis framework for machine code
 Date: 2018-09-24T10:11
 Tags: framework, comparison, machine code, dynamic analysis
+Status: published
 Category: research
 summary: A table of comparison of dynamic analysis framework for machine code processing.
 

@@ -1,6 +1,7 @@
 Title: Profiling Zeek
 Date: 2018-09-24 09:33
 Modified: 2020-03-11 09:33
+Status: published
 Tags: Zeek, Bro, profiling
 Slug: zeek-profiling
 category: research

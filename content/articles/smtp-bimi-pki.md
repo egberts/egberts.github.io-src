@@ -1,6 +1,6 @@
 title: PKI for BIMI
 date: 2022-04-14 11:13
-status: draft
+status: published
 tags: BIMI, SMTP, mail
 category: research
 summary: I was curious as to how a new CA infrastructure is forming for this BIMI PKI part.

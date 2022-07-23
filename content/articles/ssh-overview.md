@@ -1,6 +1,7 @@
 Title: OpenSSH Overview
 Date: 2016-09-24T12:08
 Modified: 2022-03-15 08:00
+Status: published
 Tags: ssh, OpenSSH, environment variables
 Category: research
 Summary: An overview of OpenSSH server and client.

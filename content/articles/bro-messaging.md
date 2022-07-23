@@ -1,6 +1,7 @@
 Title: Zeek messaging
 Date:  2018-05-16 14:16:28
 Modified:  2020-03-11 14:04:11
+Status: published
 Tags: Zeek, Bro, API
 Category: research
 Summary: Enabling debug messages of Zeek script
