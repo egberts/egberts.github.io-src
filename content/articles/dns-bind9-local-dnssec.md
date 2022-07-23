@@ -43,6 +43,7 @@ Second item is an ongoing state of integration.
 
 So what's the current state of affair ... after 5 years ... for the third wishlist item covering this local private DNSSEC?
 
+This article covers the bowel of the DNS validators found in both DNS nameservers (authoritative and resolvers) and most hosts' resolver mechanims in details.
 
 # Current State
 
@@ -57,7 +58,7 @@ I might even add that it is nearly useless outside of the 13
 Root DNS (unless you're 
 into erecting a thin veil of querying privacy by doing this 'in-house').
 
-Take, for example, the `.test` (or even the newly created [`home.arpa`](https://datatracker.ietf.org/doc/html/rfc8375) domain that is available for 
+Take, for example, the [`.test`](https://www.rfc-editor.org/rfc/rfc2606.html) (or even the newly created [`home.arpa`](https://datatracker.ietf.org/doc/html/rfc8375) domain that is available for 
 anyone to use: DNSSEC would not YET work in those 'private' zone trees.
 
 How did DNSSEC ever stop working on those 'private' zone trees? It didn't
