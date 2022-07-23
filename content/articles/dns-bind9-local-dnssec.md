@@ -35,8 +35,8 @@ I want:
 ```
 
 It is this last point that nearly all (except for probably ISP) DNS admins wanted.  
-Noticed that we got the first one in form of DNS-over-HTTPS (DoH) and 
-DNS-over-TLS (DoT).  IMHO:  DoT has better overall security but
+Noticed that we got the first one in form of [DNS-over-HTTPS (DoH)](https://datatracker.ietf.org/doc/html/rfc8484) and 
+[DNS-over-TLS (DoT)](https://datatracker.ietf.org/doc/html/rfc8310).   IMHO:  DoT has better overall security but
 DoH has easier adoption rate.
 
 Second item is an [ongoing state of integration](https://datatracker.ietf.org/doc/draft-ietf-dnsop-dns-catalog-zones/).
