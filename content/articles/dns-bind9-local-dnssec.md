@@ -41,7 +41,7 @@ DoH has easier adoption.
 
 Second item is an ongoing state of integration.
 
-So what's the current state of affair ... after 5 years ... for the third: this local private DNSSEC?
+So what's the current state of affair ... after 5 years ... for the third wishlist item covering this local private DNSSEC?
 
 
 # Current State
