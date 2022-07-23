@@ -41,7 +41,7 @@ DoH has easier adoption rate.
 
 Second item is an [ongoing state of integration](https://datatracker.ietf.org/doc/draft-ietf-dnsop-dns-catalog-zones/).
 
-So what's the current state of affair ... after 5 years ... for the third wishlist item covering this local private DNSSEC?
+So what's the current state of affair ... after 5 years ... for the third wishlist item covering this [local private DNSSEC](https://www.rfc-editor.org/rfc/rfc6303.html)?
 
 This article covers the bowel of the DNS validators found in both DNS nameservers (authoritative and resolvers) and most hosts' resolver mechanims in details.
 
