@@ -47,14 +47,14 @@ This article covers the bowel of the DNS validators found in both DNS nameserver
 
 # Current State
 
-So far, DLV for Root has been removed from Bind v9.16.  But no 
+So far, DLV for Root has been [removed from](https://kb.isc.org/docs/aa-01310) Bind v9.16.  But no 
 suitable replacement is on the horizon as far as we can see.
-Not even the latest Bind 9.20 has it.
+Not even the latest Bind 9.20 has anything closely resembling this DNSSEC lookaside validation.
 
 In the latest Bind 9.16+, there is this new `trust-anchors` clause.
 
 `trust-anchors` clause is only a general overall setting.  
-I might even add that it is nearly useless outside of the 13 
+I might even add that this option is nearly useless outside of the 13 
 Root DNS (unless you're 
 into erecting a thin veil of querying privacy by doing this 'in-house').
 
