@@ -39,7 +39,7 @@ Noticed that we got the first one in form of DNS-over-HTTPS (DoH) and
 DNS-over-TLS (DoT).  IMHO:  DoT has better overall security but
 DoH has easier adoption rate.
 
-Second item is an ongoing state of integration.
+Second item is an [ongoing state of integration](https://datatracker.ietf.org/doc/draft-ietf-dnsop-dns-catalog-zones/).
 
 So what's the current state of affair ... after 5 years ... for the third wishlist item covering this local private DNSSEC?
 
