@@ -36,8 +36,8 @@ I want:
 
 It is this last point that nearly all (except for probably ISP) DNS admins wanted.  
 Noticed that we got the first one in form of DNS-over-HTTPS (DoH) and 
-DNS-over-TLS (DoT).  Side-note, DoT has better overall security but
-DoH has easier adoption.
+DNS-over-TLS (DoT).  IMHO:  DoT has better overall security but
+DoH has easier adoption rate.
 
 Second item is an ongoing state of integration.
 
