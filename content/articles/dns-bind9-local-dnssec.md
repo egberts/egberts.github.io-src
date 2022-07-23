@@ -125,7 +125,7 @@ So why is today's DNSSEC validators not capable of doing this zone cut
 of DNSSEC?  I mean, the validator has this DNS zone cut mechanism. Why
 not a DNSSEC zone cut?
 
-# Zone Cut
+## Zone Cut
 
 What is this "zone cut"?  Zone cut is the boundary between
 authoritative zones.  It also represents the seeking of
@@ -147,7 +147,7 @@ an answer containing its nameserver (`NS` RR) for that zone
 name `mydomain`. This is the basic mechanism of a zone cut within
 the validator logic of a resolving nameserver.
 
-# DNS Zone Cut
+## DNS Zone Cut
 
 Surely we could have the DNSSEC zone cut in much exactly the same way 
 as DNS zone cut, no?
@@ -184,7 +184,7 @@ that DS into its own parent zone database file.
 
 Tedious but common, uh?
 
-# DNSSEC Zone Cut
+## DNSSEC Zone Cut
 
 What if we can have our own DNSSEC-capable TLD or even sub-TLD on top
 of the existing DNSSEC trees?  
@@ -302,7 +302,7 @@ In chime, the cybersecurity and protocol experts would repeatedly say:
 * Faked DNSSEC
 * DDoS via DNSSEC
 
-# DNS MitM
+## DNS MitM
 
 Would it surprise you to learn that nearly ALL workstations 
 do not make use of DNSSEC?  Even Linux? Probably most IoT too?
