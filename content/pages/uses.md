@@ -98,10 +98,44 @@ helps us to reduce OpenSSL option conflict errors between options by providing a
 - I also use [Python](https://www.python.org/) ([3!](http://www.onthelambda.com/2014/05/13/damn-the-torpedoes-full-speed-ahead-making-the-switch-to-python-3/)) pretty regularly, especially for natural language processing (with [nltk](http://www.nltk.org/)) and web scraping (with [Requests](http://docs.python-requests.org/en/master/) + [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)). Every few months I play with pandas and numpy and Jupyter, but I'm far more comfortable with R for scientific computing.
 - I use RStudio for editing R files, but I use [Sublime Text 3](https://sublimetext.com/3) for everything else.
 
+# Source Code Revision Controls
+- Maven
+- Git (Github, Gitlab, sr.ht)
+- CVS
+- Mercurial (Mozilla Firefox)
+- Atlassian Confluence
+- Wikipedia 
+- Jira
+- Bugzilla
+- CT/CI
+
+# Languages
+- C/C++
+- Assembly, x86, MIPS, ARM, MPB860, i960, 
+- Python
+- R
+- JavaScript
+- Haskell
+- Nim
+
+# Administration
+
+I keep all my autoconfiguration of many network daemons in [here](https://github.com/egberts/easy-admin).
+
+# Security
+
+- CISecurity Level 1 and 2
+- many [government standards](https://dodiac.dtic.mil/wp-content/uploads/2022/07/2022-06-24-csiac-dod-cybersecurity-policy-chart.pdf)
+
+
 # Network Layer
 
 - maintain a default deny-firewall using newer `nftables`.  Also maintain Vim syntax highlighter for 430 keywords used eithin `nft` command line [here](https://github.com/egberts/vim-nftables).
-# Hardware
+- Wrote a protocol to connect LAN bridges together from 1,000s of miles apart and called it [Bridge Relay Element](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=4096); that one worked really well with remote sites like savannah Africa via X.25, Frame Relay, and shortwave radio.
+- Wrote, rewrote, rewrote, ported, and re-ported PPP-over-Ethernet for many employers.
+
+
+# Systems
 
 - Xeon, 24-core, with a mixture of 24TB RAID5 HD storage and 6TB RAID1 SDD storage.
 - Dell Optiplex and Precison hardware for all my gateway, servers and security
@@ -110,14 +144,22 @@ helps us to reduce OpenSSL option conflict errors between options by providing a
   iPods and odd Internet thingies.
 - Raspberry Pi for my Kerberos/LDAP ticketing and multiple-session/single-login SAML needs across all GUI devices above (except for iPhone).
 - PinePhone (the original) is also a hobby of mine, with focus on profiling the cellular firmware API.
-- Efficient Network ENI3600 ATM PCI adapter card.  Helped John Williams of US Navy to extend Linux ATM driver for this product
-- MIPS evaluation board, a complete bootup of VxWorks Real-Time OS.
-- Motorola MPC850, a complete writeup of bootup sequence; wrote PPPoE from scratch
+- often make my own toolchains from scratch (full toolchains for cross-platforms).
+
+
+# Hardwares
+
+- wrote a bootloader for a radition-hardened CPU.  Improved TCP protocol (called TCP-Westwood) with Sally Floyd of ISC for bit rot compensation.
+- Xilinx ARM, Real-Time Linux, ruggedized portable test unit; full integration of U-Boot, BusyBox, USB file downloader; Yocto build.
+- performed full FPGA troubleshooting and resolution for RocketIO issues within noisy EMP environment.  Successful demonstration at customer site. Project approved.
+- Efficient Network ENI3600 ATM PCI adapter card.  Helped John Williams of US Navy to extend Linux ATM driver for this product.  Also wrote PPPoE protocol for maximum theoretical throughput.
+- MIPS evaluation board, a complete bootup of VxWorks Real-Time OS, enahnced Ethernet driver for maximum throughput.
+- Motorola MPC850, a complete writeup of bootup sequence; wrote PPPoE from scratch, again.
 - Intel i960, a complete writeup of bootup sequence and Ethernet driver for VxWorks RT-OS
 - many Software-Defined Radio using many [tools](https://www.rtl-sdr.com/big-list-rtl-sdr-supported-software/)
 - Motorola 68000, vendor OS, pure assembly programming, including floppy drive controller
-- used to memorize the entire instruction set of Motorola 68000 and Intel x86-32.
-- breadboard, lots and lots of breadboards
+- used to memorize the entire instruction set of Motorola 68000 and Intel x86-32 in hexidecimal; and programmed assembly using hexicode values, as well as mnenmonic opcode/operands.
+- breadboard, I have lots, lots and lots of breadboards
 
 # Writing
 
@@ -129,4 +171,6 @@ helps us to reduce OpenSSL option conflict errors between options by providing a
 ## Patent Efforts
 
 - I've written, filed, and have been awarded several patents.  Those awarded
-  patents are available upon request.  Filed patents are pending and hopefully awarded. Unfiled patents will be kept as unfiled and unreported.
+  patents are available upon request.  
+- Filed patents are pending and hopefully will be awarded. 
+- Unfiled patents will be kept as unfiled and unreported.
