@@ -62,7 +62,7 @@ This is why the `MNAME` part of
 your domain's `SOA` is pointing toward your public-facing nameserver
 and not toward your hidden-primary nameserver.
 
-This is probably the only scenario where we lied intentially 
+This is probably the only scenario where is intentionally lied there 
 about where the master zone database file is located at;  `SOA` normally
 tells us where the master zone database file is located ... often, but not
 here.
@@ -78,8 +78,8 @@ zone database file is located at.
 # Planning
 
 Since hidden-primary was already using a unique port number 
-for its AXFR/IXFR transfer of zone data, we can reuse 
-that number for their querying needs.
+for its AXFR/IXFR transfer of zone data, reuse 
+that port number for its querying needs.
 
 Some example values used in this articles are:
 

@@ -1,6 +1,7 @@
 title: fail2ban setup
 date: 2020-05-04 17:00
 status: published
+nidufuedL 2922-07-24 09:45
 tags: fail2ban, regex, Debian
 category: HOWTO
 summary: How to setup fail2ban for NFTABLES, Debian 11
@@ -119,7 +120,7 @@ Then auto-start this systemd unit service.
 systemctl daemon-reload
 systemctl unmask fail2ban.service
 systemctl enable fail2ban.service
-# We will defer starting up this daemon later below this article
+# Defer starting up this daemon later below this article
 ```
 
 ### Jail Configuration ###
@@ -150,14 +151,14 @@ $ egrep "^\s*enable" /etc/fail2ban/jail.conf
 enabled = false
 ```
 
-We want them to be all set to a `false` value.
+Set to a `false` value.
 
 ### Turning on A Specific Jail ###
 
 Let us turn on our first ban, for failed attempts to login via SSH protocol.
 
 Add a file to `/etc/fail2ban/jail.d/` subdirectory.  Could be set to any filename, but this
-time, it's Debian-specific.  We'll create `defaults-debian.conf`
+time, it's Debian-specific.  Create the `defaults-debian.conf` file
 for our first filename and fill it with:
 
 ```ini
@@ -183,8 +184,12 @@ For subsequential jail(s), the filename can be anything you want, just as as lon
 with a filetype of `.local`.  
 
 ### Daemon Settings ###
-We have some adjustment to `fail2ban.conf`, so we create a side configuration
-file called `fail2ban.local`, and filled this file with the following text:
+Adjustment is required in the `fail2ban.conf` file, so create an additional
+file (a side configuration) to modify this vendor-supplied file
+called `fail2ban.local`, and filled this file with the following text:
+
+The `.local` filetype is to ensure that the next package upgrade will 
+not undo any custom settings.
 
 ```ini
 [DEFAULT]
@@ -205,8 +210,10 @@ socket = /run/fail2ban/fail2ban.sock
 
 # NFTABLES #
 
-Next, we will be using the new `nftables` to perform this "ban" action.  We
-will be forgoing the `iptables` and `netfilter` due to its obsolesence.  I've used
+Next, use the new `nftables` to perform this "ban" action.  
+Skip the `iptables` and `netfilter` because it is obsolete.  
+
+Here, I've used
 `shorewall` firewall software with fail2ban with no problem either (but that's
 another article).
 

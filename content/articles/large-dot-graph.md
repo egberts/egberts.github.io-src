@@ -1,5 +1,6 @@
 title: Viewing (selectively) large DOT or GV graph
 date: 2020-10-09 09:31
+modified: 2022-07-24 09:53
 status: published
 tags: DOT, graphviz, python3-graphviz, SVG, Python, python-graphviz, bison
 category: HOWTO
@@ -103,7 +104,7 @@ zoom, zoom, zoom, view-drag, view-drag, view-drag, zoom, zoom, zoom.
 
 PRUNE THE TREE
 ==============
-We could selectively prune the graph tree to get what we want.  And I want 
+The graph tree can be selectively pruned to get what one desires.  And I want 
 that.
 
 ```python

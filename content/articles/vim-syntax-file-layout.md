@@ -80,7 +80,7 @@ Syntax files may be found in the following directories:
 * System - /usr/share/vim/vim81/syntax
 * Local - $HOME/.vim/syntax
 
-We will use `vim` as our choice of editor in this blog demostration.  You will
+One will use `vim` as our choice of editor in this blog demostration.  You will
 find that `vim` also has its own syntax highlighting for its own Vimscript
 format.  
 
@@ -369,7 +369,7 @@ definitions with a 4 to 8 letter prefix after
 checking against the `/usr/share/vim/vim81/syntax` for any already-taken 
 prefix letterings.
 
-We will start all syntax identifiers with `named`.  I re-used `named` 
+Let us start all syntax identifiers with `named`.  I re-used `named` 
 as I had intended to replace it.
 
 Mapping Keywords to Syntax Identifier
@@ -394,7 +394,7 @@ server <ip_addr> {
 ```
 
 And we will need to map our new syntax identifer for each part of the 
-config text file.  We can use those documented BNF as our labeling guide.
+config text file.  One can use those documented BNF as our labeling guide.
 
 For the snippet of config given above, we could use the following
 example as our syntax identifiers:
@@ -677,7 +677,7 @@ I would take Google's Vim Syntax Guideline and use `\\m` where I can.
 
 Number Pattern
 --------------
-We have a generic number pattern with no range checking.
+A generic number pattern having no range checking looks like:
 
 ```vim
 server 192.1.1.124/24 {
@@ -739,8 +739,8 @@ syn keyword namedOV_MaxRefreshTime max-refresh-time
 \ nextgroup=namedOV_MaxRefreshTime
 \ containedin=namedStmt_ViewSection
 ```
-Well, we know that the unit is `Time`, just don't know what kind of time.  
-We had to consult the ARM documentation to determine what increment this kind of time is. Turns out to be in 'seconds'.  Rewrite the
+Well, the unit is `Time`, just don't know what kind of time.  
+I had to consult the ARM documentation to determine what increment this kind of time is. Turns out to be in 'seconds'.  Rewrite the
 syntax name as:
 
 ```vim

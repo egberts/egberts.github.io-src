@@ -338,7 +338,7 @@ include statement, and possibly error highlighting.
 
 Mind-Meld
 =========
-We have two disparate sets of terminologies, Vim and Bison.
+There are two disparate sets of terminologies, Vim and Bison.
 
 Now, putting it all together.
 
@@ -374,7 +374,7 @@ syn keyword nftables_base_cmd skipwhite skipnl skipempty
 \     export monitor table rule 
 \     ip ip6 inet netdev bridge arp 
 ```
-We could call it a night and be done with the creation of 
+One could call it a night and be done with the creation of 
 this Vim syntax for `nftables`.  But, there's more... like 1400 more
 of these states in the `nftables` LR-parser state machine.  Plus 
 I like RED highlighting for any errors of typing.

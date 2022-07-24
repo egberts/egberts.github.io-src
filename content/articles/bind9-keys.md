@@ -88,15 +88,14 @@ needs to be done and a new key is created each time `named` daemon restarts.
 Downside is that you get the default `hmac-sha256` and you, as an administrator,
 must remember to restart DHCP server for everytime that `named` restarts.
 
-If you want `hmac-sha512`, manual key generation is the way to go.  We
+If you want `hmac-sha512`, manual key generation is the way to go.  One
 could symbolically link the `/etc/bind/rndc.key` into `/etc/dhcp` and
-be done here.  But here we are going to create a new key labelled
-uniquely apart from the `rndc-key` used by `rndc` utility.
+be done here.  
 
-To manually create the key, we can re-use the `named` built-in key 
-name, `local-ddns` here.
+To manually create the key, re-use the `named`'s built-in key 
+name: `local-ddns`.
 
-To use an algorithm better than `hmac-sha256`, we execute:
+To use an algorithm better than `hmac-sha256`, execute:
 
 ```bash
 rndc-confgen -a -A hmac-sha512 -b 512 local-ddns
@@ -119,9 +118,9 @@ For more details on `rndc` setup, see [Bind9 `rndc` Setup]({filename}dns-bind9-r
 The only place that SIG(0) key is used for is by the ISC Bind9 `nsupdate` utility
 in communicating with `named` daemon.
 
-To create one SIG(0) for all the zones in `/var/lib/bind/keys/`, we could; but not here.
+One could create one SIG(0) for all the zones in `/var/lib/bind/keys/`, but not here.
 
-Instead, we always want an unique SIG(0) for each `nsupdate` user or for each `nsupdate`/zone.
+Instead, it is desired to use an unique SIG(0) for each `nsupdate` user or for each `nsupdate`/zone.
 
 To generate a public/private pair of SIG(0) keys:
 

@@ -1,5 +1,6 @@
 title: Setting up Bridge using Systemd in Debain9
 date: 2020-07-10 14:35
+modified: 2022-07-24 10:02
 status: published
 tags: bridge, systemd, debian9
 slug: howto-bridge-systemd-debian9
@@ -104,13 +105,12 @@ The two ethernet interface names are `eth0` and `eth1`.  If you had
 "Predictable Network Interface Device Names" turned on, then the link
 name would be something like `enp3s0` and `enp3s1` as an example.
 
-You should want your default gateway interface to be the first interface, so 
-we picked `eth0`.
+To set the default gateway interface to be on the first interface, this example uses `eth0`.
 
 First Ethernet Link
 -------------------
 
-For `eth0`, we create a config file named `10-eth0-wired-802.3.link`.
+For `eth0`, create the config file named `10-eth0-wired-802.3.link`.
 The file type must ends with `.link`.
 
 The content of the `10-eth0-wired-802.3.link` would look like:
@@ -141,7 +141,7 @@ the NIC card will be on standby to watch for any Wake-On-LAN magic value.
 
 Second Ethernet Link
 --------------------
-For `eth1`, we create a config file named `10-eth0-wired-802.3.link`.
+For `eth1`, create the config file named `10-eth0-wired-802.3.link`.
 The file type must ends with `.link`.
 
 The content of the `13-eth1-wired-802.3.link` would look like:
@@ -181,8 +181,8 @@ netdev Config File
 netdev Bridge interface
 ----------------
 
-First, create a virtual bridge interface. We tell systemd to create a 
-device named br0 that functions as an ethernet bridge.
+First, create a virtual bridge interface that will tell systemd to create a 
+device named `br0` to function as an ethernet bridge.
 
 `vim /etc/systemd/network/30-bridge-br0.netdev`
 and fill file with:
@@ -212,8 +212,8 @@ Note that the interface br0 is listed but is still DOWN at this stage.
 Bind Ethernet to Bridge
 -----------------------
 The next step is to add to the newly created bridge a network 
-interface. In the example below, we add any interface that matches 
-the name `en*` into the bridge br0.
+interface. An interface that matches 
+the name `en*` into the bridge br0 is being added below:
 
 ```bash
 vim /etc/systemd/network/50-bind-br0-slave-eth0.network
@@ -260,7 +260,7 @@ Boot Container to br0
 ---------------------
 Add option to boot the container
 
-As we want to give a separate IP for host and container, we need to Disconnect networking of the container from the host. To do this, add this option --network-bridge=br0 to your container boot command.
+To give a separate IP for host and container, one needs to Disconnect networking of the container from the host. To do this, add this option `--network-bridge=br0` to your container boot command.
 
 ```bash
 systemd-nspawn --network-bridge=br0 -bD /path_to/my_container

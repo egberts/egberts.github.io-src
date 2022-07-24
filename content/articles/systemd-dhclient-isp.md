@@ -1,6 +1,6 @@
 Title: Systemd and ISC DHCP Client
 Date: 2018-10-14T16:23
-Modified: 2022-02-24 12:13
+Modified: 2022-07-24 09:35
 Status: published
 Tags: dhclient, DHCP, systemd, ISP
 Category: research
@@ -36,7 +36,7 @@ systemd-analyze dot --order \
 As one can see that most people don't have dhclient@eth0.service systemd
 unit file.
 
-We are going to create a .gv file and convert it to SVG as shown below:
+Create a `.gv` file and convert it to SVG as shown below:
 
 ```bash
 dot -Tsvg < /tmp/custom.gv > /tmp/custom.svg

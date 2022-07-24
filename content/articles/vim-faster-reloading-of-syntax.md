@@ -22,9 +22,9 @@ I prefer my simplistic X-WindowManager `ALT-Tab` key sequence here.
 Developing Syntax File
 ----------------------
 Syntax file is where all the development of highlighting goes into.  
-We won't be able to see any visble effect here.   
+One won't be able to see any visble effect here.   
 
-We call this Vim edit session in our first 
+Let us call this Vim edit session in our first 
 terminal console, our DEVELOPMENT window.
 If I am creating a new syntax file, such as ISC Bind9 named configuration), I
 would be editing `~/.vim/syntax/bind-named.vim`) file in this
@@ -34,7 +34,7 @@ Viewing Highlighted File
 ------------------------
 Text file (example or under test)  is where we can view our new 
 highlightings.  Second terminal console host the
-second Vim editor session.  We VIEW new highlights in VIEW window, from
+second Vim editor session.  Let us VIEW the new highlights in VIEW window, from
 reading syntax files changed by our effort made within DEVELOPMENT window.
 
 Develop in one window; view in another window.  DEVELOP, VIEW, DEVELOP, VIEW.
@@ -85,11 +85,11 @@ Then new shell command:
 # Press ENTER to execute: vim named.vim
 ```
 
-just to VIEW a change to the syntax file.  We are down to seven (7) keystrokes.  
+just to VIEW a change to the syntax file.  Now, it is minimized to seven (7) keystrokes.  
 
 Bah.  Surely, there is that single keystroke method to do all that jazz somewhere.  
 
-And there is.  We can:
+And there is.  One could do one of the followings:
 
 * Forget the Vim write/quit `:wq` command
 * Forget the bash shell command to open file in Vim editor session.

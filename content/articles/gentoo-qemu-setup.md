@@ -81,7 +81,7 @@ then this is your new starting point.
 ## Enable Swapper
 
 ```
-swapon
+swapon /dev/vda2
 ```
 
 # Mount the root partition
@@ -498,11 +498,132 @@ or for a static kernel build without any module support.
     genkernel --menuconfig bzImage # (module-less)
 ```
 
-# Configure GRUB2 Bootloader
 
 
 
-# Rebuild Bootloader using GRUB2
+# System Install
+
+## Filesystem Table (`/etc/fstab`)
+
+Fill the `/etc/fstab` with the following content:
+
+```
+# Adjust any formatting difference and additional partitions created 
+# from the Preparing the disks step
+/dev/vda1   /boot        ext4    defaults,noatime     0 2
+/dev/vda2   none         swap    sw                   0 0
+/dev/vda3   /            ext4    noatime              0 1
+  
+/dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
+```
+
+## Host and Domain Information
+
+```bash
+echo 'hostname="tux"' > /etc/conf.d/hostname
+```
+
+## Password Quality
+
+To bastardize the password quality to that those of 1980-style:
+
+Edit the line to reflect in the `/etc/security/passwdqc.conf` file:
+
+```ini
+min-default=24,8,8,7
+match=0
+```
+
+Now you can use any 8-char simple password or longer.
+
+```bash
+passwd    # enter in your root password
+```
+
+## System Clock Timezone
+
+Edit the timezone to your desire setting (I use UTC) in `/etc/conf.d/hwclock` file:
+```ini
+clock="UTC"
+```
+
+
+# Tools
+
+## Syslog
+
+Install the smallest syslog daemon possible, `sysklogd` and activate them at bootup:
+
+```bash
+emerge app-admin/sysklogd
+rc-update add sysklogd default
+```
+
+## Remote Access (SSH)
+
+Activate SSH server daemon:
+
+```bash
+rc-update add sshd default
+```
+
+On OpenRC, ensure that the serial console section in /etc/inittab are
+commented out (prepend with `#`) in `/etc/inittab` file:
+
+```
+# SERIAL CONSOLES
+#s0:12345:respawn:/sbin/agetty 9600 ttyS0 vt100
+#s1:12345:respawn:/sbin/agetty 9600 ttyS1 vt100
+```
+
+## Time Synchronization
+
+Install `chronyd` and activate it:
+
+```bash
+emerge net-misc/chrony
+rc-update add chronyd default
+
+
+## Filesystem Tools
+
+Install BtrFS tools:
+
+```bash
+emerge sys-fs/btrfs-progs
+```
+
+
+## Network Tools
+
+### DHCP Client
+
+We are using ISC DHCP client, because our ISP DHCP server is complex enough:
+
+```bash
+emerge dhcp dhcpd-syntax
+```
+
+
+# Bootloader 
+
+## Selecting Bootloader Package
+
+To select a Grub2 bootloader:
+
+```bash
+emerge --ask --verbose sys-boot/grub
+emerge --ask --update --newuse --verbose sys-boot/grub
+```
+
+## Install GRUB2 Bootloader
+
+```bash
+grub-install /dev/vda
+```
+
+
+## Configuring GRUB2
 
 ```bash
    # reads from /etc/default/grub
@@ -510,3 +631,15 @@ or for a static kernel build without any module support.
 
    grub-mkconfig -o /boot/grub/grub.cfg
 ```
+
+# Rebooting
+
+Exit and then reboot
+
+```console
+(chroot) / # exit
+/root # reboot
+```
+
+
+Enjoy

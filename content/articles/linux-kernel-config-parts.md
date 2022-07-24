@@ -1,5 +1,6 @@
 title: How to maintain small multiple configs for Linux kernels
 date: 2022-04-27 04:10
+modified: 2022-07-24 09:59
 status: published
 tags: Linux, kernel
 category: HOWTO
@@ -188,7 +189,7 @@ that you will be pummeled with the daunting task of
 answering yes, 'n'o, 'n'o, 'y'es, 'y'es, enter, 'm'odule, 'n'o ... 
 for about 1,000 times (or papercuts).
 
-Instead of a single-prompt/multiple-times approach, we can have a 
+Instead of a single-prompt/multiple-times approach, a 
 text file containing just those names of selected Kconfig variables 
 and merge them into the master `.config` file.
 

@@ -83,8 +83,8 @@ a Vimscript of:
 syn keyword nftables_LIST list skipwhite nextgroup=nftables_LIST_list_cmd
 ```
 
-Detailed explaination of above Vim command:  We are instructing Vim 
-editor to label this operation as `nftables_LIST` and to 
+Detailed explaination of above Vim command:  Vim 
+editor is being instructed to label this operation as `nftables_LIST` and to 
 look for a `list` keyword after skipping any and all whitespaces, 
 if the keyword matches then go to the set of group called 
 `nextgroup=`.  In the above example, there is only one nextgroup: 
@@ -155,7 +155,7 @@ and a label for the object itself.
 The trick is determine how to handle multiple outward flow with 
 the simplistic Vim function call.
 
-Using the function arguments, We could use a list variable containing
+Using the function arguments, one could use a list variable containing
 a bunch of gotos then pass that list into function argument(s).
 
 Or we could use multiple arguments (after the label and pattern arguments)
@@ -202,7 +202,7 @@ same object (being reused) are not being terminated.  Such as
   D  E F   G
 ```
 
-We have already complicated our new virtual function with many arguments.
+It is already increasing our new virtual function with many (complex) arguments.
 Recap of arguments of our ideal virtual function is:
 
 1. current syntax pathway 
@@ -212,7 +212,7 @@ Recap of arguments of our ideal virtual function is:
 3. goto(s)
 and this function returns:
 
-We also need to be adding "PATH" way into our syntax tree somewhere,
+In adding a "PATH" way into our syntax tree somewhere,
 adding already to its overburdened argument list of our 
 not-so-fancy, but dreamy, virtual function.  
 K.I.S.S. principle is going gone, eh? Or is it?  
@@ -387,7 +387,7 @@ or shorten it to
 ```vim
 syn match nftables_EOS contained /[ \t]\{0,16}[^\n;# ]/ 
 ```
-We don't need to see beyond 16 character for an error.  First character
+No need to see beyond 16 character for an error.  First character
 is more than sufficient, 16 is used to show you where 
 the error is by its big long red box.
 
@@ -409,21 +409,21 @@ I formatted it this way so that the 'match' keywords are indented
 in another 4-char purely for readability sake.  Not overly concerned 
 with excessive line counts ... yet.
 
-We still haven't made a function prototype yet because this is as terse
+Still haven't made a function prototype yet because this is as terse
 as it is going to be.... no need for a function there.
 
 Basic Building Blocks
 ---------------------
 
-We still need some things out of the way with the simpliest of building
-blocks.  We are going to need:
+Need some things out of the way with the simpliest of building
+blocks.  This requires:
 
 1.  Common prefix labeling
 2.  Highlighter
 
 Common prefix of variable name is required within Vim environment as 
 to ensure that it doesn't interferes with other Vim plugins. 
-We use `nftables_` as our common preofix.  It doesn't make sense 
+Let us use `nftables_` as our common prefix.  It doesn't make sense 
 to be doing:
 
 ```vim
@@ -520,7 +520,7 @@ an end-node or not?  Or make two separate functions? Mmmm.
 
 Here, we're going to take the two-functions approach.  Let me tell you 
 why: reading code should have functions whose name tells us what it does
-exactly.   We cannot always figure out what the argument does or not
+exactly.   Thus one cannot always figure out what the argument does or not
 at first glance.  So, two-function approach, it is.
 
 Even bigger reason for choosing the two-function approach is that we want to 
@@ -614,7 +614,7 @@ either one.
 
 And here we really want to be doing syntax error checking from thereon.
 
-We get an error condition at this point of which it will be highlight as
+An error condition appears at this point of which it will be highlight as
 bright red box:
 ```nft
     list ruleset ip6 no-such-thing
@@ -696,7 +696,7 @@ contain either a single long string containing comma-separated values
 the function
 argument list) using `varg` technique (think C-language `printf()`).
 
-Note: We couldn't pass a set list variable through a function argument.  
+Note: One couldn't pass a set list variable through a function argument.  
 I've tried and failed.  Vim documentation has horrible examples too.
 StackOverflow didn't help either.
 
@@ -722,7 +722,7 @@ Long CSV string makes it nice to drop in next to the Vim syntax
 
 The real question is that is there a reason to work with individual
 group inside this `next_groups` argument? The answer is yes.
-We want to do ERROR CHECKING to ensure that such a group name 
+Ensure that ERROR CHECKING occurs to ensure that such a group name 
 is properly and correctly typed and that such a group name EXISTS!
 Ahhhhh, existance test.  Remember the previous problem, we've decided
 on full-spec Vim group name as an approach so this works here as well.

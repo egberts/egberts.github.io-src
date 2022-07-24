@@ -25,10 +25,11 @@ File/Directory, Description
 
 Fail2ban Options
 
-There is only one section within `fail2ban.(conf|local)` file:  \[Definition\].
+There is only one section within `fail2ban.(conf|local)` file, called `[Definition]`.
 
-For the \[Definition\] section:
+For the `[Definition]` section:
 [jtable]
+keyword, description
 socket,
 pidfile,
 loglevel,
@@ -38,9 +39,11 @@ syslogsocket,
 
 ## Filter Config File ##
 
-Filter Options
-For the \[XXXX\] section:
+Filter Options are put under a custom labeled section name.
+
+For the `[XXXX]` section:
 [jtable]
+keyword, description
 prefregex,
 ignoreregex,
 failregex,
@@ -87,9 +90,9 @@ sender, Email address that the email will be sending from.
 usedns, Perform DNS lookup using OS-provided domain name resolver.
 [/jtable]
 
-Let’s explain one example:
+Following example explains further:
 
-In your customized copy of jail configuration (`/etc/fail2ban/jail.local`):
+In the customized copy of a jail configuration (`/etc/fail2ban/jail.local`):
 
 ```ini
 [sshd]
@@ -104,7 +107,7 @@ maxretry = 5
 bantime = 3600
 ```
 
-Log path can vary, adjust it on your system (OS). Based on rules above, we’re monitoring SSH log (/var/log/secure), and we’re banning anyone (for 1 hour, 3600 seconds) who fails to log 5 times within 2 minutes (120 seconds). Rules are pretty straight forward. We’ve specified “sshd” filter, so if you go to /etc/fail2ban/filter.d/sshd.conf, you’ll se a number of failregex rules, used to match login attempts from log file.
+Log path can vary, adjust it on your system (OS). Based on rules above, we’re monitoring SSH log (`/var/log/secure`), and we’re banning anyone (for 1 hour, 3600 seconds) who fails to log 5 times within 2 minutes (120 seconds). Rules are pretty straight forward.  With "`sshd`" filter specified, go to `/etc/fail2ban/filter.d/sshd.conf`, there will be a number of `failregex` rules that are  used to match login attempts from log file.
 
 To whitelist (ignore) an IP, add them to the ignoreip line:
 
@@ -130,7 +133,7 @@ findtime = 60
 maxretry = 3
 ```
 
-Next we need that filter. Check your web server (Apache/nginx) logs:
+Look for that filter in the web server (Apache/nginx) logs:
 
 ```
 /var/log/nginx/access.log.1:121.169.192.227 - - [19/Sep/2018:01:41:23 +0000] "GET /phpmyadmin/index.php?pma_username=root&pma_password=root&server=1 HTTP/1.1" 200 10050 "-" "Mozilla/5.0"
@@ -138,7 +141,7 @@ Next we need that filter. Check your web server (Apache/nginx) logs:
 /var/log/nginx/access.log.1:121.169.192.227 - - [19/Sep/2018:01:41:23 +0000] "GET /phpmyadmin/index.php?pma_username=root&pma_password=r00t&server=1 HTTP/1.1" 200 10050 "-" "Mozilla/5.0"
 ```
 
-The IP 121.169.192.227 is trying to bruteforce its way in (well known malicious IP). We’ll try to make their life a bit more difficult. Make a file in your /etc/fail2ban/filter.d/phpmyadmin.conf, and insert:
+The IP 121.169.192.227 is trying to bruteforce its way in (well known malicious IP). Let us make their life a bit more difficult. Make a file in your `/etc/fail2ban/filter.d/phpmyadmin.conf`, and insert:
 
 ```
 [Definition]
@@ -160,7 +163,7 @@ $ fail2ban-client reload phpmyadmin
 
 Fail2ban testing regex
 
-When you finish creating some filter it’s good idea to test it before activating it. For that we have fail2ban-regex:
+After creating a filter, it’s good idea to test it before activating it. For that we have this `fail2ban-regex` tool:
 
 ```console
 $ fail2ban-regex /var/log/nginx/access.log /etc/fail2ban/filter.d/phpmyadmin.conf
@@ -194,7 +197,7 @@ Lines: 4078 lines, 0 ignored, 56 matched, 4022 missed [processed in 0.33 sec]
 Missed line(s): too many to print.  Use --print-all-missed to print all 4022 lines
 ```
 
-We have a match. In case filter/regex is wrong, we’ll probably end up with no matches:
+There is a match. In case filter/regex is wrong, this will probably end up with no matches:
 
 ```
 Lines: 3315 lines, 0 ignored, 0 matched, 3315 missed [processed in 0.23 sec]

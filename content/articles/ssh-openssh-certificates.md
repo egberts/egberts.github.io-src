@@ -543,12 +543,12 @@ Also the final argument is the file to read for the PRIVATE key in PEM format.  
 How To Configure Host Certificates
 ==================================
 
-We will start by configuring certificates that will authenticate our servers to our clients. This will allow our clients to connect to our servers without needing to question the authenticity of the server.
+Let us start by configuring certificates that will authenticate our servers to our clients. This will allow our clients to connect to our servers without needing to question the authenticity of the server.
 
-We begin on the machine that we will be using as the certificate authority. In this example, we’ll refer to this as “auth.example.com”.
+Begin on the machine that that will be using as the certificate authority. In this example, we’ll refer to this as “auth.example.com”.
 Generating Signing Keys
 
-First, we need to generate some RSA keys that will function as the signing keys. Use any user you’d like, but the root user is probably a good idea. We will be creating keys called “server_ca” and “server_ca.pub” since these will be used to authenticate our servers.
+First, we need to generate some RSA keys that will function as the signing keys. Use any user you’d like, but the root user is probably a good idea. Create these keys called “server_ca” and “server_ca.pub” since these will be used to authenticate our servers.
 
 Let’s create these keys in our home directory:
 
@@ -566,7 +566,7 @@ Signing Host Keys
 
 Now that we have our keys, we can begin signing our host keys.
 
-We should start by signing the host key of the certificate authority itself. We can do this using the following syntax:
+Start by signing the host key of the certificate authority itself. Use the following syntax:
 
 <pre> ssh-keygen -s <span class=“highlight”>signing_key</span> -I <span class=“highlight”>key_identifier</span> -h -n <span class=“highlight”>host_name</span> -V +52w <span class=“highlight”>host_rsa_key</span> </pre>
 
@@ -580,122 +580,163 @@ Let’s go over what all of this means.
 
 Afterwards we specify the key that we want to sign.
 
-In our case, to sign our own host RSA key, we will use a line that looks like this. We are going to identify this server as “host_auth_server”. We will be prompted for the passphrase we used when creating the signing key:
+In our case, to sign our own host RSA key, we will use a line that looks like this. identify this server as "`host_auth_server`".  Then a prompt appears for the passphrase we used when creating the signing key:
 
-ssh-keygen -s server_ca -I host_auth_server -h -n auth.example.com -V +52w /etc/ssh/ssh_host_rsa_key.pub
+```console
+$ ssh-keygen -s server_ca -I host_auth_server \
+    -h -n auth.example.com \
+    -V +52w \
+    /etc/ssh/ssh_host_rsa_key.pub
+Signed host key `/etc/ssh/ssh_host_rsa_key-cert.pub`: id "host_auth_server" serial 0 for auth.example.com valid from 2014-03-20T12:25:00 to 2015-03-19T12:26:05
+```
 
-Signed host key /etc/ssh/ssh_host_rsa_key-cert.pub: id "host_auth_server" serial 0 for auth.example.com valid from 2014-03-20T12:25:00 to 2015-03-19T12:26:05
-
-As you can see from the output, our certificate is valid for one year. It has been created in the same directory as our server host key (/etc/ssh/) and is called “ssh_host_rsa_key-cert.pub”.
+As you can see from the output, our certificate is valid for one year. It has been created in the same directory as our server host key (in `/etc/ssh/` directory) and is called "`ssh_host_rsa_key-cert.pub`".
 
 Now that we have signed our host key on the certificate authority itself, we can sign the host key for the separate SSH server we’re trying to authenticate to clients.
 
-Copy the host key from our SSH server. We’ll refer to this machine as “sshserver.example.com”. You can do this using scp:
+Copy the host key from our SSH server. Refer to this machine as the "`sshserver.example.com`". You can do this using scp:
 
-cd ~
-scp root@sshserver.example.com:/etc/ssh/ssh_host_rsa_key.pub .
+```console
+$ cd ~
+$ scp root@sshserver.example.com:/etc/ssh/ssh_host_rsa_key.pub .
+```
 
-Now, we can create a certificate from this file using the same method we used above. We’ll need to change some values to refer to the new host we’re signing:
+Now, create the certificate from this file using the same method we used above. Change some values to refer to the new host that is being signed:
 
+```
 ssh-keygen -s server_ca -I host_sshserver -h -n sshserver.example.com -V +52w ssh_host_rsa_key.pub
 
 Signed host key ssh_host_rsa_key-cert.pub: id "host_sshserver" serial 0 for sshserver.example.com valid from 2014-03-20T12:40:00 to 2015-03-19T12:41:48
+```
 
-Now, we need to copy the generated certificate file back onto the host. Again, we can use scp for this:
+Now, copy the generated certificate file back onto the host. Again, using `scp` for this:
 
-scp ssh_host_rsa_key-cert.pub root@sshserver.example.com:/etc/ssh/
+```console
+$ scp ssh_host_rsa_key-cert.pub root@sshserver.example.com:/etc/ssh/
+```
 
 Afterwards, we can delete both the SSH server’s public key and certificate from our authentication server:
 
+```bash
 rm ssh_host_rsa_key.pub ssh_host_rsa_key-cert.pub
+```
 
 We now have the signed certificates in place, we just need to configure our components to use them.
-Configuring Components to Use Host Certs
 
-First, we need to continue with both of our servers (auth.example.com and sshserver.example.com) to make them aware of the certificate files we created.
 
-On both of these machines, we’ll have to edit the main SSH daemon configuration file. Make sure you are editing the sshd_config file, not the ssh_config file:
+# Configuring Components to Use Host Certs
 
+First, we need to continue with both of our servers (`auth.example.com` and `sshserver.example.com`) to make them aware of the certificate files we created.
+
+On both of these machines, we’ll have to edit the main SSH daemon configuration file. Make sure you are editing the `sshd_config` file, not the `ssh_config` file:
+
+```bash
 sudo nano /etc/ssh/sshd_config
+```
 
 If you can find a HostCertificate line, modify it. Otherwise, add this to the bottom of the file. We need to establish to path to our host certificate file:
 
+```
 HostCertificate /etc/ssh/ssh_host_rsa_key-cert.pub
+```
 
 Save and close the file when you are finished.
 
 Now, restart the SSH daemon to make these changes happen:
 
+```
 sudo service ssh restart
+```
 
 Do this on all of the servers you are configuring host certificates for.
 
 Now, our servers are configured to use the certificate, but our client does not know how to check the certificate that the server will present.
 
-On our client machine, which we’ll be referring to as “client.example.com”, open or create the “~/.ssh/known_hosts” file:
+On our client machine, which we’ll be referring to as "`client.example.com`", open or create the "`~/.ssh/known_hosts`" file:
 
+```bash
 nano ~/.ssh/known_hosts
+```
 
-We need to remove any entries that have to do with the servers we’re configuring for certificate entry. It may be best to delete everything.
+Need to remove any entries that have to do with the servers we’re configuring for certificate entry. It may be best to delete everything.
 
 Afterwards, we need to add a special entry that specifies the public key that we should use to check the certificate that our hosts will give us during login. Start it off with @cert-authority. Afterwards, it can include a domain restriction where the key will be applied, followed by the public certificate authority key that we’ve been signing everything with.
 
 On your certificate authority machine, you can get the public certificate signing key by typing:
 
-cat ~/server_ca.pub
+```console
+$ cat ~/server_ca.pub
 
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxC+gikReZlWEnZhKkGzhcNeRD3dKh0L1opw4/LQJcUPfRj07E3ambJfKhX/+G4gfrKZ/ju0nanbq+XViNA4cpTIJq6xVk1uVvnQVOi09p4SIyqffahO9S+GxGj8apv7GkailNyYvoMYordMbIx8UVxtcTR5AeWZMAXJM6GdIyRkKxH0/Zm1r9tsVPraaMOsKc++8isjJilwiQAhxdWVqvojPmXWE6V1R4E0wNgiHOZ+Wc72nfHh0oivZC4/i3JuZVH7kIDb+ugbsL8zFfauDevuxWeJVWn8r8SduMUVTMCzlqZKlhWb4SNCfv4j7DolKZ+KcQLbAfwybVr3Jy5dSl root@auth
+```
 
-Using this information, the line in your ~/.ssh/known_hosts file should look like:
+Using this information, the line in your `~/.ssh/known_hosts` file should look like:
 
+```
 @cert-authority *.example.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxC+gikReZlWEnZhKkGzhcNeRD3dKh0L1opw4/LQJcUPfRj07E3ambJfKhX/+G4gfrKZ/ju0nanbq+XViNA4cpTIJq6xVk1uVvnQVOi09p4SIyqffahO9S+GxGj8apv7GkailNyYvoMYordMbIx8UVxtcTR5AeWZMAXJM6GdIyRkKxH0/Zm1r9tsVPraaMOsKc++8isjJilwiQAhxdWVqvojPmXWE6V1R4E0wNgiHOZ+Wc72nfHh0oivZC4/i3JuZVH7kIDb+ugbsL8zFfauDevuxWeJVWn8r8SduMUVTMCzlqZKlhWb4SNCfv4j7DolKZ+KcQLbAfwybVr3Jy5dSl root@auth
+```
 
 Save and close the file when you’re done.
 
-Now, when you visit the SSH server for the first time from your client (using the full hostname), you should not be asked whether you trust the remote host. This is because the host has presented its host certificate to you, signed by the certificate authority. You’ve checked your known_hosts file and verified that the certificate is legitimate.
+When you visit the SSH server for the first time from your client (using the full hostname), you should not be asked whether you trust the remote host. This is because the host has presented its host certificate to you, signed by the certificate authority. You’ve checked your `known_hosts` file and verified that the certificate is legitimate.
 
 
 How To Configure User Keys
 ==========================
 
-Now that we’ve learned how to authenticate servers to our users, we can also configure our certificate authority to authenticate our users to our servers.
+Now that we’ve learned how to authenticate servers to our users, one can then configure our certificate authority to authenticate our users to our servers.
 
 As before, this process will start on our certificate authority server. We will need to generate a new set of keys, this time, to sign user certificates:
 
+```bash
 ssh-keygen -f users_ca
+```
 
 Again, select a passphrase so that your key will be protected if someone gains access.
-Configuring Servers to Accept Logins with the User Certification
+
+
+## Configuring Servers to Accept Logins with the User Certification
 
 When you are done, you will need to copy the public key onto each of your SSH servers that need to validate user authenticity. We will do this using scp as usual:
 
+```
 scp users_ca.pub root@sshserver.example.com:/etc/ssh/
+```
 
 We need to modify our SSH daemon configuration on our SSH server to look for this key.
 
-On our “sshserver.example.com” host, open the configuration file:
+On our "`sshserver.example.com`" host, open the configuration file:
 
+```
 sudo nano /etc/ssh/sshd_config
+```
 
 At the bottom, below our HostCertificate line, we need to add another line that references the file we just copied over:
 
+```
 TrustedUserCAKeys /etc/ssh/users_ca.pub
+```
 
 Again, we’ll need to restart the SSH daemon for these changes to take place:
 
+```
 sudo service ssh restart
+```
 
-Signing User Login Keys
+## Signing User Login Keys
 
-Now that the servers are configured to trust keys signed by the users_ca key, we need to actually sign the users’ authentication keys so that this scheme will work.
+SSH Server is now configured to trust keys signed by the `users_ca` key, we need to actually sign the users’ authentication keys so that this scheme will work.
 
-First, we need to get our client key onto the certificate authority server with scp. From the cert server, type:
+First, to get our client key onto the certificate authority server with scp, type:
 
+```console
+$ vi user_ca
 <pre> cd ~ scp <span class=“highlight”>username</span>@client.example.com:/home/<span class=“highlight”>username</span>/.ssh/id_rsa.pub . </pre>
+```
 
-Now that we have the key on the cert machine, we can sign it using our users_ca key. This will be very similar to last time we signed keys using the server_ca keys, only now, we don’t include the -h parameter, because these are user keys.
+With the key on the cert machine, sign it using our `users_ca` key. This will be very similar to last time the keys got signed using the `server_ca` keys, only now, don’t include the `-h` parameter, because these are for user keys.
 
-The command we want is something like this. Change the “username” value to reflect the name of the user you’re signing for easier management:
+The command we want is something like this. Change the "`user_username`" value to reflect the name of the user you’re signing for easier management:
 
 ```bash
 $ ssh-keygen -s users_ca \
@@ -718,12 +759,18 @@ ssh-keygen -s /etc/ssh/ca \
 ssh-add ~/.ssh/*-cert.pub
 ```
 
-You will be prompted for the users_ca passphrase that set during the key’s creation. Now, we have an id_rsa-cert.pub file in our directory that we need to transfer back onto our client machine:
+A prompt appears for the `users_ca` passphrase that set during the key’s creation. Enter in the passphrase.
 
+An `id_rsa-cert.pub` file appears in `$HOME/.ssh` directory that we need to transfer back onto our client machine:
+
+Content looks like:
+```
 <pre> scp id_rsa-cert.pub <span class=“highlight”>username</span>@client.example.com:/home/<span class=“highlight”>username</span>/.ssh/ </pre>
+```
 
-Now, when you log into sshserver.example.com from your client computer, you should not be asked for your authentication details, even if you’ve never before logged into this server as this user.
-Conclusion
+Log into `sshserver.example.com` from your client computer, this time no prompting should appear asking for your authentication details, even if you’ve never before logged into this server as this user.
+
+# Conclusion
 
 By signing your host and user keys, you can create a more flexible system for user and server validation. This allows you to set up one centralized authority for your entire infrastructure, in order to validate your servers to your user, and your users to your servers.
 
@@ -733,9 +780,9 @@ While perhaps not the most powerful way of creating centralized authentication, 
 Verifying SSH Certificate Key
 =============================
 
-To verify the certificate, use `ssh-keyscan -c <hostname>`. To limit to a specific certificate type, you can include `-t type`, using ssh-rsa not ssh-rsa-cert-v01@openssh.com, if necessary.
+To verify the certificate, use `ssh-keyscan -c <hostname>`. To limit to a specific certificate type, you can include `-t type`, using `ssh-rsa` not `ssh-rsa-cert-v01@openssh.com`, if necessary.
 
-Note: (without the -c option, you will only get the host key(s), not host certificate)
+Note: (without the `-c` option, you will only get the host key(s), not host certificate)
 
 ```bash
 ssh-keyscan -c ssh-ca.my-server.test 

@@ -139,11 +139,12 @@ Log path can vary, you can adjust it on your system (OS).
 
 Based on rules above, fail2ban monitors SSH log (`/var/log/secure`), and will be banning anyone (for 1 hour, or 3600 seconds) who fails to log 5 times 
 within 2 minutes (120 seconds). 
-Rules are pretty straight forward. We’ve specified “sshd” filter, so if you 
+
+Rules are pretty straight forward. Specify the "`sshd`" filter, so if you 
 go to `/etc/fail2ban/filter.d/sshd.conf`, you’ll see a number of failregex 
 rules, used to match login attempts from log file.
 
-To whitelist (ignore) an IP, add them to the ignoreip line:
+To whitelist (ignore) an IP, add them to the `ignoreip` setting:
 
 ```ini
 ignoreip = 127.0.0.1/8
@@ -151,7 +152,7 @@ ignoreip = 127.0.0.1/8
 
 Note: Depending on the amount of traffic specific service has (website, wordpress, etc.) fail2ban can generate CPU concerns/load.
 
-Custom Fail2ban PhpMyAdmin filter (Jail & Regex)
+# Custom Fail2ban PhpMyAdmin filter (Jail & Regex)
 
 The best way to learn is to try and write your own filters. I’ll show you an example for Custom Fail2ban PhpMyAdmin filter. First, we need the jail in our jail.local file:
 
@@ -177,7 +178,7 @@ Next we need that filter. Check your web server (Apache/nginx) logs:
 ```
 
 The IP 121.169.192.227 is trying to bruteforce its way in (well known malicious IP). 
-We’ll try to make their life a bit more difficult: Make a file in 
+Let us try to make their life a bit more difficult: Make a file in 
 your `/etc/fail2ban/filter.d/phpmyadmin.local`, and insert:
 
 ```ini
@@ -238,7 +239,7 @@ Date template hits:
 Lines: 4078 lines, 0 ignored, 56 matched, 4022 missed [processed in 0.33 sec]
 Missed line(s): too many to print.  Use --print-all-missed to print all 4022 lines
 
-We have a match. In case filter/regex is wrong, we’ll probably end up with no matches:
+There is a match. In case the filter/regex is wrong, this will probably end up with no matches:
 
 Lines: 3315 lines, 0 ignored, 0 matched, 3315 missed [processed in 0.23 sec]
 Missed line(s): too many to print. Use --print-all-missed to print all 3315 lines

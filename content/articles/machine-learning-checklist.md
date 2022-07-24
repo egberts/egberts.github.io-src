@@ -1,6 +1,6 @@
 Title: Machine Learning Checklist
 Date: 2018-02-21T11:49
-Modified: 2020-02-25T19:23
+Modified: 2022-07-24T09:53
 Status: published
 Tags: ml, checklist
 Category: research
@@ -9,12 +9,14 @@ summary: A checklist for Machine Learning.
 System architecture
 ===================
 
-Here we assume a system architecture that extracts features from raw
-input data, feeds them into a training system that produces a model,
+Assuming a system architecture that extracts features from raw
+input data, it can be fed into a training system that produces a model,
 which is then read into a serving system to make inferences and affect
-the user-facing behavior of the system. We also assume typical software
+the user-facing behavior of the system. 
+
+Assuming typical software
 engineering practice such as a source repository, continuous automated
-test framework, and an ability to conduct experiments comparing
+test framework, and an ability can then be experimentally conducted to comparing
 different system versions.
 
 Related work
@@ -24,8 +26,8 @@ Software testing is well studied, as is machine learning, but their
 intersection has been less well explored in the literature. \[ 4 \]
 review testing for scientific software more generally, and cite a number
 of articles such as \[ 5 \], who present an approach for testing ML
-algorithms. These ideas are a useful complement for the tests we
-present, which are focused on testing the use of ML in a production
+algorithms. These ideas are a useful complement for the tests being 
+presented, which are focused on testing the use of ML in a production
 system rather than just the correctness of the ML algorithm per se.
 
 Checklist
@@ -37,7 +39,7 @@ Tests for Features and Data
 Machine learning systems differ from traditional software-based systems
 in that the behavior of ML systems is not specified directly in code but
 is learned from data. Therefore, while traditional software can rely on
-unit tests and integration tests of the code, here we attempt to add a
+unit tests and integration tests of the code, here an attempt is to add a
 sufficient set of tests of the data.
 
 ### Test that the distributions of each feature match your expectations.

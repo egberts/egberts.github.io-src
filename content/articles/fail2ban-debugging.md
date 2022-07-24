@@ -11,19 +11,27 @@ and performs banning by its detected IP, IP-protocol, and IP-port indications.
 
 NOTICE: This does not apply toward IPv6 system (yet).
 
-We are going to debug the fail2ban.  We got an error.  And it's obviously a
+# Debugging `fail2ban`
+
+In debugging `fail2ban`,  an error occurred.  And it's obviously a
 failed pattern (IMHO, the worse kind to debug).
 
-# Debugging fail2ban-client #
+
+## Debugging `fail2ban-client`
+
 To debug the `fail2ban-client`, the outputs are governed by syslog severity
-level.  It defaults to SYSLOG_ERROR.  Its cmdline options to use are:
+level.  It defaults to `SYSLOG_ERROR`.  Its cmdline options to use are:
 
-* `fail2ban-client -v` - SYSLOG_WARNING
-* `fail2ban-client -v -v` - SYSLOG_INFO
-* `fail2ban-client -v -v -v` - SYSLOG_DEBUG
-* `fail2ban-client -v -v -v -v` - Heavy debug outputs
+[jtable]
+`fail2ban-client -v`, `SYSLOG_WARNING`
+`fail2ban-client -v -v`, `SYSLOG_INFO`
+`fail2ban-client -v -v -v`, `SYSLOG_DEBUG`
+`fail2ban-client -v -v -v -v`, Heavy debug outputs
+[/jtable]
 
-# Debugging fail2ban-server #
+
+## Debugging `fail2ban-server`
+
 To debug the `fail2ban-server`, the outputs are statically fixed via `XXXXX`
 settings in `/etc/fail2ban/fail2ban.(local|conf)` file.
 
@@ -33,7 +41,7 @@ fail2ban-client set loglevel 1
 fail2ban-client set logtarget STDERR
 ```
 
-# External References #
+# External References
 
 * [Monitoring the fail2ban log](https://www.the-art-of-web.com/system/fail2ban-log/)
 

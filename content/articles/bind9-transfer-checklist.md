@@ -1,12 +1,13 @@
 title: Bind9 XFER Checklist
 date: 2020-06-07 09:46
+modified: 2022-07-24 10:00
 status: published
 tags: Bind9, axfr, ixfr, checklist
 category: HOWTO
 summary: Troubleshooting Bind9 AXFR and IXFR
 
 My hidden master nameserver was diligently updating the publicly exposed
-master nameserver for sometime.
+master nameserver for sometime, yet it started to fail ... silently.
 
 But no new DNS record information were being pushed out by the hidden master
 to any of my public master nameserver.
@@ -45,7 +46,7 @@ And according to the datestamp method used within the DNS serial number,
 it has been some 24 days elapsed since the failure began.  (Make note to
 add another monitoring point of failure here).
 
-At this point, we have a failure of DNS transfer.  It may be an AXFR or IXFR,
+At this point, a failure of DNS transfer occurred.  It may be an AXFR or IXFR,
 but there is definitely a DNS record transfer failure.
 
 Initial Log Check - Hidden Master
@@ -58,8 +59,8 @@ There are two ways to do transfers of new DNS records from master to slave.
 1.  Slave to perform transfer at an interval 
 2.  Master get QUERY-SOA notified to do a forced transfer
 
-Since we haven't done any forced transfer, we will look for errors during
-the interval update.
+Since the sysadmin haven't done any forced transfer, the focus is
+now within the update interval period.
 
 You may have a general purpose log file for your named daemon, but I have
 split my log files out into individual logging channels and thusly
@@ -203,8 +204,8 @@ electronic engineering of piecemealing partial logic together again.
 Do It Loosely
 =============
 
-We need to get those transfers going again, so it is time to toss 
-that shackle of restriction.
+To get those transfers going again, it is time to toss 
+that shackle of ACL restriction.
 
 ```nginx
 zone "egbert.net" IN

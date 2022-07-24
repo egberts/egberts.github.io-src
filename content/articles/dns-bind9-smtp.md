@@ -266,7 +266,7 @@ This filespec is `/etc/bind/key-named.conf` and contains the following:
 
 
 # for use with "local-ddns" key (a default for session-based queries like
-# sftdyn), we declare:
+# sftdyn), declare:
 # 
 #    session-keyname "local-ddns";
 #    session-keyfile "/var/cache/bind/session.key";

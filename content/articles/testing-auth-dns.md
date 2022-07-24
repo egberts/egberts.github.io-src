@@ -104,24 +104,26 @@ EDNS - Truncated Response
 -------------------------
 ```bash
 dig +norec +dnssec +bufsize=512 +ignore dnskey zone @server
-```
 expect: status is `NOERROR`
 expect: OPT record with EDNS version set to 0
-This is an opportunistic test only
-We can't test a zone for the ability to indicate that an answer was truncated (setting the TC flag in a response) unless we know which query to send it that will definitely result in a large response. If you are testing your own zone, you know what RRsets you have in it, so may be able to create a better test query. The reason our test uses DNSKEY and +dnssec is that there is a very good chance that the query response for a DNSSEC-signed zone will exceed 512 bytes
+```
 
-See RFC6891, 7. Transport Considerations
+## This is an opportunistic test only
+
+One cannot test a zone for the ability to indicate that an answer was truncated (setting the TC flag in a response) unless we know which query to send it that will definitely result in a large response. If you are testing your own zone, you know what RRsets you have in it, so may be able to create a better test query. The reason our test uses DNSKEY and `+dnssec` option is that there is a very good chance that the query response for a DNSSEC-signed zone will exceed 512 bytes
+
+See RFC6891, 7. Transport Considerations for more details.
 
 EDNS - Unknown Version with Unknown Option
 ------------------------------------------
-```bash
-dig +norec +edns=100 +noednsneg +ednsopt=100 soa zone @server
-```
+```console
+$ dig +norec +edns=100 +noednsneg +ednsopt=100 soa zone @server
 expect: status is `BADVERS`
 expect: OPT record with EDNS version set to 0
 expect: not to see SOA in the ANSWER section of the query response
 expect: that the EDNS option will not be present in response
 See RFC6891
+```
 
 The above expectations are based on the following preconditions:
 

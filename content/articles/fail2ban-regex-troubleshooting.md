@@ -162,7 +162,7 @@ like:
 failregex = query.+<HOST>
 ```
 Notice that there is no `$` to catch end-of-line match condition? 
-We'll do those `$` lastly because we're trying to just match ... ANYTHING!
+Do those `$` lastly because our goal is to just match ... ANYTHING!
 
 Re-run `fail2ban-regex` with `-l HEAVYDEBUG` and notice the 
 `T:   Matched FailRegex` part:
@@ -170,7 +170,7 @@ Re-run `fail2ban-regex` with `-l HEAVYDEBUG` and notice the
 T:   Matched FailRegex('query.+(?:(?:::f{4,6}:)?(?P<ip4>(?:\\d{1,3}\\.){3}\\d{1,3})|\\[?(?P<ip6>(?:[0-9a-fA-F]{1,4}::?|::){1,7}(?:[0-9a-fA-F]{1,4}|(?<=:):))\\]?|(?P<dns>[\\w\\-.^_]*\\w))')
 ```
 Now I am matching SOMETHING! Notice the convoluted patterns after `query.+`?
-These long patterns represent `<HOST>` part. We can safely ignore that for 
+These long patterns represent `<HOST>` part. Ignore that for 
 now.
 
 Most importantly, I am MATCHING something that starts with `^query`! Yippee!
@@ -245,7 +245,7 @@ NOTE: You are running `fail2ban-regex` between each modification, aren't you?
 
 NOW FOR THE ENDING PART
 =======================
-We have FINALLY reached the `<HOST>` part of the log text. 
+FINALLY it reached the `<HOST>` part of the log text. 
 
 Now it is closing time!  Let's race to the `$` (end).
 
@@ -277,7 +277,7 @@ for.)
 SIMPLIFICATION
 ==============
 Now for the `view` part of Bind9 where we handle the view name.  
-View name is optional.  We may not get a view name on some nameserver
+View name is optional.  A `view` name may not be used on some nameserver
 installation.  
 
 ```ini
@@ -295,9 +295,8 @@ NOTE: You are running `fail2ban-regex` between each modification, aren't you?
 
 FINAL STRETCH
 =============
-We have the remaining of log text ` query failed (REFUSED) for example.tld/IN/ANY at query.c:5445` left to go.
+With the remaining of log text ` query failed (REFUSED) for example.tld/IN/ANY at query.c:5445` left to go, rush it up with:
 
-We're impatient lot, aren't we?  Rush it up with:
 ```ini
 _query_refused = query failed \(REFUSED\) for %(_dns_tuple)s at %(_codeloc)s$
 ```

@@ -1,5 +1,6 @@
 title: Current State with Private Subnets and DNSSEC
 date: 2022-05-08 06:42
+modified: 2022-07-24 10:08
 status: published
 tags: DNSSEC, Bind9, DNS
 category: HOWTO
@@ -35,7 +36,7 @@ I want:
 ```
 
 It is this last point that nearly all (except for probably ISP) DNS admins wanted.  
-Noticed that we got the first one in form of [DNS-over-HTTPS (DoH)](https://datatracker.ietf.org/doc/html/rfc8484) and 
+Noticed that the first one is in a form of [DNS-over-HTTPS (DoH)](https://datatracker.ietf.org/doc/html/rfc8484) and 
 [DNS-over-TLS (DoT)](https://datatracker.ietf.org/doc/html/rfc8310).   IMHO:  DoT has better overall security but
 DoH has easier adoption rate.
 
@@ -48,7 +49,8 @@ This article covers the bowel of the DNS validators found in both DNS nameserver
 # Current State
 
 So far, DLV for Root has been [removed from](https://kb.isc.org/docs/aa-01310) Bind v9.16.  But no 
-suitable replacement is on the horizon as far as we can see.
+suitable replacement is on the horizon as far as one can see.
+
 Not even the latest Bind 9.20 has anything closely resembling this DNSSEC lookaside validation.
 
 In the latest Bind 9.16+, there is this new `trust-anchors` clause.
@@ -150,7 +152,7 @@ the validator logic of a resolving nameserver.
 
 ## DNS Zone Cut
 
-Surely we could have the DNSSEC zone cut in much exactly the same way 
+Surely the DNSSEC zone could have been cut in much exactly the same way 
 as DNS zone cut, no?
 
 Except that validation is being done with retrieving the
@@ -187,10 +189,11 @@ Tedious but common, uh?
 
 ## DNSSEC Zone Cut
 
-What if we can have our own DNSSEC-capable TLD or even sub-TLD on top
+What if one enterprising system administrator can have its 
+own DNSSEC-capable TLD or even sub-TLD on top
 of the existing DNSSEC trees?  
 
-What if we can pre-validate the parent DS?
+What if the portion of DNS validator can pre-validate the parent DS?
 
 We could get the following zones to call our own and have 
 it DNSSEC'd based on our own public key.
@@ -202,8 +205,8 @@ it DNSSEC'd based on our own public key.
 * `10.in-addr.arpa.`
 * `whatevermydesiredtldisgoingtobe.`
 
-By having these non-root trust-anchors, we could 
-have a controlled set of RFC-compliant DNS resolvers herding 
+By having these non-root trust-anchors,
+a controlled set of RFC-compliant DNS resolvers can be herding 
 all the queries from its internal net, and still DNSSEC-validate all
 the answers related to the inside.
 
@@ -235,8 +238,8 @@ Arguably, a full-stop break on a sub-TLD domain trusted key by the
 DNSSEC validator chain loop processing would be an OK option for a privately-rolled 
 DNS tree, but NEVER as a publicly-available option.  
 
-Until we solve the technical issues of publically-available option, 
-we shouldn't even be deploying the private TLD/LAN DNSSEC yet, despite my trekking
+Until the technical issues of publically-available option are solved, 
+one shouldn't even be deploying the private TLD/LAN DNSSEC yet, despite my trekking
 the desert for 8 years and the need to quench my parched throat because of
 this.
 

@@ -148,7 +148,7 @@ controls {
 most likely only need to use `-s <label>`.
 
 Manpage will state that `-s` holds the server name; it also
-supports `label` as well.  In this article, we use `-s` 
+supports `label` as well.  In this article, use the `-s` option
 for our labeled needs and let the `rndc.conf` config select the 
 nameserver IP or hostname ... by its server label.
 
@@ -386,8 +386,8 @@ server whitelab {
     };
 ```
 
-In the example above, we used a single default `/etc/bind/rndc.conf`
-config file to hold all nameservers for use with
+Use a single default `/etc/bind/rndc.conf`
+config file to hold all our nameservers for use with
 `rndc` utility.
 
 The above scenario obviates the need to craft separate shell script

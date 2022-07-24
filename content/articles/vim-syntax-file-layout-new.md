@@ -73,7 +73,7 @@ Syntax files may be found in the following directories:
 * System - /usr/share/vim/vim81/syntax
 * Local - $HOME/.vim/syntax
 
-We will use `vim` as our choice of editor in this blog demostration.
+Let us use `vim` as our choice of editor in this blog demostration.
 
 And prototype our syntax file in our local syntax directory.
 

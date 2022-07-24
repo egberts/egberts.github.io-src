@@ -1,6 +1,6 @@
 title: SSHFP DNS resource record
 date: 2022-03-24 09:54
-modified: 2022-04-02 01:52
+modified: 2022-07-24 10:13
 status: published
 tags: DNS, SSHFP
 category: HOWTO
@@ -122,7 +122,7 @@ Two fingerprint hash types are currently supported in SSHFP as of 2012. Each fin
 1. SHA-1
 2. SHA-256
 
-We should not worry too much about the strength of the hash algorithm here
+Do not worry too much about the strength of the hash algorithm here
 because the DNSSEC secures this field with multi-chaining of at least
 RSA2048/SHA256.
 
@@ -133,7 +133,7 @@ RSA2048/SHA256.
 The `ssh-keygen` utility generates the records using the `-r` parameter, followed by the hostname (which does not affect the fingerprints so you can specify whatever you like instead)
 Example
 
-To generate the RR data for SSFP, use `ssh-keygen` utility that comes with the SSH package:
+To generate the RR data for SSHFP, use `ssh-keygen` utility that comes with the SSH package:
 
 ```console
 # ssh-keygen -r portal.mydomain.example
@@ -151,7 +151,7 @@ Protection of SSHFP is only assured by a properly signed resource record by DNSS
 
 The problem here is not the confidentiality of the public key (it isn’t confidential).
 
-The problem we have is the integrity of the dns record holding this public key. 
+The problem here is the integrity of the dns record is holding this public key, publicly.
 
 If not distributed securely (via DNSSEC), such SSHFP DNS records can be tampered with or replaced with another key. 
 

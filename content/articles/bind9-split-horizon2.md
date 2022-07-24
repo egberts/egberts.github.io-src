@@ -45,10 +45,10 @@ separate directory would help minimize this likelihood.
 
 A Better Split-Horizon
 ----------------------
-To fix this shortcoming of this "Multi-View Split-Horizon", we run multiple
-`named` daemons.  In this article, we demonstrate two `named`.
+To fix this shortcoming of this "Multi-View Split-Horizon", multiple
+`named` daemons are started.  This article demonstrates two `named`.
 
-We leverage the new [Bind9 Systemd] here.
+Let us leverage the new [Bind9 Systemd] here.
 
 For handling multiple-instance of named and its config file, the organizational approach was either using a:
 
@@ -151,7 +151,7 @@ mv rndc.conf rndc-public.conf
 chown root:bind rndc-public.conf
 chmod 0640 rndc-public.conf
 
-# Since RNDC is keyed by port and its key, we no longer have a default RNDC config file
+# Since RNDC is keyed by port and its key, there is no longer a default RNDC config file
 ```
 
 Now whenever the command `rndc` gets (accidentially) evoked, you will get an
@@ -161,12 +161,12 @@ rndc: neither /etc/bind/rndc.conf nor /etc/bind/rndc.key was found
 ```
 
 There is a reason for this breakage of `rndc`, there is no easy way to determine
-which instance of the many named daemon that we will be running.
+which instance of the many named daemon that are running.
 
-We want new sets of `rndc` commands to denote which is which side of the horizon.  We can use the `<instance>` name here.
+For a new sets of `rndc` commands to denote which is which side of the horizon.  `<instance>` name shall be used here.
 
-Also we want to assist systemd with communicating with the correct instance so
-we repurpose the `/etc/default/bind9` into:
+Also to assist `systemd` with communicating with the correct instance, 
+the `/etc/default/bind9` get copied and modified into:
 
 File: `/etc/default/bind9-internal`
 ```bash
@@ -219,7 +219,7 @@ Bind9 has only has two primary and lesser functions, so only needs one unique na
 
 Unfortunately, all maintainers/distros' current `named.service` only supports one daemon/server.  Furthermore, distro maintainers only supplied one service file, typically in `/lib/systemd/system/named.service`.
 
-Hence, for this expansion and correctness, we will focus on using 'bind9.service' as the current systemd unit name for this ISC Bind9 named daemon.  Templating this new `bind9.service` unit then follows easily afterward.
+Hence, for this expansion and correctness, focus on using 'bind9.service' as the current systemd unit name for this ISC Bind9 named daemon.  Templating this new `bind9.service` unit then follows easily afterward.
 
 To do multi-daemon split-horizon, systemd needs to use these different-horizon configuration files.  Systemd comes to the rescue and provides a unit template.  Our current unit file for Bind9 is `bind9.service`.  Templating unit files are denoted by '@' symbol in its template filename like `bind9@.service`.
 t
