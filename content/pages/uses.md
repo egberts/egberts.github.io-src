@@ -27,7 +27,7 @@ Dated fairly regularly. As of March 19, 2022, this is what I'm doing:
 
 - Secondary focus is DNSSEC and writing a Python libary module to perform
   intensive security check against DNSSEC for any weakness or failure points.
- - DANE/SMTPS is the current focus.
+ - mastered DANE/SMTPS.
 
 - I've completed my [Bind9 parser](https://github.com/egberts/bind9_parser) as my large exercise in using [PEG (parser expression grammer)](https://en.wikipedia.org/wiki/Parsing_expression_grammar).  This guide on [Parsing: Algorithms and Terminology](https://tomassetti.me/guide-parsing-algorithms-terminology/) is a great start for anyone.
 
@@ -36,7 +36,7 @@ OpenSSL, written in bash shell.](https://github.com/egberts/tls-ca-manage) and
 helps us to reduce OpenSSL option conflict errors between options by providing actual workable pairups of CLI options toward OpenSSL.  Useful if running your own Internet DNS infrastructure.
 
 - Also expanding stock Vim highlight for ISC Bind named configuration file from
-  version 9.4 to 9.15+.  My current work-in-progress is called
+  version 9.4 to 9.20.  My current work-in-progress is called
 [vim-syntax-bind-named](https://github.com/egberts/vim-syntax-bind-named).
 
 ## Web
@@ -51,9 +51,10 @@ helps us to reduce OpenSSL option conflict errors between options by providing a
 
 - I use [Debian](http://debian.org/) to install OS for all my gateway, desktop, and laptop needs.
 - [QubeOS](https://www.qubes-os.org/) is now the primary desktop.
-- [Proxmox](https://www.proxmox.com/en/) is the cloud server in my white lab.
+- [Proxmox](https://www.proxmox.com/en/) is the cloud server in my white lab having many VMs running.
 - I use [Homebrew](http://brew.sh/) to install Unix-y programs on Macbooks.
 - I'm partial to both [Hack](https://sourcefoundry.org/hack/) and [Consolas](https://en.wikipedia.org/wiki/Consolas) for my monospaced fonts.  Otherwise I use [IBM Plex](https://www.ibm.com/plex/) fonts.
+- Gentoo Linux for all my embedded host needs, of which my gateway is using `libmusl` (not libc6) because `LD_PRELOAD` is hardcoded into libc and it is way too easy for non-root user to hijack any process this way.  Also use OpenRC (instead of `systemd` because systemd opens network sockets at PID1 thus it is way too easy for a trojan to be slipped into; OpenRC PID 1 uses no network socket).
 
 
 # Desktop apps
@@ -84,24 +85,39 @@ helps us to reduce OpenSSL option conflict errors between options by providing a
 - I run a transparent proxy server between my ISP and my gateway router.  That
   is the jewel of my past cybersecurity research minuate.  It runs [Zeek](https://www.zeek.org) (used to be called Bro-IDS), [Suricata](https://suricata-ids.org), and [Snort](https://snort.org) on an undisclosed but hand-built platform.  Packet analysis remains my forte.
 - Also this transparent proxy server runs [Squid Proxy](http://www.squid-cache.org) along with many custom-made ICAP modules of mine.
-- I use [ISC Bind9](https://isc.org/bind) to support this website's DNSSEC and to maintain a hidden master with quad secondary nameservers as well as a hidden bastion nameserver.
+- - has HTTPS/ICAP server (to block DNS-over-HTTP)
+- - has TLS/ICAP server (to block DNS-over-TLS)
+- I use [ISC Bind9](https://isc.org/bind) to support this website's DNSSEC and to maintain a hidden master with quad secondary nameservers as well as a hidden bastion nameserver.  I run my own private Root Servers with DNSSEC within my WhiteLab.
 
 ## Development research
 
 - Things that I publically post are on [GitHub](https://github.com/egberts).
-- Things that I do not publically post are in my White Lab.
+- Found microcode vulnerabilty bug in QEMU TLB cache reload failure during my [Unicorn](https://github.com/unicorn-engine/unicorn/issues/437) that emulates just about any file-less malware.
+- Things that I do not publically post stay inside my White Lab.
 - I use [R](https://www.r-project.org/) and [RStudio](https://www.rstudio.com/) for most of my statistical computing, and I'm a dedicated devotee of the [tidyverse](http://tidyverse.org/) (especially [ggplot2](http://ggplot2.org/) and [dplyr](https://cran.rstudio.com/web/packages/dplyr/vignettes/introduction.html)). I sometimes use [knitr](http://yihui.name/knitr/) and [RMarkdown](http://rmarkdown.rstudio.com/), but I generally just export figures and tables from R and reference them in my writing rather than making full-blown literate documents.
 - I also use [Python](https://www.python.org/) ([3!](http://www.onthelambda.com/2014/05/13/damn-the-torpedoes-full-speed-ahead-making-the-switch-to-python-3/)) pretty regularly, especially for natural language processing (with [nltk](http://www.nltk.org/)) and web scraping (with [Requests](http://docs.python-requests.org/en/master/) + [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)). Every few months I play with pandas and numpy and Jupyter, but I'm far more comfortable with R for scientific computing.
 - I use RStudio for editing R files, but I use [Sublime Text 3](https://sublimetext.com/3) for everything else.
 
+# Network Layer
+
+- maintain a default deny-firewall using newer `nftables`.  Also maintain Vim syntax highlighter for 430 keywords used eithin `nft` command line [here](https://github.com/egberts/vim-nftables).
 # Hardware
 
+- Xeon, 24-core, with a mixture of 24TB RAID5 HD storage and 6TB RAID1 SDD storage.
 - Dell Optiplex and Precison hardware for all my gateway, servers and security
   needs.
 - 2016 13″ MacBook Pro, iPad Mini 2, and iPhone 6s.  Some smattering of
   iPods and odd Internet thingies.
-- Raspberry Pi for my Kerberos/LDAP ticketing and multiple window-session-login SAML needs across all GUI devices above (except for iPhone).
+- Raspberry Pi for my Kerberos/LDAP ticketing and multiple-session/single-login SAML needs across all GUI devices above (except for iPhone).
 - PinePhone (the original) is also a hobby of mine, with focus on profiling the cellular firmware API.
+- Efficient Network ENI3600 ATM PCI adapter card.  Helped John Williams of US Navy to extend Linux ATM driver for this product
+- MIPS evaluation board, a complete bootup of VxWorks Real-Time OS.
+- Motorola MPC850, a complete writeup of bootup sequence; wrote PPPoE from scratch
+- Intel i960, a complete writeup of bootup sequence and Ethernet driver for VxWorks RT-OS
+- many Software-Defined Radio using many [tools](https://www.rtl-sdr.com/big-list-rtl-sdr-supported-software/)
+- Motorola 68000, vendor OS, pure assembly programming, including floppy drive controller
+- used to memorize the entire instruction set of Motorola 68000 and Intel x86-32.
+- breadboard, lots and lots of breadboards
 
 # Writing
 
