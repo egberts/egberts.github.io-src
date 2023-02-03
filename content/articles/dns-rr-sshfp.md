@@ -176,6 +176,7 @@ File: `/etc/resolv.conf`
 .
 options edns0
 options trust-ad
+options ndots:2
 .
 .
 .
