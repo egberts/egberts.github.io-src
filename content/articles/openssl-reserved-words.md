@@ -4,15 +4,15 @@ status: published
 tags: OpenSSL, environment variables
 category: research
 slug: pki-openssl-reserved-words
-summary: 15 years of barely ignoring this file, I've finally detailed the `openssl.cnf` file.
+summary: 15 years of barely ignoring this file, I've finally detailed the syntax of `openssl.cnf` file.
 lang: en
 private: False
 
 I've stared at the `openssl.cnf` far more times than I cared for.  It wasn't
-until some 15 years later, I have set out to fully understand the entire OpenSSL
-configuration file and its intricities.
+until some 15 years later, I set out to fully understand the entire OpenSSL
+configuration file and its syntax intricities.
 
-How exactly does one grok an OpenSSL configuration file?  Grok?  Yeah, grok as
+How exactly does one grok such an OpenSSL configuration file?  Grok?  Yeah, grok as
 in perusing, parsing, absorbing, dissemination and dissection:
 
 - You follow the assignments.  
@@ -31,26 +31,26 @@ In this article, I will outline what or which actual keywords that the OpenSSL w
 BACK UP A BIT
 =============
 
-But before we go further into `openssl.cnf`, we have to consider who the external influencers are toward the `openssl` binary: shell environment variables.
+But before we go further into `openssl.cnf`, we have to consider who the external influencers can be when using the `openssl` binary: the shell environment variables.
 
 I've identified the following shell environment names used by `openssl` 
 (by scanning for `getenv()` functions and few other code review tricks)
-and listed them in this [OpenSSL Environment Variables]({filename}openssl-envvars.md) article.
+and compiled a list of them in this [OpenSSL Environment Variables]({filename}openssl-envvars.md) article.
 
-With that out of the way, now we can delve into OpenSSL configuration file and
+With that out of the way, we can now delve into OpenSSL configuration file syntax for
 all its simplicity.
 
 Why So Complicated?
 -------------------
-I do do believe that the OpenSSL configuration file was originally designed to
+I do do believe that the OpenSSL configuration file syntax was originally designed to
 perform testing and fuzzing of its many settings; later, it became the post de
 facto configuration for its various certificate creations.
 
-So when you execute `openssl s_client` or `openssl s_server`, a whole new keyword set of OpenSSL configuration gets used (other than the default ones that we all are familiar with that is in `/etc/ssl` (or `/etc/pki/tls` for RedHat).
+So when you execute `openssl s_client` or `openssl s_server`, a whole new keyword set of OpenSSL configuration get used (other than the default ones that we all are familiar with which is `/etc/ssl` (or `/etc/pki/tls` for RedHat).
 
 Meta keywords
 =============
-The meta keywords used in OpenSSL configuration file is:
+The meta keywords used in OpenSSL configuration file are:
 
   - `.pragma` - includes other OpenSSL configuration file
   - `.include` - includes other OpenSSL configuration file
@@ -99,7 +99,7 @@ Pre-defined Values
 ==================
 
 There are few pre-defined values available but often are limited to its scope of
-the group of keywords.
+a group of keywords.
 
 Such group of keywords like `distinguished_name` would have the following
 pre-defined values:
@@ -116,13 +116,12 @@ following keywords:
   - `attributes`
   - `default_policy` - if requester did not use a `-policy` CLI option
   - `policy` - always use the policy's section name that is assigned to it
-  - ` `
 
 Section Selectors
 =================
 
-A way to add selectable policy is to pass a `-policy <name>` and
-the section `[ policy_<name> ]` will be included.
+A way to add a selectable policy is to pass `-policy <name>` at the command line interface
+and the section `[ policy_<name> ]` will then be included.
 
 Built-In Section Names
 ======================
@@ -222,6 +221,7 @@ The certification section may be:
   - `usr_cert`
   - `ocsp_cert`
   - `dh_cert`
+
 Keywords under `*_cert` are:
 
   - `basicConstraints`
