@@ -1,6 +1,6 @@
 title: Bash Scripts Startup Ordering
 date: 2020-06-03 10:56
-modified: 2020-12-03 15:16
+modified: 2023-04-28 09:16
 status: published
 tags: bash, shell, script
 category: HOWTO
@@ -179,7 +179,7 @@ that a bash shell WOULD NOT be doing (because it only impacts
 interactive shells.)
 
 Non-interactive shell has no such direct interaction with a user: no 
-keyword, no display.
+keyboard, no display.
 
 There are "indirect" interactions between the user and such 
 non-interactive shell sessions.  
