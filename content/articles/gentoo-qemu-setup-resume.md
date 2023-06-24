@@ -91,9 +91,25 @@ cd /usr/src/linux
 # CONFIG_RPMSG_VIRTIO=n
 # CONFIG_CRYPTO_DEV_VIRTIO=y
 
-#make && make modules install  # if not using genkernel
 
-# or
+# Ways to Build a Kernel
+
+There are two ways to build a Linux kernel:
+
+* directly using `make`
+* `genkernel` tool
+
+##  Directly Build a Kernel
+
+```bash
+# make && make modules install  # if not using genkernel
+```
+
+##  Using `genkernel` build tool
+
+alternatively, you could use the Gentoo `genkernel` build tool.
+
+```console
 # emerge --ask sys-kernel/genkernel
 # emerge --ask sys-kernel/dracut      # used with initramfs
 
@@ -102,8 +118,15 @@ df | grep vda
 
 # Complete kernel build including all modules as denoted by 'make defconfig'
 # or after your kernel customization.
-#genkernel --static --virtio --bootloader=grub2 -no-lvm --loglevel=5 \
-#          --color --menuconfig all     # (with modules)
+genkernel --color \
+          --loglevel=5 \
+          --virtio \
+          --no-lvm \
+          --bootloader=grub2 \
+          --menuconfig \
+          --static \
+          all     # (with modules)
+
 #  or for a static kernel build without any module support.
 #genkernel --menuconfig bzImage # (module-less)
 
@@ -126,5 +149,7 @@ exit
 reboot
 ```
 
+
+# Conclusion
 
 Enjoy

@@ -1,16 +1,15 @@
-title: Gentoo OS for a QEMU guest
-date: 2022-07-22 01:38
-modified: 2022-09-21 09:32
+title: Gentoo OS install
+date: 2022-09-24 12:25
 status: published
 tags: Gentoo, gateway, musl, libmusl, Linux
 category: HOWTO
-summary: How to setup Linux OS for use within a QEMU guest
-slug: gentoo-qemu-setup
+summary: How to install Gentoo 2022
+slug: gentoo-install
 lang: en
 private: False
 
 
-How to setup the Gentoo OS from scratch ... within the QEMU VM startup.
+How to install the Gentoo OS from scratch ... for use as a home gateway.
 
 This would be extremely useful for a home gateway (whose requirement is
 not entailing MySQL database nor JavaScript-based web browsing or easily hijacked using a `LD_PRELOAD` environment variable.)
@@ -24,70 +23,52 @@ Under `amd64`, 'stage archives', select the desired ISO image.
 
 Of the several variants of Stage 3, I chose "OpenRC" because `systemd` PID 1 has too much network access privilege which IMHO is ripe for a file-less backdoor malware.  OpenRC PID 1 has no such network privilege (same as original ATT SysV `initrc`/`init.d`), which sets my security mind at ease.
 
+Burn and insert CD then reboot into CD.
 
-## Configure VM
+# Drive space
 
-At the host OS (virt-manager), point CD to minimal-gentoo.iso.
+Assuming that `/dev/sda` is the first hardware drive, the bare minimum we divide that drive space.
 
-  - Reorder VirtIO and DVD/CD so that VirtIO disk is first in boot ordering
-  - Do not select "Enable direct kernel boot" option (yet)
+[jtable]
+partition number, physical partition, size amount, description
+1, `/dev/sda1`, 1g, boot for BIOS or UEFI
+2, `/dev/sda2`, (twice the size of your physical RAM)`, swap space
+3, `/dev/sda3`, /`, 128g, "the" root partition
+4. `/dev/sda4`, n/a, the rest of the remaining drive space, used as MBR extension for logical parition 5-9 or entirely by LVM at OS-level.
 
+## Dividing up the drive space
 
-# Create the VM
+Use `fdisk /dev/sda` and execute 'g' option for GFI/EUFI partition scheme (instead of MS-DOS/MBR/BIOS) disk boot sequence.
 
-WARNING: Do not use UEFI; stick with classic BIOS setup.
-
-
-## Identify the hard drive 
-
-Within the newly booted minimal Gentoo, identify the hard drive used to hold our filesystems.  
-
-Note: It should be `/dev/vda` (as opposed to `/dev/sda`).
-
-
-```
-lsblk -a | grep -v ^loop | grep -v ^ram | grep disk
-NAME   MAJOR:MIN RM   SIZE RO TYPE MOUNTPOINTS
-vda      253:0    0    80G  0 disk
-```
-
-The hard drive provided by QEMU virtualization is `/dev/vda`.
-
-
-# Format the hard drive
-
-Use `fdisk /dev/vda` to continue to stay with the 'dos' (MS-DOS/MBR) disktype.
-
-Do not use GNU `parted` for this QEMU.
+Do not use GNU `parted` for this approach.
 
   Partition 1 - 250MB - /boot  (should be 1G if heavy kernel tweaking)
   Partition 2 - 2GB - swap  (should be twice your total 'physical' memory)
-  Partition 3 - remainder of QCOW2 media - ROOT label - / directory
+  Partition 3 - 128GB - / (root) directory
+  Partition 4 - remainder of drive space - 
 
+Change the type of partition 1 to '81' (for 'Linux filesystem').
 Change the type of partition 2 to '82' (for 'Linux Swap').
+Change the type of partition 3 to '81' (for 'Linux filesystem').
 
-Write out the entire partition table and quit.
+## Filesystem in each partition
 
-
-# Format the partitions
-
-Using a mixture of EXT4, BTRFS filesystems and swap space, execute:
-
+Create the filesystems:
 ```bash
-mkfs.ext4  -L BOOT /dev/vda1
-mkswap     -L SWAP /dev/vda2
-mkfs.btrfs -L ROOT /dev/vda3
+mkfs.ext4 /dev/sda1
+mkswap    /dev/sda2
+mkfs.ext4 /dev/sda3
 ```
 
 # Rescue Reboot
 
 In the case that you rebooted while not finishing the rest of this document,
-then this is your new starting point.
+then this is your new starting point using Gentoo 2022 ISO CD.
 
 ## Enable Swapper
 
 ```
-swapon /dev/vda2
+swapon /dev/sda2
 ```
 
 # Mount the root partition
@@ -99,7 +80,6 @@ We defer mounting the boot partition for later.
 
 ```
 mkdir --parents /mnt/gentoo
-mount -t btrfs /dev/vda3 /mnt/gentoo
 ```
 
 # Mount additional partitions (optional)
@@ -119,33 +99,17 @@ device, path, options, boot sequence
 (see next section), `/var/log/audit`, nodev,nosuid,noatime, 0 4
 [/jtable]
 
-There are two ways to further out the additional partitions:
+We already did the first 4 partitions.
+
+There are two ways to partition further by adding additional partitions:
 
 1. physical partition (via `fdisk /dev/sda`)
 2. logical parition (via `lvm` toolsuite)
 
-At any rate, let us create the bare minimum physical partitions firstly:
-
-```console
- 
-
-
-Pick what you need, but the whole enchilada is:
-
-```console
-$ fdisk /dev/sda
-```
-
-[jtable]
-partition number, physical partition, size amount, description
-1, `/dev/sda1`, 1g, boot for BIOS or UEFI
-2, `/dev/sda2`, (twice the size of your physical RAM)`, swap space
-3, `/dev/sda3`, /`, 128g, "the" root partition
-4. `/dev/sda4`, n/a, the rest of the remaining drive space, used as MBR extension for logical parition 5-9 or entirely by LVM at OS-level.
 
 ## Physical partition approach
 
-For the all-physical partition approach, create the following physical partitions based on not nominally consuming more than 10% of any parititon for Gentoo 2022 installation:
+For the all-physical partition approach, create the following physical partitions based on not nominally consuming more than 10% of any parititon that are consumed by the Gentoo 2022 installation:
 
 [jtable]
 partition number, physical partition, size amount, description
@@ -223,7 +187,7 @@ installer features:
 From the terminal prompt, enter in:
 
 ```
-cd /mnt/gentoo  # that is /dev/vda3 partition
+cd /mnt/gentoo  # that is /dev/sda3 partition
 links https://www.gentoo.org/downloads/mirrors
 ```
 
@@ -335,7 +299,7 @@ export PS1="(chroot) ${PS1}"
 # Mount Boot Partition
 
 ```bash
-mount /dev/vda1 /boot
+mount /dev/sda1 /boot
 ```
 
 
@@ -452,7 +416,7 @@ emerge sys-boot/grub
 
 This has to be done AFTER kernel source has been e-selected.
 
-SECURITY: I do not install SSH server.  If this VM needs network access, the VM itself can do the SSH or RSYNC protocol as a client.
+SECURITY: I do not install SSH server on gateway (yeah, sneaker-net-protected).  
 
 
 # Defaulting Kernel Configuration
@@ -484,68 +448,28 @@ Of course, a gateway OS that is NOT directly on a physical host but instead insi
 * No JIT-based application needing write/execute memory segments (Numba/Pyjion/Cinder/Piston-lite/Jpython/IronPython/PyPy/Chrome/Firefox/Acrobat Multimedia)
 
 
-## VirtIO Driver Support
+## Kernel configuration
 
-Add the VirtIO drivers whose virtual 'hardware' are provided [by RedHat](https://cateee.net/lkddb/web-lkddb/VIRTIO.html) for use within QEMU by creating a small Kconfig file for merging into the `.config`.
+### UEFI support for Linux
 
-There are [kernel tools](https://stackoverflow.com/questions/27090431/linux-kconfig-command-line-interface/70728869#70728869) that allows for multiple `.config` (in form of `config.XXXXX` filename).
+File `config-uefi.conf` contains:
 
-```bash
-vi config-qemu-guest-virtio.conf
-```
-and add the following Kconfig settings:
 ```ini
-CONFIG_VIRTIO=y
-CONFIG_VIRTIO_MENU=y
-CONFIG_ARCH_HAS_RESTRICTED_VIRTIO_MEMORY_ACCESS=y
-CONFIG_PARAVIRT=y
-CONFIG_KVM_GUEST=y
-CONFIG_PCI=y   # needed by CONFIG_PCIEPORTBUS
-CONFIG_PCIEPORTBUS=y
-CONFIG_VIRTIO_PCI=y
-CONFIG_VIRTIO_PCI_LIB=y
-CONFIG_VIRTIO_LEGACY=y
-CONFIG_HW_RANDOM=y
-CONFIG_HW_RANDOM_VIRTIO=y
-CONFIG_VIRTIO_PCI_LEGACY=y  # ???
-CONFIG_VIRTIO_BALLOON=y
-CONFIG_VIRTIO_MEM=y
-CONFIG_VIRTIO_MEMORY=y   # ???
-CONFIG_VIRTIO_INPUT=y
-CONFIG_VIRTIO_CONSOLE=y
-CONFIG_LPC_ICH=y
-CONFIG_I2C_SMBUS=y
-CONFIG_I2C_VIRTIO=y
-CONFIG_I2C_I801=y
-CONFIG_FUSE_FS=y
-CONFIG_VIRTIO_FS=y
+CONFIG_RELOCATABLE=y
+CONFIG_EFI=y
+CONFIG_EFI_STUB=y
+CONFIG_X86_SYSFB=y   # old
+CONFIG_SYSFB=y
+CONFIG_FB_SIMPLE=y  # old
+CONFIG_SYSFB_SIMPLEFB=y
+CONFIG_FRAMEBUFFER_CONSOLE=y
+```
 
-
-CONFIG_VIRTIO_MMIO=y
-CONFIG_VIRTIO_MMIO_CMDLINE_DEVICES=y
-CONFIG_VIRTIO_IOMMU=y
-CONFIG_VIRTIO_BLK=y
-CONFIG_BLK_MQ_VIRTIO=y
-CONFIG_SCSI_LOWLEVEL=y
-CONFIG_SCSI_VIRTIO=y
-CONFIG_SATA_AHCI=y
-CONFIG_SATA_AHCI_PLATFORM=y
-
-CONFIG_NET_CORE=y
-CONFIG_VIRTIO_NET=y
-CONFIG_VIRTIO_VSOCKETS_COMMON=y
-CONFIG_VIRTIO_VSOCKETS=y
-
-CONFIG_RPMSG=y
-CONFIG_RPMSG_VIRTIO=n
-
-CONFIG_CRYPTO_DEV_VIRTIO=y
-CONFIG_DRM=y
-CONFIG_DRM_VIRTIO_GPU=y
-CONFIG_MMU=y
-CONFIG_VIRTIO_GPU=y  # ???
-
-CONFIG_XHCI_HCD=y
+```ini
+CONFIG_DRM_RADEON=y
+CONFIG_FB_RADEON=y
+CONFIG_FB_RADEON_I2C=y
+CONFIG_FB_RADEON_BACKLIGHT=n
 ```
 
 To merge the above settings into the `.config` file, execute:
@@ -583,7 +507,7 @@ a required step if not using UUID for device identifier within GRUB2.
 
 ```ini
 GRUB_DISABLE_LINUX_UUID=true
-GRUB_CMDLINX_LINUX="root=/dev/vda3"
+GRUB_CMDLINX_LINUX="root=/dev/sda3"
 GRUB_DISABLE_OS_PROBER=true
 GRUB_TIMEOUT=5
 GRUB_DISABLE_UUID=true
@@ -622,9 +546,9 @@ Fill the `/etc/fstab` with the following content:
 ```
 # Adjust any formatting difference and additional partitions created 
 # from the Preparing the disks step
-/dev/vda1   /boot        ext4    noauto,noatime       1 2
-/dev/vda2   none         swap    sw                   0 0
-/dev/vda3   /            ext4    noatime              0 1
+/dev/sda1   /boot        ext4    noauto,noatime       1 2
+/dev/sda2   none         swap    sw                   0 0
+/dev/sda3   /            ext4    noatime              0 1
   
 /dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
 ```
@@ -635,7 +559,7 @@ df | grep boot
 ```
 If resultant output is empty, go mount the `/boot`:
 ```bash
-mount /dev/vda1 /boot
+mount /dev/sda1 /boot
 ```
 
 Instructing InitRamFS to mount multiple disk partitions/volumes at boot.
@@ -795,7 +719,7 @@ emerge --ask --update --newuse --verbose sys-boot/grub
 ## Install GRUB2 Bootloader
 
 ```bash
-grub-install /dev/vda
+grub-install /dev/sda
 ```
 
 
@@ -816,4 +740,8 @@ Exit and then reboot
 (chroot) / # exit
 /root # reboot
 ```
+
+# Reference
+
+* CIS Security Debian 10 Benchmark, 1.0, 2020-02-13
 

@@ -1,6 +1,6 @@
 title: SSHFP DNS resource record
 date: 2022-03-24 09:54
-modified: 2022-07-24 10:13
+modified: 2022-08-02 13:37
 status: published
 tags: DNS, SSHFP
 category: HOWTO
@@ -184,6 +184,7 @@ options ndots:2
 
 # Reference
 
+* [SSH tutorial: how to get SSHFP records, DNSSEC, and VerifyHostKeyDNS=yes to work - Tony Finch](https://dotat.at/@/2014-03-24-sshfp-tutorial-how-to-get-sshfp-records-dnssec-and-verifyhostkeydns-yes-to-work.html)
 * [Using Ed25519 in SSHFP resource records (RFC7479)](https://datatracker.ietf.org/doc/html/rfc7479)
 * [Using DNS to Securely Publish Secure Shell Key Fingerprints](https://datatracker.ietf.org/doc/html/rfc4255)
 * [Use of SHA-256 Algorithm with RSA, DSA and ECDSA in SSHFP Resource Records](https://datatracker.ietf.org/doc/html/draft-os-ietf-sshfp-ecdsa-sha2)

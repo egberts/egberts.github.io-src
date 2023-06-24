@@ -5,7 +5,9 @@ Status: published
 blastedbugger: Special Date
 
 
-Dated fairly regularly. As of March 19, 2022, this is what I'm doing:
+Dated fairly regularly. 
+
+As of July 22, 2022, this is what I'm doing:
 
 # Current Focused Activities
 
@@ -29,7 +31,7 @@ Dated fairly regularly. As of March 19, 2022, this is what I'm doing:
   intensive security check against DNSSEC for any weakness or failure points.
  - mastered DANE/SMTPS.
 
-- I've completed my [Bind9 parser](https://github.com/egberts/bind9_parser) as my large exercise in using [PEG (parser expression grammer)](https://en.wikipedia.org/wiki/Parsing_expression_grammar).  This guide on [Parsing: Algorithms and Terminology](https://tomassetti.me/guide-parsing-algorithms-terminology/) is a great start for anyone.
+- I've completed my [Bind9 parser](https://github.com/egberts/bind9_parser) as my large exercise in using [PEG (parser expression grammer)](https://en.wikipedia.org/wiki/Parsing_expression_grammar).  This guide on [Parsing: Algorithms and Terminology](https://tomassetti.me/guide-parsing-algorithms-terminology/) is a great start for anyone.  This allows Python to read complex ISC Bind9 named configuration file into a Pythonized nested array.
 
 - I've finished a tiny bash shell front-end to [OpenSSL](https://github.com/openssl/openssl) to provide appropriate TLS/SSL certificates in many setup modes.  It's called [Multi-level Certificate Authority Management tool, front-end tool to
 OpenSSL, written in bash shell.](https://github.com/egberts/tls-ca-manage) and

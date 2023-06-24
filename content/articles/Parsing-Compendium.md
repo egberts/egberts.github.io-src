@@ -1,7 +1,8 @@
 title: Parsing in Python Compendium
 date: 2020-12-29 12:27
+modified: 2022-09-11 07:39
 status: published
-tags: parsing, python
+tags: parsing, python, EBNF
 category: research
 lang: en
 private: False
@@ -21,3 +22,7 @@ Library, Algorithm, Grammar, Builds tree?, Supports ambiguity?, Can handle every
 [Parsley](https://github.com/pyga/parsley), PEG, EBNF, No, No, No\*, No, No, ReST
 [PyParsing](https://github.com/pyparsing/pyparsing/), PEG, Combinators, No, No, No\*, No, No, MIT
 [/jtable]
+
+# Reference
+
+* [BNF/EBNF Variants](http://www.cs.man.ac.uk/~pjj/bnf/ebnf.html)

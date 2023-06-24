@@ -1,19 +1,18 @@
-title: Gentoo OS for a QEMU guest
+title: A Tiny Gentoo OS as a QEMU guest
 date: 2022-07-22 01:38
-modified: 2022-09-21 09:32
 status: published
 tags: Gentoo, gateway, musl, libmusl, Linux
 category: HOWTO
-summary: How to setup Linux OS for use within a QEMU guest
-slug: gentoo-qemu-setup
+summary: How to setup a tiny Linux OS for a QEMU guest OS
+slug: gentoo-qemu-setup-tiny
 lang: en
 private: False
 
 
-How to setup the Gentoo OS from scratch ... within the QEMU VM startup.
+How to setup the Gentoo OS from scratch ... within the QEMU VM startup; this time by making it a tiny one.  This would be
+similiar to Damn Small Linux (DSL) distro.
 
-This would be extremely useful for a home gateway (whose requirement is
-not entailing MySQL database nor JavaScript-based web browsing or easily hijacked using a `LD_PRELOAD` environment variable.)
+Most useful for embedded system.
 
 
 ## Download ISO
@@ -102,103 +101,6 @@ mkdir --parents /mnt/gentoo
 mount -t btrfs /dev/vda3 /mnt/gentoo
 ```
 
-# Mount additional partitions (optional)
-
-I often break out `/usr` into a separate partition plus I do the recommended CISecurity partitioning scheme:
-
-[jtable]
-device, path, options, boot sequence
-`/dev/sda3`, `/`, noatime, 0 0
-`/dev/sda1`, `/boot`, nodev,nouser,nosuid,noatime, 0 1
-(see next section), `/usr`, nodev,nosuid,noatime, 0 2
-(see next section), `/tmp`, noexec,nodev,nosuid,noatime, 0 2
-(see next section), `/var`, nodev,nosuid,noatime, 0 2
-(see next section), `/home`, nodev,nosuid,noatime, 0 2
-(see next section), `/var/tmp`, nodev,nosuid,noatime, 0 3
-(see next section), `/var/log`, nodev,nosuid,noatime, 0 3
-(see next section), `/var/log/audit`, nodev,nosuid,noatime, 0 4
-[/jtable]
-
-There are two ways to further out the additional partitions:
-
-1. physical partition (via `fdisk /dev/sda`)
-2. logical parition (via `lvm` toolsuite)
-
-At any rate, let us create the bare minimum physical partitions firstly:
-
-```console
- 
-
-
-Pick what you need, but the whole enchilada is:
-
-```console
-$ fdisk /dev/sda
-```
-
-[jtable]
-partition number, physical partition, size amount, description
-1, `/dev/sda1`, 1g, boot for BIOS or UEFI
-2, `/dev/sda2`, (twice the size of your physical RAM)`, swap space
-3, `/dev/sda3`, /`, 128g, "the" root partition
-4. `/dev/sda4`, n/a, the rest of the remaining drive space, used as MBR extension for logical parition 5-9 or entirely by LVM at OS-level.
-
-## Physical partition approach
-
-For the all-physical partition approach, create the following physical partitions based on not nominally consuming more than 10% of any parititon for Gentoo 2022 installation:
-
-[jtable]
-partition number, physical partition, size amount, description
-1, `/dev/sda1`, 1g, boot for BIOS or UEFI
-2, `/dev/sda2`, (twice the size of your physical RAM)`, swap space
-3, `/dev/sda3`, /`, 128g, "the" root partition
-4. `/dev/sda4`, n/a, the rest of the remaining drive space, extension for logical parition 5-9
-5. `/dev/sda5`, `/usr`, 96g, UNIX-usr partition
-6. `/dev/sda6`, `/var`, 96g, UNIX-var partition
-7. `/dev/sda7`, `/tmp`, 24g, temporary space, cleaned out at each reboot
-8. `/dev/sda8`, `/var/log`, 96g, log directory
-9. `/dev/sda9`, `/var/log/audit`, 6g, audit directory
-10. `/dev/sda10`, `/home`, (rest of remaining logical partition), `$HOME` directory for multi-users
-[/jtable]
-Write and quit from the `fdisk` tool.
-
-Create the filesystems:
-```bash
-mkfs.ext4 /dev/sda1
-mkswap    /dev/sda2
-mkfs.ext4 /dev/sda3
-mkfs.ext4 /dev/sda5
-mkfs.ext4 /dev/sda6
-mkfs.ext4 /dev/sda7
-mkfs.ext4 /dev/sda8
-mkfs.ext4 /dev/sda9
-mkfs.ext4 /dev/sda10
-```
-
-Mount them in nested-order:
-
-```bash
-mount /dev/sda3 /mnt/gentoo
-cd /mnt/gentoo
-mkdir /mnt/gentoo/{boot,home,usr,var,tmp}
-mount /dev/sda1 ./boot
-mount /dev/sda5 ./usr
-mount /dev/sda6 ./var
-mkdir ./var/log
-mount /dev/sda8 ./var/log
-mkdir ./var/log/audit
-mount /dev/sda9 ./var/log/audit
-mount /dev/sda7 ./tmp
-mount /dev/sda10 ./home
-```
-
-
-That is it for the physical partition approach (skip the LVM section).
-
-## LVM approach
-
-
-
 # Check the DateTimestamp
 
 To ensure accurate recording of files being created on, check the date:
@@ -247,11 +149,6 @@ Go down to that filename you just saved.
 
 Go down two more lines to the stage3-amd64-musl-20220720T2237212.tar.DIGESTS.gz file.  Download and save that file.
 
-# Network Setup
-
-I use the Gentoo `net-setup` to get the Internet up and running ... fast.
-
-Use the 'manual configuration' option in `net-setup`, if you got some esoteric but exotic network setup.
 
 # Obtain PGP Keys of Gentoo Organization
 
@@ -365,11 +262,10 @@ config_enp1s0="dhcp"
 
 # Portage
 
-
 ## Syncing
 
 ```bash
-emerge-websync
+emerge --sync
 ```
 
 ## Perusing Latest News
@@ -390,19 +286,28 @@ eselect profile list
 ## Choosing from a List of System Models
 
 ```bash
-# 36 is default/linux/amd64/17.0/musl (exp)
-eselect profile set --force 36
+# 35 is default/linux/amd64/17.0/musl (exp)
+eselect profile set --force 35
 ```
 
-Those index numbers can change weekly, so check for the correct index number to this 'amd64 musl'.
 
-
-# Configuring USE
+# Using Portage
 
 Add the following to /etc/portage/make.conf
 ```
-USE="acl -alsa cdr curl dvd -emacs ipv6 -kde -gnome -gtk mount openrc pam -qt5 readline -systemd usbredir vim vim-syntax x86-64 -X"
+ACCEPT_LICENSE="*"
+USE="acl -alsa cdr curl dvd ipv6 -kde -gnome -gtk pam -qt5 readline vim-syntax -X"
 ```
+
+Add a `/etc/portage/package.license` file for license acceptance of firmware:
+```ini
+# Accepting both licenses for linux-firmware
+sys-kernel/linux-firmware linux-fw-redistributable no-source-code
+
+# Accepting any license that permits redistribution
+sys-kernel/linux-firmware @BINARY-REDISTRIBUTABLE
+```
+
 
 
 ## Updating Entire World
@@ -433,18 +338,16 @@ eselect kernel set 1  # there shall only be one
 # Installing Kernel Tools
 
 ```
-emerge dev-vcs/git
-emerge app-portage/cpuid2cpuflags
-emerge virtual/libudev
-emerge sys-apps/pciutils
-emerge app-portage/gentoolkit
-emerge sys-kernel/genkernel   # pulls in linux-firmware
-emerge sys-power/acpid  # for proper shutdown by VM host manager
+emerge sys-kernel/genkernel
 emerge sys-boot/grub
-
+emerge app-portage/gentoolkit
+emerge app-portage/cpuid2cpuflags
+emerge sys-apps/pciutils
+emerge sys-power/acpid  # for proper shutdown by VM host manager
+emerge openrc
 # following are optional
-# emerge sys-apps/hwdata  # pulled in by sys-apps/pciutils
-# emerge sys-apps/usbutils
+# emerge sys-apps/hwdata
+# emerge virtual/libudev
 # emerge media-libs/freetype
 # emerge sys-libs/efivar     # only if UEFI used instead of BIOS
 # emerge sys-boot/efibootmgr # only if UEFI used instead of BIOS
@@ -452,7 +355,7 @@ emerge sys-boot/grub
 
 This has to be done AFTER kernel source has been e-selected.
 
-SECURITY: I do not install SSH server.  If this VM needs network access, the VM itself can do the SSH or RSYNC protocol as a client.
+SECURITY: I do not install SSH server.  If this VM needs network access, itself can do the SSH or RSYNC protocol as a client.
 
 
 # Defaulting Kernel Configuration
@@ -472,7 +375,7 @@ Note: If `.config` does not exist, then default settings are used.
 
 # QEMU-related Driver Support
 
-## Gateway-Related QEMU Settings
+## Tiny QEMU Settings
 
 Of course, a gateway OS that is NOT directly on a physical host but instead inside a virtual machine typically does not have the following, for security reason:
 
@@ -500,52 +403,60 @@ CONFIG_VIRTIO_MENU=y
 CONFIG_ARCH_HAS_RESTRICTED_VIRTIO_MEMORY_ACCESS=y
 CONFIG_PARAVIRT=y
 CONFIG_KVM_GUEST=y
-CONFIG_PCI=y   # needed by CONFIG_PCIEPORTBUS
-CONFIG_PCIEPORTBUS=y
 CONFIG_VIRTIO_PCI=y
 CONFIG_VIRTIO_PCI_LIB=y
-CONFIG_VIRTIO_LEGACY=y
+CONFIG_VIRTIO_PCI_LIB_LEGACY=y
 CONFIG_HW_RANDOM=y
 CONFIG_HW_RANDOM_VIRTIO=y
-CONFIG_VIRTIO_PCI_LEGACY=y  # ???
+CONFIG_VIRTIO_PCI_LEGACY=y
 CONFIG_VIRTIO_BALLOON=y
 CONFIG_VIRTIO_MEM=y
 CONFIG_VIRTIO_MEMORY=y   # ???
+CONFIG_INPUT_EVDEV
 CONFIG_VIRTIO_INPUT=y
 CONFIG_VIRTIO_CONSOLE=y
 CONFIG_LPC_ICH=y
-CONFIG_I2C_SMBUS=y
+CONFIG_PCI=y   # needed by CONFIG_PCIEPORTBUS
+CONFIG_PCIEPORTBUS=y
+CONFIG_I2C_SMBUS=y   # renamed from CONFIG_SMBUS
 CONFIG_I2C_VIRTIO=y
 CONFIG_I2C_I801=y
-CONFIG_FUSE_FS=y
-CONFIG_VIRTIO_FS=y
-
 
 CONFIG_VIRTIO_MMIO=y
 CONFIG_VIRTIO_MMIO_CMDLINE_DEVICES=y
+
+CONFIG_IOMMU_SUPPORT=y
 CONFIG_VIRTIO_IOMMU=y
+
 CONFIG_VIRTIO_BLK=y
 CONFIG_BLK_MQ_VIRTIO=y
 CONFIG_SCSI_LOWLEVEL=y
 CONFIG_SCSI_VIRTIO=y
+
+CONFIG_ATA=y
+CONFIG_SATA_HOST=y
 CONFIG_SATA_AHCI=y
 CONFIG_SATA_AHCI_PLATFORM=y
 
+CONFIG_FUSE_FS=y
+CONFIG_VIRTIO_FS=y
+
 CONFIG_NET_CORE=y
+CONFIG_VSOCKETS=y
 CONFIG_VIRTIO_NET=y
 CONFIG_VIRTIO_VSOCKETS_COMMON=y
 CONFIG_VIRTIO_VSOCKETS=y
 
-CONFIG_RPMSG=y
 CONFIG_RPMSG_VIRTIO=n
 
 CONFIG_CRYPTO_DEV_VIRTIO=y
 CONFIG_DRM=y
 CONFIG_DRM_VIRTIO_GPU=y
 CONFIG_MMU=y
-CONFIG_VIRTIO_GPU=y  # ???
+CONFIG_DRM_VIRTIO_GPU=y  # (was CONFIG_VIRTIO_GPU)
 
-CONFIG_XHCI_HCD=y
+CONFIG_USB=y
+CONFIG_USB_XHCI_HCD=y    # (was CONFIG_XHCI_HCD)
 ```
 
 To merge the above settings into the `.config` file, execute:
@@ -615,18 +526,14 @@ emerge --ask sys-kernel/genkernel
 emerge --ask sys-kernel/dracut      # used with initramfs
 ```
 
-## Filesystem Table (`/etc/fstab`)
+# Fill in Filesystem
 
-Fill the `/etc/fstab` with the following content:
-
+Edit and ensure that the following is in `/etc/fstab`:
 ```
-# Adjust any formatting difference and additional partitions created 
-# from the Preparing the disks step
-/dev/vda1   /boot        ext4    noauto,noatime       1 2
-/dev/vda2   none         swap    sw                   0 0
-/dev/vda3   /            ext4    noatime              0 1
-  
-/dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
+/dev/vda1    /boot      ext4   noauto,noatime  1 2
+/dev/vda2    none       swap   sw              0 0
+_VIRTIO_VIRTIO_VIRTIO/dev/vda3    /          btrfs  noatime         0 1
+/dev/cdrom   /mnt/cdrom auto   noauto,ro       0 0
 ```
 
 Ensure that `/boot` is mounted for genkernel to fill in:
@@ -636,26 +543,6 @@ df | grep boot
 If resultant output is empty, go mount the `/boot`:
 ```bash
 mount /dev/vda1 /boot
-```
-
-Instructing InitRamFS to mount multiple disk partitions/volumes at boot.
-
-```bash
-vi /etc/initramfs.mounts
-```
-and put in something like what I use for CISecurity partitionings:
-```
-/usr
-/tmp
-/var
-/var/tmp
-/var/log
-/var/log/audit
-/home
-#
-# If you had some need of these:
-#/usr/local
-#/opt
 ```
 
 
@@ -691,6 +578,19 @@ emerge @preserved-rebuild  # rebuild system libraries
 
 # System Install
 
+## Filesystem Table (`/etc/fstab`)
+
+Fill the `/etc/fstab` with the following content:
+
+```
+# Adjust any formatting difference and additional partitions created 
+# from the Preparing the disks step
+/dev/vda1   /boot        ext4    defaults,noatime     0 2
+/dev/vda2   none         swap    sw                   0 0
+/dev/vda3   /            ext4    noatime              0 1
+  
+/dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
+```
 
 ## Host and Domain Information
 
@@ -758,16 +658,14 @@ Install `chronyd` and activate it:
 ```bash
 emerge net-misc/chrony
 rc-update add chronyd default
-```
 
 
 ## Filesystem Tools
 
-Install filesystem tools:
+Install BtrFS tools:
 
 ```bash
-emerge sys-fs/btrfs-progs   # for BtrFS
-emerge sys-fs/e2fsprogs   # for Ext2/Ext3/Ext4
+emerge sys-fs/btrfs-progs
 ```
 
 
@@ -775,7 +673,7 @@ emerge sys-fs/e2fsprogs   # for Ext2/Ext3/Ext4
 
 ### DHCP Client
 
-We are using ISC DHCP client on one side of the network, and  our ISP DHCP server is on the other side; add some editor syntax coloring:
+We are using ISC DHCP client, because our ISP DHCP server is complex enough:
 
 ```bash
 emerge dhcp dhcpd-syntax
@@ -789,6 +687,7 @@ emerge dhcp dhcpd-syntax
 To select a Grub2 bootloader:
 
 ```bash
+emerge --ask --verbose sys-boot/grub
 emerge --ask --update --newuse --verbose sys-boot/grub
 ```
 
@@ -817,3 +716,5 @@ Exit and then reboot
 /root # reboot
 ```
 
+
+Enjoy

@@ -1,10 +1,9 @@
-title: Viewing (selectively) large DOT or GV graph
-date: 2020-10-09 09:31
-modified: 2022-09-15 07:15
+title: Viewing extremely large DOT or GV graph
+date: 2022-09-15 07:15
 status: published
-tags: DOT, graphviz, python3-graphviz, SVG, Python, python-graphviz, bison
+tags: DOT, tulip, graphviz, python3-graphviz, SVG, Python, python-graphviz, bison
 category: HOWTO
-summary: How to view a large DOT or GV graph selectively
+summary: How to view an extremely large DOT or GV graph effectively
 
 Creating layout a 
 [DOT graph](https://en.wikipedia.org/wiki/DOT_\(graph_description_language\))
@@ -79,7 +78,7 @@ And to work with large DOT graph, specifically of a LR-parser nature,
 I have chosen `pygraphviz` to be this glue, a Python API glue.
 
 
-## The Python script
+# Node-selecting Python script
 The opening of large but viewable GV (or DOT) file is done by doing:
 ```python
 #!/usr/bin/env python3
@@ -111,14 +110,18 @@ process.communicate()
 
 It's that simple using an `eog` SVG viewer.  However, DOT graph with more than 10 degrees of depth are not so easily handled by other image viewers.  And LR-parser often has 30-200 degrees, notably `nftables` having 124 degrees.
 
-IT'S TOO BIG
-============
+## IT'S TOO BIG
 At least you can view the graph but all that zooming in (using a mouse wheel)
 and moving the zoomed view pane (using mouse-button holddown) can be
 a bit tiring.  
 
 I'm a bit tiring after working with N-degree graph tree:
 zoom, zoom, zoom, view-drag, view-drag, view-drag, zoom, zoom, zoom.
+
+Some alternatives to try for extremely large DOT graph files are:
+
+
+* [Gephi](https://github.com/gephi/gephi)
 
 PRUNE THE TREE
 ==============
