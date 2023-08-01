@@ -1,7 +1,8 @@
 title: PKI Certificates in OpenSSH
 date: 2022-03-24 07:38
+modified: 2023-08-01 02:22
 status: published
-tags: OpenSSH, PKI, ssh
+tags: OpenSSH, PKI, ssh, cert, certificate, X.509
 category: research
 summary: How to create PKI certificates for use by OpenSSH
 slug: ssh-openssh-certificates
@@ -44,7 +45,7 @@ Operation, Public Key Authentication, Certificate Authentication
 Authenticating unknown host, User is asked if they want to accept host key on initial login, Verify host-cert is signed by CA
 Authenticating known host, Key compared with user’s `known_hosts` file, Verify host-cert is signed by CA
 Replacing a known host’s keys, Entry must be deleted from user’s `known_hosts` file then User is asked if they want to accept new host key on login, Verify host-cert is signed by CA
-Revoking a key/cert, '@revoked' line prepended to the host entry in user’s `known_hosts file`, “@revoked” line prepended to the host entry in user’s `known_hosts` file
+Revoking a key/cert, `@revoked` keyword is prepended to the host entry in user’s `known_hosts file`, `@revoked`line prepended to the host entry in user’s `known_hosts` file
 [/jtable]
 
 The benefits of using certificate authentication:
@@ -78,6 +79,7 @@ The benefits of using certificate authentication:
 
 
 Making it work
+---------------
 
 Implementing ssh certificate authentication is much easier than working with SSL certificates. The hardest part is determining whether to use a single CA key for signing users as well as servers or two CA keys — one each for server and users.
 
@@ -94,7 +96,7 @@ On your preferred certificate authority server run the following commands
 ```console
 $ # Lets start with good organization
 $ mkdir -p ssh_cert_authorita/server_ca
-$ cd ysh_cert_authority/server_ca/
+$ cd ssh_cert_authority/server_ca/
 
 ~/ssh_cert_authority/server_ca $ # Now lets generate our server certificate authority keypair
 ~/ssh_cert_authority/server_ca $ ssh-keygen -f server_ca -C "companyname_server_ca"
@@ -173,7 +175,16 @@ Once `/etc/ssh/sshd_config` is saved, restart sshd.
 Copy the text from `server_ca.pub` and enter into your `~/.ssh/known_hosts` (or `/etc/ssh/known_hosts`) file then prepend with the underline text shown below:
 
 ```
-@cert-authority *.host.net,123.45.67.* ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDVifNRc+EN4b9g/ygWRCIvV1qw0aR33qzkutIA6C3MzHidaXe6tO4Q35YqrP2UUhOdcl2g8nO7BNSSHkjrFyEnyNqkpgHYcDzUdpE6XGS6rNcjrmLajf1CRvUBvFD0ceu//z6HL1dpE347AHSZbFxHT6NdhscdEd/Bd5c1aVyS+dUdiGX4U9YdgTN2lM8zQy5rJo+siFyHmtqXh1ZVBBC+VBF6ZPzMkxvkJmAp4eWCQJOZLIybcNZlyuXrs1bXV0X0ZIIL2j/gYC2gJPO1FUTKRcqzo/fQ/m6hAhxMMpTTgI92FiE/QOfOk5+MmgfTOqsF0us2TJ5mrSIE9o/3DQsj "companyname_server_ca"
+@cert-authority *.host.net,123.45.67.* ssh-rsa \
+AAAAB3NzaC1yc2EAAAADAQABAAABAQDVifNRc+EN4b9g/yg
+WRCIvV1qw0aR33qzkutIA6C3MzHidaXe6tO4Q35YqrP2UUh
+Odcl2g8nO7BNSSHkjrFyEnyNqkpgHYcDzUdpE6XGS6rNcjr
+mLajf1CRvUBvFD0ceu//z6HL1dpE347AHSZbFxHT6Ndhscd
+Ed/Bd5c1aVyS+dUdiGX4U9YdgTN2lM8zQy5rJo+siFyHmtq
+Xh1ZVBBC+VBF6ZPzMkxvkJmAp4eWCQJOZLIybcNZlyuXrs1
+bXV0X0ZIIL2j/gYC2gJPO1FUTKRcqzo/fQ/m6hAhxMMpTTg
+I92FiE/QOfOk5+MmgfTOqsF0us2TJ5mrSIE9o/3DQsj \
+"companyname_server_ca"
 ```
 
 Notes: Delete any existing `known_host` entries for “example.host.net”
@@ -192,7 +203,8 @@ debug1: Host 'example.host.net' is known and matches the RSA-CERT host certifica
 # User Authentication
 
 User authentication is not much harder than server authentication.
-Create User CA
+
+## Create User CA
 
 On your preferred certificate authority server run the following commands
 
@@ -253,11 +265,11 @@ total 8
 
 Important: Keep all pubkeys and certs with the CA. If you need to revoke them, you must have a copy handy!
 
-Important: You cannot negate the use of the options -I or -n when creating server certificates.
+Important: You cannot negate the use of the options `-I` or `-n` when creating server certificates.
 
-The -n option must only refer to the relevant login usernames, a blank or wildcard name will allow login to any valid user account unless otherwise restricted on the server-side. In this example the usernames “root” and “loginname” were used.
+The `-n` option must only refer to the relevant login usernames, a blank or wildcard name will allow login to any valid user account unless otherwise restricted on the server-side. In this example the usernames “`root`” and “`loginname`” were used.
 
-The -I option can be any text used to identify this certificate and you do not need to follow the same format used above.
+The `-I` option can be any text used to identify this certificate and you do not need to follow the same format used above.
 
 # Server Configuration Change
 
@@ -267,7 +279,7 @@ Add the following to `/etc/ssh/sshd_config` on every server you want to enable u
 TrustedUserCAKeys /etc/ssh/user_ca.pub
 ```
 
-Once `sshd_config` is saved, restart sshd.
+Once `sshd_config` is saved, restart `sshd`.
 
 # Testing User Authentication
 
@@ -316,19 +328,54 @@ Then enter the following commands:
 ~ $ sudo chmod 644 /etc/ssh/ssh_revoked_keys.
 ```
 
-Once complete, restart sshd.
+Once complete, restart `sshd`.
 
 When user access needs to be revoked from a server, simply add their public key or certificate and add it to `/etc/ssh/ssh_revoked_keys`. The file format is similar to authorized_keys, one key or cert per line.
 
 ```
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDL8HShSFKdY3Tox9U+gUotTFlRedPxI5zSrU6KiZEXA8i+37BtB0yp502q3Dx1MmXBF8Pqa+xEQ9DOgtragDwX0V7ieOjvRSB83w2Orj9cdMj8U6WluU2T+QlD2JtVmOp0Skg4k3AENIN9J0rmnxvmuCZa2G5f+6DGp/pW5kk9FfNv1xaAOgy3yfExD2w5cEHZfztajbTuCE6z9aNxU96ZHvXdV6Z8M3xkkea6IUU3XCyg+lB/qSq+KoBoByzwZSJ6BfA7x63okq57K6XsPp4GuVukq0OmDk9ZLpqmeC8esWhniA+2DwmjdaFa1k9K/bpCy4mVLhqTgwkU9u8rxaCd username@hostname
-ssh-rsa-cert-v01@openssh.com AAAAHHNzaC1yc2EtY2VydC12MDFAb3BlbnNzaC5jb20AAAAgcrHTa3GDn51GnAnGuuFz//tS+NsIk0pP16nEglh4/08AAAADAQABAAABAQCxl7RSkZwRW0igzKUGUqkthFvH8Su3m0G1kWC4YBQht9TkXsSsWVW5FGbIGrYWy2JOJngAKTk6T82ySiuJnMA2esEW4thZ5kp8MgdCcMuqUGfFXxkHHF0cnzY0AWSD3z8WvuGVEWDTtIUpBqiW/ZvVZgVpHViqGF8AAbiFL2iRdG4D5g35ydFs0Gujn38zfyJLRVK/AQtqS9yzh6wRfgOu0/QXI/pYVV4imuXgQCsouW/gSItvg5Qdp8tyaA0hYJA7XHD6DCxr3RplT1XrsIMuROY1nSqTq0wpXl7XPM6aLOts63uPypumMIuq5kqX+5NBd+C6gDnEU7Xedce+Ch/LAAAAAAAAAAAAAAABAAAADnVzZXJfZnVsbF9uYW1lAAAADAAAAAh1c2VybmFtZQAAAAAAAAAA//////////8AAAAAAAAAggAAABVwZXJtaXQtWDExLWZvcndhcmRpbmcAAAAAAAAAF3Blcm1pdC1hZ2VudC1mb3J3YXJkaW5nAAAAAAAAABZwZXJtaXQtcG9ydC1mb3J3YXJkaW5nAAAAAAAAAApwZXJtaXQtcHR5AAAAAAAAAA5wZXJtaXQtdXNlci1yYwAAAAAAAAAAAAABFwAAAAdzc2gtcnNhAAAAAwEAAQAAAQEAy/B0oUhSnWN06MfVPoFKLUxZUXnT8SOc0q1OiomRFwPIvt+wbQdMqedNqtw8dTJlwRfD6mvsREPQzoLa2oA8F9Fe4njo70UgfN8Njq4/XHTI/FOlpblNk/kJQ9ibVZjqdEpIOJNwBDSDfSdK5p8b5rgmWthuX/ugxqf6VuZJPRXzb9cWgDoMt8nxMQ9sOXBB2X87Wo207ghOs/WjcVPemR713VemfDN8ZJHmuiFFN1wsoPpQf6kqviqAaAcs8GUiegXwO8et6JKueyul7D6eBrlbpKtDpg5PWS6apngvHrFoZ4gPtg8Jo3WhWtZPSv26QsuJlS4ak4MJFPbvK8WgnQAAAQ8AAAAHc3NoLXJzYQAAAQBza5ekUSM6/HKNNxfsPsynW6XNVblHdWuWGdFdHU+xo5y+MqPhkOcHEK3g3MZ5xQ75CSBeNPmd+ivIAUr7czwnWE7gJF/0q2ft3tahp+t9vOV7bvTQDf6afnSOwFRWVhoUC0OItHVQ5DphL+QuUsRtq/1a99DuhhNoqO7RJeNvgWwhnPI9LuTZ/wdJGxBsY0d1bS/3ktFtPPdbQNBWcQG8ShwdJj3XM5eKkzUNrjm1CfSi4fyVWX53gx6+dKxwlg7rI1GuZ14is3ZEb6oSk++P4MrSsqeIhKiE0QLNp6kXi8qwdYX93VrI+pD9mv7qLU3h22JvQUKnuWNvdJJuQATZ username@hostname
+ssh-rsa
+    AAAAB3NzaC1yc2EAAAADAQABAAABAQDL8HShSFKdY3Tox9U+gUotT
+    FlRedPxI5zSrU6KiZEXA8i+37BtB0yp502q3Dx1MmXBF8Pqa+xEQ9
+    DOgtragDwX0V7ieOjvRSB83w2Orj9cdMj8U6WluU2T+QlD2JtVmOp
+    0Skg4k3AENIN9J0rmnxvmuCZa2G5f+6DGp/pW5kk9FfNv1xaAOgy3
+    yfExD2w5cEHZfztajbTuCE6z9aNxU96ZHvXdV6Z8M3xkkea6IUU3X
+    Cyg+lB/qSq+KoBoByzwZSJ6BfA7x63okq57K6XsPp4GuVukq0OmDk
+    9ZLpqmeC8esWhniA+2DwmjdaFa1k9K/bpCy4mVLhqTgwkU9u8rxaCd \
+    username@hostname
+ssh-rsa-cert-v01@openssh.com \
+    AAAAHHNzaC1yc2EtY2VydC12MDFAb3BlbnNzaC5jb20AAAAgcrHTa3GDn
+    51GnAnGuuFz//tS+NsIk0pP16nEglh4/08AAAADAQABAAABAQCxl7RSkZ
+    wRW0igzKUGUqkthFvH8Su3m0G1kWC4YBQht9TkXsSsWVW5FGbIGrYWy2J
+    OJngAKTk6T82ySiuJnMA2esEW4thZ5kp8MgdCcMuqUGfFXxkHHF0cnzY0
+    AWSD3z8WvuGVEWDTtIUpBqiW/ZvVZgVpHViqGF8AAbiFL2iRdG4D5g35y
+    dFs0Gujn38zfyJLRVK/AQtqS9yzh6wRfgOu0/QXI/pYVV4imuXgQCsouW
+    /gSItvg5Qdp8tyaA0hYJA7XHD6DCxr3RplT1XrsIMuROY1nSqTq0wpXl7
+    XPM6aLOts63uPypumMIuq5kqX+5NBd+C6gDnEU7Xedce+Ch/LAAAAAAAA 
+    AAAAAAABAAAADnVzZXJfZnVsbF9uYW1lAAAADAAAAAh1c2VybmFtZQAAA
+    AAAAAAA//////////8AAAAAAAAAggAAABVwZXJtaXQtWDExLWZvcndhcm
+    RpbmcAAAAAAAAAF3Blcm1pdC1hZ2VudC1mb3J3YXJkaW5nAAAAAAAAABZ
+    wZXJtaXQtcG9ydC1mb3J3YXJkaW5nAAAAAAAAAApwZXJtaXQtcHR5AAAA
+    AAAAAA5wZXJtaXQtdXNlci1yYwAAAAAAAAAAAAABFwAAAAdzc2gtcnNhA
+    AAAAwEAAQAAAQEAy/B0oUhSnWN06MfVPoFKLUxZUXnT8SOc0q1OiomRFw
+    PIvt+wbQdMqedNqtw8dTJlwRfD6mvsREPQzoLa2oA8F9Fe4njo70UgfN8
+    Njq4/XHTI/FOlpblNk/kJQ9ibVZjqdEpIOJNwBDSDfSdK5p8b5rgmWthu
+    X/ugxqf6VuZJPRXzb9cWgDoMt8nxMQ9sOXBB2X87Wo207ghOs/WjcVPem
+    R713VemfDN8ZJHmuiFFN1wsoPpQf6kqviqAaAcs8GUiegXwO8et6JKuey
+    ul7D6eBrlbpKtDpg5PWS6apngvHrFoZ4gPtg8Jo3WhWtZPSv26QsuJlS4
+    ak4MJFPbvK8WgnQAAAQ8AAAAHc3NoLXJzYQAAAQBza5ekUSM6/HKNNxfs
+    PsynW6XNVblHdWuWGdFdHU+xo5y+MqPhkOcHEK3g3MZ5xQ75CSBeNPmd+
+    ivIAUr7czwnWE7gJF/0q2ft3tahp+t9vOV7bvTQDf6afnSOwFRWVhoUC0 
+    OItHVQ5DphL+QuUsRtq/1a99DuhhNoqO7RJeNvgWwhnPI9LuTZ/wdJGxB
+    sY0d1bS/3ktFtPPdbQNBWcQG8ShwdJj3XM5eKkzUNrjm1CfSi4fyVWX53
+    gx6+dKxwlg7rI1GuZ14is3ZEb6oSk++P4MrSsqeIhKiE0QLNp6kXi8qwd
+    YX93VrI+pD9mv7qLU3h22JvQUKnuWNvdJJuQATZ \
+    username@hostname
 ```
 
 Notes: This blocks the public key or certificate from being used system-wide
 
 * Public-keys are more ideal as they are smaller and block both public-key in addition to certificate authenitcation
-* Certificates work fine here too, but do not block the public-key should it be in an authorized_keys file
+* Certificates work fine here too, but do not block the public-key should it be in an `authorized_keys` file
 
 ```
 Jul 19 00:27:26 localhost sshd[11546]: error: WARNING: authentication attempt with a revoked RSA-CERT key 6d:59:82:70:2b:93:dc:57:a6:c6:1f:64:de:ad:be:ef
@@ -336,10 +383,19 @@ Jul 19 00:27:26 localhost sshd[11546]: error: WARNING: authentication attempt wi
 
 ## Revoking Server Keys
 
-Server keys must be revoked in a user’s known_hosts file, or in /etc/ssh/known_hosts as follows:
+Server keys must be revoked in a user’s `known_hosts` file, or in `/etc/ssh/known_hosts` as follows:
 
 ```
-@revoked * ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDc9wlKYUzWZcfvPOa0L+h6Wbb/k9yJgXbnqa3VF+ucdwmBSiT3zBMAjqjFMnN3MuI4oig3SqkIXKPWn0QgFoV4d3G4opzs/OdZ6WLyxLwYQBggUQDg4QhKuHDltIR/BMxYlhB20ngmkaiBiK+Q4ThFRpW7FElOsuZ3rgJq559PgkFeFMY06oyzUMaSshFM84U/1zrVL4BgdnZBcJn018psem5kSkd0Gxm+ao1TuEnMGeArVMFiG9Hq1o2E+QGp1euE4YYQtR533fyZ8BSTE9ThLkmTXgU31dn1irFatBrBENm7TnIVmNT410NqV5J9zDME4NAnuEVwNWtq65rZkgut root@localhost
+@revoked * ssh-rsa \
+    AAAAB3NzaC1yc2EAAAADAQABAAABAQDc9wlKYUzWZcfvPOa0L+h6
+    Wbb/k9yJgXbnqa3VF+ucdwmBSiT3zBMAjqjFMnN3MuI4oig3SqkI
+    XKPWn0QgFoV4d3G4opzs/OdZ6WLyxLwYQBggUQDg4QhKuHDltIR/B
+    MxYlhB20ngmkaiBiK+Q4ThFRpW7FElOsuZ3rgJq559PgkFeFMY06
+    oyzUMaSshFM84U/1zrVL4BgdnZBcJn018psem5kSkd0Gxm+ao1Tu
+    EnMGeArVMFiG9Hq1o2E+QGp1euE4YYQtR533fyZ8BSTE9ThLkmTX
+    gU31dn1irFatBrBENm7TnIVmNT410NqV5J9zDME4NAnuEVwNWtq6 
+    5rZkgut \
+    root@localhost
 ```
 
 Notes: The wildcard prevents the host-key from being used by any host
@@ -362,7 +418,9 @@ Host key verification failed.
 # Applying Controls to Certificates
 
 When signing a certificate, an administrator can apply controls directly into the certificate that cannot be altered without re-signing.
-Certificate Expiration
+
+
+## Certificate Expiration
 
 Most organizations apply password expiration policies, and many compliance requirements require regular password and certificate expiration. Unfortunately there have only been ad-hoc methods enforce ssh key rotation.
 
@@ -380,7 +438,7 @@ Notes: Expirations work equally on user and server certificates.
 
 # Login Names
 
-As mentioned earlier, both login-names and server-names can be enforced in the certificate using the -n option.
+As mentioned earlier, both login-names and server-names can be enforced in the certificate using the `-n` option.
 
 For users, this restricts the user to specific login names on the remote server. Typically this should be a single username, but in some environments they may be a need for multiple names.
 
@@ -465,6 +523,7 @@ Also, it doesn't matter where you generate the key pair - do it on your workstat
 Just remember to keep the SSH CA signing keys safe - this one is probably one of those that you should use a password with, because this key is really powerful and you don't need to use it very often.
 
 and the output is:
+
 ```console
 Generating public/private rsa key pair.
 Enter passphrase (empty for no passphrase): 
@@ -552,14 +611,17 @@ First, we need to generate some RSA keys that will function as the signing keys.
 
 Let’s create these keys in our home directory:
 
+```console
 cd ~
 ssh-keygen -f server_ca
+```
 
 You will be asked if you’d like to create a passphrase. This will add an additional layer of protection to your key in the event that it falls into the wrong hands. Once this is finished, you’ll have a private and public key in your home directory:
 
-ls
-
+```console
+$ ls
 server_ca   server_ca.pub
+```
 
 Signing Host Keys
 =================
@@ -568,7 +630,14 @@ Now that we have our keys, we can begin signing our host keys.
 
 Start by signing the host key of the certificate authority itself. Use the following syntax:
 
-<pre> ssh-keygen -s <span class=“highlight”>signing_key</span> -I <span class=“highlight”>key_identifier</span> -h -n <span class=“highlight”>host_name</span> -V +52w <span class=“highlight”>host_rsa_key</span> </pre>
+```console
+ssh-keygen \
+    -s asigning_key \
+    -I key_identifier \
+    -h \
+    -n host_name \
+    -V +52w host_rsa_key
+```
 
 Let’s go over what all of this means.
 
