@@ -13,8 +13,8 @@ different devices for the following:
 * Opened tabs
 * Passwords
 * History of browsed web pages
-* Add-Ons (not available on mobile devices)
-* Preferences (not available on mobile devices)
+* Add-Ons (not available on iOS mobile devices)
+* Preferences (not available on iOS mobile devices)
 
 Application Program
 *******************
