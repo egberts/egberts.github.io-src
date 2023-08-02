@@ -48,5 +48,5 @@ To set up a private Firefox sync server.
 Firefox Sync Server
 -------------------
 
-To host a private server of Firefox Sync, see [Mozilla Firefox Run Sync](https://mozilla-services.readthedocs.io/en/latest/howtos/run-sync-1.5.html%7CHowTo)
+To host a private server of Firefox Sync, see [https://mozilla-services.readthedocs.io/en/latest/howtos/run-sync-1.5.html%7CHowTo](https://mozilla-services.readthedocs.io/en/latest/sync/index.html)
 
