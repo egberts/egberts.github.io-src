@@ -290,6 +290,7 @@ After passing your DNS record lookup and BIMI online testers, your domain should
 
 # References
 
+* [16-Year Bug (BIMI)](https://16years.secvuln.info/)
 * [BIMI - IETF RFC Rough Draft](https://tools.ietf.org/id/draft-blank-ietf-bimi-00.html)
 * [Convert PNG/JPG/JPEG/WEBP to TinySVG](https://image2svg.com/)
 * [SVG Tiny v1.2](https://www.w3.org/TR/SVGTiny12/)
