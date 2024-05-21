@@ -13,14 +13,14 @@ FILE_PERM=0640
 DIR_GROUP=www-data
 DIR_PERM=0750
 PORT=8000
-SSH_HOST=vps
+SSH_HOST=egbert.net
 SSH_PORT=2224
 SSH_USER=wolfe
 SSH_TARGET_DIR=/srv/htdocs/egbert.net/https/html
 SCP_OPTION=-p
 
 # rsync requires both '-g' AND '--chown' to make effective the group name change remotely
-RSYNC_OPTION=-g -P --chown=wolfe:www-data
+RSYNC_OPTION=-vv -g -P --chown=wolfe:www-data
 
 
 DEBUG ?= 0
@@ -86,8 +86,8 @@ publish:
 	@echo $(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 ifdef FILE_GROUP
-	@echo find ${OUTPUTDIR} -type d -exec chgrp -R ${FILE_GROUP} {} \;
-	find ${OUTPUTDIR} -exec chgrp -R ${FILE_GROUP} {} \;
+	@echo find ${OUTPUTDIR} -type d -exec sudo chgrp -R ${FILE_GROUP} {} \;
+	find ${OUTPUTDIR} -exec sudo chgrp -R ${FILE_GROUP} {} \;
 endif
 ifdef DIR_PERM
 	@echo find ${OUTPUTDIR} -type d -exec chmod -R ${DIR_PERM} {} \;
@@ -106,7 +106,7 @@ validate: publish
 	html5validator --root $(OUTPUTDIR)
 
 rsync_upload: publish
-	rsync ${RSYNC_OPTION} -e "ssh -p $(SSH_PORT)" -P -rvzc --delete $(OUTPUTDIR)/ $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
+	rsync ${RSYNC_OPTION} -e "ssh -p${SSH_PORT}" -rzc --progress --delete $(OUTPUTDIR)/ $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR) 
 
 
 .PHONY: html help clean regenerate serve serve-global devserver publish ssh_upload rsync_upload
