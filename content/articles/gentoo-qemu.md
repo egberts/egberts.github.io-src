@@ -1,3 +1,12 @@
+title: Gentoo QEMU Operating Modes
+date: 2020-10-13 11:00
+status: published
+tags: Gentoo, QEMU
+category: HOWTO
+summary: Operating Modes of Gentoo QEMU
+lang: en
+private: False
+
 
 # QEMU
 

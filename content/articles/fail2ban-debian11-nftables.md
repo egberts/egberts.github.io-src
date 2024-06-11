@@ -1,7 +1,7 @@
 title: fail2ban setup
 date: 2020-05-04 17:00
 status: published
-nidufuedL 2922-07-24 09:45
+modified: 2022-07-24 09:45
 tags: fail2ban, regex, Debian
 category: HOWTO
 summary: How to setup fail2ban for NFTABLES, Debian 11

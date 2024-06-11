@@ -2,7 +2,6 @@ Title: Bind9 DNSSEC Root Server
 status: published
 Date: 2020-01-28 16:14
 Modified: 2022-02-24 08:14
-status: published
 tags: Bind9, DNSSEC
 slug: dnssec-bind9-root
 category: research
