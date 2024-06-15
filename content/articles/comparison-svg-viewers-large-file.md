@@ -4,6 +4,7 @@ status: published
 tags: comparison, viewer, SVG, bison, python-graphviz, graphviz, DOT, PDF, Python
 category: HOWTO
 slug: comparison-svg-viewers-large-file
+summary: A comparison of large-SVG viewers are reviewed here.
 lang: en
 private: False
 
@@ -70,19 +71,22 @@ print('File %s created.' % image_file)
 The resulting SVG file looks like:
 
 * 156,711 SVG lines
-* 9,200,000 bytes, PDF file
+* 33,300,000 bytes, SVG file
 
 Convert it to PDF, just in case:
 
 ```bash
-
+cairosvg parser_bison.svg parser_bison.pdf
 ```
-* 33,300,000 bytes, SVG file
+* 9,200,000 bytes, PDF file
 
 I have a 33MB SVG file that was translated from DotGraph (.dot).  And cannot view this DOT, SVG, nor PDF.
 
-None of today's viewer that I have tried in the past works on this sized
+Summary
+=======
+None of today's viewer that I have tried in the past works on this large-sized
 DOT file anymore.
+
 Of the some 2-dozen window-based SVG viewers, the following were listed simply because they can load this crazy-huge 50MB-sized SVG file:
 
 * Inkscape
