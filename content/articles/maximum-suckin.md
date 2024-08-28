@@ -3,7 +3,7 @@ Date: 2019-12-17T10:35
 Modified: 2020-02-25 19:26
 Status: Published
 Tags: development, engineering, stack, full-stack, web, server
-Category: development
+Category: research
 Summary: New web server design - One-time URL
 
 I was designing a new web server that has the following capabilities:

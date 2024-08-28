@@ -1,5 +1,5 @@
 title: Comparison of Client-Side Knowledge-Base Management (KBM)
-date: 2024-06-15 05:00
+date: 2024-06-14 05:00
 status: published
 tags: KBM, comparison
 category: research
