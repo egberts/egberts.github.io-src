@@ -14,10 +14,10 @@ JTABLE_SEPARATOR = 'JTABLE_SEPARATOR'
 JTABLE_TEMPLATE = 'JTABLE_TEMPLATE'
 DEFAULT_SEPARATOR = ','
 
-AUTO_INCREMENT_REGEX = re.compile(r"ai ?\= ?\" ?(1) ?\"")
-TABLE_HEADER_REGEX = re.compile(r"th ?\= ?\" ?(0) ?\"")
-CAPTION_REGEX = re.compile("caption ?\= ?\"(.+?)\"")
-SEPARATOR_REGEX = re.compile("separator ?\= ?\"(.+?)\"")
+AUTO_INCREMENT_REGEX = re.compile(r"ai\s?\=?\"\s?(1)?\s\"")
+TABLE_HEADER_REGEX = re.compile(r"th\s?\=\s?\"\s?(0)\s?\"")
+CAPTION_REGEX = re.compile("caption\s?\=\s?\"(.+?)\"")
+SEPARATOR_REGEX = re.compile("separator\s?\=\s?\"(.+?)\"")
 MAIN_REGEX = re.compile(r"(\[jtable(.*?)\]([\s\S]*?)\[\/jtable\])")
 
 DEFAULT_TEMPATE = """
