@@ -739,11 +739,11 @@ PLUGINS = [
           'sitemap',
           'dateish',
           'tag_cloud',
+          'just_table',
           'm.alias',
           'm.htmlsanity',
           'm.images',
           'm.math',
-          'just_table',
           'code_include',
 ]
 
@@ -1126,5 +1126,5 @@ DOCUTILS_SETTINGS = {}
 #  ignore pre and code tags. This requires that
 #  Typogrify version 2.0.4 or later is installed
 #*default*  TYPOGRIFY_IGNORE_TAGS = []
-TYPOGRIFY_IGNORE_TAGS = ['pre', 'code']
+TYPOGRIFY_IGNORE_TAGS = ['pre', 'code', 'table']
 
