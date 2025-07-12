@@ -26,3 +26,4 @@ Library, Algorithm, Grammar, Builds tree?, Supports ambiguity?, Can handle every
 # Reference
 
 * [BNF/EBNF Variants](http://www.cs.man.ac.uk/~pjj/bnf/ebnf.html)
+* [Conversions](https://github.com/dundalek/GrammKit?tab=readme-ov-file)

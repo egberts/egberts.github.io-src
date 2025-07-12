@@ -12,10 +12,13 @@ private: False
 
 See https://egbert.net/blog/articles/pelican-metadata.html for details
 
-[jtable caption="This is caption" separator="|" th=0 ai="1"]
+[jtable caption="This is caption" separator="," th=1 ai="1"]
 # caption - the table caption
 # separator - default is comma
 # th - table header (=0 means disable)
 # ai - auto-index, adds a column numbering starts at 1
-
+columnA, columnB, columnC
+row1, dataB1, dataC1
+row2, dataB2, dataC2
 # : if the date is not specified and DEFAULT_DATE is set to 'fs', Pelican will rely on the file’s “mtime” timestamp, and the category can be determined by the directory in which the file resides.
+[/jtable]
