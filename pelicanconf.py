@@ -23,7 +23,7 @@ SITENAME = 'Egbert Networks'
 #  Example: SITEURL = 'https://example.com'
 #  Used in most themed template files.
 # SITEURL = 'https://egbert.net'
-SITEURL = ''
+SITEURL = 'https://egbert.net'
 
 #  PATH - Path to content directory to be processed
 #  by Pelican. If undefined, and content path is not
@@ -851,7 +851,6 @@ CACHE_PATH = 'cache'
 GZIP_CACHE = False
 CHECK_MODIFIED_METHOD = 'md5'
 LOAD_CONTENT_CACHE = False
-WRITE_SELECTED = []
 
 
 #  STATIC_CREATE_LINKS - Create links instead of
