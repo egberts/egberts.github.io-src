@@ -14,7 +14,6 @@ This is a second of 12-part series of setting up the fully secured Mail Server.
 
 First part is [Bind9 Setup for SMTP]({filename}dns-bind9-smtp.md).  
 
-Next part is [OpenSSL for SMTP Server]({filename}tls-openssl-smtp.md).
 
 
 # Install Postfix 
