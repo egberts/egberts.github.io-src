@@ -1,3 +1,13 @@
+title: Citations (running)
+date: 2025-07-12 08:11
+status: published
+tags: citations
+category: research
+summary: A list of Citations
+lang: en
+private: False
+
+
 My running citations:
 
 [Gruss et al., 2015a] Gruss, D., Bidner, D., and Mangard, S. (2015a).
