@@ -25,7 +25,7 @@ RSYNC_OPTION=-vv -g -P --chown=wolfe:www-data
 
 DEBUG ?= 0
 ifeq ($(DEBUG), 1)
-	PELICANOPTS += -D
+	PELICANOPTS += -D -vvv
 endif
 
 RELATIVE ?= 0
