@@ -8,7 +8,7 @@ slug: gateway-os-gentoo-setup
 lang: en
 private: False
 
-If wanting to be running a Gentoo Gateway within a QEMU, see [installation of Gentoo Linux OS]({{filename}gentoo-qemu-setup) firstly.
+If wanting to be running a Gentoo Gateway within a QEMU, see [installation of Gentoo Linux OS]({filename}gentoo-qemu-setup.md) firstly.
 
 
 Then check for existing services:
