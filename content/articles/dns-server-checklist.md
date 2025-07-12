@@ -16,7 +16,6 @@ is properly confgured, at least from the network level.
 This article only covers the network part of DNS and its interaction
 from the Internet (or real world).  It does not details aspects 
 on hardening or strengthening of your DNS server 
-(I have another write on that topic [here]({filename}dns-bind9-hardening)).
 
 # First Thing First
 
