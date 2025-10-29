@@ -1,5 +1,6 @@
 title: Invalid SSHFP DNS resource record
 date: 2022-04-03 07:38
+modified: 2025-10-29 12:25
 status: published
 tags: DNS, SSHFP
 category: HOWTO
