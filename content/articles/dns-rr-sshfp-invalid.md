@@ -46,6 +46,7 @@ The above decision is based on a simple comparison between:
 This message covers 99.999% of the scenario.
 
 * `sshd` is not using the same pubkey, possibly due to:
+    * shell aliased your `ssh` command
     * different set of config file (via `sshd -c <config_file>`)
     * `AuthorizedKeyFile` had been change
     * fingerprint hash (`FingerprintHash`) setting had been changed
