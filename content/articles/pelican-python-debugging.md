@@ -1,5 +1,6 @@
 title: Debugging Pelican using PyCharm
 date: 2024-06-20 18:00
+modified: 2025-07-13 01:27
 status: published
 tags: Python, Pelican, PyCharm, debug
 category: HOWTO
@@ -20,7 +21,7 @@ Enters in PyCharm: PyCharm Integrated Developer Environment (IDE) is an awesome 
 
 <em class="m-block m-note">Note: This article HOWTO assumes that you have your own Pelican theme ready for with this article: (simply copy recursively)</em>
 
-Unfortunately, the Pelican guidelines correctly wants you to use `~/virtualenv` instead
+Unfortunately, the Pelican guidelines correctly want you to use `~/virtualenv` instead
 of PyCharm's `~/venv`: and we can see why; JetBrain PyCharm does not enable 
 different venv for different projects (with JetBrain, all your projects share the same venv) ... easily.
 
@@ -165,10 +166,10 @@ Enter in the Location to your newly created `pelican` directory:
 
    cd ~/admin/websites/example.test/pelican 
 
-=== For a new VirtualEnv direcetory ===
+=== For a new virtualenv directory ===
 Click the "down" arrow next to "Python Interpreter".
 
-Select the radio button next to "New Environment using".  Change its pulldown textbox to "VirtualEnv".
+Select the radio button next to "New Environment using".  Change its pulldown textbox to "virtualenv".
 
 Under "New environment using 'Virtualenv'", change "Location" to the Pelican's preferred virtual environment:
 
@@ -180,7 +181,7 @@ Uncheck the "Create a main.py welcome script" checkbox.
 
 Click "Create" button.
 
-=== For reusing an existing Pelican VirtualEnv directory ===
+=== For reusing an existing Pelican virtualenv directory ===
 
 TBA
 
@@ -202,7 +203,7 @@ Fill out as below:
 
 Name: pelican table
 Store as a project file:  (checked the checkbox)
-Run: Pythone 3.11 (venv) ~/venv/bin/python
+Run: Python 3.11 (venv) ~/venv/bin/python
 script: /home/wolfe/admin/websites/egbert.net/debug-table/pelican
 script parameters: -D -v -v -v -v -s pelicanconf.py -o output content
 working directory: ~/admin/websites/example.test/debug-table
@@ -214,9 +215,9 @@ At the Modify Options hyperlink (or Alt-M), select:
 
 Do not use tilde ("~") in any of your pathspec.  
 
-Pelican hanadles path relatively from your current working directory. Make sure that `plugins` and `content` is in your working directory.
+Pelican handles path relatively from your current working directory. Make sure that `plugins` and `content` is in your working directory.
 
-Alternatively, you can use abolute pathspecs like in:
+Alternatively, you can use absolute pathspecs like in:
                    /home/user/admin/websites/example.test/debug-table/content \
                    -o /home/user/admin/websites/example.test/debug-table/output \
                    -s /home/user/admin/websites/example.test/debug-table/pelicanconf.py
@@ -224,7 +225,7 @@ Alternatively, you can use abolute pathspecs like in:
 
 At the bottom right of your `Run/Debug Configuration` dialog, press the `Apply` button.
 
-Then press then `Run` button and enjoy debugging.
+Then press `Run` button and enjoy debugging.
 
 
 If you are debugging a plugin, you need to add a breakpoint inside the pelican.run() function in `pelican/pelican/__init__.py` due to multi-subprocess boundary.

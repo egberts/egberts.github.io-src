@@ -10,7 +10,7 @@ NO HITS, NO MATCH, NO NOTHING!
 So, you're eager to write a new fail2ban filter and it failed ... miserably.
 
 fail2ban couldn't match anything ... regardless of whether it is
-standard fail2ban config or your highly, purportedly, hapzardly-concoted 
+standard fail2ban config or your highly, purportedly, haphazardly-concocted 
 filter config file: this page is for you.
 
 [fail2ban](https://www.fail2ban.org/wiki/index.php/Main_Page) is a
@@ -59,11 +59,11 @@ was used as DNS-QUERY-REFUSED DDOS against a target
 
 But I needed a fail2ban to shut this up. Some poor unwitted IoT devices
 crafted a bogus source UDP and sent it to my Bind9 nameserver which
-successfully goad it into a DNS amplication attack via DNS-QUERY-REFUSED
+successfully goad it into a DNS amplification attack via DNS-QUERY-REFUSED
 error message. 
 
-Sadly, latest Bind9 daemon has no configuable field to deal 
-false DNS-QUERY-REFUSED acknowledgement message (they claim
+Sadly, latest Bind9 daemon has no configurable field to deal 
+false DNS-QUERY-REFUSED acknowledgment message (they claim
 it is not kosher to do this, but I still have a problem and intend fail2ban
 to deal with it).
 
@@ -177,7 +177,7 @@ Most importantly, I am MATCHING something that starts with `^query`! Yippee!
 
 GYRATING TOWARD FULL MATCH
 ==========================
-With a working matching pattern (albiet a failed but overly-broad pattern), 
+With a working matching pattern (albeit a failed but overly-broad pattern), 
 we can then work toward a full-blown concise (yet flexible) pattern.
 
 Let's start by adding more static pattern. I am pretty sure 
@@ -214,7 +214,7 @@ I am getting close to a full-blown pattern! Don't forget, we have to
 close that pattern out with a `$` but not yet, save that for the end of this
 tutorial.
 
-CAUTION: Everytime you make a change to `failregex`, PAY VERY CLOSE ATTENTION 
+CAUTION: Every time you make a change to `failregex`, PAY VERY CLOSE ATTENTION 
 to the `Failregex: X total` tabulation. Once you get that `Failregex: 0 total` 
 , you know you have done something HORRIBLE, busted and broke your 
 pattern, so roll that pattern back to its simpler pattern and start again.
@@ -318,7 +318,7 @@ Failregex: 6 total
 `-
 ```
 
-Ok, you could have paid attention to the last line of the output:
+OK, you could have paid attention to the last line of the output:
 ```console
 Lines: 6 lines, 0 ignored, 6 matched, 0 missed
 ```

@@ -1,5 +1,6 @@
 title: Bind9 `rndc` Administration Control Channel
 date: 2022-04-17 11:16
+modified: 2025-07-13 02:34
 status: published
 tags: Bind9, DNS
 category: HOWTO
@@ -65,7 +66,7 @@ To completely disable this `rndc` utility, insert into `controls` clause the fol
 controls { };
 ```
 
-Failure to include above settings will have `named` daemon perform an opening of the network port to only 127.0.0.1 port 953/udp.  This above setting is useful for Internet-bordering host.  Such public-facing host is where an admin really should be logging into this host before talking with its `named` daemon and should not be accessing this host from a faraway place.
+Failure to include above settings will have `named` daemon perform an opening of the network port to only 127.0.0.1 port 953/udp.  This above setting is useful for Internet-bordering host.  Such public-facing host is where an admin really should be logging into this host before talking with its `named` daemon, and should not be accessing this host from a faraway place.
 
 It is useful as a security precaution to disable `rndc` especially if the name server is not going to be visited frequently.
 
@@ -80,7 +81,7 @@ You can use IPv4, IPv6, or both.
 
 ### Localhost - IP-based - Control Channel
 
-The accessible of its network outreach can be restricted by using 
+The accessibility of its network outreach can be restricted by using 
 `localhost`/`127.0.0.1` or not.
 
 There are two ways to do this `localhost`/`127.0.0.1`:
@@ -88,7 +89,7 @@ There are two ways to do this `localhost`/`127.0.0.1`:
 * Do not include any `controls` clause in the `named` config file(s). (default)
 * Explicitly define the `controls` clause.
 
-To explicitly defined `rndc` to be restrict to just the `localhost` for 
+To explicitly defined `rndc` to be restricted to just the `localhost` for 
 only observational purpose:
 
 ```nginx
@@ -118,13 +119,13 @@ controls {
 
 Adding more keys will enable a finer revocability of a single-key made to each of the issued administrator/lab-users.
 
-Of course, any other or additional IPv4 address or IPv6 address will merely expand the `rndc` reachablility remotely.
+Of course, any other or additional IPv4 address or IPv6 address will merely expand the `rndc` reachability remotely.
 
 
 ## UNIX-Socket-based - Control Channel
 
 UNIX-based BSD socket is not used by `rndc`.  However, `nsupdate` makes good
-use of this BSD socket here.  So this slightly unrelated section details how its configured for `nsupdate`
+use of this BSD socket here.  So this slightly unrelated section details how it's configured for `nsupdate`
 and other ISC-related tools.
 
 An example of a `named` setting for this no-network access to `named` daemon.
@@ -232,12 +233,12 @@ without any options; commands like this one below:
 rndc status
 ```
 
-Absence any of these `options` default settings 
+Absence of any of these `options` default settings 
 in `/etc/bind/rndc.conf`, the above command will 
 contact the `named` daemon using 127.0.0.1:953/udp and 
 the `rndc-key` found in both `/etc/bind/rndc.key` and 
 `controls` clause of `named.conf` that were created
-by `rndc-confgen` with no CLI arguument.
+by `rndc-confgen` with no CLI argument.
 
 
 ### Server Settings - Clause `options`
@@ -307,7 +308,7 @@ rndc -s dmz status
 
 # Multiple Instantiation scenario
 
-Multiple Instantiation scenario comprises of multiple `named` daemon
+Multiple Instantiation scenario consists of multiple `named` daemon
 running within the same host.
 
 For multiple instantiation scenario of `named` daemons, one
@@ -324,7 +325,7 @@ can still be easily accessible just using a single `rndc`.
 Most multi-instantiation scenarios have their `controls` clause
 fixed to the `localhost` (127.0.0.1) and not allow any
 external network have access to these multiple nameservers within
-the same host.  In the case of a whitelab environment, some 
+the same host.  In the case of a white-lab environment, some 
 `named may have remote access enabled as well.
 
 Different port numbers are used to separate these accesses of

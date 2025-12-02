@@ -1,5 +1,6 @@
 title: Mozilla Environment Variables, setting
 date: 2022-06-26 08:28
+modified: 2025-07-13T0352
 status: published
 tags: environment variables, Mozilla, Firefox
 category: research
@@ -12,23 +13,23 @@ Environment variables that got created (via `setenv()`) in Mozilla Unified repos
 
 [jtable]
 environment variable name, description, source file
- `__GL_ALLOW_FXAA_USAGE`, Set to `0` to temporarily disable the FXAA antialiasing on NVidia drivers.  Bug 1714483.,build/mach_initialize.py
- `ANDROID_EMU_VK_NO_CLEANUP`, This envvar gets created in implementing commands for running and interacting with Fuschia development on an AEMU VM platform.,dom/ipc/ContentChild.cpp
- `ANDROID_EMUGL_LOG_PRINT`, This envvar gets created in implementing commands for running and interacting with Fuschia development on an AEMU VM platform.,dom/ipc/ContentParent.cpp
- `ANDROID_EMUGL_VERBOSE`, This envvar gets created in implementing commands for running and interacting with Fuschia development on an AEMU VM platform.,gfx/gl/GLContextProviderGLX.cpp
- `DBUS_SESSION_BUS_ADDRESS`, If set to an empty string then do not overwrite an existing session dbus address but ensure that it is set.,gfx/gl/GLLibraryEGL.cpp
- `DESKTOP_AUTOSTART_ID`,,gfx/thebes/gfxPlatformGtk.cpp
- `force_s3tc_enable`, if set to `true` then forces enabling s3 texture compression. (Bug 774134),gfx/thebes/gfxPlatformGtk.cpp
- `G_SLICE`, `always-malloc`,js/src/vtune/ittnotify_static.c:736:
- `GTK_CSD`, This envvar gets set when a shell has been created for this app within GTK window environment.,js/src/vtune/ittnotify_static.c:736:
- `GTK_USE_PORTAL`, This envvar gets set when a shell has been created for this app within GTK window environment.,js/xpconnect/src/XPCShellImpl.cpp
- `INTEL_LIBITTNOTIY32`, For the Intel Parallel Inspector and Intel Inspector XE tools.  Defaults to `data/data/com.intel.vtune/perfrun/lib`.,mozglue/baseprofiler/core/platform.cpp:2938
- `INTEL_LIBITTNOTIY64`, For the Intel Parallel Inspector and Intel Inspector XE tools.  Defaults to `data/data/com.intel.vtune/perfrun/lib`.,mozglue/baseprofiler/core/platform.cpp:2945
+ `__GL_ALLOW_FXAA_USAGE`, Set to `0` to temporarily disable the FXAA antialiasing on NVidia drivers.  Bug 1714483.,`build/mach_initialize.py`
+ `ANDROID_EMU_VK_NO_CLEANUP`, This envvar gets created in implementing commands for running and interacting with Fuschia development on an AEMU VM platform.,`dom/ipc/ContentChild.cpp`
+ `ANDROID_EMUGL_LOG_PRINT`, This envvar gets created in implementing commands for running and interacting with Fuschia development on an AEMU VM platform.,`dom/ipc/ContentParent.cpp`
+ `ANDROID_EMUGL_VERBOSE`, This envvar gets created in implementing commands for running and interacting with Fuschia development on an AEMU VM platform.,`gfx/gl/GLContextProviderGLX.cpp`
+ `DBUS_SESSION_BUS_ADDRESS`, If set to an empty string then do not overwrite an existing session dbus address but ensure that it is set.,`gfx/gl/GLLibraryEGL.cpp`
+ `DESKTOP_AUTOSTART_ID`,,`gfx/thebes/gfxPlatformGtk.cpp`
+ `force_s3tc_enable`, if set to `true` then forces enabling s3 texture compression. (Bug 774134),`gfx/thebes/gfxPlatformGtk.cpp`
+ `G_SLICE`, `always-malloc`,`js/src/vtune/ittnotify_static.c:736:`
+ `GTK_CSD`, This envvar gets set when a shell has been created for this app within GTK window environment.,`js/src/vtune/ittnotify_static.c:736:`
+ `GTK_USE_PORTAL`, This envvar gets set when a shell has been created for this app within GTK window environment.,`js/xpconnect/src/XPCShellImpl.cpp`
+ `INTEL_LIBITTNOTIY32`, For the Intel Parallel Inspector and Intel Inspector XE tools.  Defaults to `data/data/com.intel.vtune/perfrun/lib`.,`mozglue/baseprofiler/core/platform.cpp:2938`
+ `INTEL_LIBITTNOTIY64`, For the Intel Parallel Inspector and Intel Inspector XE tools.  Defaults to `data/data/com.intel.vtune/perfrun/lib`.,`mozglue/baseprofiler/core/platform.cpp:2945`
  `JPROF_ISCHILD`, if (!is_child),mozglue/baseprofiler/core/platform.cpp:2952
  `LD_PRELOAD`, Gets redefined from last prior `MOZ_ORIG_LD_PRELOAD` setting.,mozglue/baseprofiler/core/platform.cpp:2955
  `MACH_MAIN_PID`, OS Process ID,mozglue/baseprofiler/core/platform.cpp:2965
  `MACH_STDOUT_ISATTY`, If set to `1` then it allow invoked processes (which may not have a handle on the original stdout file descriptor) to know if the original stdout is a TTY. This provides a mechanism to allow said processes to enable emitting code codes as an example.,mozglue/misc/PreXULSkeletonUI.cpp
- `mesa_glthread`, Set to `false` to temporarily disable the EGL GLThread under X11. Bug 1670545.,python/mach/mach/main.py:397
+ `mesa_glthread`, Set to `false` to temporarily disable the EGL GLThread under X11. Bug 1670545.,`python/mach/mach/main.py:397`
  `MOZ_APP_NO_DOCK`, This envvar gets set when this Mozilla application did not get docked via Cocoa only within macOS platforms.,security/manager/ssl/nsNSSComponent.cpp:1555:
  `MOZ_APP_RESTART=1`, This envvar gets set only as a simple indicator that this shell environment is currently in restart stage.,security/nss/cmd/nss-policy-check/nss-policy-check.c:118
  `MOZ_APP_SILENT_START`, This envvar gets set only for macOS platforms when to suppress prompting the user for escalation.,security/nss/cmd/nss-policy-check/nss-policy-check.c:126
@@ -38,10 +39,10 @@ environment variable name, description, source file
  `MOZ_HEADLESS`," This is for X11-only setup pending a solution for WebGL in Wayland mode.  Takes a value of ""1"" or remains undefined. For MOZ_WIDGET_GTK C define only.  Calls `widget::GdkIsX11Display()`",security/nss/lib/util/secport.c:743:
  `MOZ_INSTALLED_AND_RELAUNCHED_FROM_DMG`, This envvar gets set to `1` during relaunching from its DMG package file only within macOS platforms.,security/sandbox/linux/Sandbox.cpp:474:
  `MOZ_LAUNCHED_CHILD`,  This envvar gets set to `1` during NS App Runner., security/sandbox/linux/SandboxInfo.cpp:148:
- `MOZ_LAUNCHER_PROCESS`,  This envvar gets set to `1` during NS App Runner., third_party/libwebrtc/build/fuchsia/aemu_target.py:102:
- `MOZ_NO_REMOTE`,  This envvar gets set to `1` during NS App Runner., third_party/libwebrtc/build/fuchsia/aemu_target.py:102:
- `MOZ_PROFILER_SHUTDOWN`, , third_party/libwebrtc/build/fuchsia/aemu_target.py:102:
- `MOZ_PROFILER_STARTUP_ACTIVE_TAB_ID`, activeTabIDString.get, third_party/libwebrtc/build/fuchsia/aemu_target.py:102:
+ `MOZ_LAUNCHER_PROCESS`,  This envvar gets set to `1` during NS App Runner., `third_party/libwebrtc/build/fuchsia/aemu_target.py:102:`
+ `MOZ_NO_REMOTE`,  This envvar gets set to `1` during NS App Runner., `third_party/libwebrtc/build/fuchsia/aemu_target.py:102:`
+ `MOZ_PROFILER_SHUTDOWN`, , `third_party/libwebrtc/build/fuchsia/aemu_target.py:102:`
+ `MOZ_PROFILER_STARTUP_ACTIVE_TAB_ID`, activeTabIDString.get, `third_party/libwebrtc/build/fuchsia/aemu_target.py:102:`
  `MOZ_PROFILER_STARTUP_ENTRIES`, If MOZ_PROFILER_STARTUP is set then it specifies the number of entries per process in the profiler's circular buffer when the profiler is first started. If unset then the platform default is used: `%u` entries per process or `%u` when MOZ_PROFILER_STARTUP is set. (%u bytes per entry -> %u or %u total bytes per process).  Optional units in bytes: `KB` `KiB` `MB` `MiB` `GB` `GiB`.,toolkit/components/resistfingerprinting/nsRFPService.cpp:697:
  `MOZ_PROFILER_STARTUP_ENTRIES`, capacityString.get()),toolkit/components/startup/nsAppStartup.cpp:1066:
  `MOZ_PROFILER_STARTUP_FEATURES_BITFIELD`, featuresString.get()),toolkit/components/startup/nsAppStartup.cpp:408:

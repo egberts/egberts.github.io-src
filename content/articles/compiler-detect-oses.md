@@ -1,30 +1,25 @@
 title: Detect OS Using Compiler Predefined Macros
 date: 2024-06-19 12:11
+modified: 2025-07-13 02:40
 status: published
-tags: compiler, gcc, cc
+tags: compiler, gcc, cc, cpp
 category: HOWTO
 summary: C/C++ tip: How to detect the operating system type using compiler predefined macros
 lang: en
 private: False
 
-[jtable th="1" separator="|"]
-| Month    | Savings |
-| -------- | ------- |
-| <span class="m-text m-warning">January</span>  | $250    |
-| February | $80     |
-| March    | $420    |
-[/jtable]
-
- Month    | Savings 
- -------- | ------- 
- January  | $250    
- February | $80     
- March    | $420    
 
 How to list predefined macros
 =====
 
-See [How to list compiler predefined macros](compiler-predefined-macros) for instructions on getting a list of macros for the compilers referenced here.
+Try the following compiler option to get a list of actively-selected predefined macros for a specific architecture:
+
+```
+gcc -dM -E - < /dev/null | sort -u
+```
+
+For other esoteric C compiler, check this [list of predefined macros for various C/C++ compilers](https://github.com/nemequ/pre-defined-macros).
+
 
 How to detect the operating system type
 =====
@@ -313,7 +308,7 @@ Notes:
 * Based on command-line options, the Clang/LLVM and GCC compilers can build Windows applications or POSIX applications that run under Windows using POSIX compatibility libraries. Predefined macros for POSIX applications are described in the previous section of this article. The table above is strictly for compiling Windows applications.
 * Clang/LLVM can build Windows applications using the Windows target (e.g. "`-ccc-host-triple i386-pc-win32`") or the MinGW target (e.g. "`-ccc-host-triple i386-pc-mingw32`"). The "`-m32`" option builds 32-bit applications and "`-m64`" builds 64-bit.
 * GCC under Cygwin can build Windows applications using the "`-mwin32`" command-line option. While GCC is capable of building 64-bit applications, Cygwin is 32-bit only and the version of GCC included with it only builds 32-bit applications.
-* Oddly enough, GCC under Cygwin predefines UNIX macros even when building Windows applications.
+* Oddly enough, GCC under Cygwin predefined UNIX macros even when building Windows applications.
 * Some on-line code references `__CYGWIN64__`. Since there is no 64-bit Cygwin, this macro is never defined. It exists only in forum discussions about a possible future 64-bit Cygwin.
 * GCC under MinGW can build Windows applications using the "`-mwin32`" command-line option. The "`-m32`" and "`-m64`" options build 32-bit and 64-bit applications.
 * While Clang/LLVM, GCC, and Portland Group compilers define a lot of WIN32 and WIN64 macros with various numbers of underscores, the only macros that matter are those that are compatible with Microsoft's Visual Studio: `_WIN32` and `_WIN64`.
@@ -423,3 +418,12 @@ On UNIX-style OSes a common way to detect OS features is to use GNU's `autoconf`
 From the command line there are several ways to detect the OS. On UNIX-style OSes, the `uname` command reports the OS name. On Windows, the `ver` and `winver` commands report the OS name. On Linux, the `/proc/version` virtual file reports the Linux kernel version. But using any of these to automatically configure code requires scripts and Makefiles. And those have the same problems as `autoconf`.
 
 The most elegant solution is to eschew all detection scripts and simply use the above predefined macros already available on every OS and designed specifically for use in `#if`/`#endif` sets for OS-specific code. Don't reinvent the wheel.
+
+References
+====
+
+* https://sourceforge.net/p/predef/wiki/OperatingSystems/
+* [Pre-defined Compilar Macros wiki](https://github.com/cpredef/predef)
+* [How to identify platform compiler from preprocessor macros](https://stackoverflow.com/questions/4605842/how-to-identify-platform-compiler-from-preprocessor-macros)
+* [C tip: how to use compiler predefined macros to detect operating systems](https://web.archive.org/web/20120924053245/http://nadeausoftware.com/articles/2012/01/c_c_tip_how_use_compiler_predefined_macros_detect_operating_system) (archived)
+* [Operating Systems STDCXX](https://cwiki.apache.org/confluence/display/stdcxx/OperatingSystems)

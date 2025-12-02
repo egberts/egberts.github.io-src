@@ -83,7 +83,7 @@ server 10.1.2.3 {
     };
 };
 ```
-The above example is taken (and IP-anonymized) from my white-lab.
+The above example is taken (and IP-anonymized) from my whitelab.
 
 # Secondary DNS Providers
 
@@ -173,7 +173,7 @@ Click the blue "i" icon button.
 
 It takes about 3600 seconds to fully sync up.
 
-Click on the green "validate" button.
+Click on the green "validate" botton.
 
 WARNING: Do not click on the BLUE BUTTON.  If you do click on that blue button, you would need to delete the entire settings of your domain and start all over again.  So, yeah, be careful there.
 
@@ -211,7 +211,7 @@ In this example, `xfer-in_file` is the lone channel name.
 
 ## Category `default` Used
 
-If the `xfer-in` category is not being used (nor found) among the config files,
+If the `xfer-in` category is not being used (nor found) amongst the config files,
 then `category default` is our focus for this logging of DNS zone transfers.
 
 ```nginx

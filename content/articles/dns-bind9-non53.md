@@ -1,5 +1,6 @@
 title: Hidden Master Using Non-Standard DNS Port
 date: 2022-05-01 06:09
+modified: 2025-07-13 02:28
 status: published
 tags: DNS, Bind9
 category: HOWTO
@@ -8,7 +9,7 @@ slug: dns-bind9-hidden-primary-port53-not
 lang: en
 private: False
 
-This article details the narrowing of a communicaton channel of the 
+This article details the narrowing of a communication channel of the 
 hidden-primary (formerly called hidden-master) to just one 
 TCP/UDP port number so that its DNS default port 53 can be 
 reused by other instance of nameserver.
@@ -21,12 +22,12 @@ dockerized, containerized and/or QEMU'd apart; if not, they should be by now.
 Each instance of a nameserver (`named`) daemon is now competing for the right
 to serve that precious port 53/udp (and even more so now port 53/tcp).  
 
-ICYMI: Port 53/tcp is becoming more and more prevelant due to DoH, DoT, 
+ICYMI: Port 53/tcp is becoming more and more prevalent due to DoH, DoT, 
 and even IP tunneling.
 
 # 53/tcp Blocker
 
-My hidden-primary was using that last vestigate of precious 
+My hidden-primary was using that last vestige of precious 
 internet-facing port 53/tcp for its localhost testing of 
 `allow-query`/`allow-recursion-on` and allowing
 the public-facing primary nameserver to test and exercise query
@@ -38,7 +39,7 @@ its 53/udp) again, just on the public-side.
 
 Some "looming" requirements for this public 53/tcp are:
 
-* whitelab DNSSEC
+* white-lab DNSSEC
 * DoT
 * DoH
 * IP Tunneling
@@ -81,7 +82,7 @@ Since hidden-primary was already using a unique port number
 for its AXFR/IXFR transfer of zone data, reuse 
 that port number for its querying needs.
 
-Some example values used in this articles are:
+Some example values used in this article are:
 
 * AXFR/IXFR port number is `1234`.
 * TSIG key name is `key_hidden_primary_to_public_primary`.
@@ -120,7 +121,7 @@ I always (re-)generate a unique key when (re-)working between two nameservers.
 This key should not be reused elsewhere.
 
 Downside of having a new key is the increased complexity of 
-DNS administration.  But if a key should becomes compromised, you 
+DNS administration.  But if a key should become compromised, you 
 are limited to just within the nameservers
 that are impacted by such that compromised key.
 

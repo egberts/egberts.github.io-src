@@ -1,5 +1,6 @@
 title: Building `jsshell`
-date: 2022-06-23 -7:14
+date: 2022-06-23 07:14
+modified: 2025-07-13 02:12
 status: published
 tags: Firefox, Mozilla, Mach, JavaScript
 category: HOWTO
@@ -14,7 +15,7 @@ projects (such as Firefox).
 
 # `MOZCONFIG`
 
-we make use of a $HOME/mozconfigs directory to hold our generic but
+we make use of a `$HOME/mozconfigs` directory to hold our generic but
 personalized build settings.
 
     mkdir $HOME/mozconfigs
@@ -49,7 +50,7 @@ ac_add_options --enable-optimize
 mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-debug-@CONFIG_GUESS@
 ```
 
-and an optimized-variant of MOZCONFIG for our personalized use:
+and an optimized-variant of `MOZCONFIG` for our personalized use:
 
 ```console
 #
@@ -95,11 +96,15 @@ and start the build process:
 
 Once built, you can then use mach to run the jit-tests:
 
-$ ./mach jit-test
+```console
+./mach jit-test
+```
 
 Similarly you can use also run jstests. These include a local, intermittently updated, copy of all test262 tests.
 
-$ ./mach jstests
+```console
+./mach jstests
+```
 
 # Using JSSHELL
 
@@ -109,7 +114,7 @@ To start using `jsshell`, execute:
 ./mach run
 ```
 
-# `jsshell` Binary
+# `jsshell` Executable Binary
 
 The location of the newly-built `jsshell` binary file is under:
 
@@ -151,4 +156,4 @@ $ ./js hello-world.js
 
 There is a `js-gdb.py` Python script (also in the same directory as `jsshell`.
 
-But that script requires the Python `gdb` library, which Debian does not provie.
+But that script requires the Python `gdb` library, which Debian does not provide.

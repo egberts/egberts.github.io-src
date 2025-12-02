@@ -6,7 +6,7 @@ category: research
 lang: en
 private: False
 
-This article details how to perfom debugging of the `jsshell` in Mozilla Unified repository.
+This article details how to perform debugging of the `jsshell` in Mozilla Unified repository.
 
 # Setting Up `jsshell` Debug
 
@@ -96,7 +96,7 @@ You can also add a breakpoint to the program counter incrementer in the bytecode
       REGS.sp[-2] = REGS.sp[-1];
 ```
 
-But it is harder to insert a breakpoint at the main loop of the JS inteprefer (as denoted by ``.
+But it is harder to insert a breakpoint at the main loop of the JS interpreter (as denoted by ``.
 
 Some IR code can be had by using the `--dump-bytecode` or `-D` CLI option:
 

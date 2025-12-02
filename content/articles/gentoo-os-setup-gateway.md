@@ -1,5 +1,6 @@
 title: Gateway setup in Gentoo OS
 date: 2022-09-08 09:56
+modified: 2025-07-13 01:59
 status: published
 tags: Gentoo
 category: HOWTO
@@ -14,8 +15,8 @@ Burn the CD
 Boot the CD
 
 
-== Partition ==
-
+Partition
+====
 Partition the hard drive, using LVM approach:
 
 Two physical partitions shall be created:
@@ -45,7 +46,8 @@ Change the partition types as well:
 Exit `fstab` by entering 'w'rite menu option.
 
 
-== Create logical partitions ==
+Create logical partitions
+----
 
 ```bash
 pvcreate /dev/sda3
@@ -67,7 +69,8 @@ lvcreate -L50G -nlv_var_log_audit vg_log
 lvcreate -L50G -nlv_var_tmp vg_log
 ```
 
-== Format partitions ==
+Format partitions
+----
 
 ```bash
 mkfs.ext4 /dev/sda1
@@ -85,7 +88,8 @@ mkfs.ext4 /dev/vg_log/lv_var_log_audit
 mkfs.ext4 /dev/vg_log/lv_var_tmp
 ```
 
-== Networking ==
+Networking
+====
 
 Setup networking using DHCP client (this assumes a working DHCP server on the local LAN):
 
@@ -97,9 +101,12 @@ Follow instruction
 
 
 
-== Post Bootup ==
-=== Networking ===
-==== IP forwarding ====
+Post Bootup
+====
+Networking
+----
+IP forwarding
+----
 
 for all virtual and private LAN to NAT out to the public network:
 ```bash

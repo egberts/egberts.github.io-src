@@ -18,9 +18,9 @@ can handle the "local part" and the "addr-spec" ([RFC 822 Section 6.1](https://t
 
 The open-source MTAs covered and reviewed for this article are:
 
-* [sendmail](sendmail.org)
+* [Sendmail](sendmail.org)
 * [exim](exim.com)
-* [postfix](postfix.org)
+* [Postfix](postfix.org)
 * [OpenSMTPd](opensmtpd.org)
 
 
@@ -45,7 +45,7 @@ various open source MTAs.   More on this
 I'll tabulate their current terms and you'll see:
 
 [jtable]
-IETF terms, postfix, exim, sendmail, opensmtpd, Google
+IETF terms, Postfix, exim, Sendmail, OpenSMTPd, Google
 addr-spec, address, address, address, address, address
 domain, domain, domain, domain, domain, domain
 username, user, username, user, username, user
@@ -71,7 +71,7 @@ be constructed as:
 username+otherlocalpart@domain.tld (ie., Google, Apple)
 username-otherlocalpart@domain.tld (ie., Yahoo)
 ```
-For awhile, some MTAs have a changable separator symbol between username
+For awhile, some MTAs have a changeable separator symbol between username
 and other local part such as period or underscore.  The downside 
 of this configurable separator is that many website cannot validate
 this unique non-positive/non-negative separator symbol.

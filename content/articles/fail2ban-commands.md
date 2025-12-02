@@ -111,7 +111,7 @@ Jail key word, description
 `port`, The port used by the service
 `ignoreip`, IP(s) that should be ignored by fail2ban
 `findtime`, Time range fail2ban will pay attention to when looking at the logs.
-`backend`, Defines how fail2ban monitor logs. It will try pinotify then gaming and finaly OS polling.
+`backend`, Defines how fail2ban monitor logs. It will try pinotify then gaming and finally OS polling.
 `destemail`, Address to send email notifications to
 `sendername`, From field for notification emails
 `sender`, Email address from which Fail2ban will send emails.
@@ -150,7 +150,7 @@ To whitelist (ignore) an IP, add them to the `ignoreip` setting:
 ignoreip = 127.0.0.1/8
 ```
 
-Note: Depending on the amount of traffic specific service has (website, wordpress, etc.) fail2ban can generate CPU concerns/load.
+Note: Depending on the amount of traffic specific service has (website, WordPress, etc.) fail2ban can generate CPU concerns/load.
 
 # Custom Fail2ban PhpMyAdmin filter (Jail & Regex)
 
@@ -169,7 +169,7 @@ findtime = 60
 maxretry = 3
 ```
 
-Next we need that filter. Check your web server (Apache/nginx) logs:
+Next we need that filter. Check your web server (Apache/Nginx) logs:
 
 ```log
 /var/log/nginx/access.log.1:121.169.192.227 - - [19/Sep/2018:01:41:23 +0000] "GET /phpmyadmin/index.php?pma_username=root&pma_password=root&server=1 HTTP/1.1" 200 10050 "-" "Mozilla/5.0"
@@ -177,7 +177,7 @@ Next we need that filter. Check your web server (Apache/nginx) logs:
 /var/log/nginx/access.log.1:121.169.192.227 - - [19/Sep/2018:01:41:23 +0000] "GET /phpmyadmin/index.php?pma_username=root&pma_password=r00t&server=1 HTTP/1.1" 200 10050 "-" "Mozilla/5.0"
 ```
 
-The IP 121.169.192.227 is trying to bruteforce its way in (well known malicious IP). 
+The IP 121.169.192.227 is trying to brute-force its way in (well known malicious IP). 
 Let us try to make their life a bit more difficult: Make a file in 
 your `/etc/fail2ban/filter.d/phpmyadmin.local`, and insert:
 
@@ -189,7 +189,7 @@ ignoreregex =
 
 The above regex is matching the lines we’ve seen in the logs. 
 This will ban anyone for 1 hour if they fail to login more than 
-3x in 60 seonds. When done, restart fail2ban can be done in several ways:
+3x in 60 seconds. When done, restart fail2ban can be done in several ways:
 
 ```bash
 service fail2ban restart

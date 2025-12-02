@@ -1,7 +1,9 @@
 title: Developing Mozilla on Debian 11
 date: 2022-06-23 07:27
+modified: 2025-07-13 02:09
 status: published
 tags: Mozilla, Firefox, Debian
+summary: Developing Mozilla on Debian 11
 category: HOWTO
 lang: en
 private: False

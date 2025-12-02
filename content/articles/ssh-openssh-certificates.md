@@ -374,7 +374,7 @@ ssh-rsa-cert-v01@openssh.com \
 
 Notes: This blocks the public key or certificate from being used system-wide
 
-* Public-keys are more ideal as they are smaller and block both public-key in addition to certificate authenitcation
+* Public-keys are more ideal as they are smaller and block both public-key in addition to certificate authentication
 * Certificates work fine here too, but do not block the public-key should it be in an `authorized_keys` file
 
 ```
@@ -434,7 +434,7 @@ With certificates, an expiration date can be built into the certificate at the t
 ~/ssh_cert_authority/user_ca/user_certs $ ssh-keygen -s ../user_ca -I user_full_name -n root,loginname -V +180d username.pub
 ```
 
-Notes: Expirations work equally on user and server certificates.
+Notes: Expiration's work equally on user and server certificates.
 
 # Login Names
 
@@ -514,7 +514,7 @@ Create the Root CA for SSH:
 ssh-keygen -f my-enterprise-root-ca  -C "CA key for example.com"
 ```
 
-* `-C "CA key for example.com"` - The `-C` option sets a comment in your key file. The default is `user@host`, but since you'll be dealing with a lot of keys at a time now it might be better to give the keys moe descriptive names.
+* `-C "CA key for example.com"` - The `-C` option sets a comment in your key file. The default is `user@host`, but since you'll be dealing with a lot of keys at a time now it might be better to give the keys more descriptive names.
 
 Oh, and please note that most other guides will tell you to do these steps as root. There's no real need to generate keys as root - any ordinary user will do fine. So it's probably best if you do use an ordinary user account. 
 

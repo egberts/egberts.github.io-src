@@ -101,7 +101,7 @@ Link Layer - Interfaces
 =======================
 For the following examples, two physical Ethernet interfaces shall be used.
 
-The two ethernet interface names are `eth0` and `eth1`.  If you had
+The two Ethernet interface names are `eth0` and `eth1`.  If you had
 "Predictable Network Interface Device Names" turned on, then the link
 name would be something like `enp3s0` and `enp3s1` as an example.
 
@@ -135,7 +135,7 @@ WakeOnLan=magic
 
 In the above example, an Ethernet PCI card in PCI 3 Slot 0 will be loaded
 as a physical card with LAN type.  It's link name will be `eth0`
-and have a custom MAC address and force setted to 1Gbps.  Also
+and have a custom MAC address and force set to 1Gbps.  Also
 the NIC card will be on standby to watch for any Wake-On-LAN magic value.
 
 
@@ -182,7 +182,7 @@ netdev Bridge interface
 ----------------
 
 First, create a virtual bridge interface that will tell systemd to create a 
-device named `br0` to function as an ethernet bridge.
+device named `br0` to function as an Ethernet bridge.
 
 `vim /etc/systemd/network/30-bridge-br0.netdev`
 and fill file with:
@@ -232,7 +232,7 @@ Bridge=br0
 LinkLocalAddressing=no
 ```
 
-All ethernet interfaces binded to `br0` must not have DHCP or an 
+All Ethernet interfaces binded to `br0` must not have DHCP or an 
 IP address associated as the bridge requires an interface to 
 bind to with no IP:, modify the 
 corresponding /etc/systemd/network/MyEth.network 

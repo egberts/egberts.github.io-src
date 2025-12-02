@@ -1,5 +1,6 @@
 title: Host Names Used in ASUS Routers
 date: 2022-02-23 15:54
+Modified: 2025-12-02 07:51
 status: published
 tags: ASUS, router
 category: research

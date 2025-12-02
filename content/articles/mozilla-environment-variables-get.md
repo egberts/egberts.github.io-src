@@ -24,7 +24,7 @@ Environment variables are broken up into getting and setting the environment var
 
 # Setting Environment Variables
 
-For setting the environment variable, a separate page is maintained for ease of maintability: See [Mozilla Environment Variables, Setting]({filename}mozilla-environment-variables-set.md)
+For setting the environment variable, a separate page is maintained for ease of maintainability: See [Mozilla Environment Variables, Setting]({filename}mozilla-environment-variables-set.md)
 
 
 # Getting Environment Variables

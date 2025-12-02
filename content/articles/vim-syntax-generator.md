@@ -1,6 +1,6 @@
 title: Vim Syntax Generator using Bison graph
 date: 2020-10-05 17:00
-modified: 2022-02-24 08:008:03
+modified: 2025-07-13 02:39
 status: published
 tags: vim, bison, graph, nftables
 category: HOWTO
@@ -110,7 +110,7 @@ probably could benefit greatly from such a Bison parser).
 Most importantly, if NFTABLES changes, our effort to recreate the syntax
 gets easier.
 
-All the relavant info are in the DOT file needed to pump out 
+All the relevant info are in the DOT file needed to pump out 
 the necessary Vim syntax statements.  
 
 * token name
@@ -123,7 +123,7 @@ or generalized LR (GLR) parser employing LALR(1) parser tables.
 
 `bison` has this CLI output option that creates GV-formatted files.
 GV-formatted files (used to be called DOT-format but renamed
-due to prevelance of Microsoft Word Template `.dot` filetype).
+due to prevalence of Microsoft Word Template `.dot` filetype).
 
 Note: "DOT" as a search term is still a significant anchor keyword and
 its results on many search engines is better than "GV".
@@ -131,7 +131,7 @@ its results on many search engines is better than "GV".
 BASIC LR PARSER
 ---------------
 Since `bison` is a parser, the reader is expected to be familiarized
-with basic LR parser concept in general, particularily 
+with basic LR parser concept in general, particularly 
 [shift-and-reduce](https://en.wikipedia.org/wiki/Shift-reduce_parser)
 method. The shift-reduce parser's efficiency is from doing 
 no backups or backtracking.
@@ -244,9 +244,9 @@ toward another state transition.
 Node is represented as a single ID number (not using '->' symbol).
 
 Node ID format may be an non-negative integer or a pair of
-non-negative integer separated by a letter "R" (ie., "3R8").
+non-negative integer separated by a letter "R" (i.e., "3R8").
 
-Incidentially, Node is also a Python list type in python3-graphviz module.
+Incidentally, Node is also a Python list type in python3-graphviz module.
 
 Edge type
 ---------
@@ -304,7 +304,7 @@ above example will match any sequence of digits.
 
 Region
 ------
-Another keyword that handles blocking and subblocking of reuseable patterns
+Another keyword that handles blocking and sub-blocking of reusable patterns
 is [`region`](http://vimdoc.sourceforge.net/htmldoc/syntax.html#:syn-region)
 In the NFTABLES example:
 ```
@@ -332,7 +332,7 @@ often used.
 is used to ensure that these patterns cannot be used elsewhere
 except as referenced by other Vim syntax rules.  Not specifying `contained`
 means to match anywhere, regardless of current state of Vim syntax
-state machine.  No `contained` is usedful for comment lines, TODO highlighting,
+state machine.  No `contained` is useful for comment lines, TODO highlighting,
 include statement, and possibly error highlighting.
 
 

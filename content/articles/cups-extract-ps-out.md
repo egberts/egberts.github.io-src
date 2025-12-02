@@ -8,7 +8,7 @@ lang: en
 private: False
 
 
-To extract the PostScript output for a developer to analyse it, clone your print queue to a one which prints into a file:
+To extract the PostScript output for a developer to analyze it, clone your print queue to a one which prints into a file:
 
 ```console
 cupsctl FileDevice=yes

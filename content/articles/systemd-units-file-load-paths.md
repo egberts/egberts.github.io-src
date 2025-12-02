@@ -1,6 +1,6 @@
 title: Systemd Unit File Load Paths
 date: 2018-10-14T10:14
-updated: 2020-02-25 19:36
+modified: 2025-07-13T05:12
 status: published
 category: research
 tags: systemd
@@ -11,7 +11,7 @@ Unit File Load Path
 
 Unit files are loaded from a set of paths determined during compilation,
 described in the two tables below. Unit files found in directories
-listed earlier override files with the same name in directories lower in
+listed, earlier override files with the same name in directories lower in
 the list.
 
 When the variable `$SYSTEMD_UNIT_PATH` is set, the contents of this

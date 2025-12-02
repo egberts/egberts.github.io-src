@@ -76,10 +76,10 @@ environment name , program , environment description
 `BRO_SEED_FILE` , bro , A filespec to a file containing seed number for the Bro's init_random_seed(); useful for ensuring repeatable test runs.
 `BRO_PREFIXES` , bro , add given prefix to policy file resolution; this adds a full or relative directory path to try for each script file given
 `BRO_LOG_SUFFIX` , bro , ASCII log file extension (currently set to .log)
-`BRO_PROFILER_FILE` , bro , Full or relative filespec where to put the Bro profiler data in. A presense of this environment variable is the only way to turn this Bro profiler on.
+`BRO_PROFILER_FILE` , bro , Full or relative filespec where to put the Bro profiler data in. A presence of this environment variable is the only way to turn this Bro profiler on.
 `BRO_DISABLE_BROXYGEN` , bro , Disable the Broxygen documentation
 `CLUSTER_NODE` , bro , broctl
-`BROCTL_INSTALL_PREFIX` , broctl , Where did broctl get installed to? (occurrs during bro install time)
+`BROCTL_INSTALL_PREFIX` , broctl , Where did broctl get installed to? (occurs during bro install time)
 `BRO_ARG_TESTBRO` , btest ,
 `NOTDEFINED` , btest ,
 `TESTBRO` , btest ,

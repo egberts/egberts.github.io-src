@@ -1,6 +1,6 @@
 Title: Bitcoin Vulnerabilities
 Date: 2018-08-20 09:43
-Modified: 2020-03-04 17:07
+Modified: 2025-07-13 03:21
 Tags: bitcoin, vulnerabilities
 Status: published
 Category: security
@@ -9,9 +9,9 @@ summary: Vulnerabilities Found in Bitcoin.
 Some errors Satoshi with Bitcoin made are:
 
 * Early version of bitcoind allows you to spend any coin by using `op_true op_return` as signature.
-* It was initially possible to fork each version of the client on its own chain using "**op\_version**"
+* It was initially possible to fork each version of the client on its own chain using "**op_version**"
 * Input value were not directly covered by signature, making it impossible for offline devices to check how much is spent and paid in fees.
-* It is possible to put **op\_checksig** in an input script. Computing the signature hash fails and return 1 as an error code, but error code was checked so it is possible to produce a valid signature signing 1.
+* It is possible to put **op_checksig** in an input script. Computing the signature hash fails and return 1 as an error code, but error code was checked so it is possible to produce a valid signature signing 1.
 * Version fields are completely useless because they don't degrade gracefully.
 * In case of hard fork, you can't make sense of the new data regardless of version, and in case of soft forks, they aren't useful.
 * Places where addresses could be useful, for instance outputs, do not have one.
@@ -22,12 +22,12 @@ Some errors Satoshi with Bitcoin made are:
 * The script number format is little-endian, one complement. No more comments on that one.
 * The original code had numerous problems checking signature encoding, at least one could lead to a chain split between 32 and 64 bits architectures.
 * The [Merkle tree](wikipedia:Merkle_tree "wikilink") doesn't handle empty branches properly. This lead to a vulnerability where you could repeat transactions is a block and get a node to reject it.
-* It is also possible to generate a valid 64 bytes transaction that looks like an intermediate node in the Merkle tree, making it possible to lie to **spv** by brute forcing 70bits or so, which isn't considered secure.
+* It is also possible to generate a valid 64 bytes transaction that looks like an intermediate node in the Merkle tree, making it possible to lie to **spv** by brute forcing 70-bit or so, which isn't considered secure.
 * Verifying signatures was O(n\*m) where n is the number of **checksig** ops and **m** the transaction size. This makes it possible to generate transaction that are absurdly expensive to validate.
 
 Updated
 -------
-* Shour method of encryption then hash will do nothing to protect your privacy.  Then again you had little privacy to begin with a typical blockchain.
+* Shour method of encryption, then hash will do nothing to protect your privacy.  Then again you had little privacy to begin, with a typical blockchain.
 
 References
 ==========

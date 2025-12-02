@@ -1,4 +1,4 @@
-title: Wireguard, Systemd, Netfilter
+title: WireGuard, Systemd, Netfilter
 date: 2020-08-30 08:01
 status: published
 tags: wireguard, systemd, netfilter
@@ -9,17 +9,17 @@ note: Still working on it
 Preparation
 ===========
 * Kernel check
-* Wireguard version check
+* WireGuard version check
 * Selection of IP subnet for tunneling (10.9.1.1/30)
  
-Wireguard Installation
+WireGuard Installation
 ----------------------
 
 ```console
 apt install wireguard wireguard-dksm wireguard-tools
 ```
 
-Wireguard Setup
+WireGuard Setup
 ---------------
 
 Create `/etc/wireguard/wg0.conf`

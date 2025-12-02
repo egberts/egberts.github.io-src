@@ -1,5 +1,6 @@
 title: Comparison of Client-Side Knowledge-Base Management (KBM)
 date: 2024-06-14 05:00
+modified: 2025-12-02 05:00
 status: published
 tags: KBM, comparison
 category: research
@@ -15,7 +16,7 @@ functionalities:
 * Note-taking, in Markdown
   * Note organization
     * File-based (Database-free)
-      * Hierarchial structure
+      * Hierarchical structure
     * Zettlekasten note method
   * File-Tagging
     * Subtag
@@ -24,7 +25,7 @@ functionalities:
   * Goal setting
 * Output enhancement
   * Syntax highlight
-* Useability
+* Usability
   * work offline
   * cross-OS support
   * sync between devices
@@ -74,12 +75,12 @@ K.I.S.S. (Keep it simple, stupid.)
 
 Offline Support
 ---------------
-Again, the ability to host the backend yourself is the ultimate piller of
+Again, the ability to host the backend yourself is the ultimate pillar of
 privacy, end-user privacy.  
 
 Robustness
 ---------------
-Robustness of the KBM also entails the extensibility and useability of 
+Robustness of the KBM also entails the extensibility and usability of 
 such software, not only in user-interface (UI) but at command line (CLI) 
 as well.
 
@@ -136,7 +137,7 @@ This looks like the finest product as well of
 any KBM that I have encountered.
 
 Shiniest aspect of Obsidian is that entire product is based on
-hierarchial file-centric Markdown for its core.
+hierarchical file-centric Markdown for its core.
 
 Obsidian has the best documentation, bar none.  
 
@@ -174,7 +175,7 @@ It is an Electron app; if that doesn't bother you, skip to next paragraph.
 First thing I noticed when cloning Zetllr repository is that all the codes
 are written in TypeScript using Electron SDK and stored in Electron ASAR
 archive (`file resources/*`, kinda of like JAVA `.jar` format).  Requires
-the use of Electron virtual machine (kinda like the Python script intepreter).
+the use of Electron virtual machine (kinda like the Python script interpreter).
 
 Yet, I soldier on into the Electron arena for the purpose of this article.
 
@@ -186,21 +187,21 @@ No spell-check; isn't this a note-taking app?
 
 Noticed that Zettlr has second best polished appearance of UI of 
 any KBM reviewed but it remains a note-taking app with a glorious
-self-grandious appearance of claiming to be a KBM.  
+self-grandiose appearance of claiming to be a KBM.  
 But that is about the only thing that shine in this app; online reviews 
 have all been counter-SEO'd and inflated by a lone user.
 
 Note: Electron is yet another disdainful bloatware with goals to 
 make same graphic user interface (GUI) work across various 
 platforms, in this case, specifically on macOS, iOS/iPadOS, Windows, and Linux.
-Unfortunatley, Signal app makes good use of Electron (which in itself
+Unfortunately, Signal app makes good use of Electron (which in itself
 is the single one most major security vulnerability that is awaiting to be
 revealed).
 
 Quickly ruled out for SW bloatness and lack of support for Apple iOS, 
 even though Electron supports iOS.  I suspect this to be yet another case
 of developer not wanting to go thru the notion of securing his DUNS ID
-and thusly his Apple Developer ID.
+and thus his Apple Developer ID.
 
 Also ruled out due to spammy but artificial support for its software.
 Yep, author of Zettlr is trying too hard to elevate his stuff to something other than what it is supposed to be ... note-taking. (Also looking at you, [Alternatives.to](https://alternatives.to), for poor anti-spam support).

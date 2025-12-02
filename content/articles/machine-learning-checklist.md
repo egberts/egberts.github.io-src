@@ -1,6 +1,6 @@
 Title: Machine Learning Checklist
 Date: 2018-02-21T11:49
-Modified: 2022-07-24T09:53
+Modified: 2025-07-13T03:43
 Status: published
 Tags: ml, checklist
 Category: research
@@ -28,7 +28,7 @@ review testing for scientific software more generally, and cite a number
 of articles such as \[ 5 \], who present an approach for testing ML
 algorithms. These ideas are a useful complement for the tests being 
 presented, which are focused on testing the use of ML in a production
-system rather than just the correctness of the ML algorithm per se.
+system, rather than just the correctness of the ML algorithm per se.
 
 Checklist
 =========
@@ -137,7 +137,7 @@ decisions.
 Regularly testing against a very simple baseline model, such as a linear
 model with very few features, is an effective strategy both for
 confirming the functionality of the larger pipeline and for helping to
-assess the cost to benefit tradeoffs of more sophisticated techniques.
+assess the cost to benefit trade-offs of more sophisticated techniques.
 
 ### Test model quality on important data slices.
 
@@ -234,7 +234,7 @@ in the range (0,100) or that class distribution is about 10:1.
 ### Test that your training and serving features compute the same values.
 
 The codepaths that actually generate input features may differ for
-training and inference time, due to tradeoffs for flexibility vs.
+training and inference time, due to trade-offs for flexibility vs.
 efficiency and other concerns. This is sometimes called
 “training/serving skew” and requires careful monitoring to detect and
 avoid.

@@ -45,7 +45,7 @@ Renewal Timer (T1) Expires
 
 The renewal timer, T1, is set by default to 50% of the length of the
 lease. When the timer goes off, the client transitions from the BOUND
-tate to the RENEWING state.
+state to the RENEWING state.
 
 Note that a client may initiate lease renewal prior to T1 timer
 expiration if it desires.

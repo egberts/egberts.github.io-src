@@ -55,7 +55,7 @@ I was faced with two separate problems:
 * Wrong default location for an `openssl.cnf` file
 * Wrong configuration settings between TLS versions
 
-Ok, I got that first part right ... now.
+OK, I got that first part right ... now.
 
 But the part about "Between TLS versions?" (sigh)
 
@@ -70,7 +70,7 @@ Now a few applications has adopted the new interface, there is a DIFFERENT way t
 
 I'll document those so that every program in the system will use your preferred default settings (let me guess, just TLSv1.3 only, right?)
 
-You can change the global `openssl.cnf`.  Just that it is not where (most of) you expected.  Again, it is not in `/etc/ssl/openssl.cnf` (nor Redhat-family `/etc/pki/openssl.cnf`).  (hint: it is mentioned earlier).
+You can change the global `openssl.cnf`.  Just that it is not where (most of) you expected.  Again, it is not in `/etc/ssl/openssl.cnf` (nor RedHat-family `/etc/pki/openssl.cnf`).  (hint: it is mentioned earlier).
 
 To modify the default TLSv1.3 ciphersuites for OpenSSL itself, so every program in the system will use the ciphersuites you specified:
 

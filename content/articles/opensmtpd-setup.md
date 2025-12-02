@@ -2,7 +2,7 @@ title: OpenSMTPD, Dovecot, Debian
 date: 2020-09-01 08:01
 modified: 2022-04-04 10:35
 status: published
-tags: OpenSMTPd, Dovecot, Debian, Wireguard
+tags: OpenSMTPd, Dovecot, Debian, WireGuard
 category: HOWTO
 summary: How to set up OpenSMTPD  with Dovecot on Debian 10.4.
 note: Aborted in favor of exim4
@@ -10,7 +10,7 @@ note: Aborted in favor of exim4
 Preparation
 ===========
 * Installation
-* Wireguard version check
+* WireGuard version check
 * Selection of IP subnet for tunneling (10.9.1.1/30)
  
 Installation

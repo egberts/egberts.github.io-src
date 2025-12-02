@@ -35,7 +35,7 @@ to the kernel flags at boot time due to restrictive `/sys` write.
 
 # ATA Security
 
-ATA-4 secification allows for locking the hard drive.  Nothing to do with encryption whatsoever.  
+ATA-4 specification allows for locking the hard drive.  Nothing to do with encryption whatsoever.  
 
 This ATA-4 security lock is easily circumventable by relocating the drive to a different platform or 
 a different ATA controller having its own BIOS (ie., Dell R710 PERC6i RAID).
@@ -57,7 +57,7 @@ Unfortunately, some USB-SATA enclosure will not support SATA hot-plugging, cavea
 
 Two ways to securely wipe the hard drive (in Linux):
 
-Using `shred` (as part of `coreutils` packae):
+Using `shred` (as part of `coreutils` package):
 ```console
 $ sudo shred -vfz -n 10 /dev/sda
 ```

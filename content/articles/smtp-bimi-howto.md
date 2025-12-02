@@ -1,5 +1,6 @@
 title: HOWTO BIMI-fy Your Domain
 date: 2022-04-14 11:13
+modified: 2025-07-13 02:46
 status: published
 tags: BIMI, SMTP, mail, SPF, DMARC, DKIM
 category: HOWTO
@@ -10,7 +11,7 @@ private: False
 
 So your mail server is up and running?  People who received your emails compliment you?  Pat yourself on the back.  This is just the beginning.
 
-One recipient may comment to you that a logo is missing next to your sent-email on their phone-based mail clients.  You've spent 35 years of digesting some 400-off IETF Request For Comments (RFCs) and its drafts, countless of SMTP specifications, and many onerous hidden protocol tweaks by various mail client vendors, you say "WHAT? What dastardly new feature is it this time?  This logo next to my emails?".
+One recipient may comment to you that a logo is missing next to your sent-email on their phone-based mail clients.  You've spent 35 years of digesting some 400-off IETF Request For Comments (RFCs) and its drafts, countless SMTP specifications, and many onerous hidden protocol tweaks by various mail client vendors, you say "WHAT? What dastardly new feature is it this time?  This logo next to my emails?".
 
 BIMI, stands for Brand Indicator for Message Notification. It has been percolating around since 2017 and officially appeared in ([2018 IETF Draft](https://datatracker.ietf.org/doc/html/draft-chuang-bimi-certificate-00)).
 
@@ -31,7 +32,7 @@ Also replace the `ns1.example.test.` with the hostname of your primary (master) 
 
 There is a security ramification to NOT using this BIMI feature.  Other senders would (not 'may', would) be able to impersonate you.  Ideally, you too will want to be able to disable this BIMI (whether your domain has a mail server or not).
 
-Nevermind the fact that SPF and DKIM can too be impersonated if not properly secured.
+Never mind the fact that SPF and DKIM can too be impersonated if not properly secured.
 
 If the complexity of using BIMI exceeds your desire, you must at a minimum provide for one BIMI DNS TXT record that tells everyone that your BIMI is "disabled" ... just to prevent others from impersonating you.
 
@@ -108,7 +109,7 @@ For this article, the URL of this BIMI logo image file is:
 
     https://example.test/images/bimi1_image.svg
 
-Use a web browser, go fetch it.  Enjoy your latest handiwork then keep moving.
+Use a web browser, go fetch it.  Enjoy your latest handiwork, then keep moving.
 
 
 # BIMI TXT DNS Resource Record
@@ -235,7 +236,7 @@ or
 ```
 
 `; fully validated` means that your domain demonstrated par excellence.
-`; unsigned answer` is a muted way of saying, nothing you have read so far will be safe from any imposters of this domain.
+`; unsigned answer` is a muted way of saying, nothing you have read so far will be safe from any impostors of this domain.
 
 Check out BIMI1 TXT using `delv`.
 
@@ -285,7 +286,7 @@ A BIMI online tester can check out the BIMI setup for your domain.  There are se
 
 # In Closing
 
-After passing your DNS record lookup and BIMI online testers, your domain should be very very safe from any imposter.
+After passing your DNS record lookup and BIMI online testers, your domain should be very very safe from any impostor.
 
 
 # References

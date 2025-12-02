@@ -129,7 +129,7 @@ $ cat /tmp/update-exim4.conf.strace | grep -v "fstat" | \
        | grep -v "/chown" | grep -v "/ls\"" | grep -v "/chmod" \
        | grep -v "/expr" | less
 ```
-Output is a bit smaller but still monsterously long.
+Output is a bit smaller but still monstrously long.
 
 
 For the Debian Standalone setup mode of config files, I have hand-compiled the list as:

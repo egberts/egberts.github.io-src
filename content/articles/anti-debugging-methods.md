@@ -1,5 +1,6 @@
 Title: Anti Debugging Detection & Prevention
 Date: 2018-11-14 08:00
+Modified: 2025-12-02 07:51
 tags: debugger, malware
 category: research
 status: published
@@ -8,7 +9,7 @@ slug: anti-debugging-methods
 
 some source in [LordNoteworthy@github]. Most common/interesting ones:
 
-* `IsDebuggerPresent()`, `CheckRemoteDebuggerPresent()` etc. (quite silly, mostly as a kinda-decoy) OS calls are not 100% obfuscatable => using them (unless they’re actually inlines or macros) is a Bad Idea™ (Bad Example: [zer0fl4g@github]). IF using them – obfuscate system calls and literals (such as obfuscating “OllyDbg” for FindWindow(), and obfuscating “FindWindow” for GetProcAddress()); more on obfuscating system calls below
+* `IsDebuggerPresent()`, `CheckRemoteDebuggerPresent()` etc. (quite silly, mostly as a kinda-decoy) OS calls are not 100% obfuscatable => using them (unless they’re actually inline or macros) is a Bad Idea™ (Bad Example: [zer0fl4g@github]). IF using them – obfuscate system calls and literals (such as obfuscating “OllyDbg” for FindWindow(), and obfuscating “FindWindow” for GetProcAddress()); more on obfuscating system calls below
 * Not-so-obvious system calls, such as OpenProcess(“csrss.exe”),
 * OutputDebugString(), UnhandledExceptionFilter(), FindWindow() (silly, but…)
 * Memory reads. NtGlobalFlag, heap flags, KdDebuggerEnabled, GetLastError() (cmp

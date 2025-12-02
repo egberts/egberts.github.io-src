@@ -29,7 +29,7 @@ q /tmp 1777 root root 10d
 `
 
 The type field, `q`, discusses creating a subvolume with quotas which is 
-really only applicable to btrfs filesystems. 
+really only applicable to BTRFS filesystems. 
 It references type `v` which in turn references type `d` (directory). 
 This then creates the specified directory if is is not present and adjusts 
 the permissions and ownership as specified. 

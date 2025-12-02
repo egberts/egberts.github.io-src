@@ -1,7 +1,7 @@
 title: UEFI System Classes for Dell Optiplex 790 
 date: 2022-09-29 08:47
 status: published
-tags: UEFI, Optiplex
+tags: UEFI, Optiplex, Dell
 category: research
 summary: A detailed insight on about UEFI for Linux and Dell Optiplex 790 (2012)
 slug: uefi-class-dell-optiplex-790
@@ -44,7 +44,7 @@ New systems are class 3 bios with no legacy booting of anything.
 
 Intel will be only supporting UEFI Class 3, which means no legacy support of CSM.  It also means windows 10 only and 64 bit only from now on.
 
-The 790 allows legacy as well as 32 bit windows xp and therefore will never have secure boot due to lacking ACPI 2.0 and UEFI 2.3.1
+The 790 allows legacy as well as 32 bit windows XP and therefore will never have secure boot due to lacking ACPI 2.0 and UEFI 2.3.1
 
 Firmware that meets the UEFI 2.3.1 specifications
 

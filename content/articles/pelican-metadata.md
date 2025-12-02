@@ -29,7 +29,7 @@ Metadata, Description
 `save_as`, Save content to this relative file path.  Useful for renaming files into `index.html` or copying to outside of content directory (for example, copying content/pages/website-cover.md to https://website.example/index.html especially if your entire blog is already one-deep (https://website.example/blog/).
 `slug`, Filename identifier that are used in its URL and language translation(s).
 `status`, Status of this content file: `draft`, `hidden`, or `published`.
-`summary`, Brief description of this content file for use by various index pages. Trunction of this summary is set by `SUMMARY_MAX_COUNT` in number of words unit.
+`summary`, Brief description of this content file for use by various index pages. Truncation of this summary is set by `SUMMARY_MAX_COUNT` in number of words unit.
 `tags`, Content tag(s) whereas if more than one then separated by comma.
 `template`, Name of template that is use to generate this content (without the extension filetype).
 `translation`, Translated from another content file. Boolean value only: `true` or `false`.  Used to denote which content file has the original translation.

@@ -1,11 +1,12 @@
 Title: SpiderMonkey Overview
 Date: 2018-09-24T10:35
+modified: 2025-07-13T0235
 Status: published
 Tags: javascript, js engine, browser, mozilla
-Category: javascript
+Category: JavaScript
 Summary: SpiderMonkey is a cool JavaScript utility.
 
-SpiderMonkey is a Mozilla Web Browser DOM component that comprises of
+SpiderMonkey is a Mozilla Web Browser DOM component that consists of
 the following functional capabilities:
 
 * JavaScript engine
@@ -18,7 +19,7 @@ have been created from SpiderMonkey:
 1.  JavaScript/Emulators/SpiderMonkey/js - JavaScript console-based engine
 2. JavaScript/Emulators/SpiderMonkey/xpcshell - JavaScript Browser-based engine
 
-Difference between `js` and `xpcshell` is that `js` has no graphical
+The difference between `js` and `xpcshell` is that `js` has no graphical
 support (thus a smaller subset of JS API support).
 
 Overviews

@@ -44,7 +44,7 @@ Attribute, Description, Section
 `ssl_conf`, section name to take in new settings for TLS/SSL module; Used only by `openssl s_client` or `openssl s_server`, [default]
 `engines`, section name to the `engine` module, [default]
 `stbl_section`, section name to the ASN.1 module, [default]
-`oid_section`, section name to a new section containing the oid-related attribute settings, [default]
+`oid_section`, section name to a new section containing the OID-related attribute settings, [default]
 `alg_section`, section name to the EVP module, [default]
 `asn1`, section name to a new section containing the selected ASN1 attributes; used only by `openssl asn1pars` command., [default,asn1pars]
 [/jtable]
@@ -53,7 +53,7 @@ Attribute, Description, Section
 -------------------------
 [jtable]
 Attribute, Description, Section
-`system_default`, section name to a new section containing the TLS/SSL-relatd attribute settings such as `MinProtocol=TLSv1.3`, `CipherSuites`, or `Options=-SessionTicket,MiddleboxCompat`, [ssl]
+`system_default`, section name to a new section containing the TLS/SSL-related attribute settings such as `MinProtocol=TLSv1.3`, `CipherSuites`, or `Options=-SessionTicket,MiddleboxCompat`, [ssl]
 [/jtable]
 
 See man page `SSL_CONF_cmd_value_type.3ssl` for more TLS/SSL options under `[ ssl_conf ]` section.
@@ -108,8 +108,8 @@ Attribute, Description, Section
 `private_key`, file specification to a file containing the CA private key in PEM format; `-keyfile` CLI overrides this setting, [ca]
 `serial`, file specification to a file containing the current serial number text file; `-create-serial` can reset this; `-rand_serial` ignores this file., [ca]
 `crl`, file specification to a file containing the current CRL PEM file, [ca]
-`crlnumber`, file specification to a file containing the base 10 number for serial number to the CRL certificateion, [ca]
-`oid_file`, file specficiation to a file containing the OIDs; uses `$ENV::HOME/.oid` file as a default?, [default,ca]
+`crlnumber`, file specification to a file containing the base 10 number for serial number to the CRL certification, [ca]
+`oid_file`, file specification to a file containing the OIDs; uses `$ENV::HOME/.oid` file as a default?, [default,ca]
 [/jtable]
 
 Attributes options within [ca]
@@ -243,7 +243,7 @@ There are many X509v3 extensions.  Most are commonly used and are listed here wi
 * `crlDistributionPoint` (CDP)
 * `proxyCertInfo` (PCI)
 
-What X509v3 extension settings to use for each type of certificates are detailedin [{filename}openssl-x509v3-cert-type.md]
+What X509v3 extension settings to use for each type of certificates are detailed in [{filename}openssl-x509v3-cert-type.md]
 
 basicConstraints (BC)
 ---------------------

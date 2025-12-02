@@ -1,5 +1,6 @@
 title: Adding An Option to an SSH client OR SSH session using OpenSSH?
 date: 2022-05-03 05:10
+modified: 2025-07-13 02:27
 status: published
 tags: SSH, OpenSSH
 category: HOWTO
@@ -9,7 +10,7 @@ lang: en
 private: False
 
 # Methods
-There are several methods for a end-user to pass a specific option 
+There are several methods for an end-user to pass a specific option 
 setting for a new or existing SSH session.
 
 1. Command Line Interface (CLI)
@@ -29,15 +30,15 @@ $ ssh -oServerAliveInterval=60 host.domain.tld
 $
 ```
 The above example demonstrate a temporary passing of `serveraliveinterval=60`,
-which is 60 seconds after which if no data has been received 
+which is 60 seconds, after which if no data has been received 
 from the server, ssh(1) will send a message 
 through the encrypted channel to request a 
 response from the server.  The default is 0, 
 indicating that these messages will not be sent 
 to the server.
 
-If a SSH setting is desired to be made more permanent, there are several more
-ways to do this.
+If an SSH setting is desired to be made more permanent, 
+there are various more ways to do this.
 
 # Configuration File
 
@@ -65,7 +66,7 @@ for either the server-side or client-side.
 For ease of reading this article, we start with most common side 
 of SSH protocol, the client-side.
 
-Both sides share many similar use of incorporating a setting.
+Both sides share many similar uses of incorporating a setting.
 
 ## By Scope - SSH Client Configuration 
 
@@ -78,7 +79,7 @@ such a permanent setting is for the:
 
 ### Default User - By Scope - Client
 
-For default user, this is the username of this login session.  
+For the default user, this is the username of this login session.  
 Username can be identified by echoing the shell `$USER` environment name.
 
 File `$HOME/.ssh/config` is where all settings for its user are being
@@ -219,15 +220,15 @@ Match all
 
 ### Match Criteria
 
-Available criterias of `Match` are:
+Available criteria of `Match` are:
 
 [jtable]
 match criteria keyword, description
 `host`, Fully-qualified domain name of the host. `Match host <hostname>` is the same as `Host <hostname>`
-`user`, the username that was passed to at the command line (CLI) interface.
-`localuser`, the actual username of the current shell session
+`user`, username that was passed to at the command line (CLI) interface.
+`localuser`, actual username of the current shell session
 `exec`, an executable that is run at `$USER` session to determine whether it returns a 0 or not before applying settings under `Match exec`.  Useful as an access control method.  One can pass on the user's public key and see if the user is authorized  or not.
-`originalhost`, the exact name that was entered at the command line before any effort of canonicalization got applied (using the `search` domainname from `/etc/resolv.conf` and appending to end of that CLI hostname.
+`originalhost`, exact name that was entered at the command line before any effort of canonicalization got applied (using the `search` domainname from `/etc/resolv.conf` and appending to the end of that CLI hostname.
 `canonical`
 `final`
 `all`, last resort; must be the last `Match` in its config.
@@ -298,7 +299,7 @@ file specification, description
 
 ## By `Match` - SSH Server
 
-Pretty much the same for SSH client, except the `Match` criterias are:
+Pretty much the same for SSH client, except the `Match` criteria are:
 
 [jtable]
 `Match` criteria, description

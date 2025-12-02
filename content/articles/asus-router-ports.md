@@ -1,5 +1,6 @@
 title: ASUS Router Ports
 date: 2022-02-23 14:31
+Modified: 2025-12-02 07:51
 status: published
 tags: ports, ASUS, router
 category: research

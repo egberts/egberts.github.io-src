@@ -55,7 +55,7 @@ For handling multiple-instance of named and its config file, the organizational 
 * one-sysconfdir, flat-directory: `/etc/bind` with `named-internal.conf`/`named-public.conf` or
 * one-sysconfdir, tree-directory: `/etc/bind` with `keys`, `dynamic`, `zones` 
 * many-sysconfdir, flat-directory: `/etc/bind/internal/`/`/etc/bind/public/` using just `named.conf`.
-* many-sysconfdir, tree-directory, combo of aboves
+* many-sysconfdir, tree-directory, combo of above's
 
 
 With the many-sysconfdir, tree-directory approach, the directory tree would look like:
@@ -154,7 +154,7 @@ chmod 0640 rndc-public.conf
 # Since RNDC is keyed by port and its key, there is no longer a default RNDC config file
 ```
 
-Now whenever the command `rndc` gets (accidentially) evoked, you will get an
+Now whenever the command `rndc` gets (accidentally) evoked, you will get an
 error message:
 ```
 rndc: neither /etc/bind/rndc.conf nor /etc/bind/rndc.key was found

@@ -22,7 +22,7 @@ I prefer my simplistic X-WindowManager `ALT-Tab` key sequence here.
 Developing Syntax File
 ----------------------
 Syntax file is where all the development of highlighting goes into.  
-One won't be able to see any visble effect here.   
+One won't be able to see any visible effect here.   
 
 Let us call this Vim edit session in our first 
 terminal console, our DEVELOPMENT window.
@@ -33,7 +33,7 @@ DEVELOPMENT window.
 Viewing Highlighted File
 ------------------------
 Text file (example or under test)  is where we can view our new 
-highlightings.  Second terminal console host the
+highlighting.  Second terminal console host the
 second Vim editor session.  Let us VIEW the new highlights in VIEW window, from
 reading syntax files changed by our effort made within DEVELOPMENT window.
 
@@ -43,7 +43,7 @@ Interactions
 ------------
 To see any new highlighting, the VIEW edit session needs to reload 
 the syntax file (that has been changed).  
-One way to see new/changed highlightings is to perform closing and opening of this same test file.
+One way to see new/changed highlighting is to perform closing and opening of this same test file.
 
 At the beginning of my development cycle, lots of closing and opening files were going there.
 
@@ -68,7 +68,7 @@ vim named.conf
 Same Vim edit terminal session, same test example file; lot's of typing.
 
 Of course, there is this bash shell history.  Let's try the bash history
-approach (which sounds and works way better after the first few laborous times).
+approach (which sounds and works way better after the first few laborious times).
 
 The new command sequences now are given below:
 
@@ -118,7 +118,7 @@ To execute our command sequences of reloading new syntax with a single
 keystroke, we need one available key.
 
 Preferably that key is not hogged by others.  
-That key maye be already snagged by one of your many applications,
+That key may be already snagged by one of your many applications,
 a window manager, or this Vim editor.
 
 Function key is a common choice for remapping of such a key.

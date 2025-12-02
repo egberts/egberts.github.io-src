@@ -1,5 +1,6 @@
 title: Virtual Vim Function
 date: 2020-06-01 11:11
+modified: 2025-07-13 02:36
 status: published
 tags: vimscript, design
 category: research
@@ -10,7 +11,7 @@ large undertaking, some 3700 lines.
 
 Then I went on to get started for the NFTABLES syntax highlighter for Vim editor
 as well.  But, the task of doing another 3,000 lines seems crazy at this point.
-Nevermind the fact that I am crazy to do it in the first place.
+Never mind the fact that I am crazy to do it in the first place.
 
 So, let's makes some Vimscript functions to shorten the amount of typing.  How
 to begin?
@@ -20,10 +21,10 @@ Pre-Design Angst
 Vimscript `syntax highlight` and `syntax keyword/match` are the two basic
 building blocks for creating some nice highlighting of all things being parsed.
 
-I even saw the [Stackoverflow question](https://vi.stackexchange.com/questions/25632/design-guideline-for-doing-both-autocompletion-and-highlighting)
+I even saw the [StackOverflow question](https://vi.stackexchange.com/questions/25632/design-guideline-for-doing-both-autocompletion-and-highlighting)
 on this topic, but alas... no answer.
 
-When I reread my completed Bind9 vimrscript file and my false starts 
+When I reread my completed Bind9 Vimscript file and my false starts 
 of [VIM-NFTABLES](https://github.com/egberts/vim-nftables) (before becoming 
 disenchanted and started this blog), things 
 that I am looking for are higher abstraction of building blocks for 
@@ -51,7 +52,7 @@ To simplify system engineering, `syntax keyword` has 3 major components:
 Basic Condition Operation
 -------------------------
 
-The condition operator comprises of a relationship with a parent to a child 
+The condition operator consists of a relationship with a parent to a child 
 which produces a characteristic of an AND operator:  A child 
 cannot happens unless its parent happens.
 
@@ -83,7 +84,7 @@ a Vimscript of:
 syn keyword nftables_LIST list skipwhite nextgroup=nftables_LIST_list_cmd
 ```
 
-Detailed explaination of above Vim command:  Vim 
+Detailed explanation of above Vim command:  Vim 
 editor is being instructed to label this operation as `nftables_LIST` and to 
 look for a `list` keyword after skipping any and all whitespaces, 
 if the keyword matches then go to the set of group called 
@@ -104,7 +105,7 @@ underscore as:
 * LIST, the all capitalized label for actual keyword being matched
 * `list_cmd` is the same name of its actual Bison parser grouping.
 
-With a label like that, it should be little or no problem cross-refering
+With a label like that, it should be little or no problem cross-referring
 with the `parser_bison.y` (or any parser file) and its grouping name for
 years to come.
 
@@ -166,7 +167,7 @@ Labeling Crisis
 The other factor to consider is the name of the object.
 
 I really want to see that label, the name of the object, and have it be 
-able to tell me exactly WHERE amongst the syntax tree that they 
+able to tell me exactly WHERE among the syntax tree that they 
 specifically address or reside at.
 
 The problem is that if such syntax tree becomes an cyclic graph, then
@@ -220,9 +221,9 @@ Time to try and scale back.
 
 Explosive Object Label Naming
 ===========================
-Syntax pathway typically comprises of a node, a node-to-node 
+Syntax pathway typically comprises a node, a node-to-node 
 characteristic, and a child-node.  
-Here, we can eliminate node-to-node chracteristics as being singular.
+Here, we can eliminate node-to-node characteristics as being singular.
 So, node and child-node shall remain.
 
 Somewhere in the middle of a syntax tree, a child-node is going to want
@@ -276,7 +277,7 @@ to our full pathway label from such a set list and for each time we are
 looking for an external function name.
 
 But this set-list approach would probably end up requiring yet another 
-function argument toward our beleagured virtual function name (which still
+function argument toward our beleaguered virtual function name (which still
 on the drawing board); one where it instructs a certain node to return
 to another arbitrary node in the syntax tree.
 
@@ -299,7 +300,7 @@ groups used to support this command.
     list_cmd -> `ruleset` ruleset_spec
     ruleset_spec -> `family_spec_explicit` | *empty*
 
-or diagramatically as:
+or diagrammatically as:
 ```digraph
     base_cmd
       |
@@ -316,8 +317,8 @@ In short, we got our EBNF syntax of
 
     list ruleset [ netdev | bridge | arp | ip | ip6 | inet ] [;]
 
-Let's focus on the simpliest approach of reverse engineering: its end-node, 
-thatlast child node.
+Let's focus on the simplest approach of reverse engineering: its end-node, 
+that last child node.
 
 Reiterating the nftable Bison `family_spec_explicit` group here:
 
@@ -356,7 +357,7 @@ we are going to declare a generic Error highlighter for our script file:
 hi link nftables_Error Error 
 syntax match nftables_Error /[ \ta-zA-Z0-9_./]\{1,64}/ skipwhite
 ```
-Ok.  This `nftables_Error` is going to be the bane of your development cycle.
+OK.  This `nftables_Error` is going to be the bane of your development cycle.
 But its real purpose is to be a lifesaver and a timesaver during 
 virtual prototyping.  If and when you goofed in your development, 
 you'll know it fast and glaringly so in BOLD RED highlighting and 
@@ -415,7 +416,7 @@ as it is going to be.... no need for a function there.
 Basic Building Blocks
 ---------------------
 
-Need some things out of the way with the simpliest of building
+Need some things out of the way with the simplest of building
 blocks.  This requires:
 
 1.  Common prefix labeling
@@ -581,7 +582,7 @@ endfunction
 That variance between two functions is merely the inclusion/exclusion 
 of `nftables_EOS` for `nextgroup=`.  Sad, uh?  But it's worth it.
 
-Note: Do not confuse the EOS with nextgroup. (Ok, I got confused there).
+Note: Do not confuse the EOS with nextgroup. (OK, I got confused there).
 EOS refers to the fact that the run of syntax tokens can end with a 
 carriage return or semicolon; whereas nextgroup is the run-on 
 further down of even more syntax rules:
@@ -670,7 +671,7 @@ That is the basic virtual function constructor.
 
 Problem, Problem Solving
 ------------------------
-Ok.  Each function must be able to figure out the full Vim group name
+OK.  Each function must be able to figure out the full Vim group name
 based on the terse variant in each parameter of its function.
 
 For the `pathway` argument, that is pretty easy to do: we add 
@@ -731,12 +732,12 @@ I've got a story to tell you about my
 3400-line ISC Bind9 vim syntax file and its lack of existance test.
 But nevermind that, trust me, you'll want this existance test
 as this is a serious timesaver and a 
-debug-session-advoidance exercise here.
+debug-session-avoidance exercise here.
 
 I actually prototyped the long-CSV-string approach for a bit and ran 
 into a bit of a coding challenge early on with the overall design. I couldn't
 get a satisfactory breakout of a long CSV string into 
-each individual group name so that an existance test of its group 
+each individual group name so that an existence test of its group 
 name can be performed against. StackOverflow to the rescue!
 
 ```vim

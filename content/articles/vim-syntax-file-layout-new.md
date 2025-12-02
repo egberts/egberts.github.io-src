@@ -73,7 +73,7 @@ Syntax files may be found in the following directories:
 * System - /usr/share/vim/vim81/syntax
 * Local - $HOME/.vim/syntax
 
-Let us use `vim` as our choice of editor in this blog demostration.
+Let us use `vim` as our choice of editor in this blog demonstration.
 
 And prototype our syntax file in our local syntax directory.
 
@@ -83,7 +83,7 @@ Outline of Vim Syntax File
 I'll lay the groupings out and you can pick-and-choose what you need.
 
 I might point out the irony that this Vim syntax file is a bottom-to-top 
-dependency approach (and the only viable and maintable way).  
+dependency approach (and the only viable and maintainable way).  
 
 If you are trying to learn syntax in this blog
 might be best read in sequential order from this point on.  
@@ -192,13 +192,13 @@ and mixed-case are used and supported, so I had a choice between:
 Lucky for me, I pre-mapped out all the BNF syntaxes for this Bind9 named
 configuration.   And majority of its BNF static text pattern were 
 in the forced lower-case.
-So, I chosed Choice B: Vim `keyword`/`iskeyword` are in forced 
+So, I chose Choice B: Vim `keyword`/`iskeyword` are in forced 
 lower-case and my regex supports mixed-case.
 
 Naming Convention
 =================
 
-Readablity is important.  Consistency is also important.
+Readability is important.  Consistency is also important.
 
 Naming convention of syntax identifier makes it easy to associate 
 with the specific phrase within your text body in question.
@@ -260,7 +260,7 @@ the naming got longer, longer and longer:
 syn keyword namedStmtOptionsViewDualStackServersPortWildcard ...
 ```
 
-Ok, this is wrong.  I've been looking at this super-long syntax identifier
+OK, this is wrong.  I've been looking at this super-long syntax identifier
 and decided to pare it down even further.  `Stmt` is extraneous after 
 its first keyword were detected so all other options following that main
 keyword need not have `Stmt`.
@@ -293,10 +293,10 @@ Bind9 has over 55 keywords just within `Options` alone.
 
 Couple that with over 16 top-level keywords. Too much typing.  
 
-Let us make a table, a secton table:
+Let us make a table, a section table:
 
 [jtable]
-Annocated letter(s), top-level Bind statement section
+Annotated letter(s), top-level Bind statement section
 A, `acl`
 C, `controls`
 Ch, `channels`

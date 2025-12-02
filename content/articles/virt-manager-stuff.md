@@ -9,7 +9,7 @@ lang: en
 private: False
 
 
-Eclectic things that I've found about virtual machine (`libvirt`) library that is used by `virt-manager` (amongst many others).
+Eclectic things that I've found about virtual machine (`libvirt`) library that is used by `virt-manager` (among many others).
 
 # Kernel Configuration
 The required settings of Linux kernel configuration (`/usr/src/linux/.config`) for `virt-manager` (on 

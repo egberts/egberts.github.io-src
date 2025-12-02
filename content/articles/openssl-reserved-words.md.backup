@@ -1,11 +1,11 @@
-title: How to read an OpenSSL configuration file
+title: How to read a OpenSSL configuration file
 date: 2021-11-18 11:00
-modified: 2025-07-15T03:31
+modified: 2025-07-15T0331
 status: published
 tags: OpenSSL, environment variables
 category: research
 slug: pki-openssl-reserved-words
-summary: After 15 years of barely paying attention to this file, I've finally detailed the syntax of the `openssl.cnf` file.
+summary: 15 years of barely ignoring this file, I've finally detailed the syntax of `openssl.cnf` file.
 lang: en
 private: False
 
@@ -40,7 +40,7 @@ syntax for all its simplicity.
 
 I do do believe that the OpenSSL configuration file syntax was 
 originally designed to perform testing and fuzzing of its many settings; 
-later, it became the de facto configuration for its various 
+later, it became the post de facto configuration for its various 
 certificate creations.
 
 So when you execute `openssl s_client` or `openssl s_server`, a whole new keyword set of OpenSSL configuration get used (other than the default ones that we all are familiar with which is `/etc/ssl` (or `/etc/pki/tls` for RedHat).
@@ -65,7 +65,13 @@ settings for certificate requests or CA behavior.
 
 Section blocks are each declared in `[brackets]`:
 
-```ini
+```INI
+[section_name]
+```
+
+Each block starts with and follows:
+
+```INI
 [section_name]
 ```
 
@@ -77,7 +83,7 @@ Individual settings within each section follow the "`key = value`" format.
 
 Inside a section, each line is a simple key–value assignment; each non-comment, non-section, non-period-starting line follows:
 
-```ini
+```INI
 key = value
 ```
 
@@ -109,7 +115,7 @@ OpenSSL may interpret these string values as specific types based on context, ke
 ### Value of a Key
 You can obtain data from other previous defined keys using the `$key` syntax:
 
-```ini
+```INI
 dir = /etc/ssl
 private_key = $dir/private/ca.key
 ```
@@ -165,7 +171,7 @@ _max
 Enforces a maximum string length
 
 Example:
-```ini
+```INI
 [req_distinguished_name]
 CN = Common Name
 CN_default = www.example.com
@@ -217,7 +223,7 @@ A special "`[default]`" section is optional, but all key-values that occur from 
 
 Used in the `[ req_distinguished_name ]` section when creating certificate requests:
 
-```ini
+```INI
 [ req_distinguished_name ]
 C = Country Name (2 letter)
 ST = State or Province Name
@@ -269,7 +275,7 @@ Used by openssl s_client/s_server:
 
 Loads providers & applies global config:
 
-```ini
+```INI
 providers = provider_sect, activate = 1
 ```
 
@@ -282,7 +288,7 @@ Keywords used within `openssl_conf`
 #### `providers`
 You define and activate providers in the OpenSSL config file using a section like:
 
-```ini
+```INI
 openssl_conf = openssl_init
 
 [openssl_init]
@@ -309,7 +315,7 @@ Once again, `default` is not a reserved word.  Can be used as a section name ("`
 
 In OpenSSL 3.x:
 
-```ini
+```INI
 [openssl_init]
 providers = provider_sect
 
@@ -333,7 +339,7 @@ It's built into OpenSSL 3 by default.
 #### `activate`
 In OpenSSL 3.x configuration files, when you declare a provider (e.g., `default`, `fips`, `legacy`), you must use:
 
-```ini
+```INI
 activate = 1
 ```
 
@@ -341,7 +347,7 @@ This tells OpenSSL to activate (load and enable) the provider at runtime.
 
 Example:
 
-```ini
+```INI
 [openssl_init]
 providers = provider_sect
 
@@ -386,7 +392,7 @@ You can place comments on their own line or after configuration values.
 Lines can be commented out with `#` or `;`.
 
 #### Full-line comment
-```ini
+```INI
 # first comment line
 ; Another comment style
 key = value  # Inline comments also work
@@ -397,7 +403,7 @@ For inline comment syntax, it is all about placing comments at the end of that l
 
 Examples:
 
-```ini
+```INI
 [ req ]
 distinguished_name = req_distinguished_name  # Inline comment is OK
 ```
@@ -408,11 +414,11 @@ No unquoted # inside values:
 If your value contains a `#` and it's not quoted, OpenSSL will treat everything after `#` as a comment.
 
 Problematic:
-```ini
+```INI
 some_value = abc#123   # OpenSSL treats "#123" as a comment
 ```
 Correct:
-```ini
+```INI
 some_value = "abc#123"  # Now # is treated as part of the value
 ```
 
@@ -433,7 +439,7 @@ To modularize configurations, you can include external files:
 
 A working example of an include statement is:
 
-```ini
+```INI
 .include=conf-includes
 .include conf-includes
 .include [.conf-includes]
@@ -449,7 +455,7 @@ Default: Off (relative paths resolved relative to current working directory or `
 
 Example usage:
 
-```ini
+```INI
 .include = /etc/ssl/extra
 ```
 
@@ -461,7 +467,7 @@ Makes `.include xyz.cnf` refer to `/etc/ssl/extra/xyz.cnf` file.
 In OpenSSL's openssl.cnf, the `.pragma` directive controls how the parser handles specific behaviors. 
 
 
-```ini
+```INI
 .pragma abspath = on        # require absolute .include paths
 .pragma dollarid = true     # literal $ in key/value names
 .pragma includedir = /libs  # prefix relative paths (obsolete)
@@ -475,7 +481,7 @@ Default: `Off` (relative paths are allowed).
 
 Example usage:
 
-```ini
+```INI
 .pragma abspath = on
 ```
 
@@ -491,7 +497,7 @@ When On: `$` is treated literally; variables must be in `${...}` or `$(...)`.
 
 Example sage:
 
-```ini
+```INI
 .pragma dollarid = true
 ```
 
@@ -562,7 +568,7 @@ Structured into defined sections with expected keywords for CA, CSR, TLS, etc.
 
 ## Sample Minimal Configuration
 
-```ini
+```INI
 [ ca ]
 dir = /etc/ssl/myCA
 new_certs_dir = $dir/newcerts
@@ -597,13 +603,13 @@ myPolicy = 1.2.3.4.5
 
 ### Starting Section
 
-`openssl_conf` key may be used by OpenSSL to tell `openssl` which section to start with, firstly.
+`openssl_conf` varname may be used by OpenSSL to tell `openssl` which section to start with, firstly.
 
 `openssl_conf` key is optionally defined but only from within the "`[default]`" section.
 
 `openssl_conf` is often user-defined to `openssl_init` section.
 
-```ini
+```INI
 # Inside somefile.cnf
 openssl_conf = openssl_init  # You must define this key
 
@@ -660,7 +666,7 @@ The section names that the openssl parse will be looking for are:
 Do not use those section name unless you intend to have `openssl` parser behave specially on them.
 
 # Specific Section Features
-Most prominent of the reserved keywords that OpenSSL MUST expect
+Most promiment of the reserve keywords that OpenSSL MUST expect
 is the assignment of the `distinguished_name` to another section of your own
 choosing (commonly `req_distinguished_name`).
 
@@ -701,7 +707,7 @@ For more details, see [OpenSSL config by section names]({filename}openssl-conf-b
 
 Within extensions sections (e.g., `[ v3_ca ]`, `[ usr_cert ]`), each key is an extension name and its value defines how it behaves:
 
-```ini
+```INI
 [ v3_ca ]
 basicConstraints = CA:TRUE
 keyUsage = digitalSignature, keyCertSign
@@ -791,7 +797,7 @@ Keywords under `ca` and `*_ca` are:
 
 ## Certification section
 
-The certification section may include:
+The certification section may be:
 
   - `usr_cert`
   - `ocsp_cert`
@@ -853,7 +859,7 @@ Used in sections like `[ req_distinguished_name ]`, `[ alt_names ]`, and similar
 
 Example:
 
-```ini
+```INI
 [ req_distinguished_name ]
 commonName                 = Example Corp
 organizationName           = Example Org
@@ -865,7 +871,7 @@ These suffixes (`.0`, `.1`, etc.) allow repetition of fields like OU (`organizat
 
 Also applies to:
 
-```ini
+```INI
 subjectAltName → DNS.1, DNS.2, IP.1  # , etc.
 
 email.0, RID.1, URI.0, dirName.0, otherName.1  # in SAN blocks.
@@ -912,11 +918,29 @@ Meaning of Policy Suffixes:
 | `_supplied` | `[policy_*]` |  The field must be present in the CSR |
 | `_optional` | `[policy_*]` | The field may or may not be present in the CSR |
 
-These are not suffixes of the field name (like `commonName_optional`), but instead values assigned to DN field keys in policy sections, such as:
+These suffixes are applied to DN field names (like `commonName`, `organizationName`, etc.) as the value, not as part of the key name.
+Example:
+```INI
+[ca]
+default_ca = my_ca
 
-```ini
-commonName = supplied
+[my_ca]
+policy = policy_strict
+
+[policy_strict]
+countryName             = match
+stateOrProvinceName     = match
+organizationName        = match
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
 ```
+
+match: CSR value must match CA's.
+
+supplied: CSR must include this field.
+
+optional: CSR may omit this field.
 
 These keywords are values, not suffixes of the field name — so technically, `_optional` and `_supplied` are not suffixes, even though they're suffix-like.
 
@@ -924,7 +948,7 @@ These keywords are values, not suffixes of the field name — so technically, `_
 
 Used to provide default values for fields in req-based certificate requests.
 
-```ini
+```INI
 [ req_distinguished_name ]
 countryName                     = Country Name (2 letter code)
 countryName_default             = US
@@ -943,17 +967,17 @@ The "`_prompt`" suffix is used to customize the prompt message shown to the user
 
 Where is _prompt Used?
 
-Only meaningful in the Distinguished Name (DN) sections used by `openssl req`, typically in:
+Only meaningful in the Distinguished Name (DN) sections used by openssl req, typically in:
 
-```ini
+```INI
 [req_distinguished_name]
 ```
-Or any other section referenced by `distinguished_name` = ... in the `[req]` section.
+Or any other section referenced by distinguished_name = ... in the `[req]` section.
 
 If you have a DN field like `commonName`, you can specify a custom prompt by adding `commonName_prompt`.
 
 Example:
-```ini
+```INI
 [req]
 prompt = yes
 distinguished_name = req_distinguished_name
@@ -1011,7 +1035,7 @@ Makes CSR creation more intuitive for users by providing clear instructions.
 
 Helpful when automating certificate requests with interactive scripts.
 
-Supports multilingual or custom prompt text.
+Supports multi-lingual or custom prompt text.
     
 ## `[oid_section]` suffixes
 
@@ -1019,7 +1043,7 @@ Supports multilingual or custom prompt text.
 
 While not strictly suffixes on keys, OpenSSL looks for specific section references like:
 
-```ini
+```INI
 oid_section = my_oids
 
 [my_oids]
@@ -1082,7 +1106,7 @@ The `_value` suffix is used to supply a DN field value non-interactively, even i
 
 * Where `_value` is recognized, only in DN-related sections, such as:
 
-```ini
+```INI
 [req_distinguished_name] — most common
 ```
 
@@ -1096,7 +1120,7 @@ Used primarily in CA-related contexts, where OpenSSL expects a directory of cert
 
 In `[ca]` section and related CA config, dir-like fields such as:
 
-```ini
+```INI
 [ca_default]
 dir              = /etc/ssl/ca
 certs_dir        = $dir/certs
@@ -1129,7 +1153,7 @@ This is used to tell OpenSSL to read the content of a file and treat that as the
 Anywhere values are expected to be X.509 textual or binary blobs
 
 Example:
-```ini
+```INI
 [usr_cert]
 subjectAltName = @alt_names
 certificatePolicies = policyInformation_file
@@ -1177,7 +1201,7 @@ So, while not syntactically enforced, it's a semantic convention that functions 
 
 You will see something like:
 
-```ini
+```INI
     ca_dir = $ENV::HOME/ca
 ```
 
@@ -1324,7 +1348,7 @@ If you'd like, I can render this as a Markdown table-based cheat sheet, suitable
 
 # Putting It All Together
 
-```ini
+```INI
 .pragma abspath = on
 .pragma dollarid = true
 .pragma includedir = /etc/ssl/includes
@@ -1376,7 +1400,7 @@ Structured sections map to OpenSSL commands (req, ca, s_client, etc.) and X.509 
 
 Extendable: add new OIDs, tweak parser, modularize config
 
-For production use, I wrap this approach in tls‑ca‑manage — my bash toolkit for building CA hierarchies from clean, transparent config.
+For production use, I wrap this approach in tls‑ca‑manage—my bash toolkit for building CA hierarchies from clean, transparent config.
 
 
 ## Default Settings
@@ -1411,7 +1435,7 @@ openssl version -a
 - `config_diagnostics` varname is used by OpenSSL test suite.
 
 
-```iniT
+```INIT
 BITS               "default_bits"
 KEYFILE            "default_keyfile"
 PROMPT             "prompt"
@@ -1433,13 +1457,13 @@ However, OpenSSL tools look for and expect specific keys ending in
 
 The base directory of the CA structure:
 
-```ini
+```INI
 dir = /etc/ssl/myCA
 ```
 
 Used later to build paths:
 
-```ini
+```INI
 certificate     = $dir/cacert.pem
 private_key     = $dir/private/cakey.pem
 new_certs_dir   = $dir/newcerts
@@ -1451,7 +1475,7 @@ new_certs_dir   = $dir/newcerts
 
 Where OpenSSL stores newly issued certificates:
 
-```ini
+```INI
 new_certs_dir = $dir/newcerts
 ```
 
@@ -1461,7 +1485,7 @@ new_certs_dir = $dir/newcerts
 
 Directory for Certificate Revocation Lists:
 
-```ini
+```INI
 crl_dir = $dir/crl
 ```
 
@@ -1471,7 +1495,7 @@ crl_dir = $dir/crl
 
 Used as well for directory structuring:
 
-```ini
+```INI
 certs = $dir/certs
 private = $dir/private
 ```

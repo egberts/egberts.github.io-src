@@ -8,7 +8,7 @@ summary: How to set up fail2ban to monitor scanlogd log file
 
 Seems like quite a bit of portscanning is going on against VPS ecosphere.
 
-It's time to ban those pesking log-clogging offenders.  I thought
+It's time to ban those pesky log-clogging offenders.  I thought
 of a port-scanning ban tool, but none can be found.
 
 So, let's split those functions into two and look for a 

@@ -3,15 +3,17 @@ Libpcap to capture 10Gbps
 
 :Tags: pcap, libpcap, Ethernet, high-speed
 :Date: 2014-12-14 20:34
+:modified: 2025-07-13 03:26
 :Status: published
 :Category: research
 
 Someone asked:
 
-I want to capture packets from 10Gbps network card with 0 packet loss. I am
-using lipcap for 100Mbps NIC and it is working fine. Will libpcap be able to
-handle 10Gbps NIC traffic? If not what are the other alternative ways to achive
-this?
+I want to capture packets from 10Gbps network card with 0 
+packet loss. 
+I am using libpcap for 100Mbps NIC and it is working fine. 
+Will libpcap be able to handle 10Gbps NIC traffic? 
+If not what are the other alternative ways to achieve this?
 
 I answered:
 
@@ -51,7 +53,7 @@ So, Linux has an edge over FreeBSD to capture the 10Gbps rate in 0% drop rate
 AND run several virtual machines (and other overheads). Just that it requires a
 new memory management (MM) of some sort for a specific network device and not
 necessarily the whole operating system. Most new super-high-performance network
-driver are now making devices use HUGE memory that were allocated at userland
+driver are now making devices use HUGE memory that were allocated at userland,
 then using driver calls to pass a bundle of packets at a time.
 
 Many new network-driver having repurposed MM are out (in no particular order):

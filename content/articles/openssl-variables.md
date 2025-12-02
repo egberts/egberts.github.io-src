@@ -1,5 +1,6 @@
 title: Using Variables in a OpenSSL Config File
 date: 2022-03-20 11:04
+modified: 2025-07-13 03:15
 status: published
 tags: OpenSSL, environment variables
 category: HOWTO
@@ -9,11 +10,11 @@ lang: en
 private: False
 
 
-There are many ways to use a variables in a OpenSSL configuration file:
+There are many ways to use a variable in a OpenSSL configuration file:
 
 Direct Variable
 ===============
-Those are the easiest kind (in many languages too!)
+Those are the easiest kind (in many languages, too!)
 
 ```ini
 dir = /home/johndoe/ssl
@@ -21,7 +22,7 @@ dir = /home/johndoe/ssl
 cert_file = $dir/cert.crt.pem
 ```
 
-Then there is curly braces for variable names.
+Then there are curly braces for variable names.
 
 The set of curly braces is most useful when constructing 
 a text string having variable suffix/middle/prefix, like filetype
@@ -46,11 +47,11 @@ commonName = $issuer_url
 issuer_url = https://ocsp.mysite.test:80
 crlDistributionPoint=URI:$issuer_url
 ```
-The above is an error: `issuer_url` variable is scoped to only be used under the `[ crl ]` section and not made available to the outside scope of `[ distinguished_name ]` section.
+The above is an error: the `issuer_url` variable is scoped to only be used under the `[ crl ]` section and not made available to the outside scope of `[ distinguished_name ]` section.
 
 It is common to put variables in the default section.  Default sections are the outermost scope before the first section of a config file.  
 
-There is also an optional `[ default ]` section.  Optional `[ default ]` is useful in add-on config files when one wishes to overwrite a default setting.  Such add-on config file  can be then be appended to the default `openssl.cnf` file via `-reqexts` or `-extensions` CLI option.)
+There is also an optional `[ default ]` section.  Optional `[ default ]` is useful in add-on config files when one wishes to overwrite a default setting.  Such add-on config file  can be then be appended to the default `openssl.cnf` file via `-reqexts` or `-extensions` CLI option.
 
 ```ini
 issuer_url = https://ocsp.mysite.test:80
@@ -145,7 +146,7 @@ This takes it down one step less.
 1. Your script could lift the server's actual DNS name
 2. Create the `SERVER_NAME=c512-does-not-exist.sea.wa.fios.verison.net` environment variable (of course, replace it with your server's actual DNS name)
 3. re-run all your ready-made `openssl` scripts
-4. if using a SSL provider, submit CSR to recreate the server certificate
+4. if using an SSL provider, submit CSR to recreate the server certificate
 5. deploy the new server certificate into web server's config directory
 
 And enjoy your refreshing beverage.

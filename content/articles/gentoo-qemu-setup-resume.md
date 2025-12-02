@@ -9,7 +9,7 @@ lang: en
 private: False
 
 
-How to resuming the setup the Gentoo OS ... within the QEMU VM startup.
+How to resume the setup the Gentoo OS ... within the QEMU VM startup.
 
 This would be extremely useful if you are doing a major developmental
 iteration of tweaking Linux kernel ... within Gentoo rescue disk.

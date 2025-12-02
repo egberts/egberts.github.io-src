@@ -55,7 +55,7 @@ See https://egbert.net/blog/articles/pelican-metadata.html for details
 
 References
 ==========
-* [ABNF - IETF RFC 5234 - Augumented BNF for Syntax Specification](https://datatracker.ietf.org/doc/html/rfc5234)
+* [ABNF - IETF RFC 5234 - Augmented BNF for Syntax Specification](https://datatracker.ietf.org/doc/html/rfc5234)
 * [EBNF - International standard (ISO 14977)](https://en.wikipedia.org/wiki/International_standard)
 * [SRFB](https://github.com/gbrault/railroad-diagrams/blob/gh-pages/live/doc/readme.md/)
 * [IETF RFC 5234 history](https://datatracker.ietf.org/doc/rfc2234/)

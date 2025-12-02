@@ -1,6 +1,6 @@
 Title: Overview of Verizon FiOS Network
 date: 2018-11-10T13:28
-modified: 2022-02-24T08:00
+modified: 2025-07-13T02:36
 tags: Verizon, ISP, FiOS
 status: published
 category: research
@@ -35,16 +35,16 @@ Ethernet via ONT direct Cat-5 (preferred)
 * Cat-5E cabling for 802.3/1000Base-T
 * Your firewall (you do do have a firewall?)
 * Cat-5E cabling for 802.3/1000Base-T
-* ActionTec MI424WR, 4-port wireless broadband modem router, 2-channel MoCA,.
+* Actiontec MI424WR, 4-port wireless broadband modem router, 2-channel MoCA,.
 * Cat-5E cabling for 802.3/1000Base-T; no PPP, no PPPoE, no PPTP.  Straight TCP/IP.
 * ONT, Motorola 1400, via Ethernet RJ-45 connector
 
 Note: Call FiOS support at 1-888-553-1555. Remember what your mother
 taught you: use your manners! The Verizon technician doesn’t have to do
 this for you and will be doing you a favor. Ask customer support to
-switch the ONT from coaxial output to ethernet output. If they give you
+switch the ONT from coaxial output to Ethernet output. If they give you
 a hard time about doing it remotely, tell them that you want to use your
-own router, an ethernet cable is already run, and you don’t need a
+own router, an Ethernet cable is already run, and you don’t need a
 technician to come out. You may even need to ask for a supervisor or
 level-two support technician. Expect to spend about 30-45 minutes on the
 phone.
@@ -58,7 +58,7 @@ Most commonly used method by Verizon installer is:
 * Cat-5E cabling for 802.3/1000Base-T
 * Your firewall
 * Cat-5E cabling for 802.3/1000Base-T
-* ActionTec MI424WR, 4-port wireless broadband router, 2-channel MoCA
+* Actiontec MI424WR, 4-port wireless broadband router, 2-channel MoCA
 * RG-6 cabling, with F-connectors, MoCA protocol
 * ONT, Motorola 1400, coaxial, via F-connector
 
@@ -100,7 +100,7 @@ then
 Head-End
 --------
 
-Head-End comprises of the following:
+Head-End consists of the following:
 
 * Trunk Fiber cable, Single-Mode (SM)
 * EQAM (mixes cable and data)
@@ -174,7 +174,7 @@ GPON ONT
 --------
 
 * SFH ONT 612AZ
-* [ActionTEC Router datasheet](https://www.actiontec.com/products/wifi-routers-gateways/fiber/bhr-rev-i)
+* [Actiontec Router datasheet](https://www.actiontec.com/products/wifi-routers-gateways/fiber/bhr-rev-i)
 * Motorola ONT 1400
 
 [jtable separator=","]
@@ -210,9 +210,9 @@ Modem Router
 
 DOCSIS 3.0 MoCA Modem Routers:
 
-* [ActionTec MI424WR](https://www.actiontec.com/products/wifi-routers-gateways/fiber/bhr-rev-i)
-* ActionTec MI424WR\]
-* Fios Quantum Gateway
+* [Actiontec MI424WR](https://www.actiontec.com/products/wifi-routers-gateways/fiber/bhr-rev-i)
+* Actiontec MI424WR\]
+* FiOS Quantum Gateway
 
 Set-Top Box
 -----------

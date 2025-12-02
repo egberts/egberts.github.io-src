@@ -4,7 +4,7 @@ Modified: 2020-03-04 16:53
 Status: published
 Tags: Python
 Category: research
-Summary: Toward a tigher redevelopment cycle on Python.
+Summary: Toward a tighter redevelopment cycle on Python.
 
 Tight Multiversion Python Re-development Cycle
 ==============================================

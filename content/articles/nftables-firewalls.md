@@ -4,7 +4,7 @@ modified: 2022-09-21 15:58
 status: published
 tags: nftables, firewalls, libvirt, firewalld
 category: research
-summary: Summary of nftables and its coexistance with firewalls
+summary: Summary of nftables and its coexistence with firewalls
 lang: en
 private: False
 
@@ -23,7 +23,7 @@ The integration of nftables and its various firewalls having been reviewed here 
 * nwfilter (libvirt/libvirtd)
 * firewalld (RedHat)
 * systemd nftables.service
-* shorewall (Perl-based)
+* Shorewall (Perl-based)
 
 `ufw` is not reviewed here as it is not nftables-friendly.
 
@@ -32,14 +32,14 @@ So, let's start looking at firewalls.
 
 
 
-# Overview of coexistance with nftables 
+# Overview of coexistence with nftables 
 
 The basic aspect a firewall being able to be coexisting with `libvirt` (and `nftables`) boils down to:
 
 * who is in control (start/restart/stop) overall
 * who can control the nftable policy
 * who can control segregation by netdev interfaces (common FW chaining organizational technique)
-* who can insert FW rules effortlessly into an existing FW rulset without corrupting other rulesets.
+* who can insert FW rules effortlessly into an existing FW ruleset without corrupting other ruleset.
 
 None of this matter to my goal if you simply take out the `default` Virtual Network from `virt-manager`.
 
@@ -65,22 +65,22 @@ And I get to keep using my favorite `virt-manager` within a supremely complex fi
 
 ## virt-manager
 
-virt-manager is a Python3 front-end script to both `libvirt` and `qemu-system-x86_64`.  Works on KDE and Gnome equally; also leverages `gnome-keyring` and `kwalletcli` for proper password storages.
+virt-manager is a Python3 front-end script to both `libvirt` and `qemu-system-x86_64`.  Works on KDE and Gnome equally; also leverages `gnome-keyring` and `kwalletcli` for proper password storage.
 
 `virt-manager` is not very flexible enough to handle complex network scenario outside of multiple sets of simple bridge, NAT, routed, and closed-net.  We will be keeping the 'Virtual Network' capability of this GUI but we ditch the `default` one.
 
-`virt-manager` cannot customize firewall rules directly at GUI-level but would let you edit (should I say, bastardize) the XML-formatted `/etc/libvirt/network/your-virtual-network-name.xml` file and insert zany XML proses.  With my 538 rules times 8-9 lines required for each rule to type up, I'd say "no thanks" to +4,800 lines.
+`virt-manager` cannot customize firewall rules directly at GUI-level but would let you edit (should I say, bastardize) the XML-formatted `/etc/libvirt/network/your-virtual-network-name.xml` file and insert zany XML prose's.  With my 538 rules times 8-9 lines required for each rule to type up, I'd say "no thanks" to +4,800 lines.
 
 virt-manager does NOT remove whatever table/chain it created under 'Virtual Network' after first/last VM gets removed.  That's the job of `libvirt` and its API.  And `libvirt` does not remove chains either.
 
 
 ## libvirt
 
-libvirt is an API library that can manage virtual machines and containers (QEMU, Xen, LXC, Docker).  `libvirt` can also crafts firewall rules for its many network segmentations (`virt-manager`'s 'Virtual Network') needed by different groups of virtual machines.  Unrelatedly, `libvirt` handles storage too.
+libvirt is an API library that can manage virtual machines and containers (QEMU, Xen, LXC, Docker).  `libvirt` can also crafts firewall rules for its many network segmentation (`virt-manager`'s 'Virtual Network') needed by different groups of virtual machines.  Unrelatedly, `libvirt` handles storage too.
 
-Ease of configuration with `libvirt` is considered extremely hostile toward user-friendliness and [poorly documented](https://avdv.github.io/libvirt/formatnetwork.html#examplesBridge): it uses XML-formatted config files; totally devoided of working examples.
+Ease of configuration with `libvirt` is considered extremely hostile toward user-friendliness and [poorly documented](https://avdv.github.io/libvirt/formatnetwork.html#examplesBridge): it uses XML-formatted config files; totally devoid of working examples.
 
-This inability to clean up stray chains after dying itself is the dangling artifact of libvirt/libvirtd.  And this lingering effect of `nft list ruleset` really becomes problematic when it comes to expansion of custom FW rules and maintaining co-existance with other firewall daemons. 
+This inability to clean up stray chains after dying itself is the dangling artifact of libvirt/libvirtd.  And this lingering effect of `nft list ruleset` really becomes problematic when it comes to expansion of custom FW rules and maintaining co-existence with other firewall daemons. 
 
 
 ## libvirtd
@@ -110,7 +110,7 @@ Also, to those who are in the "DEFAULT-DENY" firewall camp, your `nftables` rule
 
 I am only thankful that the `libvirtd` is only creating chain policy of `accept`.  This makes it easier to wrap around each chain that is required with a `drop` (DEFAULT-DENY) policy scenarios.
 
-As a default, `libvirtd` daemon inserts its own type/hooks/priority/policy into the nftables.  This makes co-existance slightly more difficult with other firewall (and is considered a part of the RedHat walled garden strategy).  An easy workaround is for your custom `nftables` ruleset to bump its priority ([more negative value](https://egbert.net/blog/articles/netfilter-priority-levels.html)) to a higher priority than `libvirt`'s filter (0) priority:  a priority value of +1 should suffice in performing ruleset before `libvirt` and a priority value of -1 should suffice in performing ruleset after `libvirt`.  Not many firewall daemons would let you set this priority (shorewall, ufw, firewalld).
+As a default, `libvirtd` daemon inserts its own type/hooks/priority/policy into the nftables.  This makes co-existence slightly more difficult with other firewall (and is considered a part of the RedHat walled garden strategy).  An easy workaround is for your custom `nftables` ruleset to bump its priority ([more negative value](https://egbert.net/blog/articles/netfilter-priority-levels.html)) to a higher priority than `libvirt`'s filter (0) priority:  a priority value of +1 should suffice in performing ruleset before `libvirt` and a priority value of -1 should suffice in performing ruleset after `libvirt`.  Not many firewall daemons would let you set this priority (Shorewall, UFW, firewalld).
 
 Disabling libvirt network is still not recommended given their power to handle opening and closing pin-holes via builtin `libvirt` API (or you could also do it with `/etc/libvirt/hooks/qemu.d` scripting).  This auto-pin-holing further cements the zeal to get both `libvirt` and `nftables.service` working ... TOGETHER.
 
@@ -119,9 +119,9 @@ Disabling libvirt network is still not recommended given their power to handle o
 
 ## Shorewall
 
-Shorewall (much like systemd `nftables.service`) is a one-shot daemon-less perl-script that reads various text-based configuration files covering domain, network segments, physical interfaces, masquerading, static route.  Shorewall remains the excellent tool for a default-deny firewall setup.
+Shorewall (much like systemd `nftables.service`) is a one-shot daemon-less Perl-script that reads various text-based configuration files covering domain, network segments, physical interfaces, masquerading, static route.  Shorewall remains the excellent tool for a default-deny firewall setup.
 
-Shorewall does entire replacement of ruleset, including overriding any existing  nftables ruleset.  This makes co-existance with all firewall daemon problematic.
+Shorewall does entire replacement of ruleset, including overriding any existing  nftables ruleset.  This makes co-existence with all firewall daemon problematic.
 
 Dynamic pinhole (port forwarding) support is not there.
 
@@ -135,7 +135,7 @@ Shorewall is basically dead-on-arrival unless you are not using `libvirt`.
 firewalld is a daemon that is a RedHat walled-garden approach to administering host firewall.  Its design is complicated by several things:
 
 * all configurations are in unfriendly multiple-line XML format for each setting
-* octopus out into DBUS communication pipe (for desktop-initiated FW pinholing)
+* octopus out into D-Bus communication pipe (for desktop-initiated FW pinholing)
 * not usable for complex firewall environments.
 * cannot support default-deny firewall setups.
 * crushes Docker firewall settings
@@ -222,14 +222,14 @@ flush chain systemd_filter SYSD_OUTPUT
 flush chain systemd_filter SYSD_FORWARD
 ```
 
-Also, there should be somekind of reloading of libvirtd network firewall from the `systemctl reload libvirt.service` approach.  Not seeing RedHat as being eager to implement this.
+Also, there should be some kind of reloading of libvirtd network firewall from the `systemctl reload libvirt.service` approach.  Not seeing RedHat as being eager to implement this.
 
 And that in systemd-parlance, the `libvirt.service` should be dependent on this `nftables.service` as being successful before starting itself up.  Again, not in RedHat's walled-garden design either.
 
 
 # Final Consideration
 
-By chosing both `libvirt` and `nftables.service` together, we should be able to  get the best of both complex firewall setup as well as the VM-specific `nwfilter` part of `libvirt`.
+By choosing both `libvirt` and `nftables.service` together, we should be able to  get the best of both complex firewall setup as well as the VM-specific `nwfilter` part of `libvirt`.
 
 This `flush rulset` line must be edited out from `/etc/nftables.conf` and replaced with the following multi-line:
 
@@ -250,7 +250,7 @@ flush chain filter INPUT
 flush chain filter OUTPUT
 ```
 
-By leveraging the `nwfilter` rulset of `libvirt`, `virt-manager` can do extra Virtual Network filtering things on a per-VM/container basis but admin would require crafting the rules in XML format.
+By leveraging the `nwfilter` ruleset of `libvirt`, `virt-manager` can do extra Virtual Network filtering things on a per-VM/container basis but admin would require crafting the rules in XML format.
 
 By leveraging the `/etc/libvirt/hooks` subdirectory for VM/contain-specific firewall needs (such as pin-hole, port forwarding), we cover the bit of VM/container-specific actions using any scripting language (Bash and Python are two most popular ones here).
 
@@ -263,7 +263,7 @@ Since the libvirt is defaulting to `filter` (0) priority level, we have a choice
 
 Let's do that: our own `/etc/nftables.conf` does the wrapping around `libvirt`.
 
-As the default install of `libvirtd` and `nftables.service`, the `nftables` gets first dib (by the virtue of being declared firstly at boot-up time before `libvirtd.service` got started.
+As the default install of `libvirtd` and `nftables.service`, the `nftables` gets first dibs (by the virtue of being declared firstly at boot-up time before `libvirtd.service` got started.
 
 This is not good enough.  We must be able to block after `libvirt` as well as check firstly before `libvirt` for our insanely complex firewall setup.
 

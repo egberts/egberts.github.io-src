@@ -32,7 +32,7 @@ env var name, description, source
 `OPENSSL_ENGINES`, , `crypto/engine/eng_list.c`; `util/wrap.pl`
 `OPENSSL_FIPS`, FIPS, `openssl.c`
 `OPENSSL_ia32cap`, Crypto Intel Itanium Architecture, `crypto/cryptlib.c`
-`OPENSSL_MALLOC_FAILURES`, `malloc` test intrumentation point, `crypto/mem.c`
+`OPENSSL_MALLOC_FAILURES`, `malloc` test instrumentation point, `crypto/mem.c`
 `OPENSSL_MALLOC_FD`, `malloc` file descriptor, `crypto/mem.c`
 `OPENSSL_MODULES`, , `util/wrap.pl`
 `OPENSSL_HTTP_PROXY`, ,
@@ -51,12 +51,12 @@ env var name, description, source
 
 NOTE: Above list are derived from `openssl` version 1.1.1k (11/18/2021).
 
-Yeah, a lot of environment names there, accidential or not, to watch out for while using `openssl`.  
+Yeah, a lot of environment names there, accidental or not, to watch out for while using `openssl`.  
 
 Expert
 ======
 
-Bet you did not know that the `openssl` practically opens the default `/usr/lib/ssl/openssl.cnf` everytime you use the command.
+Bet you did not know that the `openssl` practically opens the default `/usr/lib/ssl/openssl.cnf` every time you use the command.
 
 Sometime, you have your own configuration file.  And you might think that specifying `-config my_damn_ssl_config_file.cnf` is all you get.  
 

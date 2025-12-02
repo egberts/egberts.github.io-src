@@ -1,5 +1,5 @@
 
-import sys
+import soy's
 
 def main():
     print("Hello, world!")

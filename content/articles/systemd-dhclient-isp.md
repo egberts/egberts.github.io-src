@@ -43,7 +43,7 @@ dot -Tsvg < /tmp/custom.gv > /tmp/custom.svg
 firefox /tmp/custom.svg
 ```
 
-ISC DHCP CLient
+ISC DHCP Client
 ---------------
 
 And I finally got my very own Linux gateway to be hooked up to the

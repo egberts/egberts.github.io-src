@@ -1,6 +1,6 @@
 Title: Comparison of Memory Allocation Methods
 Date: 2017-10-20T12:53
-Modified: 2022-03-14T04:53
+Modified: 2025-07-13T05:31
 Status: published
 Tags: comparison, malloc
 Category: research
@@ -22,9 +22,9 @@ the allocator, the allocator will serialize them. Programs making
 intensive use of the allocator actually slow down as the number of
 processors increases.
 
-Malloc (libc) is the worse memory allocation API to use.
+Malloc (libc) is the worst memory allocation API to use.
 
-Programs should avoid, if possible, allocating/deallocations memory too
+Programs should avoid, if possible, allocating/deallocating memory too
 often and in particular whenever a packet is received.
 
 In the Linux kernel there are available kernel/driver patches for
@@ -51,7 +51,7 @@ and bucket-heap mechanism are used to divide the private-heap using size
 class approach.
 
 Soon, garbage collection algorithm introduced the initial backend of the
-memory allocation scheme. Frontend covers the usual malloc() API, et.
+memory allocation scheme. Frontend covers the usual `malloc()` API, et
 al.
 
 In 2006, a third pool was introduced (after operating system memory pool
@@ -75,7 +75,7 @@ in the following order:
 5. Epoch encoding
 6. Large-size class memory block by direct mmap()
 7. Hazard pointers (safe memory reclamation for lock-free objects) (M.M. Michael, 2004)
-8. Arena memory pool
+8. Arena memory pool (CPU/core and thread, separately)
 9. thread-specific local allocation buffers (TLABs)
 10. constant-time modulo synchronization (early return to OS pool, or FreeBSD madvise call)
 
@@ -109,18 +109,18 @@ ssmalloc , , <a href="https://apsys2012.kaist.ac.kr/media/papers/apsys2012-final
 jemalloc , Jason Evans ("Facebook, FreeBSD") , [whitepaper](https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf) ,
 sfmalloc , "SNU, Korea" , ,
 Streamflow , , ,
-ptmalloc3 , , ,
+ptmalloc3 , , [website](http://www.malloc.de/en/)[tarball] (http://www.malloc.de/malloc/ptmalloc3-current.tar.gz),
 nedmalloc-1.02 , , ,
 lockless , , ,
-ptmalloc2 , GNU Libc (dlmalloc-forked) , ,
+ptmalloc2 , GNU Libc (dlmalloc-forked) , [website](http://www.malloc.de/en/) [tarball](http://www.malloc.de/malloc/ptmalloc2-current.tar.gz) ,
 Hoard , , ,
 libumem , SMI Solaris , ,
 mtmalloc , , ,
 nedmalloc-1 , , ,
 tcmalloc , Google , ,
 ctmalloc , Google Code , ,
-ptmalloc , GNU Libc (dlmalloc-forked) , ,
-dlmalloc , "Doug Lea, FreeBSD" , <a href="http://g.oswego.edu/dl/html/malloc.html">blog</a>, <a href="ftp://g.oswego.edu/pub/misc/malloc.c">FTP</a>
+ptmalloc , GNU Libc (dlmalloc-forked) , [website](http://www.malloc.de/en/) [tarball](http://www.malloc.de/malloc/ptmalloc.tar.gz),
+dlmalloc , "Doug Lea, FreeBSD" , [website](http://g.oswego.edu/dl/html/malloc.html) [website, archived](https://web.archive.org/web/20190619034641/http://g.oswego.edu/dl/html/malloc.html) <a href="ftp://g.oswego.edu/pub/misc/malloc.c">FTP</a>
 pkmalloc , , <a href="http://www.freebsd.dk/pubs/malloc.pdf">whitepaper</a>,
 phkmalloc , FreeBSD , ,
 malloc , GNU Libc (glibc) , ,
@@ -163,20 +163,20 @@ Unit Test Approaches
 
 Malloc testing
 
-Test various patterns of memory allocation, aiming for various levels of fragmentation. Perform the tests both in single-threaded and multi-threaded environments.
+Test various patterns of memory allocation, aiming for various levels of fragmentation. Perform the tests both in single-threaded and multithreaded environments.
 
 Checks for correctness:
 
 * None of the allocated blocks should overlap, and all should be successfully writable for the requested number of bytes.
-* Allocations made by posix\_memalign should be correctly aligned and freeable by free.
-* Arguments to calloc which would overflow size\_t when multiplied should result in allocation failure, not under-allocation.
-* Allocating a block so large that subtracting two pointers within that block could overflow ptrdiff\_t should not be possible.
+* Allocations made by `posix_memalign` should be correctly aligned and freeable by free.
+* Arguments to calloc which would overflow `size_t` when multiplied should result in allocation failure, not under-allocation.
+* Allocating a block so large that subtracting two pointers within that block could overflow `ptrdiff_t` should not be possible.
 
 Further implementation-specific correctness checks: checking consistency of bookkeeping information before and after each allocated block.
 
 Possible quality-of-implementation checks: Attempting to obtain pathological fragmentation and allocation failure where it should not happen.
 
-Corruption check: The attacker could overflow a buffer dynamically allocated by malloc(3) and:
+Corruption check: The attacker could overflow a buffer dynamically allocated by `malloc(3)` and:
 
 * overwrite the next contiguous boundary tag ([Netscape browsers exploit](http://www.openwall.com/advisories/OW-002-netscape-jpeg.txt) or
 * underflow such a buffer and overwrite the boundary tag stored just before [Secure Locate exploit](ftp://maxx.via.ecp.fr/dislocate/)), or
@@ -201,4 +201,7 @@ References
 * Heap and allocators
 * [here](http://www.cs.dartmouth.edu/~sergey/cs108/2015/heaps-and-allocators.txt)
 * [Anatomy of a Program in Memory](https://manybutfinite.com/post/anatomy-of-a-program-in-memory/)
-
+* [Worst-case of Memory Allocation Algorithms, Garey 1972](https://dl.acm.org/doi/pdf/10.1145/800152.804907)
+* [The Memory Fragmentation Problem: Solved? Johnstone 1997](https://www.cs.tufts.edu/~nr/cs257/archive/paul-wilson/fragmentation.pdf)
+* [Simulation of High-Performance Memory Allocators, Risco-Martin](https://arxiv.org/pdf/2406.15776)
+* [Dynamic Storage Allocation: A Survey and Critical Review](https://www.cs.hmc.edu/~oneill/gc-library/Wilson-Alloc-Survey-1995.pdf), very useful chronological order of malloc()

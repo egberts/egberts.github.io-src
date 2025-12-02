@@ -12,12 +12,12 @@ master nameserver for sometime, yet it started to fail ... silently.
 But no new DNS record information were being pushed out by the hidden master
 to any of my public master nameserver.
 
-Yet, there is no discernable error in my hidden master log files.
+Yet, there is no discernible error in my hidden master log files.
 
 Initial Confirmation of Failure
 ===============================
 
-To quickly prove that an update failure is occuring (other than
+To quickly prove that an update failure is occurring (other than
 no fresh DNS records), I checked the serial number in both the hidden
 and the public nameserver.
 
@@ -63,7 +63,7 @@ Since the sysadmin haven't done any forced transfer, the focus is
 now within the update interval period.
 
 You may have a general purpose log file for your named daemon, but I have
-split my log files out into individual logging channels and thusly
+split my log files out into individual logging channels and thus
 into multiple log files.  ISC Bind v9.16 (at this writing) has 
 20 `category` in which to split logs with. 
 

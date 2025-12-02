@@ -1,5 +1,6 @@
 title: Invalid SSHFP DNS resource record
 date: 2022-04-03 07:38
+modified: 2025-07-13 02:49
 status: published
 tags: DNS, SSHFP
 category: HOWTO
@@ -56,7 +57,7 @@ This message covers 99.999% of the scenario.
 The other 0.001% of the time is broken down in one of the many not so common scenarios:
 
 * points to a different SSH server
-    * a new port number has been opened (legitmately or not)
+    * a new port number has been opened (legitimately or not)
     * Dockerized container reusing same IP address
     * MAC address has been changed to point to a cloned server
     * IP route has been changed (by route table or by various IP route protocol like BGP, OSPF, RIP)

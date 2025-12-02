@@ -1,18 +1,24 @@
 Title: OpenLDAP Debugging Levels
 Date: 2018-01-14T19:26
+modified: 2025-07-13T0337
 Status: published
 Tags: debugging, openldap
 Category: research
 Summary: How to set debugging level in OpenLDAP client and server programs.
 
-olcLogLevel: \<level\> This directive specifies the level at which
+`olcLogLevel`: <level> This directive specifies the level at which
 debugging statements and operation statistics should be syslogged
-(currently logged to the syslogd(8) LOG\_LOCAL4 facility). You must have
-configured OpenLDAP --enable-debug (the default) for this to work
-(except for the two statistics levels, which are always enabled). Log
-levels may be specified as integers or by keyword. Multiple log levels
-may be used and the levels are additive. To display what levels
-correspond to what kind of debugging, invoke slapd with -d? or consult
+(currently logged to the `syslogd(8)` `LOG_LOCAL4` facility). 
+
+You must have configured OpenLDAP --enable-debug (the default) for this 
+to work (except for the two statistics levels, which are always enabled).
+
+Log levels may be specified as integers or by keyword. 
+
+Multiple log levels may be used, and the levels are additive. 
+
+To display what levels correspond to what kind of debugging, 
+invoke `slapd` with `-d?` or consult
 the table below. The possible values for <level> are:
 
 Table 5.1: Debugging Levels
@@ -32,6 +38,6 @@ Level, Keyword, Description
 512, (0x200 stats2),   stats log entries sent
 1024, (0x400 shell),    print communication with shell backends
 2048, (0x800 parse),    print entry parsing debugging
-16384, (0x4000 sync),    syncrepl consumer processing
+16384, (0x4000 sync),    secretly consumer processing
 32768, (0x8000 none),    only messages that get logged whatever log level is
 [/jtable]

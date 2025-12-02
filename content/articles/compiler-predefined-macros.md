@@ -7,7 +7,7 @@ summary: How to list compiler predefined macros for most OS platforms.
 lang: en
 private: False
 
-All C/C++ compilers predefine macros indicating the target processor, operating system, language features, compiler name and version, and more. Cross-platform code can use `#if`/`#endif` to wrap OS-specific `#include`s (such as `<Windows.h>` vs. `<unistd.h>`), compiler-specific code (such as inline assembly), or processor-specific optimizations (such as SSE instructions on x86). Macro names are not standardized and nor are methods to get the compiler to list them. This article surveys common desktop and server application compilers and shows how to list their predefined macros.
+All C/C++ compilers predefined macros indicating the target processor, operating system, language features, compiler name and version, and more. Cross-platform code can use `#if`/`#endif` to wrap OS-specific `#include`s (such as `<Windows.h>` vs. `<unistd.h>`), compiler-specific code (such as inline assembly), or processor-specific optimizations (such as SSE instructions on x86). Macro names are not standardized and nor are methods to get the compiler to list them. This article surveys common desktop and server application compilers and shows how to list their predefined macros.
 
 
 
@@ -15,7 +15,7 @@ Command-line options
 =====
 Most compilers have command-line options to list predefined macros:
 
-[jtable caption="Compiler Predefned Macros" separator="," th=1 ai="1"]
+[jtable caption="Compiler Predefined Macros" separator="," th=1 ai="1"]
 Command lines Compiler,C macros,C++ macros
 Clang/LLVM, `clang -dM -E -x c /dev/null`, `clang++ -dM -E -x c++ /dev/null`
 GNU GCC/G++,`gcc -dM -E -x c /dev/null`,`g++ -dM -E -x c++ /dev/null`

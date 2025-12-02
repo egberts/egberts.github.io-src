@@ -1,5 +1,6 @@
 title: Comparison of Large SVG File Viewers
 date: 2024-06-11 06:00
+modified: 2025-07-13 01:53
 status: published
 tags: comparison, viewer, SVG, bison, python-graphviz, graphviz, DOT, PDF, Python
 category: HOWTO
@@ -8,14 +9,14 @@ summary: A comparison of large-SVG viewers are reviewed here.
 lang: en
 private: False
 
-Comparison of grpahical viewers for large SVG file are covered here.
+Comparison of graphical viewers for large SVG file are covered here.
 
 
 Background 
 =============
 Was working on a NeoVim/Vim syntax highlighter for the `nft` command of nftables package on Linux.
 
-Would make sense if I had a concrete visual view of this `nft` command syntax other than the cryptic lexer code deep in the `nftables` code.
+It would make sense if I had a concrete visual view of this `nft` command syntax other than the cryptic lexer code deep in the `nftables` code.
 
 NeoVim/Vim I need to see the parser as a whole for an application.  The parser
 leverages the Bison lexer.
@@ -87,7 +88,7 @@ Summary
 None of today's viewer that I have tried in the past works on this large-sized
 DOT file anymore.
 
-Of the some 2-dozen window-based SVG viewers, the following were listed simply because they can load this crazy-huge 50MB-sized SVG file:
+Of some 2-dozen window-based SVG viewers, the following were listed simply because they can load this crazy-huge 50MB-sized SVG file:
 
 * Inkscape
 * Okular
@@ -112,7 +113,7 @@ Gdk-Message: 11:35:43.122: Lost connection to Wayland compositor.
 [/jtable]
 
 
-Alernatives
+Alternatives
 ==============
 Alternatively, you can splice out a portion of the view at DotGraph-level
 before doing any SVG/PDF rendering:

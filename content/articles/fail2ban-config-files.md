@@ -115,7 +115,7 @@ To whitelist (ignore) an IP, add them to the ignoreip line:
 ignoreip = 127.0.0.1/8
 ```
 
-Note: Depending on the amount of traffic specific service has (website, wordpress, etc.) fail2ban can generate CPU concerns/load.
+Note: Depending on the amount of traffic specific service has (website, WordPress, etc.) fail2ban can generate CPU concerns/load.
 Custom Fail2ban PhpMyAdmin filter (Jail & Regex)
 
 The best way to learn is to try and write your own filters. I’ll show you an example for Custom Fail2ban PhpMyAdmin filter. First, we need the jail in our jail.local file:
@@ -133,7 +133,7 @@ findtime = 60
 maxretry = 3
 ```
 
-Look for that filter in the web server (Apache/nginx) logs:
+Look for that filter in the web server (Apache/Nginx) logs:
 
 ```
 /var/log/nginx/access.log.1:121.169.192.227 - - [19/Sep/2018:01:41:23 +0000] "GET /phpmyadmin/index.php?pma_username=root&pma_password=root&server=1 HTTP/1.1" 200 10050 "-" "Mozilla/5.0"
@@ -141,7 +141,7 @@ Look for that filter in the web server (Apache/nginx) logs:
 /var/log/nginx/access.log.1:121.169.192.227 - - [19/Sep/2018:01:41:23 +0000] "GET /phpmyadmin/index.php?pma_username=root&pma_password=r00t&server=1 HTTP/1.1" 200 10050 "-" "Mozilla/5.0"
 ```
 
-The IP 121.169.192.227 is trying to bruteforce its way in (well known malicious IP). Let us make their life a bit more difficult. Make a file in your `/etc/fail2ban/filter.d/phpmyadmin.conf`, and insert:
+The IP 121.169.192.227 is trying to brute-force its way in (well known malicious IP). Let us make their life a bit more difficult. Make a file in your `/etc/fail2ban/filter.d/phpmyadmin.conf`, and insert:
 
 ```
 [Definition]
@@ -149,7 +149,7 @@ failregex = ^<HOST> -.*"(GET|POST).*/phpmyadmin/index\.php\?pma_username=root&pm
 ignoreregex =
 ```
 
-The above regex is matching the lines we’ve seen in the logs. This will ban anyone for 1 hour if they fail to login more than 3x in 60 seonds. When done, restart fail2ban:
+The above regex is matching the lines we’ve seen in the logs. This will ban anyone for 1 hour if they fail to login more than 3x in 60 seconds. When done, restart fail2ban:
 
 ```console
 $ service fail2ban restart
@@ -206,7 +206,7 @@ Missed line(s): too many to print. Use --print-all-missed to print all 3315 line
 
 Fail2ban Email Alerts
 
-I didn’t experiment with this much, but its probably worth mentioning that you have Email Alert option. Adjust email setings:
+I didn’t experiment with this much, but its probably worth mentioning that you have Email Alert option. Adjust email settings:
 
     destemail: Destination Email address, where you would like to receive the emails.
     sendername: Name under which the email will shows up.

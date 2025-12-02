@@ -30,7 +30,7 @@ BrandIndicatorforMessageIdentification is a valueless OID whose presence indicat
 CA authorities that provide BIMI certs are called "Verified Mark Certificate (VMC) CA authority".  Entrust, DigiSign, Comodo are most of the VMC providers.
 
 
-And one new X509v3 extension for embeddeding the same logo inside the PEM certificate:
+And one new X509v3 extension for embedding the same logo inside the PEM certificate:
 
 * 1.3.6.1.5.5.7.1.12 (Logotype; id-pe-logotype; not parsable by OpenSSL; no value field)
 

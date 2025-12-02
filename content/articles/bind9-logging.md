@@ -6,7 +6,7 @@ status: published
 Category: research
 summary: Logging Files Used By ISC Bind9
 
-Editing Bind9 logging Bind9 logging is controlled and ferrated into several channels.
+Editing Bind9 logging Bind9 logging is controlled and serrated into several channels.
 
 Functional Log
 --------------

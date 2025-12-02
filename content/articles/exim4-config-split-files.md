@@ -1,6 +1,6 @@
 title: Double `conf.conf` filetype in Exim4 Config File
 date: 2022-03-23 03:58
-modified: 2022-04-04 10:34
+modified: 2025-07-13 03:11
 status: published
 tags: Exim4, SMTP
 category: HOWTO
@@ -38,6 +38,6 @@ Naturally, you would go to your own site-specific settings in `/etc/exim4/update
 
 Why is the file type named `...conf.conf`, simply because the tool used to generate all this split-files is called `update-exim4.conf`.   
 
-Yeah, it seems counter-intuitive but that is a utility script, not a config file, so add that extra `.conf` when editing.
+Yeah, it seems counter-intuitive, but that is a utility script, not a config file, so add that extra `.conf` when editing.
 
 

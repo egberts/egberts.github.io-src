@@ -312,7 +312,7 @@ canSkipEnqueuingJobs = {
 ```
 
 
-## Interupts - Process Handling
+## Interrupts - Process Handling
 
 ```
 interruptCallbacks_ = {

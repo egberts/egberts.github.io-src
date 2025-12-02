@@ -1,5 +1,6 @@
 title: Viewing extremely large DOT or GV graph
 date: 2022-09-15 07:15
+modified: 2025-07-13 01:56
 status: published
 tags: DOT, tulip, graphviz, python3-graphviz, SVG, Python, python-graphviz, bison
 category: HOWTO
@@ -112,7 +113,7 @@ It's that simple using an `eog` SVG viewer.  However, DOT graph with more than 1
 
 ## IT'S TOO BIG
 At least you can view the graph but all that zooming in (using a mouse wheel)
-and moving the zoomed view pane (using mouse-button holddown) can be
+and moving the zoomed view pane (using mouse-button hold down) can be
 a bit tiring.  
 
 I'm a bit tiring after working with N-degree graph tree:

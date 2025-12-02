@@ -47,7 +47,7 @@ Desktop VNC window appears.  Yep, it got rebooted without my consent.
 It is currently in Debian GNU Boot Prompt, ncurse-style of menu options.
 
 Since I've lost the kernel narrative (read as, MY custom but secured 
-variants of Debian linux kernel), whole system is contaiminated all
+variants of Debian linux kernel), whole system is contaminated all
 because of a reboot, an unwanted reboot.
 
 

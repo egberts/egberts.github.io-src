@@ -46,7 +46,7 @@ Besides, having a management port makes it easier to:
 Not entirely undoable.  But not entirely un-orthodox either.
 
 The most common yet simplistic way to do this, two different IP addresses 
-of the same subnet amongst different NIC netdevs on the same box, has
+of the same subnet among different NIC netdevs on the same box, has
 pretty much always resulted in network traffic going out only the 
 netdev interface having a gateway.
 

@@ -1,6 +1,7 @@
 Title: API security checklist
 Tags: API, security, checklist, REST, SOAP, XML
 Date: 2018-11-25 06:07
+Modified: 2025-12-02 07:51
 Status: published
 Category: research
 Summary: Checklist of the most important security countermeasures when designing, testing, and releasing your API.

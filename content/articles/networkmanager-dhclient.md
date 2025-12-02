@@ -22,8 +22,8 @@ Some caveats here:
 
 * DHCP configuration cannot use 'include' statement to include another
 dhclient-related configuration file.  This is somewhat problematic of 
-large enterprise.  But for a very-complex HomeLAB or replacing an 
-ISP cablerouter, this is not an issue.
+large enterprise.  But for a very-complex homelab or replacing an 
+ISP cable-router, this is not an issue.
 
 * You just cannot use nor expect the all keywords supported by ISC
 DHCP client within the `dhclient[-*].conf` file.
@@ -90,8 +90,8 @@ In the DHCP client configuration file (`/etc/dhcp/dhclient-*.conf`)...
 
 The following settings are actively being stripped out by the NetworkManager:
 
- * `alias` block - Entire blocks are 100% ignored; nothing lifte nor gleaned
- * `lease` block - Entire blocks are 100% ignored; nothing lifte nor gleaned
+ * `alias` block - Entire blocks are 100% ignored; nothing lifted nor gleaned
+ * `lease` block - Entire blocks are 100% ignored; nothing lifter nor gleaned
  * `also request` - strips it out
  * `timeout`
  * `retry`
@@ -127,7 +127,7 @@ file are:
    this way unless you copy these script files over from 
    `/etc/NetworkManager/dispatcher.d/*` and
    into the `/etc/dhcp/dhclient-enter.d` and `/etc/dhcp/dhclient-exit.d`;
-   dont forget to check the shell arguments and compensate for this.
+   don't forget to check the shell arguments and compensate for this.
    DHCP dispatch only uses `$1` for its own full-filepath and nothing else.
    (In case you're wondering, `$0` is `/sbin/dhclient-dispatch`)
 
@@ -139,7 +139,7 @@ NetworkManager are:
 * `wpad` keyword is one nasty imposition.  I cannot get rid of it.  And it has
   caused problem with some public WiFi.  I filed a bug report,
   they won't fix it.
-* `rfc3442-classless-static-route` is another.  I can forsee a few
+* `rfc3442-classless-static-route` is another.  I can foresee a few
 scenario that needs to get rid of this but it is very rare.
 * `ms-classless-static-route` - Also needed only by Microsoft DHCP servers.
 Totally useless otherwise.  Is very problematic when some other DHCP 
@@ -152,7 +152,7 @@ Summary
 =======
 
 After all, NetworkManager is just a desktop network connection manager, 
-albiet a full-blown one, if you call it that.
+albeit a full-blown one, if you call it that.
 
 I now can enjoy the rich DHCP networking experience that 
 `systemd-networkd`, SysV initd, OpenRC, and s6 cannot 

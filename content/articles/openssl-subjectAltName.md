@@ -16,7 +16,7 @@ Alternative Subject Name (ASN) is a X509v3 extension field used during issuing o
 
 In X509v3 parlance, the attribute name is `subjectAltName`.
 
-`subjectAltName` attributes are defined only under the scope of `[req]` section or its `req`-related sections, preferably under its own renamed `req` section.
+`subjectAltName` attributes are defined only under the scope of the `[req]` section or its `req`-related sections, preferably under its own renamed `req` section.
 
 
 Who Uses SAN?

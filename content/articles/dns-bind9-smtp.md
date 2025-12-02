@@ -15,7 +15,7 @@ This is the first of 12-part series of setting up a fully secured Mail Server.
 Second part is [Postfix Setup for SMTP Server]({filename}smtp-postfix.md).
 
 This article has heavily annotated settings to protect against
-accidential `tweaking` by readers/end-users who do not
+accidental `tweaking` by readers/end-users who do not
 fully understand the ramification of their action.
 
 By extracting many documentations and placing it next to their

@@ -1,5 +1,6 @@
 title: Debian 11 SNAFU with virt-manager
 date: 2022-07-20 08:32
+modified: 2025-07-13 02:05
 status: published
 tags: libvirt, Bullseye, Debian, nftables
 category: HOWTO
@@ -16,13 +17,13 @@ libvirt.libvirtError: internal error:
     iptables v1.8.7 (nf_tables): table `nat' is incompatible, use 'nft' tool. 
 ```
 
-And I google-fu the heck out of that error message and NONE provided a suitable answer.
+And I google-fu the heck out of that error message, and NONE provided a suitable answer.
 
 After a code review of libvirt, it turns out NOT to be a bug.
 
 # NOT A BUG?
 
-Yeah, not a bug for any software except in the admin's mind where that error occurred.
+Yeah, not a bug for any software, except in the admin's mind where that error occurred.
 
 # HOW?
 

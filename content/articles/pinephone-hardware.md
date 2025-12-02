@@ -1,9 +1,9 @@
-title: Pinephone hardware
+title: PinePhone hardware
 date: 2021-01-18 09:00
 status: published
 tags: pinephone
 category: research
-summary: Details of Pinephone hardware
+summary: Details of PinePhone hardware
 lang: en
 private: False
 
@@ -34,7 +34,7 @@ Non-Android based device, Yes
 Unixbench Whet/Dhry score, 1314.3
 [/jtable]
 
-Pinephone Features
+PinePhone Features
 ==================
 [jtable]
 Type, Chipset, Driver, Status
@@ -86,14 +86,14 @@ There's a 6 contact dipswitch on the back of the phone underneath the back cover
 6, Headphone UART mode, Headphone audio mode 
 [/jtable]
 
-Pinephone CPU
+PinePhone CPU
 =============
-Pinephone CPU is an Allwinner A64 1.2Ghz 4x Cortex-A53, 64-bit, superscalar, 32KB instruction & 32KB data L1 cache per core, 512KB L2 shared cache, ARM Mali-400 MP2 (Utgard) GPU, HDMI 1.4 (up to 4K@30), USB 2.0 with OTG, MIPI CSI, 4 channels in/out, 24-bit, 8-48 KHz audio, video encode: H.264 1080p@60, video decode: H.265 4K@30, H.265 1080p@120, H.264, MPEG1/2/4 / VP8 / AVS / AVS+ 1080p@60, FBGA-396 15x15 mm
+PinePhone CPU is an Allwinner A64 1.2Ghz 4x Cortex-A53, 64-bit, superscalar, 32KB instruction & 32KB data L1 cache per core, 512KB L2 shared cache, ARM Mali-400 MP2 (Utgard) GPU, HDMI 1.4 (up to 4K@30), USB 2.0 with OTG, MIPI CSI, 4 channels in/out, 24-bit, 8-48 KHz audio, video encode: H.264 1080p@60, video decode: H.265 4K@30, H.265 1080p@120, H.264, MPEG1/2/4 / VP8 / AVS / AVS+ 1080p@60, FBGA-396 15x15 mm
 Note: Clocked at 1.152Ghz on the PinePhone.
 
-Pinephone Display
+PinePhone Display
 =================
-The Pinephone display is a LCM/CTP which stands for liquid crystal display monitor/capacitive touch panel". An LCM generally includes an LCD screen + LED backlight + PCB with the LCD controller + frame.
+The PinePhone display is a LCM/CTP which stands for liquid crystal display monitor/capacitive touch panel". An LCM generally includes an LCD screen + LED backlight + PCB with the LCD controller + frame.
 
 LCD Panel is a [Xingbangda XBD599](https://lkml.org/lkml/2020/6/16/1654), 5.99″ IPS LCD, 720x1440 pixels, 16.7M colors, hardened glass.
 
@@ -101,9 +101,9 @@ LCD Driver is a [Sitronix ST7703](http://files.pine64.org/doc/datasheet/pinephon
 
 Touchpanel is a [Goodix GT917S](http://files.pine64.org/doc/datasheet/pinephone/GT917S-Datasheet.pdf) touch controller.
 
-Pinephone Data Communication
+PinePhone Data Communication
 ============================
-Pinephone Modem - 4G
+PinePhone Modem - 4G
 --------------------
 Cellular modem is a [Quectel EG25-G](https://www.quectel.com/UploadFile/Product/Quectel_EG25-G_LTE_Specification_V1.1.pdf) GSM/UMTS/LTE cellular modem and GNSS (GPS/Galileo/GLONASS/BeiDou/QZSS, with A-GPS), LGA-144 9.0x32.0x2.4 mm.
 
@@ -114,4 +114,4 @@ WiFi/Bluetooth is a [Realtek RTL8723CS](http://files.pine64.org/doc/datasheet/pi
 
 References
 ==========
-* [Pinephone component list](https://wiki.pine64.org/wiki/PinePhone_component_list)
+* [PinePhone component list](https://wiki.pine64.org/wiki/PinePhone_component_list)

@@ -30,7 +30,7 @@ lpoptions -p <printer> -o psdebug
 
 to make `psdebug` a personal default setting for you.
 
-To extract the PostScript output for a developer to analyse it,
+To extract the PostScript output for a developer to analyze it,
 clone your print queue to a one which prints into a file:
 
 ```bash

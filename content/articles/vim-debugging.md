@@ -404,7 +404,7 @@ between two different terminal sessions by using this new F12 keystroke.
 * And 2nd terminal, F12 key to reload new syntax file.
 * Back and forth.
 
-Ok, four keystrokes and a window switch (either by mouse or 
+OK, four keystrokes and a window switch (either by mouse or 
 Alt-Tab key-combo on most Unix window managers).
 
 Still haven't started debugging yet.  Blind Man Development Cycle, still.
@@ -426,7 +426,7 @@ Update: There is a later version v4m at [Dr. Chip](http://www.drchip.org/astrona
 
 But I got mine `git clone` from [Kergoth's Github](https://github.com/kergoth/vim-hilinks).
 
-Files are in "VimBall" format and often denoted using `.vba` filetype.
+Files are in "vimball" format and often denoted using `.vba` filetype.
 
 If you retrieved your file from Dr. Chip, execute:
 

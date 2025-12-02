@@ -41,7 +41,7 @@ would require the user to complete public key authentication, followed by either
 For keyboard interactive authentication it is also
 possible to restrict authentication to a specific
 device by appending a colon followed by the device
-identifier bsdauth or pam depending on the server
+identifier bsdauth or PAM depending on the server
 configuration.  For example:
 
     AuthenticationMethods keyboard-interactive:bsdauth

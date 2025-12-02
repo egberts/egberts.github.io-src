@@ -1,5 +1,6 @@
 title: DNS server checklist
 date: 2022-04-30 10:35
+modified: 2025-07-13 02:31
 status: published
 tags: DNS
 category: HOWTO
@@ -11,10 +12,10 @@ private: False
 So your DNS server is up and running.  What to do next?
 
 There is always online test tools to ensure that the DNS server
-is properly confgured, at least from the network level.
+is properly configured, at least from the network level.
 
 This article only covers the network part of DNS and its interaction
-from the Internet (or real world).  It does not details aspects 
+from the Internet (or real world).  It does not detail aspects 
 on hardening or strengthening of your DNS server 
 
 # First Thing First

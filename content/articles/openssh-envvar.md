@@ -90,11 +90,11 @@ Env. varname, description, type, source
 `MAIL`, Set to the filepath of a user local inbox for UNIX Maildir system, filepath or directory path, session.c
 `PATH`, a set of directories where executable programs are located, list of filepaths, session.c
 `SSH_CLIENT`, (deprecated) SSH client connection socket info; set by the sshd(8) daemon, string, session.c
-`SSH_CONNECTION`, Identifies the client and server ends of the connection.  The variable contains four space-separated values: client IP address and client port number and server IP address and server port number. SSH client and server socket connection info; set by the sshd(8) daemon, string, session.c 
+`SSH_CONNECTION`, Identifies the client and server ends of the connection.  The variable contains four space-separated values: client IP address and client port number and server IP address and server port number. SSH client and server socket connection info; set by the sshd(8) daemon, string, session.c
 `SSH_ORIGINAL_COMMAND`, This variable contains the original command line if a forced command is executed.  It can be used to extract the original arguments.; set by the sshd(8) daemon, string, session.c
 `SSH_TTY`, This is set to the name of the tty (path to the device) associated with the current shell or command.  If the current session has no tty, this variable is not set.  Set by the sshd(8)., string, session.c
 `SSH_TUNNEL`,  Optionally set by sshd(8) to contain the interface names assigned if tunnel forwarding was requested by the client., string, session.c
-`SSH_USER_AUTH`, Optionally set by sshd(8) this variable may contain a pathname to a file that lists the authentication methods successfully used when the session was es‐ tablished including any public keys that were used., string, session.c
+`SSH_USER_AUTH`, Optionally set by sshd(8) this variable may contain a pathname to a file that lists the authentication methods successfully used when the session was established including any public keys that were used., string, session.c
 `SUPATH`, a set of directories where executable programs are located from a superuser shell, list of filepaths, session.c
 `TERM`, UNIX terminal device name, string, session.c
 `TZ`, UNIX timezone, string, session.c

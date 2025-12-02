@@ -10,7 +10,7 @@ This article details how the rebuilding of Trusted Root CA occurs on a Debian
 Linux using the `update-ca-certificates` tool as part of `ca-certificates`
 Debian package.
 
-Also it details what my current thoughts are regarding the auditable aspect of
+Also it details what my current thoughts are regarding the audit-able aspect of
 Root CA, its intermediate CA, trusted CA and blacklisting CAs.
 
 For the first round of audit, by executing the `update-ca-certificates --fresh` using `strace -f`, the output has compile a list of files read and written by `update-ca-certificates`.
@@ -124,7 +124,7 @@ CREATION of files (or PKI Subject, or both) that are found in:
 1. `$CWD/ca-certificates.txt`
 2. `/etc/ssl/certs/java/cacerts`
 
-This would enable auditors to do tracibility matrix against this.  
+This would enable auditors to do traceability matrix against this.  
 
 A singular JSON output file would be a plus.
 

@@ -14,14 +14,14 @@ you can start with the `category queries` in your `/etc/bind/named.conf`.
 This might be in another file if `named.conf` uses `include` statement(s).
 You probably can find it inside the `logging` statement.
 
-After finding this `category queries` amongst the `named.conf` files:
+After finding this `category queries` among the `named.conf` files:
 ```nginx
 ...
     category queries { queries_file; };
 ...
 ```
 Take the identifier (that denotes the channel name) inside the curly braces 
-and search for it again amongst the `named.conf`, et. al.
+and search for it again among the `named.conf`, et. al.
 In my example, `queries_file` is the channel name.
 
 ```nginx

@@ -1,6 +1,7 @@
 Title: Personal GitHub Static Website
 Tags: github, blog
 Date: 2018-12-28 09:25
+modified: 2025-07-13T0351
 Status: published
 Category: HOWTO
 Summary: Creating a personal Github.IO website.
@@ -176,7 +177,7 @@ this number to either 5 (shallow view) or 100 (long view).
     > What is your time zone? [Europe/Paris]
 
 Timezone.  You can find your available timezone label using the following tools
-`tzselect` at another terminal. On macos/Mac OSX, you can visit the
+`tzselect` at another terminal. On macOS/Mac OSX, you can visit the
 /usr/share/zoneinfo and determine your choices of timezones.
 
 `TIMEZONE` is the Python variable updated in `pelicanconf.py` configuration file.

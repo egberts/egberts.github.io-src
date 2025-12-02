@@ -10,7 +10,7 @@ private: False
 
 
 How to setup the Gentoo OS from scratch ... within the QEMU VM startup; this time by making it a tiny one.  This would be
-similiar to Damn Small Linux (DSL) distro.
+similar to Damn Small Linux (DSL) distro.
 
 Most useful for embedded system.
 
@@ -116,7 +116,7 @@ date 202207211500   # to change to July 21, 2022, 1500UTC
 Since we are booting within a QEMU environment, we only need the following
 installer features:
 
-* OpenRC (no systemd due to uncontrolable network-access within PID 1)
+* OpenRC (no systemd due to uncontrollable network-access within PID 1)
 * libmusl (no glibc, no `LD_PRELOAD` support; [comparison chart](http://www.etalabs.net/compare_libcs.html))
 * no-multilib (x86-64 only, no x86-32 support)
 * no-desktop
@@ -379,7 +379,7 @@ Note: If `.config` does not exist, then default settings are used.
 
 Of course, a gateway OS that is NOT directly on a physical host but instead inside a virtual machine typically does not have the following, for security reason:
 
-* a soundcard (not even a tinny-souding PC speaker)
+* a soundcard (not even a tinny-sounding PC speaker)
 * USB memory stick access
 * CD/DVD access (it's a potential malicious vector, turn BIOS off to that too)
 * HugePageTLB (prevents heap-spraying)

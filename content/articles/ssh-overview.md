@@ -1,6 +1,6 @@
 Title: OpenSSH Overview
 Date: 2016-09-24T12:08
-Modified: 2022-03-15 08:00
+Modified: 2025-07-13 03:28
 Status: published
 Tags: ssh, OpenSSH, environment variables
 Category: research
@@ -100,7 +100,7 @@ console of a machine that doesn’t have screen or some other multiplexer
 on it (or you forgot to start one). Of course, you have to remember that
 when you need it, but now that you’ve read it maybe you will.
 
-List forwarded connections is handy for managing the forwards you might
+List of forwarded connections is handy for managing the forwards you might
 have created with the command line. Backgrounding SSH attempts to close
 all the connections, and will wait patiently for them to die. I have
 never needed this, because I’m the impatient bastard that just

@@ -34,7 +34,7 @@ partition number, physical partition, size amount, description
 1, `/dev/sda1`, 1g, boot for BIOS or UEFI
 2, `/dev/sda2`, (twice the size of your physical RAM)`, swap space
 3, `/dev/sda3`, /`, 128g, "the" root partition
-4. `/dev/sda4`, n/a, the rest of the remaining drive space, used as MBR extension for logical parition 5-9 or entirely by LVM at OS-level.
+4. `/dev/sda4`, n/a, the rest of the remaining drive space, used as MBR extension for logical partition 5-9 or entirely by LVM at OS-level.
 
 ## Dividing up the drive space
 
@@ -104,12 +104,12 @@ We already did the first 4 partitions.
 There are two ways to partition further by adding additional partitions:
 
 1. physical partition (via `fdisk /dev/sda`)
-2. logical parition (via `lvm` toolsuite)
+2. logical partition (via `lvm` toolsuite)
 
 
 ## Physical partition approach
 
-For the all-physical partition approach, create the following physical partitions based on not nominally consuming more than 10% of any parititon that are consumed by the Gentoo 2022 installation:
+For the all-physical partition approach, create the following physical partitions based on not nominally consuming more than 10% of any proton that are consumed by the Gentoo 2022 installation:
 
 [jtable]
 partition number, physical partition, size amount, description
@@ -178,7 +178,7 @@ date 202207211500   # to change to July 21, 2022, 1500UTC
 Since we are booting within a QEMU environment, we only need the following
 installer features:
 
-* OpenRC (no systemd due to uncontrolable network-access within PID 1)
+* OpenRC (no systemd due to uncontrollable network-access within PID 1)
 * libmusl (no glibc, no `LD_PRELOAD` support; [comparison chart](http://www.etalabs.net/compare_libcs.html))
 * no-multilib (x86-64 only, no x86-32 support)
 * no-desktop
@@ -440,7 +440,7 @@ Note: If `.config` does not exist, then default settings are used.
 
 Of course, a gateway OS that is NOT directly on a physical host but instead inside a virtual machine typically does not have the following, for security reason:
 
-* a soundcard (not even a tinny-souding PC speaker)
+* a soundcard (not even a tinny-sounding PC speaker)
 * USB memory stick access
 * CD/DVD access (it's a potential malicious vector, turn BIOS off to that too)
 * HugePageTLB (prevents heap-spraying)

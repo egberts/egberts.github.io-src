@@ -86,7 +86,7 @@ and DNS name server:
 The plus side of an auto-generated `session` key is nothing
 needs to be done and a new key is created each time `named` daemon restarts.  
 Downside is that you get the default `hmac-sha256` and you, as an administrator,
-must remember to restart DHCP server for everytime that `named` restarts.
+must remember to restart DHCP server for every time that `named` restarts.
 
 If you want `hmac-sha512`, manual key generation is the way to go.  One
 could symbolically link the `/etc/bind/rndc.key` into `/etc/dhcp` and

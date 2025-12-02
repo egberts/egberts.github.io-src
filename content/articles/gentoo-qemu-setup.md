@@ -122,7 +122,7 @@ device, path, options, boot sequence
 There are two ways to further out the additional partitions:
 
 1. physical partition (via `fdisk /dev/sda`)
-2. logical parition (via `lvm` toolsuite)
+2. logical partition (via `lvm` toolsuite)
 
 At any rate, let us create the bare minimum physical partitions firstly:
 
@@ -141,18 +141,18 @@ partition number, physical partition, size amount, description
 1, `/dev/sda1`, 1g, boot for BIOS or UEFI
 2, `/dev/sda2`, (twice the size of your physical RAM)`, swap space
 3, `/dev/sda3`, /`, 128g, "the" root partition
-4. `/dev/sda4`, n/a, the rest of the remaining drive space, used as MBR extension for logical parition 5-9 or entirely by LVM at OS-level.
+4. `/dev/sda4`, n/a, the rest of the remaining drive space, used as MBR extension for logical partition 5-9 or entirely by LVM at OS-level.
 
 ## Physical partition approach
 
-For the all-physical partition approach, create the following physical partitions based on not nominally consuming more than 10% of any parititon for Gentoo 2022 installation:
+For the all-physical partition approach, create the following physical partitions based on not nominally consuming more than 10% of any proton for Gentoo 2022 installation:
 
 [jtable]
 partition number, physical partition, size amount, description
 1, `/dev/sda1`, 1g, boot for BIOS or UEFI
 2, `/dev/sda2`, (twice the size of your physical RAM)`, swap space
 3, `/dev/sda3`, /`, 128g, "the" root partition
-4. `/dev/sda4`, n/a, the rest of the remaining drive space, extension for logical parition 5-9
+4. `/dev/sda4`, n/a, the rest of the remaining drive space, extension for logical partition 5-9
 5. `/dev/sda5`, `/usr`, 96g, UNIX-usr partition
 6. `/dev/sda6`, `/var`, 96g, UNIX-var partition
 7. `/dev/sda7`, `/tmp`, 24g, temporary space, cleaned out at each reboot
@@ -214,7 +214,7 @@ date 202207211500   # to change to July 21, 2022, 1500UTC
 Since we are booting within a QEMU environment, we only need the following
 installer features:
 
-* OpenRC (no systemd due to uncontrolable network-access within PID 1)
+* OpenRC (no systemd due to uncontrollable network-access within PID 1)
 * libmusl (no glibc, no `LD_PRELOAD` support; [comparison chart](http://www.etalabs.net/compare_libcs.html))
 * no-multilib (x86-64 only, no x86-32 support)
 * no-desktop
@@ -476,7 +476,7 @@ Note: If `.config` does not exist, then default settings are used.
 
 Of course, a gateway OS that is NOT directly on a physical host but instead inside a virtual machine typically does not have the following, for security reason:
 
-* a soundcard (not even a tinny-souding PC speaker)
+* a soundcard (not even a tinny-sounding PC speaker)
 * USB memory stick access
 * CD/DVD access (it's a potential malicious vector, turn BIOS off to that too)
 * HugePageTLB (prevents heap-spraying)

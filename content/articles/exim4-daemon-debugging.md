@@ -1,5 +1,6 @@
 title: Debugging Exim4 Daemon
 date: 2022-03-21 01:50
+modified: 2025-07-13 03:09
 status: published
 tags: Exim4
 category: HOWTO
@@ -56,7 +57,7 @@ Then scan the intensive output for the output marker:
 <pid> ----------- end verify ------------
 ```
 
-Look for the all of the lines with the starting word `check `:
+Look for the all the lines with the starting word `check `:
 
 First level check:
 ```console

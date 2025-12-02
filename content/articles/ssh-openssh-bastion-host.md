@@ -15,7 +15,7 @@ The following are the best practices while configuring a bastion host
 3. Always have more than one bastion. For example, having a bastion host for each Availability Zone (AZ).
 4. Make sure to configure security groups on private subnets to accept SSH traffic only from the bastion hosts.
 
-SSH Bastion Server is the most secured of any SSH server configuration: SSH Jump Server or SSH Proxy Server are most useful when used within the enterprise network or non-Internet part of your network (e.g. HomeLAN, small-medium-business network).
+SSH Bastion Server is the most secured of any SSH server configuration: SSH Jump Server or SSH Proxy Server are most useful when used within the enterprise network or non-Internet part of your network (e.g. homeLAN, small-medium-business network).
 
 Well, maybe except for the proprietary Cloudflare SSH server which also boast secured logging of any and all SSH commands that goes through such a SSH bastion server.
 

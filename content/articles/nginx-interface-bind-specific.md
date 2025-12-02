@@ -22,8 +22,8 @@ Edit your startup sequence to run a command or script that captures the interfac
 
     echo "listen $(ip -o -4 a s eth0 | awk '{ print $4 }' | cut -d/ -f1):80;" > /path/to/some/file
 
-Then just have your nginx config include that file:
+Then just have your Nginx config include that file:
 
     include /path/to/some/file;
 
-Obviously, you'll need to make sure the IP capture occurs before the nginx startup does.
+Obviously, you'll need to make sure the IP capture occurs before the Nginx startup does.

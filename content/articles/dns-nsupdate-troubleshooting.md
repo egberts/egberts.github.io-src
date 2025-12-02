@@ -3,7 +3,7 @@ Date: 2018-10-17T20:50
 Status: published
 Tags: nsupdate, DNS, troubleshooting
 Category: research
-Summary: How to troubleshoot DNS issues using nsupdate utiliy.
+Summary: How to troubleshoot DNS issues using nsupdate utility.
 
 Protocol/Port
 =============

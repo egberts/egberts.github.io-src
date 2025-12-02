@@ -129,7 +129,7 @@ If many people are submitting different passwords to the creator of certificates
 
 `openssl` has a `passwd`-like command.  `openssl passwd` takes one raw password (from many input methods listed above) and creates a salted password (much like UNIX `passwd` would do) for safer storage in a filesystem.  Unfortunately, this feature has a default salt and iteration settings baked-in, which isn't so bad but definitely better than stored in raw form.
 
-It is better to use a different front-end password utility, like `mcrypt` or `ccrypt`.  Different passowrd utility most likely would provide more refined salt, iteration, and random seeding control for such a safer password storage system.
+It is better to use a different front-end password utility, like `mcrypt` or `ccrypt`.  Different password utility most likely would provide more refined salt, iteration, and random seeding control for such a safer password storage system.
 
 Of course, you would roll your own front-end password utility that would choose a fixed salt value and maybe leave the iteration setting to the end-user.  One salt value per group of end-users, if possible to manage.
 

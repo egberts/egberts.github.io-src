@@ -6,7 +6,7 @@ Category: research
 Summary: ISC DHCP handling of weird hostnames found in Nintendo 3DS and iPods.
 Status: published
 
-Believe it or not, I dusted off my Ninetendo 3DS and very old Apple iPods and tried to join my home network, and it failed.
+Believe it or not, I dusted off my Nintendo 3DS and very old Apple iPods and tried to join my home network, and it failed.
 
 When it came time to configure it and attach it to my ISC DHCP server, the
 server rejected the devices' DHCP-REQUEST message.

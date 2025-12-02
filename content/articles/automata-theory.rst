@@ -3,7 +3,7 @@ Automata theory: formal languages and formal grammars
 
 :Tags: rst, automata, formal language, formal grammar
 :Date: 2018-11-29 10:09
-:Modified: 2022-02-24 08:09
+:Modified: 2025-12-02 01:34
 :Status: published
 :Category: research
 

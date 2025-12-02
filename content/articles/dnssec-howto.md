@@ -17,13 +17,13 @@ Signing your domain with DNSSEC involves two components:
 DNSSEC Resource Records
 =======================
 
-A Resource Record (RR) contains a specific information about the domain.
+A Resource Record (RR) contains specific information about the domain.
 Some common ones are A record which contains the IP address of the
 domain, AAAA record which holds the IPv6 information, and MX record
 which has mail servers of a domain. A complete list of DNS RRs can be
 found here.
 
-Likewise DNSSEC too requires several RRs.
+Likewise, DNSSEC too requires several RRs.
 
 * DNSKEY Holds the public key which resolvers use to verify.
 * RRSIG Exists for each RR and contains the digital signature of a record.
@@ -90,13 +90,13 @@ cd /var/lib/bind ; Debian
 cd /var/cache/named ; RedHat
 ```
 
-Create a Zone Signing Key(ZSK) with the following command.
+Create a Zone Signing Key(ZSK) with the following command:
 
 ```bash
 dnssec-keygen -a NSEC3RSASHA1 -b 2048 -n ZONE example.com
 ```
 
-If you have installed haveged, it'll take only a few seconds for this
+If you have installed `haveged`, it'll take only a few seconds for this
 key to be generated; otherwise it'll take a very long time. Sample
 output.
 
@@ -113,7 +113,7 @@ which outputs are:
    Kexample.com.+007+40400
 ```
 
-Create a Key Signing Key(KSK) with the following command.
+Create a Key Signing Key(KSK) with the following command:
 
 ```bash
 dnssec-keygen -f KSK -a NSEC3RSASHA1 -b 4096 -n ZONE example.com
@@ -338,7 +338,7 @@ location to be changed. Edit the main configuration file of BIND.
 nano /etc/named.conf
 ```
 
-Place these lines inside the options { } section if they don't exist.
+Place these lines inside the `options { }` section if they don't exist.
 
 ```cfg
    dnssec-enable yes;
@@ -346,7 +346,7 @@ Place these lines inside the options { } section if they don't exist.
    dnssec-lookaside auto;
 ```
 
-Edit the file option inside the zone { } section.
+Edit the file option inside the `zone { }` section.
 
 ```cfg
     zone "example.com" IN {
@@ -363,7 +363,7 @@ Reload the BIND service.
 service named reload
 ```
 
-Check if there is a new .signed zone file.
+Check if there is a new `.signed` zone file.
 
 ```bash
 ls -l /var/named/slaves/
@@ -375,14 +375,14 @@ total 16
 -rw-r--r-- 1 named named 9180 Nov 27 18:29 example.com.zone.signed
 ```
 
-Voila! That's it. Just to make sure things are working as they should
-,query the DNSKEY using dig as mentioned in the previous section.
+Voilà! That's it. Just to make sure things are working as they should
+query the DNSKEY using dig as mentioned in the previous section.
 
 Configure DS records with the registrar
 ---------------------------------------
 
-When we ran the dnssec-signzone command apart from the .signed zone
-file, a file named dsset-example.com was also created, this contains the
+When we ran the dnssec-signzone command apart from the `.signed` zone
+file, a file named `dsset-example.com` was also created, this contains the
 DS records.
 
 ```bash
@@ -426,7 +426,7 @@ digest, but when entering it in the form you should omit it. Click Next,
 click Finish and Save the records.
 
 It'll take a few minutes for these changes to be saved. To check if the
-DS records have been created query the nameservers of your TLD. Instead
+DS records have been created, query the nameservers of your TLD. Instead
 of finding the TLD's nameservers we can do a `dig +trace` which is much
 simpler.
 
@@ -451,7 +451,7 @@ The first tool is a simple one, while the second gives you a visual
 representation of things. Here is a screenshot from the first tool.
 
 Notice the lines I've marked. The first one mentions the Key tag value
-(62910) of the DS record while the second one key id (40400) of the
+(`62910`) of the DS record while the second one key id (`40400`) of the
 DNSKEY record which holds the ZSK (Zone Signing Key).
 
 Modifying Zone Records
@@ -485,7 +485,7 @@ chmod +x /usr/sbin/zonesigner.sh
 ```
 
 Whenever you want to add or remove records, edit the example.com.zone
-and NOT the .signed file. This file also takes care of incrementing the
+and NOT the `.signed` file. This file also takes care of incrementing the
 serial value, so you needn't do it each time you edit the file. After
 editing it run the script by passing the domain name and zone filename
 as parameters.
@@ -512,11 +512,17 @@ dig NSEC3PARAM example.com. @master.example.com. +short
    1 0 10 7CBAA916230368F2
 ```
 
-All this makes zone walking difficult but not impossible. A determined
+All this makes zone walking difficult but not impossible. 
+
+A determined
 hacker using rainbow tables can break the hash, though it'll take a long
-time. To prevent this we can recompute this salt at regular intervals,
+time. 
+
+To prevent this we can recompute this salt at regular intervals,
 which makes a hacker's attempt futile as there is a new salt before
-he/she can find the hash with the old salt. Create a cron job to do this
+he/she can find the hash with the old salt. 
+
+Create a cron job to do this
 for you using the `zonesigner.sh` script we created previously. If you run
 the cronjob as root you don't have to worry about file ownership. Or
 else make sure the user under whom you're placing the cron has write
@@ -535,4 +541,4 @@ And insert in the following:
 
 This will sign the zone every 3 days and as a result a new salt will be
 generated. You'll also receive an email containing the output of the
-dnssec-signzone command.
+`dnssec-signzone` command.

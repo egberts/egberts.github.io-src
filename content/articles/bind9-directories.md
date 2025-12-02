@@ -96,7 +96,7 @@ Category name  , Description
 `dnssec` , DNSSEC and TSIG protocol processing.
 `dnstap` , The "dnstap" DNS traffic capture system.
 `edns-disable` , "Log queries that have been forced to use plain DNS due to timeouts. This is often due to the remote servers not being :rfc:`1034`-compliant (not always returning FORMERR or similar to EDNS queries and other extensions to the DNS when they are not understood). In other words, this is targeted at servers that fail to respond to DNS queries that they don't understand."
-`lame-servers` , "Misconfigurations in remote servers, discovered by BIND 9 when trying to query those servers during resolution."
+`lame-servers` , "Misconfiguration in remote servers, discovered by BIND 9 when trying to query those servers during resolution."
 `network` , "Network events get logged. open() close() dropped or downed network interface."
 `notify` , Notify protocols and events.
 `nsid` , "NSID options received from upstream nameservers.

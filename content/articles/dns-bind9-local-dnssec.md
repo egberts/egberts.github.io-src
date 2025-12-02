@@ -1,6 +1,6 @@
 title: Current State with Private Subnets and DNSSEC
 date: 2022-05-08 06:42
-modified: 2022-07-24 10:08
+modified: 2025-07-13 02:17
 status: published
 tags: DNSSEC, Bind9, DNS
 category: HOWTO
@@ -18,7 +18,7 @@ does not bode well for its struggling but continuing adoption rate of DNSSEC.
 In 2017 and 2018, the DNSSEC adoption rate measured by APNIC.NET actually [declined](https://blog.apnic.net/2019/03/14/the-state-of-dnssec-validation/).  Although, its adoption rate is still slowly climbing, but still way [too slow](https://blog.apnic.net/2020/03/02/dnssec-validation-revisited/).
 
 Even Tony Finch and Evan Hunts discussed this ['private local DNSSEC'](https://fanf.dreamwidth.org/125531.html) for
-enterprise (and implicitly last-mile use such as HomeLab) usage.
+enterprise (and implicitly last-mile use such as homelab) usage.
 
 Here is a good recap of what Tony (and most of us) wanted:
 
@@ -44,7 +44,7 @@ Second item is an [ongoing state of integration](https://datatracker.ietf.org/do
 
 So what's the current state of affair ... after 5 years ... for the third wishlist item covering [this local private DNSSEC](https://www.rfc-editor.org/rfc/rfc6303.html#section-7)?
 
-This article covers the bowel of the DNS validators found in both DNS nameservers (authoritative and resolvers) and most hosts' resolver mechanims in details.
+This article covers the bowel of the DNS validators found in both DNS nameservers (authoritative and resolvers) and most hosts' resolver mechanism in details.
 
 # Current State
 
@@ -56,7 +56,7 @@ Not even the latest Bind 9.20 has anything closely resembling this DNSSEC lookas
 In the latest Bind 9.16+, there is this new `trust-anchors` clause.
 
 `trust-anchors` clause is only a general overall setting.  
-I might even add that this option is nearly useless outside of the 13 
+I might even add that this option is nearly useless outside the 13 
 Root DNS (unless you're 
 into erecting a thin veil of querying privacy by doing this 'in-house').
 
@@ -75,21 +75,21 @@ downward zone name (`myhomelab` in `myhomelan.mydomain.example.com`) must
 submit a DS RR containing the public key of your `myhomelab` zone 
 to the higher owner of `mydomain.example.com.`.  
 
-Of course, if you own both the `mydomain` as well as `myhomelan`, 
+Of course, if you own both the `mydomain` and `myhomelan`, 
 then it is not a problem to make `myhomelab`
 DNSSEC valid, EXCEPT that you must continue to support the validating of the chain 
 linkages toward higher zone names, as this what current DNS validators (resolvers and nameservers) do.
 As a domain owner, you must repeat the same `DS` RR delivery for each
 zone name until you no longer own that zone name, which is 
-invariably always its TLD or someone else's zone (domain) name.
+invariably, always its TLD or someone else's zone (domain) name.
 
 The next chain link is the DS RR of `mydomain` zone must be sent 
-to the TLD admin of `example` zone.  Ad naseum, but not quite ad infinitium.
+to the TLD admin of `example` zone.  Ad nauseam, but not quite ad infinitium.
 
 # MyDomain, MyChoice
 
-Execuse the ripped-off slogan: my domain, my choice;
-it should be possible to deploy DNSSEC throughout the enteprise, small-medium
+Excuse the ripped-off slogan: my domain, my choice;
+it should be possible to deploy DNSSEC throughout the enterprise, small-medium
 businesses and home labs.  But this is not happening ... for private LAN/TLD ... yet.
 
 The idea of continual extension of DNSSEC below your owned `mydomain.tld`
@@ -114,19 +114,20 @@ statement setting doesn't quite cut the mustard, instead it just
 leaves DNSSEC broken (via un-validated answer).
 
 The second one helps to stem the privacy leakage caused, but one can make interference past this weak privacy veil
-if given enough depth the zone names of its hostname.  Sure that `deny-answer-aliases` statement setting may help, but this solves only half of the privacy in the query-answer exchange.  It still breaks the DNSSEC chain.
+if given enough depth, the zone names of its hostname.  Sure that `deny-answer-aliases` statement setting may help, but this solves only half of the privacy in the query-answer exchange.  It still breaks the DNSSEC chain.
 
 The third choice isn't even possible with today's DNSSEC validators. 
 The closest nameserver vendor to support the DNSSEC of private TLD 
-is `hdns` of handshake.org but it still doesn't solve the 
+is `hdns` of handshake.org, but it still doesn't solve the 
 problem of wide-spread acceptance (within
 today's constraints of un-obsoleted IETF RFC specifications).
 
-# DNS Validator
+# DNS Validators
 
-So why is today's DNSSEC validators not capable of doing this zone cut
-of DNSSEC?  I mean, the validator has this DNS zone cut mechanism. Why
-not a DNSSEC zone cut?
+So why are today's DNSSEC validators not capable of doing this 
+zone cut of DNSSEC?  
+I mean, the validator has this DNS zone cut mechanism. 
+Why not a DNSSEC zone cut?
 
 ## Zone Cut
 
@@ -139,7 +140,7 @@ Note: Keep in mind, multiple zone names may be served by the
 same authoritative nameserver; `mypersonallab.myhomelab.mydomain.tld`
 may have its `myworkstation.mypersonallab.myhomelab.mydomain` all served by
 the same but single authoritative nameserver, so a `myworkstation`
-could still be zone cut as `mydomain` singularily.
+could still be zone cut as `mydomain` singularly.
 
 During a zone cut where a nameserver finds its next authoritative zone
 up the chain, it takes the `myhomelab.mydomain.tld`
@@ -221,7 +222,7 @@ being inserted.
 This single logic is the terminator of a chain link and where to
 do this break of this loop of the chain links.
 
-Unfortunately, such logic would dictact that the entire chain link
+Unfortunately, such logic would dictate that the entire chain link
 would now have to be done within one resolver context (and not by any
 failover resolvers either).  Why?  Because the faking of the remaining
 chain link(s) now needs to be done internally and completely finished
@@ -238,7 +239,7 @@ Arguably, a full-stop break on a sub-TLD domain trusted key by the
 DNSSEC validator chain loop processing would be an OK option for a privately-rolled 
 DNS tree, but NEVER as a publicly-available option.  
 
-Until the technical issues of publically-available option are solved, 
+Until the technical issues of publicly-available option are solved, 
 one shouldn't even be deploying the private TLD/LAN DNSSEC yet, despite my trekking
 the desert for 8 years and the need to quench my parched throat because of
 this.
@@ -384,7 +385,7 @@ In these days and ages, security-conscious people are grabbing
 whatever [public DNS resolvers](https://egbert.net/blog/articles/public-nameservers-with-dnssec-support.html) are out there and using them:  yes, this remains a serious problem.  
 
 Pre-validation is only as secured as how you treat your private key
-of your domain name and useable only within the subnet that your authoritative nameserver provides over.
+of your domain name and usable only within the subnet that your authoritative nameserver provides over.
 
 Ideally, you would like that private-key stored inside a 
 Hardware Security Module (HSM).
@@ -396,7 +397,7 @@ a PCI-based HSM card at each of the 13 Root nameservers.
 
 The `.com` (and a few others') private key is stored in 
 a HSM at VeriSign Lab.  
-Most domain registars can happily handle your 
+Most domain registrars can happily handle your 
 insertion request of your domain's `DS` key into 
 VeriSign Lab `.com`  and that is heavily guarded
 by their set of strong public/private key combo.

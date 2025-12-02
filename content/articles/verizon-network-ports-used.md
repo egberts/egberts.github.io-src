@@ -1,5 +1,6 @@
 title: Ports used in Verizon Network
 date: 2018-01-18 13:15
+modified: 2025-07-13T0341
 status: published
 tags: Verizon, ISP, ports
 category: research
@@ -12,7 +13,7 @@ Why would I do such a convoluted setup like this?  Because, I like full control 
 
 In order to do this, a complete remapping out the Verizon home network topology is necessary, complete with TCP/UDP, IP and Ethernet layer.
 
-I attached a 10-BaseT Ethernet --> HUB <-- so that WireShark can be captured in its entirety and unchanged from default Verizon setup.
+I attached a 10-BaseT Ethernet --> HUB <-- so that Wireshark can be captured in its entirety and unchanged from default Verizon setup.
 In order to cut out the marketspeak to mere labels for this article, I use the following terms:
 
 * cable router - Actiontec broadband gateway router, provided by Verizon
@@ -32,7 +33,8 @@ I used IP subnets used throughout the home (listed in ingress to egress order):
 When a broadband router boots up, it access the following ports to communicate with various Verizon infrastructure servers:
 
 DHCP Client - Verizon HFC network
-First the cable router issues a DHCP request to Verizon FiOS DHCP server using the following IP ports:
+===
+First, the cable router issues a DHCP request to Verizon FiOS DHCP server using the following IP ports:
 
 ```
     Port 67/UDP - egress
@@ -94,7 +96,7 @@ Bootstrap Protocol (Request)
         Option End: 255
 ```
 
-To deal with that Juniper DHCP server request, my copy of ISC DHCP client configuration for personal router is (also given at GitHub https://github.com/egberts/systemd-dhclient/etc/dhcp/dhclient.conf).
+To deal with that Juniper DHCP server request, my copy of ISC DHCP client configuration for personal router is (also given at [GitHub](https://github.com/egberts/systemd-dhclient/etc/dhcp/dhclient.conf)).
 
 If your personal gateway router is going to be directly attached to the ONT (Optical Network Terminator, a white box) like I hooked mine up, then that gateway's ingress DHCP server is required to serve additional DHCP specialized options toward the cable router's dhclient.
 
@@ -241,7 +243,7 @@ shared-network "dmz2" {
 ```
 
 
-Of course, I include the following line in the main DHCP server configuration file, usually /etc/dhcp/dhcpd.conf.
+Of course, I include the following line in the main DHCP server configuration file, usually `/etc/dhcp/dhcpd.conf`.
 
 ```cfg
     include "/etc/dhcp/dhcpd.conf.192.168.6.dmz"

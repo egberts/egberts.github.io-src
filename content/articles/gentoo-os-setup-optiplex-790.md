@@ -110,7 +110,7 @@ Do not forget to toggle the partition 1 as "bootable".  In the fstab, enter in o
 
 ## Creating LVM partitions
 
-Create the logical partitions by doiong `pvcreate`, `vgcreate`, and `lvcreate` commands:
+Create the logical partitions by doing `pvcreate`, `vgcreate`, and `lvcreate` commands:
 
 
 ```bash
@@ -338,7 +338,7 @@ Use the 'manual configuration' option in `net-setup`, if you got some esoteric b
 Since we are booting within a QEMU environment, we only need the following
 installer features:
 
-* OpenRC (no systemd due to uncontrolable network-access within PID 1)
+* OpenRC (no systemd due to uncontrollable network-access within PID 1)
 * libmusl (no glibc, no `LD_PRELOAD` support; [comparison chart](http://www.etalabs.net/compare_libcs.html))
 * no-multilib (x86-64 only, no x86-32 support)
 * no-desktop
@@ -602,7 +602,7 @@ Note: If `.config` does not exist, then default settings are used.
 
 Of course, a gateway OS that is NOT directly on a physical host but instead inside a virtual machine typically does not have the following, for security reason:
 
-* a soundcard (not even a tinny-souding PC speaker)
+* a soundcard (not even a tinny-sounding PC speaker)
 * USB memory stick access
 * CD/DVD access (it's a potential malicious vector, turn BIOS off to that too)
 * HugePageTLB (prevents heap-spraying)
@@ -689,7 +689,7 @@ GRUB_DISABLE_UUID=true
 
 Note: `nofb` is mandatory if a graphic card has been inserted into the PCI slot thus overriding Intel HD graphic card.
 d
-Note: `vga=current` compensates for any flakey or mis-configured graphic hardware settings.
+Note: `vga=current` compensates for any flaky or mis-configured graphic hardware settings.
 
 Details of above GRUB2 settings can be found in [here](https://www.gnu.org/software/grub/manual/grub/grub.html#Simple-configuration).
 

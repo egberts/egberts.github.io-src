@@ -591,7 +591,7 @@ Create the custom TLD zone database file in
     a.myroot-servers.whitelab. 86400 IN A   @MY_ROOT_DNS_SERVER_IP@
 ```
 
-The custom TLD zone database file wll also be signed as well:
+The custom TLD zone database file will also be signed as well:
 
 ```bash
 dnssec-keygen -P -a rsasha256 -b 2048 -n ZONE whitelab
@@ -702,7 +702,7 @@ DNSKEY RRs.
 #10 0x00007ffff761bfa3 in start_thread ()
 ```
 
-Then we add our whitelab TLD zone:
+Then we add our white-lab TLD zone:
 
 ```cfg
   view "local\_view" {
@@ -721,7 +721,7 @@ Then we add our whitelab TLD zone:
 ```
 
 Now, to corral DNS query to `local_view` to just the root for local clients;
-we want any attempt to query the XXXX.local. to just thie `local_view`
+we want any attempt to query the XXXX.local. to just the `local_view`
 view.
 
 Root zone and DNSSEC
@@ -731,7 +731,7 @@ NOTE: Substitute the `MY_ROOT_DNS_SERVER_IP` with the IP address of your DNS ser
 
 DNSSEC Key Subdirectory
 -----------------------
-Key subdirectory must be writeable by its UNIX owner of `named` daemon. Move to the key subdirectory:
+Key subdirectory must be writable by its UNIX owner of `named` daemon. Move to the key subdirectory:
 
 ```bash
 mkdir -p /var/lib/bind/keys
@@ -835,12 +835,12 @@ Full check (default, without -a)
 * (not implemented) current_domain=. (root)
 * (not implemented) Loop1: while current_domain != checked_domain;
 * (not implemented) Using NS of current_domain, grab DS record of child zone
-* (not implemented) Grab DNSKEY assosicated with the DS record's RRSIG's
+* (not implemented) Grab DNSKEY associated with the DS record's RRSIG's
 * (not implemented) Validate DNSKEY(child)
 * (not implemented) Validate DS and DNSKEY(child)
 * (not implemented) current_domain = child, child = new_child(current_domain)
 * (not implemented) If: current_domain = child; break
-* (not implemented) Perform check similar to authoratative (-a), above
+* (not implemented) Perform check similar to authoritative (-a), above
 
 Bind9 directories
 =================
@@ -907,6 +907,6 @@ be useful to you.
 
 References
 ==========
-* [a local augumented root-zone with DNSSEC](https://dnsworkshop.de/local-augmented-root-zone.html)
+* [a local augmented root-zone with DNSSEC](https://dnsworkshop.de/local-augmented-root-zone.html)
 * [OpenDNSSEC.org](https://www.opendnssec.org/)
 

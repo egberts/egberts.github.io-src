@@ -15,7 +15,7 @@ Scared of tweaking Exim4 or Debian settings?  This article strives to make
 this as painless as possible.
 
 You want to give out fancy but DIFFERENT email addresses to 
-everyone but use only one account to get them all? 
+everyone, but use only one account to get them all? 
 
 Fancy emails like:
 
@@ -37,7 +37,7 @@ Exim4 has an excellent support for subaddressing scheme.  More details here at [
 How about that?
 
 This article will show you the way, using the Debian split-file mode.
-If you are unsure about what Debiam config mode that
+If you are unsure about what Debian config mode that
 your Exim4 mail server is using, check out [this article]({filename}exim4-config-check-which.md)
 
 # Exim4 Config Files, Debian-way
@@ -46,8 +46,8 @@ Many of the HOWTOs and blogs frequently advocate mucking with
 the Debian-installed config files for Exim4.  I am saying 
 "DO NOT DO THAT!".  
 
-The sole reason for not mucking with Debian-provided 
-settings is that the next time that you do a Debian 
+The sole reason, for not mucking with Debian-provided 
+settings, is that the next time that you do a Debian 
 package upgrade, you run a severe risk of losing all 
 your custom settings (and your email server goes down ... 
 probably at the next reboot).

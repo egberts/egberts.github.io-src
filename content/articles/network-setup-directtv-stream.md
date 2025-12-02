@@ -1,5 +1,6 @@
 title: Setting up your own gateway for DirectTV-stream
 date: 2022-07-15 07:26
+modified: 2025-07-13 02:08
 status: published
 tags: DirectTV, gateway
 category: howto
@@ -51,7 +52,7 @@ class "DirecTV_MFH3" {
     }
 ```
 
-ACLs and Firewalls need to allow IP access (both TCP and UDP, unicast and multicast) between the set-top box and the DirecTv servers on the same internal subnets, including any running an internal video server.
+ACLs and Firewalls need to allow IP access (both TCP and UDP, unicast and multicast) between the set-top box and the DirecTV servers on the same internal subnets, including any running an internal video server.
 
 Using `ipfilter`, the simplest and recommended examples are:
 
@@ -97,6 +98,6 @@ Note: Above examples are outbound from the router/firewall to the subnet (inboun
              
 # Routers
 
-Routers including routing firewalls, need to understand and run multicast routing protocols, specifically Protocol Independent Multicast (PIM) running in pim-sparse mode.
+Routers, including routing firewalls, need to understand and run multicast routing protocols, specifically Protocol Independent Multicast (PIM) running in pim-sparse mode.
 
 This usually entails enabling `mrouted`.

@@ -100,7 +100,7 @@ Drop-Down Approaches
 IPython Drop-Down
 -----------------
 Using IPython by embedding an IPython shell in your Python script code. 
-You can do from ipython `import embed`, and then use `embed()` in your code. 
+You can do from IPython `import embed`, and then use `embed()` in your code. 
 
 When your program/script hits an `embed()` statement, you are dropped into 
 an IPython shell. 

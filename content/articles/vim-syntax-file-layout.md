@@ -80,7 +80,7 @@ Syntax files may be found in the following directories:
 * System - /usr/share/vim/vim81/syntax
 * Local - $HOME/.vim/syntax
 
-One will use `vim` as our choice of editor in this blog demostration.  You will
+One will use `vim` as our choice of editor in this blog demonstration.  You will
 find that `vim` also has its own syntax highlighting for its own Vimscript
 format.  
 
@@ -336,13 +336,13 @@ for this Bind9 named configuration.
 And based on the majority of its BNF static text pattern were 
 mostly in the forced lower-case.
 
-So, I chosed `syntax case match` which forces lower-case and lets 
+So, I chose `syntax case match` which forces lower-case and lets 
 my regex supports mixed-case.
 
 Naming Convention
 =================
 
-Readablity is important.  Consistency is also important.
+Readability is important.  Consistency is also important.
 
 Selecting a Prefix Name
 -----------------------
@@ -367,7 +367,7 @@ Latest vim-vint version is 0.4a4
 A good way is to prefix all your syntax identifiers and 
 definitions with a 4 to 8 letter prefix after 
 checking against the `/usr/share/vim/vim81/syntax` for any already-taken 
-prefix letterings.
+prefix lettering.
 
 Let us start all syntax identifiers with `named`.  I re-used `named` 
 as I had intended to replace it.
@@ -393,7 +393,7 @@ server <ip_addr> {
     };
 ```
 
-And we will need to map our new syntax identifer for each part of the 
+And we will need to map our new syntax identifier for each part of the 
 config text file.  One can use those documented BNF as our labeling guide.
 
 For the snippet of config given above, we could use the following
@@ -446,7 +446,7 @@ syn keyword namedStmtOptionsViewDualStackServersPortWildcard ...
 ```
 
 
-Ok, this is wrong.  I've been looking at this super-long syntax identifier
+OK, this is wrong.  I've been looking at this super-long syntax identifier
 and decided to pare it down even further.  `Stmt` is extraneous after 
 its first keyword were detected so all other options following that main
 keyword need not have its already discarded scope called `Stmt`.
@@ -749,7 +749,7 @@ syn match namedOV_MaxRefreshTime_Seconds /\d\+/ ...
 ```
 
 Specific syntax name probably won't help anyone except the most 
-saavy Vimscript highlight debugging person who can leverage 
+savvy Vimscript highlight debugging person who can leverage 
 the syntax identifier name.
 Maybe we can somehow shows the type of "unit" in the status
 bar below (future task?).

@@ -1,6 +1,6 @@
 title: How to maintain small multiple configs for Linux kernels
 date: 2022-04-27 04:10
-modified: 2022-07-24 09:59
+modified: 2025-07-13 02:35
 status: published
 tags: Linux, kernel
 category: HOWTO
@@ -18,7 +18,7 @@ This `.config` is a text-based INI-format file
 that many Windows and Linux sysadmin comes to 
 love (no section needs apply there).
 
-Its file format comprises of `#` for a commentline and a simple syntax of:
+Its file format consists of `#` for a comment line and a simple syntax of:
 ```bnf
 variable_name=value
 ```
@@ -127,7 +127,7 @@ subdirectory.
 
 `scripts/config` has been around since [2.6.29
 days](https://github.com/torvalds/linux/commit/2302e8730e5caa774e7c6702fc878404d71f13f9), so it is not
-exactly a state secret amongst eminent kernel builders and embedded engineers.
+exactly a state secret among eminent kernel builders and embedded engineers.
 
 ```bash
 ./scripts/config --set-val CONFIG_OPTION y
@@ -144,7 +144,7 @@ The above `make oldconfig` will update any new dependencies not found in the cur
 One thing to note about `make oldconfig` is that it will always put a required option back into the `.config`.  When this happens, one often has to scan for all the `Kconfig` files throughout the entire Linux source directories for matching config option, then re-examine the requirement conditional logics to figure out how to make that option truly stay the way you want it to be (that is, disabled or enabled).
 
 While this single option approach is useful, doing this for many options may
-prove to be tangle-some and unwieldly.
+prove to be tangle-some and unwieldy.
 
 It is common to group those option settings together into a small `config` file
 and file-name it to something like `config-ethernet-vendors-gone` or
@@ -154,7 +154,7 @@ and file-name it to something like `config-ethernet-vendors-gone` or
 
 I had a weird case of trying to completely disable modules in Debian 11.
 
-There were intractable clawbacks of other options that will pull modules back into the kernel, despite setting `CONFIG_MODULES=n`.  If you do not clear those other options, then re-activated modules (`CONFIG_MODULES=y`) will appear after the next `make oldconfig` command.
+There were intractable claw-backs of other options that will pull modules back into the kernel, despite setting `CONFIG_MODULES=n`.  If you do not clear those other options, then re-activated modules (`CONFIG_MODULES=y`) will appear after the next `make oldconfig` command.
 
 In advanced, I've identified those "pesky things" interfering with our goal as a
 module-less Linux kernel as:

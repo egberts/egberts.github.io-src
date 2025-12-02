@@ -124,7 +124,7 @@ The key thing to overall securedness is the lack of host resolver adherence to "
 
 Key thing is that nearly 99% of the resolvers out there do not bother to check whether the DNSSEC is valid or not.
 
-Despite the near perfect strength of the DNS record protection by DNSSEC, the weakness of the resolvers has undermined the usefulness of DNS KEY (and subsequentially TKEY and DNSKEY) record.
+Despite the near perfect strength of the DNS record protection by DNSSEC, the weakness of the resolvers has undermined the usefulness of DNS KEY (and subsequently TKEY and DNSKEY) record.
 
 Your Bind9 DNS should have in the `options` clause the following settings:
 

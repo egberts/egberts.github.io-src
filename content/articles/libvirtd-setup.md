@@ -6,7 +6,7 @@ category: HOWTO
 slug: libvirtd-setup
 lang: en
 private: False
-summary: How to setup libvirtd daemon in Debbia 11
+summary: How to setup libvirtd daemon in Debian 11
 
 So, Debian apt packaging threw me in for a curve.
 

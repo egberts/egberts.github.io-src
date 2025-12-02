@@ -1,12 +1,13 @@
 title: Systemd-Resolved NOPE!
 date: 2020-06-06 18:06
+modified: 2025-07-13 03:18
 status: published
 tags: systemd, resolver, resolv.conf
 category: security
 summary: systemd-resolved and DNSSEC, Ouch!
 
 You should never let `systemd` do your DNSSEC, especially
-if you're a hobbyist gateway router maintainer, running a homenet or 
+if you are 're a hobbyist maintainer of gateway router, operating a homenet or 
 whitelab with private TLDs.
 
 I will explain why.

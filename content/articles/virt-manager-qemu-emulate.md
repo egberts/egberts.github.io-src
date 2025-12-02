@@ -10,7 +10,7 @@ private: False
 
 This article outlines the creation of an emulated QEMU startup using virt-manager.
 
-Emulated QEMU does not allow direct machine code execution as this is considered the safest but also the slowest method.  Alternatively, you may be interested the fastest and fairly safe QEMU/KVM method in [[{{filename}}virt-manager-qemu-kvm]].
+Emulated QEMU does not allow direct machine code execution as this is considered the safest but also the slowest method.  Alternatively, you may be interested the fastest and fairly safe QEMU/KVM method in [[{filename}virt-manager-qemu-kvm.md]].
 
 Version 4.0 of virt-manager is used here, on Debian 11.
 

@@ -70,7 +70,7 @@ The design approach for packet monitoring comes in two flavors:
 * network interface (netdev) device monitoring
 * multiple BSD sockets
 
-Promiscuous network interface is an interface that will receive any and ALL network packets from its netdev interface (whether it matches its own IP address ornot).
+Promiscuous network interface is an interface that will receive any and ALL network packets from its netdev interface (whether it matches its own IP address or not).
 
 It leverages PCAP `libpcap` library for examination of network packets that comes in on the selected network interface (netdev) device.  This one takes the most CPU overhead of any design approaches.
 

@@ -12,9 +12,9 @@ Your throughput is a bit higher using that Ethernet port on the ONT than
 letting an Verizon-provided broadband modem router bridge the MoAC cable
 into providing that Ethernet.
 
-* ActionTec Rev A/C/D MoCa has 100 Mbps throughput
-* ActionTec Rev E/F MoCa has 100 Mbps throughput
-* ActionTec Rev. G/I MoCA has 175 Mbps throughput
+* Actiontec Rev A/C/D MoCa has 100 Mbps throughput
+* Actiontec Rev E/F MoCa has 100 Mbps throughput
+* Actiontec Rev. G/I MoCA has 175 Mbps throughput
 * FiOS Quantum Gateway MoCA has 200 Mbps throughput
 
 whereas:
@@ -40,13 +40,13 @@ save $10 to 12/month.
 I used to recommend cloning the MAC address of your FiOS router onto
 your new router. However, one commenter had a pretty terrible time with
 this, and actually had his service cancelled. Instead, I recommend using
-your router with it’s true MAC address. This will most likey involve a
+your router with it’s true MAC address. This will most likely involve a
 call to Verizon, but it’s worth a few minutes on the phone.
 
 As for me, I've successfully cloned the MAC address ONLY because I use
 custom ISC DHCP client that mirrored the behavior of the original
-ActionTec broadband modem router. I can clone MAC only because I am
-still holding the ActionTec equipment.
+Actiontec broadband modem router. I can clone MAC only because I am
+still holding the Actiontec equipment.
 
 References
 ==========

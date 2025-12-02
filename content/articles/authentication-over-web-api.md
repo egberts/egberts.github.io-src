@@ -1,6 +1,6 @@
 Title: Authentication for API
 Date: 2018-12-28 06:30
-Modified: 2020-02-25 01:34
+Modified: 2025-12-02 07:51
 Status: published
 Tags: API, CORS, JWT, Authentication, Auth0, Fusion, Gluu
 Category: research
@@ -9,7 +9,7 @@ Summary: Authentication methods for API usages.
 Authentication for API
 ======================
 
-When deploying a new web API, authentication approaches came to mind foremostly.  Needed to determine which type of authentication to use.  Large binning, salting of hash, and revocatable are my criteria.
+When deploying a new web API, authentication approaches came to mind fore mostly.  Needed to determine which type of authentication to use.  Large binning, salting of hash, and revocable are my criteria.
 
 Some toolkits that went out the window firstly are: 
 

@@ -26,7 +26,7 @@ It didn't work.  Something about 2to3.
 # WORKING INSTALLATION #
 
 Yeah, one of those "package distro manager" issue.  Argh.  A short search on
-Debian bugzilla didn't reveal any prior experiences.  
+Debian Bugzilla didn't reveal any prior experiences.  
 I dug hard into the fail2ban's GitHub Issues and barely found the solution.
 
 This fail2ban repository is based on Python2 source code, but by running the `2to3` utility,
@@ -142,7 +142,7 @@ and change that `before` setting into:
 before = paths-debian.conf
 ```
 
-Exit the editor and then search for any inadvert enabling of jails in the
+Exit the editor and then search for any inadvertly enabling of jails in the
 jail.conf.  
 
 
@@ -180,7 +180,7 @@ chown root:root /etc/fail2ban/jail.d/defaults-debian.conf
 That `defaults-debian.conf` is the only Debian-specific configuration, hence we
 do not use `.local` filetype for that purpose.
 
-For subsequential jail(s), the filename can be anything you want, just as as long as it ends
+For subsequent jail(s), the filename can be anything you want, just as as long as it ends
 with a filetype of `.local`.  
 
 ### Daemon Settings ###
@@ -362,7 +362,7 @@ usedns = "true"
 
 ## JAIL Configuration ##
 
-Jail is the sentencing mechnaism, its guidelines and how justice is mete out.
+Jail is the sentencing mechanism, its guidelines and how justice is mete out.
 It may be in form of:
 
 * blanket and outright IP subnet ban, 
