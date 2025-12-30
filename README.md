@@ -16,4 +16,5 @@ To recreate build environment for this website, execute:
   make html
   make serve
   firefox http://localhost:8000/blog
-  make rsync\_upload
+
+  make rsync\_upload  # this is the sole REPL step
