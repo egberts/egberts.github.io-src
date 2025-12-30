@@ -1,6 +1,6 @@
 title: Vim Syntax File Layout
 date: 2020-04-02 17:35
-modified: 2022-02-24 08:01
+modified: 2025-12-30 05:33
 status: published
 tags: vim, syntax, file layout
 category: research

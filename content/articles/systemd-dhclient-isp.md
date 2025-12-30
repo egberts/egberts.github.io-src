@@ -1,6 +1,6 @@
 Title: Systemd and ISC DHCP Client
 Date: 2018-10-14T16:23
-Modified: 2022-07-24 09:35
+Modified: 2025-12-30T05:41
 Status: published
 Tags: dhclient, DHCP, systemd, ISP
 Category: research
@@ -16,8 +16,8 @@ Primarily because systemd DHCP cannot handle DHCP-Options (not options,
 but Options). The ones that Juniper JunOS DHCP server requires for
 Verizon FiOS.
 
-So, here begins the long saga of a blog (that I might break up in
-several blogs)...
+So, here begins the long saga of a blog (that I might break up across
+blogs)...
 
 First thing first, to do an analysis of systemd unit inter-dependencies,
 I executed:
@@ -46,7 +46,7 @@ firefox /tmp/custom.svg
 ISC DHCP Client
 ---------------
 
-And I finally got my very own Linux gateway to be hooked up to the
+And got my own Linux gateway hooked up to the
 Verizon HFC network, instead of using ActionTek wireless broadband
 router.
 
@@ -55,5 +55,5 @@ Details in here: [Github egberts/systemd-dhclient](https://github.com/egberts/sy
 <code>/etc/systemd/network/dhclient$.service<code>
 --------------------------------------------
 
-It is also possible to explicitly tell systemd-networkd to ignore a link
+Also possible to explicitly tell systemd-networkd to ignore a link
 by using Unmanaged=yes option, see systemd.network(5).

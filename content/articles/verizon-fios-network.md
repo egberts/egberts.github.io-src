@@ -18,7 +18,7 @@ Components, as listed in network order from your PC to the Internet:
 Home Network
 ============
 
-Your home network can be connected in one of three ways:
+Your home network connects in one of three ways:
 
 * Ethernet by ONT direct Cat-5 (preferred)
 * Ethernet via Modem Router MoCA coaxial (common)
@@ -33,7 +33,7 @@ Ethernet via ONT direct Cat-5 (preferred)
 
 * Personal Computer
 * Cat-5E cabling for 802.3/1000Base-T
-* Your firewall (you do do have a firewall?)
+* Your firewall (you do have a firewall?)
 * Cat-5E cabling for 802.3/1000Base-T
 * Actiontec MI424WR, 4-port wireless broadband modem router, 2-channel MoCA,.
 * Cat-5E cabling for 802.3/1000Base-T; no PPP, no PPPoE, no PPTP.  Straight TCP/IP.
@@ -65,7 +65,7 @@ Most commonly used method by Verizon installer is:
 Ethernet via Set-Top Box's MoCA coaxial (rare)
 ----------------------------------------------
 
-or that rarely used Ethernet port behind the Set-Top Box
+or that infrequently used Ethernet port behind the Set-Top Box
 
 * Personal Computer
 * Cat-5E cabling for 802.3/1000Base-T
@@ -194,16 +194,16 @@ Motorola, 6000-GVT, MDU, Shared, 1: MoCA, 12: VDSL2, 24
 Legend:
 -------
 
-* SFU Exterior (ONT Outside of Home): An ONT is installed outside. The battery backup unit (BBU) and power supply (PS) are installed inside. The PS must be within 6 feet of a grounded outlet. The PS can be up to 50 feet from the BBU.
-* SFU Exterior installs are now only done if an SFU Interior is not feasible.
-* SFU Interior (ONT Wall-Mounted Inside of Home): An All-In-One ONT is usually used on house interior installs. The ONT, BBU (if applicable) and PS are in a single enclosure. SFU Interior is the most common type of install.
-* SFU Desktop (ONT Self-Standing Inside of Home): A small ONT is placed inside the house, not wall mounted. This setup is used if wall space is limited.
+* SFU Exterior (ONT Outside of Home): An ONT installed, typically outside. The battery backup unit (BBU) and power supply (PS) installed, always inside. The PS must be within 6 feet of a grounded outlet. The PS can be up to 50 feet from the BBU.
+* SFU Exterior gets installed if an SFU Interior is not feasible.
+* SFU Interior (ONT Wall-Mounted Inside of Home): An All-In-One ONT is on house interior installation. The ONT, BBU (if applicable) and PS are in a single enclosure. SFU Interior is the most common type of install.
+* SFU Desktop (ONT Self-Standing Inside of Home): A small ONT placed inside the house, not wall mounted, if given limited wall space.
 * Desktop ONTs can also be wall mounted inside or outside, in an enclosure. This makes them the most versatile, and therefore most common type of ONT used.
 * SOHO Exterior (ONT Outside of Office): Same as SFU Exterior, except the ONT has extra Ethernet and Telephone ports for the Office/Small Business.
 
 Phased out:
 
-* MDU Shared (ONT in Shared Location for Apartments and Condos): A shared ONT is placed in the apartment or condo building. Speeds are limited to anywhere from 15/5 to 75/75, depending on the ONT, and FiOS Digital Voice is not available. There is, however, FiOS Freedom Essentials, which isn't VoIP.
+* MDU Shared (ONT in Shared Location for Apartments and Condos): A shared ONT placed in the apartment or condo building. Link speed gets constrained to anywhere from 15/5 to 75/75, depending on the ONT, and FiOS Digital Voice is not available. However, FiOS Freedom Essentials becomes an option, which isn't VoIP.
 
 Modem Router
 ------------

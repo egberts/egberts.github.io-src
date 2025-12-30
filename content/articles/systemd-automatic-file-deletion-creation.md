@@ -8,36 +8,36 @@ summary: How to configure systemd to perform automatic creation and deletion of 
 Configuring Automatic File Creation and Deletion
 ================================================
 
-There are several services that create or delete files or directories:
+Services that create or delete files or directories:
 
 * `systemd-tmpfiles-clean.service`
 * `systemd-tmpfiles-setup-dev.service`
 * `systemd-tmpfiles-setup.service`
 
-The system location for the configuration files is `/usr/lib/tmpfiles.d/*.conf`. 
-The local configuration files are in `/etc/tmpfiles.d`. 
-Files in `/etc/tmpfiles.d` override files with the same name in `/usr/lib/tmpfiles.d`. 
+The system location for the configuration files is `/usr/lib/tmpfiles.d/*.conf`.
+The local configuration files are in `/etc/tmpfiles.d`.
+Files in `/etc/tmpfiles.d` override files with the same name in `/usr/lib/tmpfiles.d`.
 See tmpfiles.d(5) manual page for file format details.
 
-Note that the syntax for the `/usr/lib/tmpfiles.d/*.conf` files can be 
-confusing. 
-For example, the default deletion of files in the `/tmp` directory is 
-located in `/usr/lib/tmpfiles.d/tmp.conf` with the line:
+Note that the syntax for the `/usr/lib/tmpfiles.d/*.conf` files can be
+confusing.
+For example, the default deletion of files in the `/tmp` directory locates
+in `/usr/lib/tmpfiles.d/tmp.conf` with the line:
 
 `cron
 q /tmp 1777 root root 10d
 `
 
-The type field, `q`, discusses creating a subvolume with quotas which is 
-really only applicable to BTRFS filesystems. 
-It references type `v` which in turn references type `d` (directory). 
-This then creates the specified directory if is is not present and adjusts 
-the permissions and ownership as specified. 
-Contents of the directory will be subject to time based cleanup if 
-the age argument is specified.
+The type field, `q`, discusses creating a subvolume with quotas applies
+to BTRFS filesystems.
+It references type `v` which in turn references type `d` (directory).
+This then creates the specified directory if none existed before and adjusts
+the permissions and ownership as specified.
+Contents of the directory will be subject to time based cleanup if
+the age argument gets specified.
 
-If the default parameters are not desired, then the file should be 
-copied to `/etc/tmpfiles.d` and edited as desired. For example:
+If the default parameters are not desired, then copy the file
+to `/etc/tmpfiles.d` and edited as desired. For example:
 
 ```bash
 mkdir -p /etc/tmpfiles.d

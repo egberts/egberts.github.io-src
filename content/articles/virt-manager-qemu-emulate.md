@@ -1,5 +1,6 @@
 title: Creating an emulated QEMU using virt-manager
 date: 2022-08-06 16:17
+modified: 2025-12-30 05:35
 status: draft
 tags: QEMU, virt-manager
 category: howto

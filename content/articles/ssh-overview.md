@@ -1,6 +1,6 @@
 Title: OpenSSH Overview
 Date: 2016-09-24T12:08
-Modified: 2025-07-13 03:28
+Modified: 2025-12-30T05:42
 Status: published
 Tags: ssh, OpenSSH, environment variables
 Category: research
@@ -32,13 +32,13 @@ Auto-Assess
 To audit in a passive manner the SSH servers and clients, execute
 `ssh-audit`.
 
-`ssh-audit` (written in Python) can be found over at
+`ssh-audit` (written in Python) script file is at
 [GitHub jtesta/ssh-audit](https://github.com/jtesta/ssh-audit).
 
 Manual Remediation
 ------------------
 
-To manually check and ensure that the SSH is clamped down securely,
+To manually check and ensure that the SSH is securely clamped down,
 execute the following:
 
 * [CIS Debian Linux 8 Benchmark v1.0.0](https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Linux_8_Benchmark_v1.0.0.pdf)
@@ -68,13 +68,13 @@ command sequence, description
 ~R, rekey (SSH protocol 2 only)
 ~^Z, ssh
 ~#, forwarded connections
-~&, ssh (when waiting for connections to terminate)
+~&, ssh (when waiting for connections to end)
 ~?, message
 ~~, the escape character by typing it twice
 
 Most commonly, I use tilde-period (~.) to close an unresponsive session,
 like when a firewall has closed my connection. BREAK is useful for
-various things, usually getting back to a terminal server console or
+at getting back into a terminal server console or
 getting the attention of network equipment. The command line doesn’t do
 much, but you can alter forwards from it. I’ve never used it but it’s
 probably handy for troubleshooting if your tunnels aren’t working right:
@@ -92,22 +92,22 @@ Request local forward Request remote forward Request dynamic forward
 Cancel remote forward
 
 I’ve also never had to rekey a session for any reason, as SSH protocol
-version 2 does it automatically after a certain amount of data has been
-transferred. You can mess with it via the RekeyLimit configuration
+version 2 does it automatically after a certain amount of transferred data.
+You can mess with it via the RekeyLimit configuration
 directives, or read more about it in RFC 4344. Suspending SSH via
-tilde-Ctrl-Z is handy from time to time, especially when you’re on the
+tilde-Ctrl-Z is handy from time to time, when you’re on the
 console of a machine that doesn’t have screen or some other multiplexer
 on it (or you forgot to start one). Of course, you have to remember that
-when you need it, but now that you’ve read it maybe you will.
+when you need it, but now that you’ve read it, maybe you will.
 
 List of forwarded connections is handy for managing the forwards you might
 have created with the command line. Backgrounding SSH attempts to close
-all the connections, and will wait patiently for them to die. I have
-never needed this, because I’m the impatient bastard that just
-tilde-periods them if they don’t close right away.
+all the connections, and will wait forever for them to die. I have
+never needed this, because I’m the impatient bastard that will type
+tilde-periods if they don’t close right away.
 
 You can use the EscapeChar configuration directive to change the tilde,
-if that conflicts with something. Or you can just type it twice to send
+if that conflicts with something. Or you can type it twice to send
 it.
 
 Current Secured Configurations
@@ -125,14 +125,14 @@ Current Secured Client Configuration
 #
 # This is the ssh client system-wide configuration file.  See
 # ssh_config(5) for more information.  This file provides defaults for
-# users, and the values can be changed in per-user configuration files
+# users, and the values gets changed in per-user configuration files
 # or on the command line.
 
-# Configuration data is parsed as follows:
+# Configuration data parses as follows:
 #  1. command line options
 #  2. user-specific file
 #  3. system-wide file
-# Any configuration value is only changed the first time it is set.
+# Any configuration value gets changed at first declaration time.
 # Thus, host-specific definitions should be at the beginning of the
 # configuration file, and defaults at the end.
 
@@ -140,8 +140,8 @@ Current Secured Client Configuration
 # list of available options, their meanings and defaults, please see the
 # ssh_config(5) man page.
 
-# Keyword ordering in this ssh_config are laided
-# out as the ssh client binary actually acts
+# Keyword ordering in this ssh_config sequentially process
+# as the ssh client binary actually acts
 # on them.
 # This naturally results in grouping such as
 #    key exchange,
@@ -149,19 +149,19 @@ Current Secured Client Configuration
 #    session.
 
 # IgnoreUnknown specifies a pattern-list of unknown
-#    options to be ignored if they are encountered
+#    options gets ignored if encountered
 #    in configuration parsing.
-#    This may be used to suppress errors if
-#    ssh_config contains options that are unrecognised
+#    IgnoreUnknown suppresses errors if
+#    ssh_config contains unrecognized options
 #    by ssh(1).
-#    It is recommended that IgnoreUnknown be listed
-#    early in the configuration file as it will not
-#    be applied to unknown options that appear
+#    Recommends that IgnoreUnknown keyword gets
+#    declared closer to beginning of the configuration file as it will not
+#    detect unknown options that appear
 #    before it.
 IgnoreUnknown yes
 
 # Include includes the specified configuration
-#    file(s).  Multiple pathnames may be specified
+#    file(s).  Supports more than one pathnames
 #    and each pathname may contain glob(7)
 #    wildcards and, for user configurations,
 #    shell-like ‘~’ references to user home
@@ -174,7 +174,7 @@ IgnoreUnknown yes
 #Include /etc/ssh/ssh_config_local
 
 # HostName specifies the real host name to log into.
-#    This can be used to specify nicknames or
+#    Specifies nicknames or
 #    abbreviations for hosts.  Arguments to HostName
 #    accept the tokens described in the TOKENS
 #    section.  Numeric IP addresses are also
@@ -184,8 +184,8 @@ IgnoreUnknown yes
 #    Source: main()/ssh.c
 # HostName <system-hostname>  # default
 
-# CanonicalizeHostname controls whether explicit
-#    hostname canonicalization is performed.
+# CanonicalizeHostname controls whether performing
+#    explicit hostname canonicalization or not.
 #    The default, no, is not to perform any name
 #    rewriting and let the system resolver handle all
 #    hostname lookups.  If set to yes then, for
@@ -194,9 +194,8 @@ IgnoreUnknown yes
 #    the hostname specified on the command line using
 #    the CanonicalDomains suffixes and
 #    CanonicalizePermittedCNAMEs rules.
-#    If CanonicalizeHostname is set to always, then
-#    canonicalization is applied to proxied
-#    connections too.
+#    If CanonicalizeHostname sets to `always`, then
+#    canonicalization of hostname gets done for proxied connections.
 #    Source: options.canonicalize_hostname/resolve_canonicalize()/main()
 #    Source: options.canonicalize_hostname/check_follow_cname()/resolve_canonicalize()/main()
 CanonicalizeHostname no
@@ -204,7 +203,7 @@ CanonicalizeHostname no
 
 # CanonicalizeMaxDots specifies the maximum number of
 #    dot characters in a hostname before
-#    canonicalization is disabled.  The default, 1,
+#    disabling canonicalization.  The default, 1,
 #    allows a single dot (i.e. hostname.subdomain).
 #    Source: resolve_canonicalize()/ssh.c
 # CanonicalizeMaxDots 1  # default
@@ -224,14 +223,14 @@ CanonicalizeMaxDots 1
 #    up the unqualified hostname using the system
 #    resolver's search rules.  A value of no will
 #    cause ssh(1) to fail instantly if
-#    CanonicalizeHostname is enabled and the target
-#    hostname cannot be found in any of the domains
+#    enabling CanonicalizeHostname and the target
+#    hostname not found in any of the domains
 #    specified by CanonicalDomains.
 #    Source: resolve_canonicalize()/ssh.c
 CanonicalizeFallbackLocal yes
 
 # CanonicalizePermittedCNAMEs specifies rules to
-#    determine whether CNAMEs should be followed when
+#    determine whether CNAMEs follows when
 #    canonicalizing hostnames.  The rules consist of
 #    one or more arguments of
 #    source_domain_list:target_domain_list, where
@@ -243,7 +242,7 @@ CanonicalizeFallbackLocal yes
 #    For example,
 #    "*.a.example.com:*.b.example.com,*.c.example.com"
 #    will allow hostnames matching "*.a.example.com" to
-#    be canonicalized to names in the "*.b.example.com"
+#    canonicalized names in the "*.b.example.com"
 #    or "*.c.example.com" domains.
 #    Source: resolve_canonicalize()/ssh.c
 # CanonicalizePermittedCNAMEs <cname-hostname>
@@ -265,7 +264,7 @@ Port 22
 
 # ProxyCommand specifies the command to use to
 #    connect to the server.  The command string
-#    extends to the end of the line, and is executed
+#    extends to the end of the line, and executes
 #    using the user's shell ‘exec’ directive to avoid
 #    a lingering shell process.
 #
@@ -273,7 +272,7 @@ Port 22
 #    described in the TOKENS section.  The command
 #    can be basically anything, and should read from
 #    its standard input and write to its standard
-#    output.  It should eventually connect an sshd(8)
+#    output.  It should connect an sshd(8)
 #    server running on some machine, or execute
 #    sshd -i somewhere.  Host key management will be
 #    done using the HostName of the host being
@@ -296,7 +295,7 @@ Port 22
 # ClearAllForwardings specifies that all local,
 #    remote, and dynamic port forwardings specified
 #    in the configuration files or on the command
-#    line be cleared.  This option is primarily
+#    line have its forwarding cleared.  This option is primarily
 #    useful when used from the ssh(1) command line to
 #    clear port forwardings set in configuration
 #    files, and is automatically set by scp(1) and
@@ -308,8 +307,8 @@ ClearAllForwardings no
 
 # ProxyJump specifies one or more jump proxies as
 #    either [user@]host[:port] or an ssh URI.
-#    Multiple proxies may be separated by comma
-#    characters and will be visited sequentially.
+#    Proxies gets separated by comma
+#    characters and is sequential ordered from first to last.
 #    Setting this option will cause ssh(1) to connect
 #    to the target host by first making a ssh(1)
 #    connection to the specified ProxyJump host and
@@ -317,10 +316,10 @@ ClearAllForwardings no
 #    ultimate target from there.
 #
 #    Note that this option will compete with the
-#    ProxyCommand option - whichever is specified
+#    ProxyCommand option - whichever specified
 #    first will prevent later instances of the other
 #    from taking effect.
-#    NOTE: ProxyCommand is ignored if ProxyJump
+#    NOTE: ProxyCommand gets ignored if ProxyJump
 #          already specified.
 #    Source: options.jump_host/process_config_line_depth()/main()/ssh.c
 #    Source: options.jump_user/process_config_line_depth()/main()/ssh.c
@@ -335,49 +334,49 @@ ClearAllForwardings no
 #    Source: main()/ssh.c
 # ProxyUseFdpass no  # default
 
-# Protocol is obsoleted since 7.1; always v2
+# Protocol obsoleted since 7.1; always v2
 Protocol 2
 
 # ControlPersist, when used in conjunction with
 #    ControlMaster, specifies that the master
 #    connection should remain open in the background
 #    (waiting for future client connections) after
-#    the initial client connection has been closed.
+#    the initial client connection got closed.
 #    If set to no, then the master connection will
-#    not be placed into the background, and will
+#    not placed into the background, and will
 #    close as soon as the initial client connection
-#    is closed.  If set to yes or 0, then the master
+#    gets closed.  If set to yes or 0, then the master
 #    connection will remain in the background
 #    indefinitely (until killed or closed via a
 #    mechanism such as the "ssh -O exit").  If set to
 #    a time in seconds, or a time in any of the
 #    formats documented in sshd_config(5), then the
 #    backgrounded master connection will
-#    automatically terminate after it has remained
+#    automatically terminates after it has remained
 #    idle (with no client connections) for the
 #    specified time.  (ssh_session2()/ssh.c)
 #    Source: main()/ssh.c
 # ControlPersist   # not specified by default
 
 # UpdateHostKeys specifies whether ssh(1) should accept
-#    notifications of additional hostkeys from the
+#    notifications of extra hostkeys from the
 #    server sent after authentication has completed and
 #    add them to UserKnownHostsFile.  The argument must
 #    be yes, no (the default) or ask.  Enabling this
 #    option allows learning alternate hostkeys for a
 #    server and supports graceful key rotation by
 #    allowing a server to send replacement public keys
-#    before old ones are removed.  Additional hostkeys
-#    are only accepted if the key used to authenticate
+#    before old ones gets removed.  Extra hostkeys
+#    gets accepted only if the key used to authenticate
 #    the host was already trusted or explicitly accepted
-#    by the user.  If UpdateHostKeys is set to ask, then
-#    the user is asked to confirm the modifications to
-#    the known_hosts file.  Confirmation is currently
-#    incompatible with ControlPersist, and will be
-#    disabled if it is enabled.
+#    by the user.  If UpdateHostKeys sets to 'ask', then
+#    the console prompts the user to confirm the modifications to
+#    the known_hosts file.  Confirmation keyword conflicts
+#    with ControlPersist, and will be
+#    disabled if formerly enabled.
 #
-# Presently, only sshd(8) from OpenSSH 6.8 and greater
-#    support the "hostkeys@openssh.com" protocol
+# Presently, sshd(8) from OpenSSH 6.8 or greater
+#    supports the "hostkeys@openssh.com" protocol
 #    extension used to inform the client of all the
 #    server's hostkeys.
 #    Source: main()/ssh.c
@@ -398,25 +397,25 @@ ConnectionAttempts 1
 # RemoteCommand specifies a command to execute on the
 #    remote machine after successfully connecting to
 #    the server.  The command string extends to the
-#    end of the line, and is executed with the user's
+#    end of the line, and executes from the user's
 #    shell.  Arguments to RemoteCommand accept the
 #    tokens described in the TOKENS section.
 #    Source: main()/ssh.c
 # RemoteCommand # not defined by default
 
-# LogLevel gives the verbosity level that is used
-#    when logging messages from ssh(1).  The
+# LogLevel determines the verbosity level
+#    when logging messages from ssh(1) daemon.  The
 #    possible values are: QUIET, FATAL, ERROR, INFO,
 #    VERBOSE, DEBUG, DEBUG1, DEBUG2, and DEBUG3.
 #    The default is INFO.
-#    DEBUG and DEBUG1 are equivalent.
+#    DEBUG and DEBUG1 are the same.
 #    DEBUG2 and DEBUG3 each specify higher levels of
 #    verbose output.
 #    Source: options.log_level/main()/ssh.c
 # LogLevel INFO  # default
 LogLevel INFO
 
-# SyslogFacility gives the facility code that is used
+# SyslogFacility selects the facility code
 #    when logging messages from ssh(1).  The possible
 #    values are: DAEMON, USER, AUTH, LOCAL0, LOCAL1,
 #    LOCAL2, LOCAL3, LOCAL4, LOCAL5, LOCAL6, LOCAL7.
@@ -453,10 +452,10 @@ SyslogFacility AUTH
 #    to disable connection sharing.  Arguments to
 #    ControlPath may use the tilde syntax to refer to
 #    a user's home directory or the tokens described
-#    in the TOKENS section.  It is recommended that
+#    in the TOKENS section.  Recommends that
 #    any ControlPath used for opportunistic
 #    connection sharing include at least %h, %p, and
-#    %r (or alternatively %C) and be placed in a
+#    %r (or alternatively %C) and placed in a
 #    directory that is not writable by other users.
 #    This ensures that shared connections are
 #    uniquely identified.
@@ -465,8 +464,8 @@ SyslogFacility AUTH
 # ConnectTimeout specifies the timeout (in seconds)
 #    used when connecting to the SSH server, instead
 #    of using the default system TCP timeout.  This
-#    value is used only when the target is down or
-#    really unreachable, not when it refuses the
+#    value is useful when the target is down or
+#    firmly unreachable, not when it refuses the
 #    connection.
 #    Source: options.connect_timeout/main()/ssh.c
 # ConnectTimeout 0  # default
@@ -474,32 +473,32 @@ ConnectTimeout 0
 
 # TCPKeepAlive specifies whether the system should
 #    send TCP keepalive messages to the other side.
-#    If they are sent, death of the connection or
+#    If sent, death of the connection or
 #    crash of one of the machines will be properly
-#    noticed.  This option only uses TCP keepalives
+#    noticed.  This option leverages TCP keepalives
 #    (as opposed to using ssh level keepalives), so
 #    takes a long time to notice when the connection
 #    dies.  As such, you probably want the
-#    ServerAliveInterval option as well.  However,
-#    this means that connections will die if the
+#    ServerAliveInterval option as well.
+#    This means that connections will die if the
 #    route is down temporarily, and some people find
 #    it annoying.
 #
 #    The default is yes (to send TCP keepalive
 #    messages), and the client will notice if the
 #    network goes down or the remote host dies.  This
-#    is important in scripts, and many users want
+#    is important in scripts, and users want
 #    it too.
 #
-#    To disable TCP keepalive messages, the value
-#    should be set to no.  See also ServerAliveInterval
+#    To disable TCP keepalive messages, set the value
+#    to no.  See also ServerAliveInterval
 #    for protocol-level keepalives.
 # TCPKeepAlive yes  # default
 TCPKeepAlive yes
 
 # BindAddress use the specified address on the local
 #    machine as the source address of the connection.
-#    Only useful on systems with more than one address.
+#    Useful on systems with more than one address.
 #    Source: options.bind_address/ssh_create_socket()/ssh_connect_direct()/ssh_connect()/main()
 
 

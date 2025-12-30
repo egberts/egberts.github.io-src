@@ -6,12 +6,9 @@ tags: systemd, resolver, resolv.conf
 category: security
 summary: systemd-resolved and DNSSEC, Ouch!
 
-You should never let `systemd` do your DNSSEC, especially
-if you are 're a hobbyist maintainer of gateway router, operating a homenet or 
+You should never let `systemd` do your DNSSEC, notably
+if you are 're a hobbyist maintainer of gateway router, operating a homenet or
 whitelab with private TLDs.
-
-I will explain why.
-
 
 
 Forcing 'consumer' mode in `systemd-resolv`
@@ -30,11 +27,10 @@ LLMNR=False
 ; Systemd should not access any external network, period.
 DNSSEC=False
 
-; there shall be no DNS server available to systemd
+; no DNS server available to systemd
 DNS=
 
-; 
+;
 DNSDefaultRoute=
 ```
-
 

@@ -9,11 +9,11 @@ summary: Ports used in Verizon Network
 
 I've got a Verizon residential cable setup where I placed a personal Linux router directly to the Verizon white box via Ethernet 10Base-1000 and CAT-5 cable.  And I need to relocate this Actiontec media gateway router somewhere within my new home subnet and no longer in front of my personal router.
 
-Why would I do such a convoluted setup like this?  Because, I like full control of my home network which is full of 802.1X devices, Bro IDS and various other pet projects related to network security.
+Why would I do such a convoluted setup like this?  Because, I like full control of my home network which is full of 802.1X devices, Bro IDS and other pet projects related to network security.
 
 In order to do this, a complete remapping out the Verizon home network topology is necessary, complete with TCP/UDP, IP and Ethernet layer.
 
-I attached a 10-BaseT Ethernet --> HUB <-- so that Wireshark can be captured in its entirety and unchanged from default Verizon setup.
+I attached a 10-BaseT Ethernet --> HUB <-- so that Wireshark now capturs in its entirety and unchanged from default Verizon setup.
 In order to cut out the marketspeak to mere labels for this article, I use the following terms:
 
 * cable router - Actiontec broadband gateway router, provided by Verizon
@@ -30,7 +30,7 @@ I used IP subnets used throughout the home (listed in ingress to egress order):
     192.168.6.0/24 - Declared by personal router for home-wide uses.
 ```
 
-When a broadband router boots up, it access the following ports to communicate with various Verizon infrastructure servers:
+When a broadband router boots up, it access the following ports to communicate with Verizon infrastructure servers:
 
 DHCP Client - Verizon HFC network
 ===
@@ -98,7 +98,7 @@ Bootstrap Protocol (Request)
 
 To deal with that Juniper DHCP server request, my copy of ISC DHCP client configuration for personal router is (also given at [GitHub](https://github.com/egberts/systemd-dhclient/etc/dhcp/dhclient.conf)).
 
-If your personal gateway router is going to be directly attached to the ONT (Optical Network Terminator, a white box) like I hooked mine up, then that gateway's ingress DHCP server is required to serve additional DHCP specialized options toward the cable router's dhclient.
+If your personal gateway router is directly attached to the ONT (Optical Network Terminator, a white box) like I hooked mine up, then that gateway's ingress DHCP server require serving additional DHCP specialized options toward the cable router's dhclient.
 
 ```nginx
 # Configuration file for /sbin/dhclient.
@@ -110,9 +110,9 @@ If your personal gateway router is going to be directly attached to the ONT (Opt
 # and a more comprehensive list of the parameters understood by
 # dhclient.
 #
-# Normally, if the DHCP server provides reasonable information and does
+# If the DHCP server provides reasonable information and does
 # not leave anything out (like the domain name, for example), then
-# few changes must be made to this file, if any.
+# this file must change, if any.
 #
 
 send host-name = "Wireless_Broadband_Router";
@@ -201,7 +201,7 @@ shared-network "dmz2" {
     # addresses to clients without static host declarations,
     # which is almost certainly something you want to do.
     #
-    # Otherwise, only clients you've manually given addresses to
+    # Otherwise, clients you've manually given addresses to
     # later in the file will get DHCP assignments.
     deny unknown-clients;
     ignore client-updates;
@@ -243,7 +243,7 @@ shared-network "dmz2" {
 ```
 
 
-Of course, I include the following line in the main DHCP server configuration file, usually `/etc/dhcp/dhcpd.conf`.
+Of course, I include the following line in the main DHCP server configuration file, `/etc/dhcp/dhcpd.conf`.
 
 ```cfg
     include "/etc/dhcp/dhcpd.conf.192.168.6.dmz"
@@ -256,7 +256,7 @@ Ports Used
 ----------
 
 
-Then the following Verizon infrastructure servers are consulted next:
+Then the following Verizon infrastructure servers get consulted next:
 
 ```
     53/udp DNS (nsphil01.verizon.net, 71.242.0.12)

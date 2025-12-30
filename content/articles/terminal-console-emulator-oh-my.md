@@ -1,5 +1,6 @@
 title: Terminal, console, emulator, oh, my!
 date: 2025-01-13 08:18
+modified: 2025-12-30 05:37
 status: skip
 tags: terminal, text terminal, console terminal, raster terminal, vector terminal
 category: research
@@ -14,12 +15,12 @@ In 1970, Cursor-positioning came next to [DEC VT05](https://en.wikipedia.org/wik
 
 
 * Character-Oriented
-In the old days ... never mind, character-oriented terminals are still being used today.
+In the old days ... never mind those character-oriented terminals used today.
 
 Anything over serial communication to a video display unit (VDU), notably having a cathode ray tube, is a 
 character-oriented terminal: the protocol, wire, and VDU operates one character at a time.
 
-Even our UNIX pipe socket handles exactly the same thing using `netcat` (`nc`), and `minicom`.
+Even our UNIX pipe socket handles the same thing using `netcat` (`nc`), and `minicom`.
 
 Today, Linux terminal (`/dev/tty0`) console is one example of a character-oriented terminal.  
 

@@ -7,11 +7,11 @@ summary: How to setup a VXLAN
 lang: en
 private: False
 
-This article is on about configuring a host-based VXLAN for use with multiple virtual machines ... on Linux.
+This article is on about configuring a host-based VXLAN for use with virtual machines ... on Linux.
 
-VXLAN describes Virtual eXtensible Local Area Network, which is used to
+VXLAN describes Virtual eXtensible Local Area Network, used to
 address the need for overlay networks within virtualized data centers
-accommodating multiple tenants.  Defined in [IETF RFC7348](https://datatracker.ietf.org/doc/html/rfc7348)
+accommodating tenants.  Defined in [IETF RFC7348](https://datatracker.ietf.org/doc/html/rfc7348)
 
 To skip overview, go straight to Setup section.
 
@@ -35,7 +35,7 @@ VXLAN takes VM's packets in Ethernet II/802.3 format and sends it over UDP/IP ov
      |
    wlan0
 
-This VXLAN has considerable overhead as opposed to its smaller cousin, VLAN.  VLAN simply uses 0x8100 for its Ethernet type.  Whereas the VXLAN uses 0x0800 (for IPv4) or 0x86dd (IPv6) then have its own VXLAN header before encapsulating the inner-network's Ethernet payload in its entirety as-is (after stripping off the Ethernet FCS checksum).
+This VXLAN has considerable overhead as opposed to its smaller cousin, VLAN.  VLAN uses `0x8100` for its Ethernet type.  Whereas the VXLAN uses `0x0800` (for IPv4) or `0x86dd` (IPv6) then have its own VXLAN header before encapsulating the inner-network's Ethernet payload in its entirety as-is (after stripping off the Ethernet FCS checksum).
 
 Smaller Cousin: VLAN
 ----
@@ -68,11 +68,11 @@ For comparison purpose, the VLAN Header is:
     |     Frame Check Sequence (4B) |
     +-------------------------------+
 
-Notice only 12-bits for the VLAN identifier (VID) or maximum 4095 (technically 4093, 2 are reserved)?
+Notice 12-bits for the VLAN identifier (VID); 4095 is the highest value (technically 4093, Value 0 and 1 reserved).
 
 Hiccups during Expansion of Virtual LAN
 ----
-There is attempts to extend VLAN IDs, several in fact, but none of them solved the real scaling and multi-tenant problems that modern datacenters face now
+There is attempts to extend VLAN IDs, but none of them solved the real scaling and multi-tenant problems that modern datacenters face now
 
 So, the evolution of VLAN are:
 
@@ -105,14 +105,14 @@ So, the evolution of VLAN are:
     GUE ────────────┘ (independent Linux/cloud-native overlay)
 
 
-VXLAN and other “overlay” virtual LAN technologies ([NVGRE](https://www.rfc-editor.org/rfc/rfc7637.html), [STT](), [Geneve](https://www.rfc-editor.org/rfc/rfc8926.html)) emerged because simply expanding the VLAN ID field was fundamentally insufficient but all failed to deal with multi-tenants found in today's datacenter.
+VXLAN and other “overlay” virtual LAN technologies ([NVGRE](https://www.rfc-editor.org/rfc/rfc7637.html), [STT](), [Geneve](https://www.rfc-editor.org/rfc/rfc8926.html)) emerged because expanding the VLAN ID field was fundamentally insufficient but all failed to deal with multi-tenants found in today's datacenter.
 
 Below is the clear, technical explanation:
 
-VLANs were designed for Layer-2, not multi-tenant cloud networks
+VLANs are Layer-2, yet not for multi-tenant cloud networks
 ----
 
-VLANs (802.1Q) were meant to segment a single enterprise LAN.
+VLANs (802.1Q) segments a single enterprise LAN.
 Cloud datacenters needed to isolate tens of thousands to millions of tenants, with:
 
 - overlapping IP spaces
@@ -123,10 +123,10 @@ Cloud datacenters needed to isolate tens of thousands to millions of tenants, wi
 
 - multi-tenant routing and security
 
-Even if the VLAN ID were expanded from 12 bits:
+Even if the VLAN ID expands from 12 bits:
 
 - VLANs fundamentally lack tenant isolation at Layer-3
-- VXLAN overlays provide network virtualization, not just segmentation.
+- VXLAN overlays provide network virtualization, not for segmentation.
 
 Expanding the VLAN ID would require changing every switch ASIC
 ----
@@ -143,9 +143,9 @@ To expand VLAN IDs:
 
 - 802.1ad, QinQ, Q-in-Q-in-Q stack handling
 
-... would need to be redesigned and replaced globally.
+... would be needing redesign and replace globally.
 
-VXLAN avoids this completely.
+VXLAN avoids this entirely.
 
 -  VXLAN uses existing IP & UDP hardware, so existing switches/NICs continued functioning.
 
@@ -158,7 +158,7 @@ Datacenters needed L2 adjacency across L3 boundaries (for VM mobility, vMotion, 
 
 Options:
 
-- Extend L2 everywhere → unstable, loops, huge broadcast domains
+- Extend L2 everywhere → unstable, loops, large broadcast domains
 
 - Use overlay tunnels → preserve L2 while using scalable L3 fabric
 
@@ -202,14 +202,14 @@ Expanding VLAN ID bits does not solve the broadcast/control-plane problems inher
 Datacenters needed 16M+ segments (VNIs), not 4096 or 65k
 ----
 
-Even if VLAN IDs were expanded:
+Even if VLAN IDs got expanded:
 
 -  Scheme 	Max segments
 -  Classic VLAN (12 bits) 	4096
 -  Hypothetical 16-bit VLAN 	65,536
 -  VXLAN (24-bit VNI) 	16,777,216
 
-Large multi-tenant clouds (AWS, Azure, Google) can easily require millions of isolated overlays**.
+Large multi-tenant clouds (AWS, Azure, Google) require millions of isolated overlays**.
 
 Even 65k is too small.
 
@@ -224,7 +224,7 @@ VXLAN chose UDP/IP encapsulation because:
 
 -  Uses ECMP load-balancing (UDP src-port hashing)
 
--  Allows hardware offloads (NICs, switches) easily
+-  Allows hardware offloads (NICs, switches) with ease
 
 -  No need for Ethernet to carry giant tables
 
@@ -235,15 +235,15 @@ VXLAN chose UDP/IP encapsulation because:
   - Multi-path transport
   - Hardware offload compatibility
 
-VXLAN gained all of this for free by riding on IP and UDP.
+VXLAN gained this for free by riding on IP and UDP.
 
-The industry already standardized on 802.1Q; changing it is hard
+The industry already standardized on 802.1Q; changing this packet layout is hard
 ---
 
-Protocols that completely replace an 802.1 standard rarely succeed.
+Protocols that replace an 802.1 standard seldomly succeed.
 But adding a new protocol over IP is easy:
 
-VXLAN could be adopted:
+VXLAN protocol state machine and packet layout can be:
 
 - incrementally
 
@@ -278,9 +278,9 @@ Hence datacenters moved to L3 underlay + L2 overlay, and VXLAN became the standa
 So instead of extending VLAN header, the new packet layout of virtual LAN entails the wrapping of
 each Ethernet payload with a UDP/IP in which to connect with other gateways/hosts' internal VLAN network.
 
-VXLAN ID is 24-bits, providing up to 16,77,215 (minus 2 that are reserved).
+VXLAN ID is 24-bits, providing up to 16,77,215 (minus 2, reserved values 0 and 1).
 
-But save the Geneva protocol for future topics as this is also an emerging technology that is posed to overtake VXLAN, simply because one can add any information to each packet such as which firewall policy got used, which BGP route was taken, which committed service level used, which country it came from;  VXLAN is not extensible for any of those, but VXLAN remains an incredible useful expansion protocol for each multi-tenant to enjoy their own Internet space without restriction.
+But save the Geneva protocol for future topics as this is also an emerging technology that pose to overtake VXLAN, because one can add any information to each packet such as which firewall policy got used, which BGP route taken, which committed service level used, which country it came from;  VXLAN is not extensible for any of those, but VXLAN remains an incredible useful expansion protocol for each multi-tenant to enjoy their own Internet space without restriction.
 
 Setup
 ====
@@ -311,19 +311,19 @@ Prevents assigning an IPv4/IPv6 address to the `br0` interface.
     $ sudo nmcli connection add type vxlan slave-type bridge con-name vxlan1-br0 \
             ifname vxlan1 id 1 local 192.10.3.1 \
             remote 10.5.0.2 master br0
-    Connection 'vxlan1-br0' (bdbe27f1-5cfe-41df-a811-462e89eba6e9) successfully added.
+    Connection 'vxlan1-br0' (bdbe27f1-5cfe-41df-a811-462e89eba6e9) added.
     $
 
 
-1: Specifies the interface name for the VXLAN connection. This is the name that will be assigned to the VXLAN interface.
+1: Specifies the interface name for the VXLAN connection. This is the name that gets assigned to the VXLAN interface.
 
 2: Specifies a unique numeric VXLAN identifier to differentiate between different VXLAN networks.
 
-3: Specifies the local IP address to be used for the VXLAN interface. This is the IP address that NetworkManager will use for the local VXLAN endpoint. This address must be reachable by the VMs that will be using the VXLAN network.
+3: Specifies the local IP address used for VXLAN interface. This is the IP address that NetworkManager will use for the local VXLAN endpoint. This address must be reachable by the VMs that will be using the VXLAN network.
 
 4: Specifies the remote IP address of the VXLAN endpoint with which the local VXLAN interface will communicate. This address must be reachable by the VM Host Server that hosts the VMs that will be using the VXLAN network.
 
-5: Specifies the name of the bridge device to which the VXLAN interface will be attached. This is typically the bridge device that acts as the VXLAN endpoint. 
+5: Specifies the name of bridge device that the VXLAN interface attaches to. This is typically the bridge device that acts as the VXLAN endpoint.
 
 
 
@@ -349,11 +349,11 @@ Creating a virtual network
 ----
 Requirements
 
-You installed libvirt virtualization tools and the libvirtd service is enabled and started.
+Install the libvirt virtualization tools and then enable/start.
 
-You configured the network bridge br0 with the VXLAN attached on SLES. 
+Configure the network bridge br0 with the VXLAN attached on SLES.
 
-Create a temporary XML file (/tmp/vxlan1-br0.xml) that defines a new virtual network. The file should be similar to the following one:
+Create a temporary XML file (/tmp/vxlan1-br0.xml) that defines a new virtual network. The file contains one of the following:
 
     <network>
     <name>vxlan1-br0</name>
@@ -365,11 +365,11 @@ Use the XML file to create a new libvirt-based virtual network.
 
     sudo virsh net-define /tmp/vxlan1-br0.xml
 
-(Optional) Remove the XML definition file from disk. It is no longer needed.
+(Optional) Remove the XML definition file from disk as this is no longer required.
 
     rm /tmp/vxlan1-br0.xml
 
-Alternatively, you can go to `virt-manager`, Edit -> Connection Details -> Virtual Networks tab, then '+' icon to add a network, then click on `XML` tab, then paste the content of `/tmp/vxlan1-br0.xml` file.  Once saved, it automatically becomes active.
+Go to `virt-manager`, Edit -> Connection Details -> Virtual Networks tab, then '+' icon to add a network, then click on `XML` tab, then paste the content of `/tmp/vxlan1-br0.xml` file.  Once saved, it automatically becomes active.
 
 Start the new vxlan1-br0 virtual network and configure it to start automatically when the libvirtd service starts.
 
@@ -377,12 +377,12 @@ Start the new vxlan1-br0 virtual network and configure it to start automatically
 
     sudo virsh net-autostart vxlan1-br0
 
-Verify the status of the newly created network. If the newly created virtual network is listed as active, the configuration was successful.
+Verify the status of the newly created network. If the newly-created virtual network lists as active, the configuration was successful.
 
     sudo virsh net-list
     Name              State    Autostart   Persistent
     ----------------------------------------------------
-    vxlan1-br0        active   yes         yes
+    vxlan1-br0        active   "yes"         "yes"
 
 Configurint virtual machines
 ----
@@ -398,7 +398,7 @@ Requirements:
 
 1. You created a VM using libvirt.
 
-2. You configured the virtual network vxlan1-br0 using libvirt. 
+2. You configured the virtual network vxlan1-br0 using libvirt.
 
 3. Connect the network interface of the VM to the virtual network vxlan1-br0.
 
@@ -420,9 +420,9 @@ Verify the virtual network interfaces on the host.
     
         virtio   52:54:12:a7:89:1f
 
-1: A virtual network automatically created by libvirt. It is used by the virtual machine VM1.
+1: A virtual network automatically created by libvirt. Used by the virtual machine VM1.
 
-2: A network bridge with the attached VXLAN network. The vnet1 network is connected to that bridge.
+2: A network bridge with the attached VXLAN network. The vnet1 network connects to that bridge.
 
 Verify the interface attached to the vxlan1-br0 network bridge on the host.
 
@@ -436,5 +436,5 @@ Verify the interface attached to the vxlan1-br0 network bridge on the host.
 
 1: The configured VXLAN network attached to the vxlan1-br0 bridge.
 
-2: A virtual network automatically created by libvirt. It is used by the virtual machine VM1. 
+2: A virtual network automatically created by libvirt. Used by the virtual machine VM1.
 

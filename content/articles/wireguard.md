@@ -1,5 +1,6 @@
 title: WireGuard, Systemd, Netfilter
 date: 2020-08-30 08:01
+date: 2025-12-30 05:37
 status: published
 tags: wireguard, systemd, netfilter
 category: HOWTO
@@ -103,11 +104,11 @@ PrivateKey=SERVER_S_PRIVATE_KEY_ENDING_WITH_EQUAL_SYMBOL
 #[WireGuardPeer]
 ## Public key of other peer, used ffor secure authorization between them
 PublicKey=SERVER_S_PUBLIC_KEY_ENDING_WITH_EQUAL_SYMBOL
-## a list of comma-separated IP addresses that should be routed through this peer
+## a list of comma-separated IP addresses that should route through this peer
 #AllowedIPs=10.91.0.2
 ## Endpoint is where to find the peer.  Once other peer sends an authenticated
-## packet, this will be updated to the correct address, but it is still
-## required ffor an initial meeting point
+## packet, this will update to the correct address, but still
+## require for an initial meeting point
 # Endpoint=your-vpn.example.tld:51001
 ```
 

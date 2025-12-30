@@ -21,7 +21,7 @@ whereas:
 
 * ONT direct Ethernet goes up to 1 Gbps throughput
 
-So just for Internet/data service, why bother with MoCA or R6 cabling?
+For Internet/data service, why bother with MoCA or R6 cabling?
 
 Call Verizon Support, ask to "bridge the Ethernet at the ONT" using the
 same Verizon's own router but through Ethernet (instead of RG-6) cable.
@@ -40,12 +40,12 @@ save $10 to 12/month.
 I used to recommend cloning the MAC address of your FiOS router onto
 your new router. However, one commenter had a pretty terrible time with
 this, and actually had his service cancelled. Instead, I recommend using
-your router with it’s true MAC address. This will most likely involve a
-call to Verizon, but it’s worth a few minutes on the phone.
+your router with it’s true MAC address. This will involve a
+call to Verizon, but it’s worth a couple of minutes on the phone.
 
-As for me, I've successfully cloned the MAC address ONLY because I use
+As for me, I've cloned the MAC address because I use
 custom ISC DHCP client that mirrored the behavior of the original
-Actiontec broadband modem router. I can clone MAC only because I am
+Actiontec broadband modem router. I can clone MAC because I am
 still holding the Actiontec equipment.
 
 References

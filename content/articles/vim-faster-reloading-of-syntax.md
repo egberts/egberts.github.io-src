@@ -1,5 +1,6 @@
 title: Vim Syntax Development: A Faster Reloading of Syntax File
 date: 2020-04-01 10:45
+modified: 2025-12-30 05:32
 status: published
 tags: vim, syntax, debugging
 category: HOWTO
@@ -15,16 +16,16 @@ Typical debugging and development of a new Vim syntax is using the dual-window V
 * to DEVELOP a syntax for new highlighting
 * to VIEW the new highlighting
 
-Note:  Some of you may prefer to single-Vim session using split windows, 
+Note:  Some of you may prefer to single-Vim session using split windows,
 instead of my suggested dual-Vim terminal session:
-I prefer my simplistic X-WindowManager `ALT-Tab` key sequence here.  
+I prefer my simplistic X-WindowManager `ALT-Tab` key sequence here.
 
 Developing Syntax File
 ----------------------
-Syntax file is where all the development of highlighting goes into.  
-One won't be able to see any visible effect here.   
+Syntax file is where all the development of highlighting goes into.
+One won't be able to see any visible effect here.
 
-Let us call this Vim edit session in our first 
+Let us call this Vim edit session in our first
 terminal console, our DEVELOPMENT window.
 If I am creating a new syntax file, such as ISC Bind9 named configuration), I
 would be editing `~/.vim/syntax/bind-named.vim`) file in this
@@ -32,7 +33,7 @@ DEVELOPMENT window.
 
 Viewing Highlighted File
 ------------------------
-Text file (example or under test)  is where we can view our new 
+Text file (example or under test)  is where we can view our new
 highlighting.  Second terminal console host the
 second Vim editor session.  Let us VIEW the new highlights in VIEW window, from
 reading syntax files changed by our effort made within DEVELOPMENT window.
@@ -41,13 +42,13 @@ Develop in one window; view in another window.  DEVELOP, VIEW, DEVELOP, VIEW.
 
 Interactions
 ------------
-To see any new highlighting, the VIEW edit session needs to reload 
-the syntax file (that has been changed).  
+To see any new highlighting, the VIEW edit session needs to reload
+the (changed) syntax file.
 One way to see new/changed highlighting is to perform closing and opening of this same test file.
 
 At the beginning of my development cycle, lots of closing and opening files were going there.
 
-I got tired.  I got tired of executing the following Vim command 
+I got tired.  I got tired of executing the following Vim command
 sequences to reload this syntax file in my edit session:
 
 ```vim
@@ -68,9 +69,9 @@ vim named.conf
 Same Vim edit terminal session, same test example file; lot's of typing.
 
 Of course, there is this bash shell history.  Let's try the bash history
-approach (which sounds and works way better after the first few laborious times).
+approach (which sounds and works way better after the first laborious times).
 
-The new command sequences now are given below:
+The new command sequences now are:
 
 The same vim command:
 
@@ -85,9 +86,9 @@ Then new shell command:
 # Press ENTER to execute: vim named.vim
 ```
 
-just to VIEW a change to the syntax file.  Now, it is minimized to seven (7) keystrokes.  
+to VIEW a change to the syntax file.  Now, keystrokes are down seven (7).
 
-Bah.  Surely, there is that single keystroke method to do all that jazz somewhere.  
+Bah.  Surely, there is that single keystroke method to do all that jazz somewhere.
 
 And there is.  One could do one of the followings:
 
@@ -98,18 +99,18 @@ And replace all that with a single keystroke.
 
 A single keystroke for viewing new syntaxes, instead of 18 or 7.
 
-A keystroke that will reload the new Vim syntax within your VIEW, impacted by that very syntax file we are developing.
+A keystroke that will reload the new Vim syntax within your VIEW, impacted by that syntax file we are developing.
 
 
 Single-Key Stroke Syntax Reloading
 ==================================
 
-For this single keystroke to work well, we need to stay 
-within the same VIEW (editor session of Vim editor) window 
+For this single keystroke to work well, we need to stay
+within the same VIEW (editor session of Vim editor) window
 throughout the whole time during our entire syntax
 development:  Same Vim edit session.  No opening, no closing.
 
-So, let us move those reloading of syntax commands back into a single Vim session.
+Let us move those reloading of syntax commands back into a single Vim session.
 
 Selecting Available Function Key
 --------------------------------
@@ -117,13 +118,13 @@ Selecting Available Function Key
 To execute our command sequences of reloading new syntax with a single
 keystroke, we need one available key.
 
-Preferably that key is not hogged by others.  
-That key may be already snagged by one of your many applications,
+Preferably that key is not hogged by others.
+That key may be already snagged by one of your applications,
 a window manager, or this Vim editor.
 
 Function key is a common choice for remapping of such a key.
 
-To choose a function key, we need to know what keys are available.  
+To choose a function key, we need to know what keys are available.
 Vim can list
 what keys they have already defined; we must figure out what is not taken yet.
 
@@ -163,14 +164,14 @@ Save and quit the Vim edit session, by executing within Vim session:
 :wq
 ```
 
-Next time the vim is executed, F12 key is now active and ready to use.
+Next time the vim runs, F12 key becomes active and ready to use.
 
 VIEW, VIEW, VIEW
 ================
-In the VIEW window, it will be able to stay up .... forever.  
-Never closing, never re-opening.  
+In the VIEW window, it will be able to stay up .... forever.
+Never closing, never re-opening.
 
-Pressing the `F12` key will now be able to reload your `.vimrc` and 
+Pressing the `F12` key will now be able to reload your `.vimrc` and
 ALL of your local (`~/.vim/syntax/*`) and system-wide
 (`/usr/share/vim/vim81/syntax/*`) syntax files..
 

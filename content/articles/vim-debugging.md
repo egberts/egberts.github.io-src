@@ -1,6 +1,6 @@
 title: Debugging Bind9 syntax file of Vim
 date: 2020-03-28 17:49
-modified: 2020-04-03 12:06
+modified: 2025-12-30 05:31
 status: published
 tags: bind9, dns, vim, syntax, PCRE, highlight
 category: HOWTO
@@ -9,19 +9,19 @@ summary: How to debug Vim syntax file while incorporating a new syntax.
 Debugging Vim Syntax File
 =========================
 
-Of all the things that I have tried to do in order to debug a brand-new syntax file for Vim editor, the following steps are my best and 
+Of some approaches that I have tried to do in order to debug a brand-new syntax file for Vim editor, the following steps are my best and
 easiest to use and I hope they serve you well.
 
 A simple edit command of `vim named.conf` will perform the following steps:
 
-* load the content of the `named.conf` file, 
-* makes note of its filename AND filetype, then 
+* load the content of the `named.conf` file,
+* makes note of its filename AND filetype, then
 * reads in all `ftdetect/*`files for any of its matching filename/filetype
 * using `ftdetect/<filenametype_match>` that matched and flagged by filename/filetype
 * loads corresponding `syntax/<filenametype_match>.vim` of highlighters
 * reads syntaxes then displays highlighting
 
-All that with just that one `vim <your-test-file>` command.
+All that with that one `vim <your-test-file>` command.
 
 Preparing Your Home Settings
 ----------------------------
@@ -31,7 +31,7 @@ I use Dr. Chip [`hilinks.vim`](https://github.com/kergoth/vim-hilinks) to suppor
 Starting Out Debugging
 ----------------------
 
-Two terminal sessions are required for a successful debugging of any
+Two terminal sessions are require for a successful debugging of any
 new or changed Vim syntax.
 
 1. Editing/saving the changed Vim syntax (`~/.vim/syntax/named.conf`) file
@@ -53,24 +53,24 @@ cp /etc/bind/named.conf /tmp/named.conf
 vim /tmp/named.conf
 ```
 
-Back at the first terminal, I made a one-line change 
+Back at the first terminal, I made a one-line change
 in `~/.vim/syntax/named.conf`, then saved it using Vim (`:w`) write command.
 
-At the second terminal, I edited my test-text `named.conf` file to see if I 
-had enhanced (or broke) something. 
+At the second terminal, I edited my test-text `named.conf` file to see if I
+had enhanced (or broke) something.
 
-Sure enough, I broke it ... rather badly.
+Sure enough, I broke it ... severely.
 
 Going back to the beginning, and do it over but trying with a new syntax setting.
 
 Documentation, Ugh.
 -------------------
 
-In the very beginning, I was blindly making multiple syntax changes to 
-my very own copy of an existing stock Vim syntax file.  
+In the beginning, I was haphazardly making multiple syntax changes to
+my own copy of an existing stock Vim syntax file.
 It wasn't all that intuitive (not at all) and its results were "unpleasant."
 
-Back to reading all relevant (and not-so-relevant) Vim documents, they 
+Back to reading all relevant (and not-so-relevant) Vim documents, they
 are (but not limited to):
 
 * [Patterns](http://vimdoc.sourceforge.net/htmldoc/pattern.html)
@@ -81,30 +81,30 @@ are (but not limited to):
 * [Advanced Syntax Highlighting](https://learnvimscriptthehardway.stevelosh.com/chapters/46.html)
 * [Even More Advanced Syntax Highlighting](https://learnvimscriptthehardway.stevelosh.com/chapters/47.html)
 
-Last two were really all we need but still woefully inadequate for 
+Last two were all we need but still woefully inadequate for
 a rapid startup toward the robust debugging session of its syntax file.
 
 The more changes I made to my copy of the stock Vim syntax file, the more I
-realized that I've got something brand new forming.  
+realized that I've got something brand new forming.
 
 None of the existing stock syntax exist anymore.  It's morphed enough to be on its own but with an MIT License.
 
-I had extracted, revised and published over 143 pseudo-BNF (Backus-Naur 
-Form) syntax diagrams.  Many were analyzed directly from the ISC Bind9 
+I had extracted, revised and published over 143 pseudo-BNF (Backus-Naur
+Form) syntax diagrams.  Diagrams were hand-created directly from the ISC Bind9
 source code due to the poor Bind documentation. Since I've incorporated
-so many times more syntaxes than the stock Vim `named` syntax file had, 
+more syntaxes than the stock Vim `named` syntax file had,
 I have renamed file as `bind-named.vim` in order not to
 conflict with the stock Vim syntax (`syntax/named.vim`) file.
 
 Reloading New Changes
 ---------------------
-As one makes a change to its Vim syntax file (now called 
-`syntax/bind-named.vim`) in 1st terminal session, you need to refresh 
-the viewing (2nd) terminal session just to view your new syntaxes.
+As one makes a change to its Vim syntax file (now called
+`syntax/bind-named.vim`) in 1st terminal session, you need to refresh
+the viewing (2nd) terminal session to view your new syntaxes.
 
-One method of view refresh is to perform exiting the current Vim edit 
-session on the target file being highlighted (`named.conf`), and then 
-restarting the same Vim editor session. 
+One method of view refresh is to perform exiting the current Vim edit
+session on the target file highlighted (`named.conf`), and then
+restarting the same Vim editor session.
 
 These steps have become rather tedious as:
 
@@ -112,14 +112,14 @@ These steps have become rather tedious as:
 " (adding new syntax changes) in Vim edit session
 ```
 
-and just save your syntax change (no need to ever quit the 1st session):
+and save your syntax change (no need to ever quit the 1st session):
 
 ```vim
 :w
 ```
 
 In the "viewing" (2nd) terminal session, exiting the vim editor:
-```vim 
+```vim
 :q
 ```
 then re-entering same edit session:
@@ -135,10 +135,10 @@ blind-man approach of hit-or-miss syntax changes.
 
 Programming Function Keys
 -------------------------
-Do this blind-man development cycle about 10,000 times (OK, so I'm 
+Do this blind-man development cycle about 10,000 times (OK, so I'm
 exaggerating here but the point stands),
-and you'll desperately want for a single keystroke do all the work 
-of 8 (tedious) keystrokes plus whatever the length of your test text file) 
+and you'll desperately want for a single keystroke do all the work
+of 8 (tedious) keystrokes plus whatever the length of your test text file)
 after doing each and every single tweaking of your syntax file.
 
 So let's go program some Vim function keys as our new shortcuts:
@@ -151,9 +151,9 @@ Detail Highlight Function Key
 
 I assigned the F10 function key to do the following:
 
-* Show which highlighter statement is being used at the current cursor
+* Shows which highlighter statement at the current cursor
 
-Stick this into your `vimrc` file (you do do remember where it is at?):
+Stick this into your `vimrc` file (you do remember where it is at?):
 
 ```vim
 " Show syntax highlighting macro at the cursor
@@ -163,26 +163,26 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 ```
 
 Now in your "viewing" (2nd) terminal session, the F10 key will now
-be able to show you which highlight syntax macro got used at exactly 
-where your cursor is currently at within your `named.conf` file.
+be able to show you which highlight syntax macro got used at
+where your cursor is at within your `named.conf` file.
 
-For our first F10 keypress, let's move the cursor to an empty line 
+For our first F10 keypress, let's move the cursor to an empty line
 with no highlighting done (see screen below):
 
 ![Initial session](/images/vim-syntax-bind-name-first-debug.png){: width="640" height="480" title="Vim syntax bind-named.vim file; initial view" }
 
-then press F10, and the status bar (at the bottom of 2nd terminal 
+then press F10, and the status bar (at the bottom of 2nd terminal
 screen) comes alive with information showing as:
 
 ```console
 hi<> trans<> lo<>
 ```
 
-The seemingly rather cryptic line means none of the entire 
+The seemingly rather cryptic line means none of the entire
 system's syntax files found a syntax match to where your cursor is at.
 
 Let's move the cursor around a bit more, until the cursor is over a
-yellow-highlighted word `acl`, a well-known Bind9 keyword: 
+yellow-highlighted word `acl`, a well-known Bind9 keyword:
 
 ![Initial Screen](/images/vim-syntax-bind-name-first-debug-F10.png){: width="640" height="480" title="Vim syntax file bind-named.vim: positioning over 'acl' keyword" }
 
@@ -196,46 +196,45 @@ You get this:
 hi<namedStmtKeyword> trans<namedStmtKeyword> lo<Statement>
 ```
 
-This means `namedStmtKeyword` syntax was matched to the word `acl`, 
-transitioned from `namedStmtKeyword` macro, and got highlighted with 
-a color of `Statement`.  
+This means `namedStmtKeyword` syntax matched to the word `acl`,
+transitioned from `namedStmtKeyword` macro, and got highlighted with
+a color of `Statement`.
 
 Show Me The Colors!
 -------------------
 
-I wanted to know what color `Statement` was, as well as what  available 
-colors I can in my new syntax file; to get the colors actually used 
-for the test-text file, execute in your "viewing" (2nd) Vim 
+I wanted to know what color `Statement` was, as well as what  available
+colors I can in my new syntax file; to get the colors actually used
+for the test-text file, execute in your "viewing" (2nd) Vim
 terminal for this example:
 
 ```vim
 :syntax
 ```
 
-Now you are seeing all the possible colors used for each syntax macro 
-(or lack thereof if you have forgotten).  
+Now you are seeing all the possible colors used for each syntax macro
+(or lack thereof if you have forgotten).
 
-And its `:syntax` output is 
-fed via Unix pipe through the `less` utility.  
-Use spacebar/PgUp/PgDn/Up/Down to scroll through the entire 
+And its `:syntax` output got fed using a Unix pipe through the `less` utility.
+Use spacebar/PgUp/PgDn/Up/Down to scroll through the entire
 pre-processed syntax file during this `:syntax` viewing.  Press `q` to quit.
 
 Vim `:syntax` command is that first debugging tool showing you all the
-highlight syntaxes and its coloring.  Very useful for 
+highlight syntaxes and its coloring: useful for
 one of final validations.
 
 Reload Function Key
 -------------------
 
-For the second function (F12) key, I found from StackOverflow that Vim 
+For the second function (F12) key, I found from StackOverflow that Vim
 reload (`:source $MYVIMRC`) command.  It's a nice command that
-does the equivalence (but, as I've discovered, NOT EXACTLY THE SAME) 
-thing of reloading your newly changed Vim syntax file during my typical 
+does the equivalence (but, as I've discovered, NOT THE SAME)
+thing of reloading your newly changed Vim syntax file during my typical
 development cycle as described in the first section of this page.
 
-NOTE: There may be some other disruptive Vim commands like 
-`:set ft=sh` in your `~/.vimrc` that 
-WILL actually break the ability to cleanly reload your 
+NOTE: There may be some other disruptive Vim commands like
+`:set ft=sh` in your `~/.vimrc` that
+WILL actually break the ability to cleanly reload your
 `syntax-file-under-test.vim` file: so, comment those out. I had to
 do the basic divide-and-conquer of putting this Vim command:
 
@@ -247,14 +246,14 @@ throughout my `.vimrc` file until that breakage stop breaking then commented
 out the offending line(s) (such as `set ft=sh` or `syntax off`, as I've found
 out).
 
-The reload command basically rereads the `vimrc` files (there's more than 
-one) which in turn reloads all applicable `syntax/*` files as 
-determined by its 
-filetype (`.vim/ftdetect/bind-named.vim`).  
+The reload command basically rereads the `vimrc` files (there's more than
+one) which in turn reloads all applicable `syntax/*` files as
+determined by its
+filetype (`.vim/ftdetect/bind-named.vim`).
 
 Note: You can see a total list of `vimrc` files that VIM checked upon
-during startup and read before displaying the content of your test-text 
-file being edited.  I'll show you how make a list of all files that Vim editor
+during startup and read before displaying the content during edit session of your test-text
+file.  I'll show you how make a list of all files that Vim editor
 opens:
 
 ```bash
@@ -268,14 +267,14 @@ vim named.conf
 Because of thrashing between `strace` utility and Vim editor's constant
 screen repositioning, your screen is now garbled.  No fear.
 
-Just blindly type in `:q` to quit the edit session and exit Vim editor.
+Type in `:q` to quit the edit session and exit Vim editor.
 You can then scan for files that Vim opened by doing:
 
 ```bash
 grep open /tmp/vim.strace | grep -v "No such file" | grep vim
 ```
 
-My actual output list is given below::
+My actual output list is:
 
 ```console
 openat(AT_FDCWD, "/usr/share/vim/vimrc", O_RDONLY) = 4
@@ -374,12 +373,12 @@ openat(AT_FDCWD, "/home/john/.viminfo", O_RDONLY) = 4
 openat(AT_FDCWD, "/home/john/.viminfo.tmp", O_WRONLY|O_CREAT|O_EXCL|O_NOFOLLOW, 0600) = 6
 ```
 
-You can see that Vim editor checks for many syntax files before it
-decided on `syntax/named.vim`.  That decision was made 
-when `ftdetect/named.vim` detected a filename called 
+You can see that Vim editor checks for syntax files before it
+decided on `syntax/named.vim`.  That decision got made
+when `ftdetect/named.vim` detected a filename called
 `named.conf` using a filename/filetype detection.
 
-Back to the Reloading Key, put the following near at the end 
+Back to the Reloading Key, put the following near at the end
 of your `~/.vimrc` of the file.
 
 ```vim
@@ -390,39 +389,39 @@ noremap <F12> <Esc>:source $MYVIMRC<CR>
 inoremap <F12> <C-o>:source $MYVIMRC<CR>
 ```
 
-Now you have a reload function key available at your very next 
-Vim edit session.  
+Now you have a reload function key available at your next
+Vim edit session.
 
-Any changes you make to your `~/.vim/syntax/<test.vim>` will immediately
+Any changes you make to your `~/.vim/syntax/<test.vim>` will
 show the changes made by your recent changes to highlight syntax(es)
 at the press of F12 key.
 
-I saved myself from doing 18 keystrokes and going back and forth 
+I saved myself from doing 18 keystrokes and going back and forth
 between two different terminal sessions by using this new F12 keystroke.
 
 * Now its 1st terminal, Vim `:w` command.
 * And 2nd terminal, F12 key to reload new syntax file.
 * Back and forth.
 
-OK, four keystrokes and a window switch (either by mouse or 
+OK, four keystrokes and a window switch (either by mouse or
 Alt-Tab key-combo on most Unix window managers).
 
 Still haven't started debugging yet.  Blind Man Development Cycle, still.
 
-Continuous Status 
+Continuous Status
 -----------------
 
-As I was about on my 5th of 134 pseudo-BNF syntax, more but serious 
-debugging analysis is now required.  The repeated hitting of F10 key 
-at each cursor positions was starting to drive me mad just to give me
+As I was about on my 5th of 134 pseudo-BNF syntax, more but serious
+debugging analysis is now required.  The repeated hitting of F10 key
+at each cursor positions was starting to drive me mad and to give me
 a clearer picture.
 
 While searching the Internet for a better Vim syntax debugging
-solution, I found this HiLinkTrace (`hilinks`) Vim bundle from Charles 
-Campbell (aka Dr. Chip).  It's an older version 
+solution, I found this HiLinkTrace (`hilinks`) Vim bundle from Charles
+Campbell (aka Dr. Chip).  It's an older version
 4 but it works on my latest Vim v8.1!
 
-Update: There is a later version v4m at [Dr. Chip](http://www.drchip.org/astronaut/vim/vbafiles/hilinks.vba.gz) that is detailed on his [website](http://www.drchip.org/astronaut/vim/index.html#HILINKS).
+Update: later version v4m at [Dr. Chip](http://www.drchip.org/astronaut/vim/vbafiles/hilinks.vba.gz) is on his [website](http://www.drchip.org/astronaut/vim/index.html#HILINKS).
 
 But I got mine `git clone` from [Kergoth's Github](https://github.com/kergoth/vim-hilinks).
 
@@ -447,7 +446,7 @@ cd vim-hilinks
 vim hilinks.vba
 ```
 
-And from either methods above, execute the Vimball installation 
+And from either methods above, execute the Vimball installation
 from Vim edit session:
 
 ```vim
@@ -460,15 +459,15 @@ It now installed! And ready for your next new Vim edit session.
 Activating Live HiLinks Status
 ------------------------------
 
-After that strange Vimball installation (remember, my lab is offline so 
-remote updating within Vim plugins is not an option for me), I'm now 
+After that strange Vimball installation (remember, my lab is offline so
+remote updating within Vim plugins is not an option for me), I'm now
 starting up a new "viewing" (2nd) terminal session.
 
-I see my highlight syntax macros and its highlighters in my local 
+I see my highlight syntax macros and its highlighters in my local
 Vim (`~/.vim/syntax/bind-named.vim`) syntax setting file inside
 my "editing" 1st terminal session.
 
-At the "viewing" 2nd terminal session, I activated the Live HiLinks status 
+At the "viewing" 2nd terminal session, I activated the Live HiLinks status
 by executing:
 
 ```vim
@@ -481,7 +480,7 @@ The status bar then comes alive with:
 SynStack:  namedStmtKeyword HltTrace: namedStmtKeyword->namedHLStatement->Statement fg<11> bg<>
 ```
 
-My cursor was over the yellow `acl` keyword when I saw the status bar. The 
+My cursor was over the yellow `acl` keyword when I saw the status bar. The
 breakdown of the status bar is:
 
 * `SynStack` - Syntax stack content
@@ -490,16 +489,16 @@ breakdown of the status bar is:
 * `bg` - Background color used
 
 For `SynStack`, the syntax stack content is `namedStmtKeyword`.  This means
-that the nesting part of syntax macro calling other 
+that the nesting part of syntax macro calling other
 syntax macro (calling other syntax macro) is
-only one level deep here.  First syntax encountered.  
+one level deep here.  First syntax encountered.
 Nothing fancy.  Nice and simple.
 
 For `HltTrace`, shows which highlighting color got used.
-Each highlight name (`->`) is an alias for another level.  First one is the 
-top-level highlight color name associated with the SynStack 
+Each highlight name (`->`) is an alias for another level.  First one is the
+top-level highlight color name associated with the SynStack
 (coincidentally also named `namedStmtKeyword`).  Each alias takes us
-closer to the actual color used, or may be just no alias but a direct
+closer to the actual color used, or may be a no alias but a direct
 color assignment.  `namedHLStatement` is a generic
 `syntax/bind-named.vim`-specific alias.  And `Statement` is a default Vim
 color.
@@ -532,12 +531,12 @@ Bigger And Deeper
 -----------------
 
 As I developed more nested syntaxes and used a longer syntax function name,
-the one-line status bar finally got overrun and made a screen mess of things.
+the one-line status bar got overrun and made a screen-mess of garbled text.
 
 I fixed that by expanding the status bar into a 2-line status bar.
 
-To activate a 2-line status at the bottom of your Vim terminal session 
-and start showing your longer highlight debug information as you move 
+To activate a 2-line status at the bottom of your Vim terminal session
+and start showing your longer highlight debug information as you move
 your cursor around:
 
 ```bash
