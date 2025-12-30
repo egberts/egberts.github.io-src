@@ -709,12 +709,12 @@ READERS = {'html': None}
 #*default* }
 MARKDOWN = {
   'extension_configs': {
-    'markdown.extensions.smarty': {},
     'markdown.extensions.extra': {},
+    'markdown.extensions.toc': {'baselevel': 1},
+    'markdown.extensions.codehilite': {'css_class': 'codehilite'},
+    'markdown.extensions.smarty': {},
     'markdown.extensions.footnotes': {},
     'markdown.extensions.meta': {},
-    'markdown.extensions.toc': {'baselevel': 1},
-    'markdown.extensions.codehilite': {'css_class': 'codehilite'}
   },
   'output_format': 'html5'}
 

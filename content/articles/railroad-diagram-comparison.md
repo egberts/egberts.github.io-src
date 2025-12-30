@@ -1,6 +1,6 @@
 title: Comparison of Railroad Diagrams
 date: 2024-07-01 08:43
-status: draft
+status: published
 tags: railroad diagram, EBNF, ABNF, BNF, SRFB
 category: research
 summary: A comparison of different railroad diagram tools
@@ -37,20 +37,12 @@ Online tools are:
 
 PyRailroad
 ====
-Makes excellent use of Tab Atkin's Railroad-Diagram (Railroad package).A
+Makes excellent use of Tab Atkin's Railroad-Diagram (Railroad package).
 
 * https://epithumia.github.io/pyrailroad/#
 
 
 See https://egbert.net/blog/articles/pelican-metadata.html for details
-
-[jtable caption="This is caption" separator="|" th=0 ai="1"]
-# caption - the table caption
-# separator - default is comma
-# th - table header (=0 means disable)
-# ai - auto-index, adds a column numbering starts at 1
-
-# : if the date is not specified and DEFAULT_DATE is set to 'fs', Pelican will rely on the file’s “mtime” timestamp, and the category can be determined by the directory in which the file resides.
 
 
 References

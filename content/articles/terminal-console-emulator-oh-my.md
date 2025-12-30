@@ -1,6 +1,6 @@
 title: Terminal, console, emulator, oh, my!
 date: 2025-01-13 08:18
-status: hidden
+status: skip
 tags: terminal, text terminal, console terminal, raster terminal, vector terminal
 category: research
 summary: 
@@ -28,16 +28,3 @@ Today, Linux terminal (`/dev/tty0`) console is one example of a character-orient
 Pseudo terminal is a pseudo-device pair that provides a text terminal interface without 
 associated virtual console, computer terminal or serial port hardware.
 
-
-
-
-[jtable caption="This is caption" separator="," th=1 ai="1"]
-# caption - the table caption
-# separator - default is comma
-# th - table header (=0 means disable)
-# ai - auto-index, adds a column numbering starts at 1
-columnA, columnB, columnC
-row1, dataB1, dataC1
-row2, dataB2, dataC2
-# : if the date is not specified and DEFAULT_DATE is set to 'fs', Pelican will rely on the file’s “mtime” timestamp, and the category can be determined by the directory in which the file resides.
-[/jtable]
