@@ -1,6 +1,6 @@
 title: Adding An Option to an SSH client OR SSH session using OpenSSH?
 date: 2022-05-03 05:10
-modified: 2025-07-13 02:27
+modified: 2026-01-03T0328
 status: published
 tags: SSH, OpenSSH
 category: HOWTO
@@ -21,7 +21,7 @@ The variable name of all option setting commands in OpenSSH are case-insensitive
 
 # Command Line Interface (CLI)
 
-At the command line, option `-o` is one way to try out a SSH setting in question before deciding into making it a permanent setting:
+At the command line, option `-o` is one way to try out an SSH setting in question before deciding into making it a permanent setting:
 
 ```console
 $ ssh -oServerAliveInterval=60 host.domain.tld
@@ -30,7 +30,7 @@ $ ssh -oServerAliveInterval=60 host.domain.tld
 $
 ```
 The above example demonstrate a temporary passing of `serveraliveinterval=60`,
-which is 60 seconds, after which if no data has been received 
+which is 60 seconds, if no data has been received 
 from the server, ssh(1) will send a message 
 through the encrypted channel to request a 
 response from the server.  The default is 0, 
@@ -182,7 +182,7 @@ configuration approach.
 Multi-file organize settings using subdirectory(s) and multiple files.
 
 This multi-file approach makes it possible for OTHER projects or 
-packages to drop-in their needed settings without being disruptive
+packages to drop into their needed settings without being disruptive
 toward the user's or system's settings.
 
 Most popular approaches are currently used by many Linux distros:
@@ -227,7 +227,7 @@ match criteria keyword, description
 `host`, Fully-qualified domain name of the host. `Match host <hostname>` is the same as `Host <hostname>`
 `user`, username that was passed to at the command line (CLI) interface.
 `localuser`, actual username of the current shell session
-`exec`, an executable that is run at `$USER` session to determine whether it returns a 0 or not before applying settings under `Match exec`.  Useful as an access control method.  One can pass on the user's public key and see if the user is authorized  or not.
+`exec`, an executable that is run at `$USER` session to determine whether it returns a 0 or not before applying settings under `Match exec`.  Useful as an access control method.  One can pass on the user's public key and see if the user is authorized or not.
 `originalhost`, exact name that was entered at the command line before any effort of canonicalization got applied (using the `search` domainname from `/etc/resolv.conf` and appending to the end of that CLI hostname.
 `canonical`
 `final`
@@ -319,7 +319,7 @@ Pretty much the same for SSH client, except the `Match` criteria are:
 
 # SSH Control Sequence Code
 
-Once a SSH session is up and running, there is a hidden menu that is accessible by your control sequence.
+Once an SSH session is up and running, there is a hidden menu that is accessible by your control sequence.
 
 So, how do you start this control sequence? First, make sure "Enter" was the last key you pressed, as the SSH client won't notice the control sequence otherwise. Next, press the tilde character (shift + backtick) followed by another character.
 ```console

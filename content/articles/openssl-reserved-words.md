@@ -1,6 +1,6 @@
 title: How to read an OpenSSL configuration file
 date: 2021-11-18 11:00
-modified: 2025-07-15T03:31
+modified: 2026-01-03T04:32
 status: published
 tags: OpenSSL, environment variables
 category: research
@@ -38,12 +38,12 @@ syntax for all its simplicity.
 
 ## Why So Complicated?
 
-I do do believe that the OpenSSL configuration file syntax was 
+I do believe that the OpenSSL configuration file syntax was 
 originally designed to perform testing and fuzzing of its many settings; 
 later, it became the de facto configuration for its various 
 certificate creations.
 
-So when you execute `openssl s_client` or `openssl s_server`, a whole new keyword set of OpenSSL configuration get used (other than the default ones that we all are familiar with which is `/etc/ssl` (or `/etc/pki/tls` for RedHat).
+So when you execute `openssl s_client` or `openssl s_server`, a whole new keyword set of OpenSSL configuration get used other than the default ones that we all are familiar with which is `/etc/ssl` (or `/etc/pki/tls` for RedHat).
 
 # INI Format
 The OpenSSL config file is formatted much like a classic INI file.
@@ -197,11 +197,11 @@ Beyond standard INI for key value and accepting just an ordinary string type, Op
 
 And OpenSSL value in key-value assignments may be:
 
-  * simple data (like "`sha256`" or "`/etc/ssl`"
+  * simple data (like "`sha256`" or "`/etc/ssl`")
   * section name
   * another key name, using "`$<variable>`"
   * list of key or section name, comma-separated
-  * key name can be used to reference a section name, thus including a group even more key-values if such key name are used as value.
+  * key name can be used to reference a section name, thus including a group even more key-values if such key name is used as value.
   * environment variables reference from its current shell session are accessible for assignments into a key (e.g., "`$ENV::HOME`")
 
 
@@ -499,7 +499,7 @@ Ensures `foo$bar` is literal, not a variable reference.
   
 
 
-HISTORICAL: `dollarid` pragma was introduced so that other operating systems who uses '`$`' in its shell variable names can use OpenSSL (e.g., DEC Vax VMS, can also use "`SYS$DISK`" ) since 2017.
+HISTORICAL: `dollarid` pragma was introduced so that other operating systems who use '`$`' in its shell variable names can use OpenSSL (e.g., DEC Vax VMS, can also use "`SYS$DISK`" ) since 2017.
 
 
 ##### `includedir`
@@ -821,7 +821,7 @@ Otherwise, key name with those suffix will be treated just as a special notation
 
 Certain suffixes are only found within `[req]`, `[ca]` and `[oid_section]` and are treated as such by `openssl` parser.
 
-Using suffixes outside of `[req]`, `[ca]`, and `[oid_section]` are treated just like normal key name, so avoid using the special suffix unless needed.
+Using suffixes outside `[req]`, `[ca]`, and `[oid_section]` are treated just like normal key name, so avoid using the special suffix unless needed.
 
 Suffixes that are expected and processed differently by `openssl` parser are detailed below:
 

@@ -4,7 +4,7 @@ modified: 2022-03-19 17:05
 status: published
 tags: OpenSSL
 category: HOWTO
-summary: How to simply changing prompt for distinguished names (DN) in OpenSSL
+summary: How to simply change the prompt for distinguished names (DN) in OpenSSL
 slug: openssl-prompt
 lang: en
 private: False
@@ -12,8 +12,7 @@ private: False
 The Art of Prompt (in OpenSSL)
 ==============================
 
-During the creation of a request certificate, the distinguished names
-goes into the request cert.
+During the creation of a request certificate, the distinguished names go into the request cert.
 
 Distinguished names covers:
 
@@ -149,7 +148,7 @@ localityName_default		= none
 0.organizationName		= Organization Name (eg, company)
 0.organizationName_default	= Internet Widgits Pty Ltd
 
-# we can do this but it is not needed normally :-)
+# we can do this, but it is not needed normally :-)
 #1.organizationName		= Second Organization Name (eg, company)
 #1.organizationName_default	= World Wide Web Pty Ltd
 
@@ -187,7 +186,7 @@ localityName			= Locality Name (eg, city)
 0.organizationName		= Organization Name (eg, company)
 0.organizationName_default	= Internet Widgits Pty Ltd
 
-# we can do this but it is not needed normally :-)
+# we can do this, but it is not needed normally :-)
 #1.organizationName		= Second Organization Name (eg, company)
 #1.organizationName_default	= World Wide Web Pty Ltd
 

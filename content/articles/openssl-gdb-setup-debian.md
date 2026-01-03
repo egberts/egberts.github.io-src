@@ -1,9 +1,10 @@
 title: GDB Setup for OpenSSL for Debian
 date: 2022-03-19 19:02
+modified: 2026-01-03T0803
 status: published
 tags: gdb, OpenSSL
 category: HOWTO
-summary: How to properly setup OpenSSL for a gdb debug session in Debian.
+summary: How to properly setup OpenSSL for a gdb debug session on Debian.
 lang: en
 private: False
 

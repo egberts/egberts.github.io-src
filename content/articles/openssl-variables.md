@@ -1,6 +1,6 @@
 title: Using Variables in a OpenSSL Config File
 date: 2022-03-20 11:04
-modified: 2025-07-13 03:15
+modified: 2026-01-03T04:16
 status: published
 tags: OpenSSL, environment variables
 category: HOWTO
@@ -51,7 +51,7 @@ The above is an error: the `issuer_url` variable is scoped to only be used under
 
 It is common to put variables in the default section.  Default sections are the outermost scope before the first section of a config file.  
 
-There is also an optional `[ default ]` section.  Optional `[ default ]` is useful in add-on config files when one wishes to overwrite a default setting.  Such add-on config file  can be then be appended to the default `openssl.cnf` file via `-reqexts` or `-extensions` CLI option.
+There is also an optional `[ default ]` section.  Optional `[ default ]` is useful in add-on config files when one wishes to overwrite a default setting.  Such add-on config file can be then be appended to the default `openssl.cnf` file via `-reqexts` or `-extensions` CLI option.
 
 ```ini
 issuer_url = https://ocsp.mysite.test:80

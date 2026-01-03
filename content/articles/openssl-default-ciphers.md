@@ -1,5 +1,6 @@
 title: Change Default TLS Setting in OpenSSL, System-Wide
 date: 2022-03-20 06:16
+modified: 2026-01-03T0911
 status: published
 tags: OpenSSL, TLS
 category: HOWTO
@@ -12,7 +13,7 @@ Many utilities and tools often make uses of OpenSSL libraries.
 
 Bet you did not know that those APIs in `openssl.so.1.1` library all often consult the `/usr/lib/ssl/openssl.cnf` as a default?  Even if you executed a simple `openssl version`.
 
-A long long time ago and far away, I had once thought that a shared library should not reference a fixed file location or compiled-in a hardcoded file specification.  Time has changed.
+Long time ago and far away, I had once thought that a shared library should not reference a fixed file location or compiled-in a hardcoded file specification.  Time has changed.
 
 Even recently, I thought it was hardcoded ONLY (and ONLY) to `/etc/ssl/openssl.cnf`, but nooooooooo.
 
@@ -20,10 +21,10 @@ You can easily prove it without looking at the OpenSSL code:
 ```console
 strace -f /usr/bin/openssl verrsion 2>&1 | grep open
 execve("/usr/bin/openssl", ["/usr/bin/openssl", "version"], 0x7ffe9e472dd0 /* 44 vars */) = 0
-<snipped many gibberish output>
+<snipped gibberish output>
 access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
-<snipped many gibberish output>
+<snipped gibberish output>
 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
@@ -123,7 +124,7 @@ A custom-named `default_conf` section name is assigned to `openssl_conf`.  It is
 
 `[ssl_sect]` is a new section to contain TLS/SSL settings.
 
-`system_default` is a built-in attributes to hold system default settings.
+`system_default` is a built-in attribute to hold system default settings.
 
 `system_default_sect` is the section name to find and take in more settings; the name is user-definable.
 
@@ -131,7 +132,7 @@ A custom-named `default_conf` section name is assigned to `openssl_conf`.  It is
 
 `Ciphersuites` is the new built-in OpenSSL (v1.1+) attributes.  It contains a list of algorithms to support.
 
-`TLS_CHACHA20_POLY1305_SHA256:TLS_AES_256_GCM_SHA384:TLS_AES_128_GCM_SHA256` is the author's choice of algorithms to use.  It is not the best, could be better, but it a demonstration that puts ChaCha20-Poly1305 in the forefront during the TLS negotiation stage of server/client algorithms.
+`TLS_CHACHA20_POLY1305_SHA256:TLS_AES_256_GCM_SHA384:TLS_AES_128_GCM_SHA256` is the author's choice of algorithms to use.  It is not the best, could be better, but it is a demonstration that puts ChaCha20-Poly1305 in the forefront during the TLS negotiation stage of server/client algorithms.
 
 `CipherString` is an existing built-in OpenSSL attributes.  It contains a special notation to control availability of selected TLSv1.2 algorithms.
 

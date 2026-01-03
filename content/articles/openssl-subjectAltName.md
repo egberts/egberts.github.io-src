@@ -1,6 +1,6 @@
 title: Use subjectAltName (SAN) in OpenSSL
 date: 2022-03-20 11:37
-modified: 2022-04-04 10:28
+modified: 2026-01-03T09:29
 status: published
 tags: OpenSSL, X509v3
 category: HOWTO
@@ -32,7 +32,7 @@ $ openssl x509 -noout -text -in <your_PEM_file>
 ```
 and look for `Extended X509v3 Key Usage:`.  If it is missing, there is no `serverAuth`.
 
-`serverAuth` and `clientAuth` certificates are used by web servers and any endpoint communications that needs a TLS protocol cover (email, REST API, IM).
+`serverAuth` and `clientAuth` certificates are used by web servers and any endpoint communications that need a TLS protocol cover (email, REST API, IM).
 
 
 
@@ -76,7 +76,7 @@ CA certificate should not use `subjectAltName`; It didn't say MUST NOT, so they 
 
 `subjectAltName` for CA certificates are not used in the same way that "web servers" expect them to be used.  
 
-Often times, it is just a simply description inserted by CA administrator of their own choosing.
+Often times, it is just a simple description inserted by CA administrator of their own choosing.
 
 Other Certificates
 ------------------

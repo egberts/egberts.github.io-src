@@ -1,5 +1,6 @@
 title: Many Ways to Pass a Password to OpenSSL
 date: 2022-03-19 07:32
+modified: 2026-01-03T0833
 status: published
 tags: OpenSSL, environment variables
 category: HOWTO
@@ -23,7 +24,7 @@ and by methods:
 * by an environment variable name (`env:`)
 * by a UNIX file descriptor (`fd:`)
 
-Also password file can be:
+Also, password file can be:
 
 * unsecured
 * secured by your choice of a digest algorithm
@@ -36,7 +37,7 @@ pass the password directly on the command line to `openssl`
 openssl req ... -passin 'pass:mysecretpassword' ...
 ```
 
-Of course, be mindful that your shell history will be recording this unless your shell setting has something like `HISTSIZE=0` to disable history recording.  Also, do not forget the memory of your terminal emulator (eg. scrollback line count, memory buffer, copy buffer).  
+Of course, be mindful that your shell history will be recording this unless your shell setting has something like `HISTSIZE=0` to disable history recording.  Also, do not forget the memory of your terminal emulator (e.g. scrollback line count, memory buffer, copy buffer).  
 
 Just might be easier to avoid this method, so read on.
 
@@ -66,7 +67,7 @@ where `<filespec>` is the filename, relative filename, or absolute file specific
 Password by Environment Variable
 --------------------------------
 
-To create an secured password file by environment variable:
+To create a secured password file by environment variable:
 ```bash
 export MY_PASSWORD="mysecretpassword"
 ```
@@ -86,7 +87,7 @@ To pass a password file by UNIX pipe (file descriptor):
 echo "mysecretpassword" | openssl req ... -passin 'fd:1' ...
 ```
 
-Also there is a `stdin` option (which is equivalent to `fd:1`).
+Also, there is a `stdin` option (which is equivalent to `fd:1`).
 
 ```bash
 echo "mysecretpassword" | openssl req ... -passin stdin ...
@@ -97,7 +98,7 @@ Securing A Password File
 
 The password file also can be secured using any one of the digest command options available.
 
-To find the available digests, the `openssl req -help` command will output many options related to the `[req]` section and creation of CSR certificate;, please noticed the `-*` option (at the beginning of the output).  That `-*` is the help notation for many-digest options.
+To find the available digests, the `openssl req -help` command will output many options related to the `[req]` section and creation of CSR certificate;, please notice the `-*` option (at the beginning of the output).  That `-*` is the help notation for many-digest options.
 
 To list the available digest command options, execute:
 ```console
@@ -125,7 +126,7 @@ Safely Storing Password File
 
 If you are storing many different passwords for creating a large CA PKI tree for research or white lab uses, it may make sense to hardcode the same password for all certificates.
 
-If many people are submitting different passwords to the creator of certificates(CA administrator), then the password MUST BE salted  and then to to pass the salted password into the `openssl` PKI system.
+If many people are submitting different passwords to the creator of certificates(CA administrator), then the password MUST BE salted  and then to pass the salted password into the `openssl` PKI system.
 
 `openssl` has a `passwd`-like command.  `openssl passwd` takes one raw password (from many input methods listed above) and creates a salted password (much like UNIX `passwd` would do) for safer storage in a filesystem.  Unfortunately, this feature has a default salt and iteration settings baked-in, which isn't so bad but definitely better than stored in raw form.
 

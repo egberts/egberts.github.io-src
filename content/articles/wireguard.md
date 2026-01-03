@@ -1,6 +1,6 @@
 title: WireGuard, Systemd, Netfilter
 date: 2020-08-30 08:01
-date: 2025-12-30 05:37
+modified: 2025-12-30 05:37
 status: published
 tags: wireguard, systemd, netfilter
 category: HOWTO
