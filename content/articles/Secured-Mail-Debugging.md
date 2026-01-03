@@ -1,6 +1,6 @@
 title: Secured Mail and DNS debugging
 date: 2020-05-12 09:03
-modified: 2022-04-04 10:31
+modified: 2026-01-03T08:32
 status: published
 tags: TLSA, DANE, DNSSEC, SMTP, mail, submissions, IMAP, OPENPGPKEY, DKIMv1
 category: HOWTO
@@ -146,15 +146,15 @@ DMARC Aggregate Reports and are sent to the email address or addresses
 specified in the domain's DMARC record.
 
 ### DMARC Tags ###
-There are a total of 11 tags that can be applied to a DMARC policy. Of those 11, the "v" and "p" tags are required and we strongly recommend the "rua" tag as well in order to receive the reports. Below is a full list of tags that can be added to a DMARC record.
+There are a total of 11 tags that can be applied to a DMARC policy. Of those 11, the "v" and "p" tags are required, and we strongly recommend the "rua" tag as well in order to receive the reports. Below is a full list of tags that can be added to a DMARC record.
 
 [jtable]
 Tag, Description 	 
 Version (v), The v tag is required and represents the protocol version. An example is v=DMARC1
 Policy (p), The required p tag demonstrates the policy for domain (or requested handling policy). It directs the receiver to report, quarantine, or reject emails that fail authentication checks. Policy options are: 1) None 2) Quarantine or 3) Reject. 
 Percentage (pct), This DMARC tag specifies the percentage of email messages subjected to filtering. For example, pct=25 means a quarter of your company’s emails will be filtered by the recipient.
-RUA Report Email Address(s) (rua), This optional tag is designed for reporting URI(s) for aggregate data. An rua example is rua=mailto:CUSTOMER@for.example.com.
-RUF Report Email Address(s) (ruf), the ruf (like the rua tag) designation is an optional tag. It directs addresses to which message-specific forensic information is to be reported (i.e., comma-separated plain-text list of URIs). An ruf example is ruf=mailto:CUSTOMER@for.example.com. 
+RUA Report Email Address(s) (rua), This optional tag is designed for reporting URI(s) for aggregate data. An RUA example is rua=mailto:CUSTOMER@for.example.com.
+RUF Report Email Address(s) (ruf), the ruf (like the rua tag) designation is an optional tag. It directs addresses to which message-specific forensic information is to be reported (i.e., comma-separated plain-text list of URIs). An RUF example is ruf=mailto:CUSTOMER@for.example.com. 
 Forensic Reporting Options (fo), The FO tag pertains to how forensic reports are created and presented to DMARC users. 
 ASPF Tag (aspf), The aspf tag represents alignment mode for SPF. An optional tag aspf=r is a common example of its configuration. 
 ADKIM Tag (adkim), the optional adkim (similiar to aspf) tag is the alignment mode for the DKIM protocol. A sample tag is adkim=r. 
@@ -180,7 +180,7 @@ Sender Policy Filter is one such information that we need to store in TXT RCODE.
 example.invalid.  IN TXT  v=spf1 a -all
 ```
 
-Testing this SPF intensively can be done online [in MxToolbox.com](https://mxtoolbox.com/spf.aspx) which will validate your SPF against the Internet and produce results in easy to read format comprising of green indicators (pass) or yellow/red indicators (warn/fail).
+Testing this SPF intensively can be done online [in MxToolbox.com](https://mxtoolbox.com/spf.aspx) which will validate your SPF against the Internet and produce results in easy to read format constisting of green indicators (pass) or yellow/red indicators (warn/fail).
 
 ## DKIMC ##
 

@@ -1,5 +1,6 @@
 title: `authorized_keys` file for OpenSSH
 date: 2022-03-24 07:36
+modified: 2026-01-03T07:37
 status: published
 tags: OpenSSH
 category: research
@@ -26,7 +27,7 @@ Both files are used in the order listed above.
 
 UNIX newline is used for EOL markers.  Use `dos2unix` utility to convert as needed.
 
-Whitespace is used to separate the values between each columns.
+Whitespace is used to separate the values between each column.
 
 
 Options column in `authorized_keys`

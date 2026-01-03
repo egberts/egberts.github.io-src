@@ -1,6 +1,6 @@
 title: Scanlogd and Fail2ban
 date: 2020-10-03 23:11
-modified: 2020-10-04 08:11
+modified: 2026-01-03 08:12
 status: published
 tags: fail2ban, scanlogd
 category: HOWTO
@@ -44,7 +44,7 @@ with the IP addresses that you are defending against.
 
 Setting up Scanlogd
 -------------------
-Current version v2.2.5 is still stuck in the SysV init days so there
+Current version v2.2.5 is still stuck in the SysV init days, so there
 is no systemd service unit file; but that gets automatically generated
 by systemd-sysv-generator.  The service name is `scanlogd.service`.
 
@@ -61,7 +61,7 @@ Fail2ban
 Now we need two more configuration files for fail2ban.
 
 * filter - To extract the IP address from each line in scanlogd file.
-* jail - to take action against these IP
+* jail - to take action against this IP address
 
 Fail2ban - Filter
 =================
@@ -86,7 +86,7 @@ maxretry = 1
 ; bantime should be longer than 1 week
 bantime = 1w
 ```
-What the configuration will do is enable the filter, read the  scanlogd.alert 
+What the configuration will do is enable the filter, read the `scanlogd.alert` 
 file, and all offenders are not allowed to try more than ONCE
 and are banned from using this host for 1 week.
 

@@ -1,5 +1,6 @@
 title: Postfix config ChangeLog
 date: 2020-12-23 11:00
+modified: 2026-01-03T0901
 status: published
 tags: postfix
 category: research
@@ -13,7 +14,7 @@ to the various keywords used in `main.cf` config file of Postfix.
 Only version 3.4.11 to 3.5.8 were examined on Debian 11 (bullseye/sid).
 
 Postfix has a utility called `postconf` that will let you examine,
-change, or validate  the `main.cf` config file, currently in 
+change, or validate the `main.cf` config file, currently in 
 `/etc/postfix` or show its compiled-in default settings which we shall use here.
 
 Checked against Postfix from version 3.4.11 to 3.5.8.
@@ -55,6 +56,6 @@ include file.
 
 Exceptions
 ==========
-v3.4.2 thru v3.4.10 did not compile due to major changes in libc include files so these versions were skipped.
+v3.4.2 thru v3.4.10 did not compile due to major changes in libc include files, so these versions were skipped.
 
 v3.4.0 thru v3.4.1 does not support Linux r5 due to its usage of the obsoleted SOCKADDR\_SIZE macro (and a few other obsoleted macro defines).

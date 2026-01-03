@@ -1,6 +1,6 @@
 title: Fine-tuning SSH authorized_keys
 date: 2021-10-26 08:00
-Modified: 2022-03-15 07:59
+Modified: 2026-01-03 07:59
 status: published
 tags: ssh, OpenSSH
 category: HOWTO
@@ -15,7 +15,7 @@ Often times, you want to govern how the SSH shell session should behave
 for a specific SSH client user.
 
 This can be done if the SSH client user supplied its own public key for
-inclusion into the remote SSH server (in `/home/user/.ssh/authorized_keys`.
+inclusion into the remote SSH server (in `/home/user/.ssh/authorized_keys`).
 
 There are several options in which to tack on to a specific line of the
 `authorized_keys` file.

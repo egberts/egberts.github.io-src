@@ -1,5 +1,6 @@
 title: Comparison of Railroad Diagrams
 date: 2024-07-01 08:43
+modified: 2026-01-03T0844
 status: published
 tags: railroad diagram, EBNF, ABNF, BNF, SRFB
 category: research
@@ -8,7 +9,7 @@ lang: en
 private: False
 
 
-A quick overview of all file format needed to construct railroad diagram and its comparison.
+A quick overview of all file formats needed to construct railroad diagram and its comparison.
 
 The starter list of railroad format is:
 

@@ -1,6 +1,6 @@
 title: How to Set Up a Bastion SSH Server
 date: 2022-03-15 0619
-modified: 2022-03-19 04:38
+modified: 2026-01-03 04:38
 status: published
 tags: ssh, OpenSSH
 category: HOWTO
@@ -17,16 +17,16 @@ The following are the best practices while configuring a bastion host
 
 SSH Bastion Server is the most secured of any SSH server configuration: SSH Jump Server or SSH Proxy Server are most useful when used within the enterprise network or non-Internet part of your network (e.g. homeLAN, small-medium-business network).
 
-Well, maybe except for the proprietary Cloudflare SSH server which also boast secured logging of any and all SSH commands that goes through such a SSH bastion server.
+Well, maybe except for the proprietary Cloudflare SSH server which also boast secured logging of any and all SSH commands that goes through such an SSH bastion server.
 
-Typical interaction with a SSH bastion server:
+Typical interaction with an SSH bastion server:
 
 
-Step 1: Adding the private key (PEM file) to the key chain. This allows the user to access the private instances without copying to the bastion host. This adds an additional layer of security.
+Step 1: Adding the private key (PEM file) to the keychain. This allows the user to access the private instances without copying to the bastion host. This adds additional layer of security.
 ```console
 $ ssh-add -k <PEM_file_name>
 ```
-Step 2: Check whether the private key is properly added to the key chain
+Step 2: Check whether the private key is properly added to the keychain
 ```console
 $ ssh-add -L
 ```
@@ -69,20 +69,20 @@ Some example uses of bastion SSH server are:
 * * System-admin remote site maintenance
 
 
-How Is It Different than SSH Jump Server?
+How Is It Different from SSH Jump Server?
 -----------------------------------------
 A Jump Server is intended to breach the gap between two security zones.
-The intended purpose here is to have a gateway to access something inside of the security zone, from the DMZ.
+The intended purpose here is to have a gateway to access something inside the security zone, from the DMZ.
 
-A SSH Jump Server is
-where a user can login onto the host and then
+SSH Jump Server is
+where a user can log in onto the host and then
 forward on to another (but internal) SSH server.
 
 
-The key difference here is whether such a SSH user will get drop down to a shell or not:
+The key difference here is whether such an SSH user will get drop to a shell or not:
 
-- bastion host gets user a shell, and makes use of two separate SSH processes (as a security feature).  This is the only (yet extremely powerful) way to get to be able to use a `ssh` client.
-- jump host gets no shell, by leveraging a single SSH process to receive then forward a SSH connection without making a use of any local TTY device.  Downside is that there is often poor auditing of internal SSH connections being multiplexed through its main SSH TCP connection.
+- bastion host gets user a shell, and makes use of two separate SSH processes (as a security feature).  This is the only (yet extremely powerful) way to get to be able to use an `ssh` client.
+- jump host gets no shell, by leveraging a single SSH process to receive then forward an SSH connection without making a use of any local TTY device.  Downside is that there is often poor auditing of internal SSH connections being multiplexed through its main SSH TCP connection.
 
 
 Audit, Logging, Compliance
@@ -117,7 +117,7 @@ SSH connection with following `sshd_config` settings:
 
 And bastion server must not open nor serve any other network ports than the SSH port itself.
 
-For SMB (small and medium businesses), SSH clients should be forced to use their read-only keys OUTSIDE of their `\$HOME` directory.  The example `sshd_config` snippet is:
+For SMB (small and medium businesses), SSH clients should be forced to use their read-only keys OUTSIDE their `\$HOME` directory.  The example `sshd_config` snippet is:
 
 - `AuthorizedKeysFile /etc/ssh/keys/%u`
 
@@ -127,7 +127,7 @@ This `AuthorizedKeysFile` method eases the SMB system administrator's duty to th
 
 After the above setup is deployed, this allows for an easy log-through from outside world to one of your internal host with the following command:
 
-  ssh -J finaluser@finalhost bastionuser@bastion.domain.tld
+    ssh -J finaluser@finalhost bastionuser@bastion.domain.tld
 
 OS Configuration for Bastion SSH 
 ================================

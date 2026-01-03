@@ -1,6 +1,6 @@
 Title: OpenSSH Overview
 Date: 2016-09-24T12:08
-Modified: 2025-12-30T05:42
+Modified: 2026-01-03T05:42
 Status: published
 Tags: ssh, OpenSSH, environment variables
 Category: research
@@ -76,7 +76,7 @@ Most commonly, I use tilde-period (~.) to close an unresponsive session,
 like when a firewall has closed my connection. BREAK is useful for
 at getting back into a terminal server console or
 getting the attention of network equipment. The command line doesn’t do
-much, but you can alter forwards from it. I’ve never used it but it’s
+much, but you can alter forwards from it. I’ve never used it, but it’s
 probably handy for troubleshooting if your tunnels aren’t working right:
 
 ```ssh
@@ -608,7 +608,7 @@ BatchMode no
 #    disables the use of an authentication agent.  If
 #    the string "SSH_AUTH_SOCK" is specified, the
 #    location of the socket will be read from the
-#    SSH_AUTH_SOCK environment variable.  Otherwise
+#    SSH_AUTH_SOCK environment variable.  Otherwise,
 #    if the specified value begins with a ‘$’
 #    character, then it will be treated as an
 #    environment variable containing the location of

@@ -1,5 +1,6 @@
 title: Debugging Python executable and libraries
 date: 2020-10-13 12:00
+modified: 2026-01-3T1201
 status: published
 category: HOWTO
 tags: Python, debug, Pelican
@@ -116,12 +117,12 @@ IPython Magic Mode
 
 You can use IPython's `%pdb` magic. Just call `%pdb` in IPython and when 
 an error occurs, you're automatically dropped to ipdb. 
-While you don't have the stepping immediately, you're in `ipdb` afterwards.
+While you don't have the stepping immediately, you're in `ipdb` afterward.
 All pdb command options are then available.
 
 This makes debugging individual functions easy, as you can just load 
 a file with `%load` and then run a function. 
-You could force an error with an assert at the right position.
+You could force an error with assertion at the right position.
 
 `%pdb` is a line magic. Call it as `%pdb on`, `%pdb 1`, `%pdb off` 
 or `%pdb 0`. If called without argument it works as a toggle.

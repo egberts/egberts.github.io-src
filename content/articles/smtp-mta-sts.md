@@ -1,14 +1,15 @@
 title: Disabling MTA-STS for Your Mail Server
 date: 2022-04-14 11:13
+modified: 2026-01-03T1113
 status: published
 tags: MTA-STA, SMTP, mail
 category: research
-summary: Was curious about MTA-STS and how it is used for a SMTP mail transport agent (MTA).
+summary: Was curious about MTA-STS and how it is used for an SMTP mail transport agent (MTA).
 slug: smtp-mta-sts
 lang: en
 private: False
 
-This article details the decreasingly use of `mta-sts` in SMTP mail transport agent.  And why we should set this up just to then disable this 'mta-sts'.
+This article details the decreasing use of `mta-sts` in SMTP mail transport agent.  And why we should set this up just to then disable this 'mta-sts'.
 
 
 # Brief History of Secured SMTP

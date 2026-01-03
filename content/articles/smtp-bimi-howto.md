@@ -1,6 +1,6 @@
 title: HOWTO BIMI-fy Your Domain
 date: 2022-04-14 11:13
-modified: 2025-07-13 02:46
+modified: 2026-01-03T02:46
 status: published
 tags: BIMI, SMTP, mail, SPF, DMARC, DKIM
 category: HOWTO
@@ -54,7 +54,7 @@ Google protects their BIMI logo from being used by spammers by mandating a signe
 
 So, you still want your logo plastered and viewed next to each email that your domain sent?  To do BIMI? For billions of mail clients out there?
 
-Some of the hoops that we have to jump through depend on whether a  mail client support BIMI and how intensely they validate BIMI.
+Some of the hoops that we have to jump through depend on whether a mail client support BIMI and how intensely they validate BIMI.
 
 * Select an image file to be your 'logo' (that is to be displayed next to your recipient's viewing of your emails).
 * Convert the image file into TinySVG+PKI
@@ -70,7 +70,7 @@ At this writing, the good news is that only Google Mail client app demands the o
 
 * Insert your BIMI image and insert inside a signed "VMA-approved" PKI certificate
 
-Before you'd say "TAKE MY MONEY!", Entrust and DigiCert offer to sign just one BIMI image once a year for $999.00 and $1,499.00, respectively.  <!-- Another good thing is that it is only required by the Google mail client app.  -->
+Before you'd say "TAKE MY MONEY!", Entrust and DigiCert offer to sign just one BIMI image once a year for $999.00 and $1,499.00, respectively.  <!-- Another good thing is that it is only required by the Google Mail client app.  -->
 
 
 ## First Step - Select an Image
@@ -120,7 +120,7 @@ This is probably the easiest step of all.
 
 It is very much like DMARC and SPF config settings.  
 
-TIME-SAVER: If your domain DNS zone file does not have the required TXT record that is containing your DMARC settings, FULL STOP:  You should stop reading and deploy DMARC first; then resume back here.  DMARC is required to be properly deployed before tinkering with this BIMI.  
+TIME-SAVER: If your domain DNS zone file does not have the required TXT record that is containing your DMARC settings, FULL STOP: You should stop reading and deploy DMARC first; then resume back here.  DMARC is required to be properly deployed before tinkering with this BIMI.  
 
 If you operate the name server of your domain, locate the text-based DNS zone file having the origin of your domain name, edit the file.  For Bind9 admins, this primary zone file is specified in your domain's `zone` clause `file` statement of `/etc/named.conf` or roughly under `/var/lib/bind/master/` subdirectory.
 
@@ -170,10 +170,10 @@ DMARC policy options:
 attribute, value, description
 `v=`,DMARC1,The `v=DMARC1` property indicates that this DNS record contains a DMARC policy. This must be the first item in the DMARC record.
 `p=`,`none`,For emails with `example.test` in the sender address, the receiving server is advised to take no additional action against emails the fail DMARC alignment. This is also known as monitoring only mode.
-`sp=`,\<not set\>,"For emails with any subdomain of `example.test` in the sender address, the receiving server is advised to take no additional action against email that fails alignment. This is also known as monitoring only mode."
-`adkim=`,`r`,Apply relaxed DKIM alignment. The domain name in the DKIM signature may be any subdomain of `example.test` for DKIM to be aligned.
-`aspf=`,`r`,Apply relaxed SPF alignment. The domain name in the email From header may be any subdomain of `example.test` for the SPF to be aligned.
-`pct=`,`100`,The DMARC policy defined in p and/or sp should be applied to 100% of emails that fail DMARC alignment.
+`sp=`,\<not set\>," For emails with any subdomain of `example.test` in the sender address, the receiving server is advised to take no additional action against email that fails alignment. This is also known as monitoring only mode."
+`adkim=`,`r`, Apply relaxed DKIM alignment. The domain name in the DKIM signature may be any subdomain of `example.test` for DKIM to be aligned.
+`aspf=`,`r`, Apply relaxed SPF alignment. The domain name in the email From header may be any subdomain of `example.test` for the SPF to be aligned.
+`pct=`,`100`, The DMARC policy defined in p and/or sp should be applied to 100% of emails that fail DMARC alignment.
 [/jtable]
 
 Aggregate reporting options:
@@ -222,7 +222,7 @@ default._bimi.example.test. TXT	"v=BIMI1; l=https://example.test/images/bimi1_im
 
 ### Secured DNS Query - BIMI
 
-I too shall assume that you have a working DNSSEC properly set up for your domain.
+I, too, shall assume that you have a working DNSSEC properly set up for your domain.
 
 ISC has a good `nslookup`/`dig` replacement tool for checking out your DNSSEC called `delv`.  `delv` can be found in the `dnsutils` Debian package.
 
@@ -286,7 +286,7 @@ A BIMI online tester can check out the BIMI setup for your domain.  There are se
 
 # In Closing
 
-After passing your DNS record lookup and BIMI online testers, your domain should be very very safe from any impostor.
+After passing your DNS record lookup and BIMI online testers, your domain should be very safe from any impostor.
 
 
 # References

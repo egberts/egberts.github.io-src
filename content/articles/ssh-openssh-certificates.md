@@ -1,6 +1,6 @@
 title: PKI Certificates in OpenSSH
 date: 2022-03-24 07:38
-modified: 2026-01-03 02:22
+modified: 2026-01-03 04:22
 status: published
 tags: OpenSSH, PKI, ssh, cert, certificate, X.509
 category: research
@@ -63,7 +63,7 @@ Operation, Public Key Authentication, Certificate Authentication
 Authentication, User’s public key gets pulled from host-user `authorized_keys` file on each server, Check to see if user-cert got signed by CA
 Key/certificate with expired mechanism not enforced, Expire timeframe gets set by administrator at time of signing
 Login Username, User’s public-key placed in `authorized_keys` file for each destination user on each server, Username gets added to certificate at time of signing or controlled via "AuthorizedPrinciples" file on each server.
-Restrictions (Port Forwarding; Force-Command; etc), is in `authorized_keys` file (edited by user) or is within Match User/Group block in each server’s `sshd_config`, gets added to certificate at time of signing; or is within Match User/Group block on each server’s `sshd_config`; gets added within "AuthorizedPrinciples" file on each server
+Restrictions (Port Forwarding; Force-Command; etc.), is in `authorized_keys` file (edited by user) or is within Match User/Group block in each server’s `sshd_config`, gets added to certificate at time of signing; or is within Match User/Group block on each server’s `sshd_config`; gets added within "AuthorizedPrinciples" file on each server
 Revoking a key/cert, gets added to RevokedKeys file on each server or (and preferred) Removed from every affected `authorized_keys` file on server, Add cert to "RevokedKeys" file on each server 
 Replacing a user’s cert, Change all affected `authorized_keys` files on each server, Add old certificate to each server’s RevokedKeys file; Sign new certificate
 [/jtable]
@@ -157,7 +157,7 @@ Important: You cannot negate the use of the options -I -h -n when creating serve
 
 The -n options must only refer to the relevant host name(s) and ip(s). A blank, wildcard, or ambiguous name will result in interchangeable server certificates.
 
-The -I option is any text used to identify this certificate and you do not need to follow the same format used above.
+The -I option is any text used to identify this certificate, and you do not need to follow the same format used above.
 
 The -h designates the certificate will be a host certificate
 
@@ -451,7 +451,7 @@ The following is an example of allowing multiple login names on a single certifi
 
 # Options (user certs only)
 
-For user certs, certificate supports added options added at the time of signing. Typically, these options applies in `/etc/sshd_config` or in `authorized_keys` file. The options are:
+For user certs, certificate supports added options added at the time of signing. Typically, these options apply in `/etc/sshd_config` or in `authorized_keys` file. The options are:
 
 ```
     clear to assume no default options

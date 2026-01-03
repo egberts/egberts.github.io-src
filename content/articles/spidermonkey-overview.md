@@ -1,6 +1,6 @@
 Title: SpiderMonkey Overview
 Date: 2018-09-24T10:35
-modified: 2025-07-13T0235
+modified: 2026-01-03T0435
 Status: published
 Tags: javascript, js engine, browser, mozilla
 Category: JavaScript
@@ -10,7 +10,7 @@ SpiderMonkey is a Mozilla Web Browser DOM component that consists of
 the following functional capabilities:
 
 * JavaScript engine
-* JavaScript just-in-time compiler (IonMonkey DOM network graphical support
+* JavaScript just-in-time compiler (IonMonkey) DOM network graphical support
 * Threading support (SpiderMonkey Promise)
 
 SpiderMonkey is compliant with ECMA 6 standard. Two engine components
