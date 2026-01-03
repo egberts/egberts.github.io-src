@@ -1,6 +1,6 @@
 title: PKI Certificates in OpenSSH
 date: 2022-03-24 07:38
-modified: 2023-08-01 02:22
+modified: 2026-01-03 02:22
 status: published
 tags: OpenSSH, PKI, ssh, cert, certificate, X.509
 category: research
@@ -9,7 +9,7 @@ slug: ssh-openssh-certificates
 lang: en
 private: False
 
-Just a couple of things:
+A couple of points:
 
 * OpenSSL `openssl` cannot manage your SSH certificates.
 * SSH certificate file format is RFC4716.  Not PEM ('`.pem`'), and not PKCS#8 ('`.pkc`').
@@ -18,23 +18,23 @@ Just a couple of things:
 Introduction to SSH Certificates
 ================================
 
-Certificates are an extension to the existing ssh public-key authentication system. They can be applied to any existing public and private key pair, and can be used in addition to any authentication method currently supported by ssh.
+Certificates are an extension to the existing ssh public-key authentication system. They apply to any existing public and private key pair, and used toward any authentication method supported by SSH.
 
-While it’s based on public-key authentication, it’s also designed to simplify the complexity of managing keys across any number of servers. Certificates eliminate the need for `known_hosts` and `authorized_users` files, and if implemented properly, replicate their entire functionality with less management overhead.
+While it’s based on public-key authentication, it’s also designed to simplify the complexity of managing keys across any number of servers. Certificates bypass the need for `known_hosts` and `authorized_users` files, and if implemented properly, replicate their entire functionality with less management overhead.
 
-Since certificate authentication is an extension of public key encryption, it will work with any `ssh2` key-type and key-size already supported by OpenSSH. This means that RSA, DSA, and EC will all work if they are supported by the version of OpenSSH you are working with. For the sake of simplicity, we are using default RSA-1024 for this guide.
+Since certificate authentication is an extension of public key encryption, it will work with any `ssh2` key-type and key-size already supported by OpenSSH. This means that RSA, DSA, and EC will all work if they are supporting by the version of OpenSSH you are working with. For the sake of simplicity, we are using default RSA-1024 for this guide.
 
 Certificates vs. Public-Key
 ===========================
 
-There are some important differences of authentication between regular public-key-based (that is commonly found in SSH authentication) and SSH certificate-based. For the most part the differences are in favor of certificate authentication.
+Some important differences of authentication between regular public-key-based (that is commonly found in SSH authentication) and SSH certificate-based. Its differences are in favor of certificate authentication.
 
 Differences From Other Public-Key Certificate Standards
 =======================================================
 
 SSH certificates are more simplistic than other certificate formats, such as x509, PKCS#11 or PEM used in SSL (and OpenSSL):
 
-* There is no certificate chaining. Therefore there is only one CA.
+* There is no certificate chaining. One CA.
 * There is no dubious commercial signing authority
 * There is no trust model aside from CA signing
 
@@ -42,53 +42,53 @@ Host Authentication
 ===================
 [jtable]
 Operation, Public Key Authentication, Certificate Authentication
-Authenticating unknown host, User is asked if they want to accept host key on initial login, Verify host-cert is signed by CA
-Authenticating known host, Key compared with user’s `known_hosts` file, Verify host-cert is signed by CA
-Replacing a known host’s keys, Entry must be deleted from user’s `known_hosts` file then User is asked if they want to accept new host key on login, Verify host-cert is signed by CA
-Revoking a key/cert, `@revoked` keyword is prepended to the host entry in user’s `known_hosts file`, `@revoked`line prepended to the host entry in user’s `known_hosts` file
+Authenticating unknown host, User gets prompted if they want to accept host key on initial login, Verify host-cert got signed by CA.
+Authenticating known host, Key compared with user’s `known_hosts` file, Verify host-cert got signed by CA.
+Replacing a known host’s keys, Entry gets deleted from user’s `known_hosts` file then User get prompted if they want to accept new host key on login, Verify host-cert got signed by CA.
+Revoking a key/cert, `@revoked` keyword gets prepended to the host entry in user’s `known_hosts file`, `@revoked`line prepended to the host entry in user’s `known_hosts` file
 [/jtable]
 
 The benefits of using certificate authentication:
 
 * Users can authenticate a host that they have never logged into before
-* There is no longer a need to distribute or manage known_hosts files (such as with puppet)
-* Servers can be replaced or their keys regenerated without user intervention
-* Users should never be prompted to accept server-keys in the workplace unless something is wrong.
-* Non-compliant hosts can be discovered by searching for unsigned hostkeys.
+* There is no longer a need to distribute or manage `known_hosts` files (such as with puppet)
+* Servers' key(s) get replaced or their keys regenerated without user intervention
+* Users get prompted to accept server-keys in the workplace unless something is wrong.
+* Non-compliant hosts get discovered by searching for unsigned hostkeys.
 
 User Authentication
 ===================
 [jtable]
 Operation, Public Key Authentication, Certificate Authentication
-Authentication, User’s public key is pulled from host-user `authorized_keys` file on each server, Check to see if user-cert is signed by CA
-Expiration key/cert, Not enforced, Expiration set by administrator at time of signing
-Login Username, User’s public-key placed in `authorized_keys` file for each destination user on each server, Usernames can be added to certificate at time of signing or Can also be controlled via "AuthorizedPrinciples" file on each server.
-Restrictions (Port Forwarding; Force-Command; etc), Can be in `authorized_keys` file (may be edited by user) or Can be within Match User/Group block in each server’s `sshd_config`, Can be added to certificate at time of signing; or Can be within Match User/Group block on each server’s `sshd_config`; Can be added within "AuthorizedPrinciples" file on each server
-Revoking a key/cert, Can be added to RevokedKeys file on each server or (and preferred) Removed from every affected `authorized_keys` file on server, Add cert to "RevokedKeys" file on each server 
-Replacing a user’s cert, All affected `authorized_keys` files on each server must be edited, Add old certificate to each server’s RevokedKeys file; Sign new certificate
+Authentication, User’s public key gets pulled from host-user `authorized_keys` file on each server, Check to see if user-cert got signed by CA
+Key/certificate with expired mechanism not enforced, Expire timeframe gets set by administrator at time of signing
+Login Username, User’s public-key placed in `authorized_keys` file for each destination user on each server, Username gets added to certificate at time of signing or controlled via "AuthorizedPrinciples" file on each server.
+Restrictions (Port Forwarding; Force-Command; etc), is in `authorized_keys` file (edited by user) or is within Match User/Group block in each server’s `sshd_config`, gets added to certificate at time of signing; or is within Match User/Group block on each server’s `sshd_config`; gets added within "AuthorizedPrinciples" file on each server
+Revoking a key/cert, gets added to RevokedKeys file on each server or (and preferred) Removed from every affected `authorized_keys` file on server, Add cert to "RevokedKeys" file on each server 
+Replacing a user’s cert, Change all affected `authorized_keys` files on each server, Add old certificate to each server’s RevokedKeys file; Sign new certificate
 [/jtable]
 
 The benefits of using certificate authentication:
 
-* Certificates expiration can be set by administrator at time of signing, enforcing a rotation policy
-* No need to manage authorized_keys files across multiple hosts
-* No fear of malicious users editing or adding to unmanaged authorized_keys files
+* Expired mechanism in Certificates gets set by administrator at time of signing, enforcing a rotation policy
+* No need to manage `authorized_keys` files across hosts
+* No fear of malicious users editing or adding to unmanaged `authorized_keys` files
 * Easier ability to restrict certain user abilities on a per-user basis at time of signing
-* No need to remove revoked keys from authorized_keys files
-* Users can be limited to specific usernames at time of certificate signing
+* No need to remove revoked keys from `authorized_keys` files
+* Users gets limited to specific usernames at time of certificate signing
 
 
 Making it work
 ---------------
 
-Implementing ssh certificate authentication is much easier than working with SSL certificates. The hardest part is determining whether to use a single CA key for signing users as well as servers or two CA keys — one each for server and users.
+Implementing SSH certificate authentication is much easier than working with SSL certificates. The hardest part is determining whether to use a single CA key for signing users as well as servers or two CA keys — one each for server and users.
 
 It’s recommended to use two separate keys for signing users and servers, to allow for different roles to manage each function: For example, a system administrator can sign the server keys while a security administrator can sign the user keys.
 
 The examples below uses separate certificate authorities for servers and users.
 Server Authentication
 
-Host authentication can be enabled in as few as 4 steps!
+Enable Host authentication in as few as 4 steps!
 Create Server CA
 
 On your preferred certificate authority server run the following commands
@@ -98,7 +98,7 @@ $ # Lets start with good organization
 $ mkdir -p ssh_cert_authorita/server_ca
 $ cd ssh_cert_authority/server_ca/
 
-~/ssh_cert_authority/server_ca $ # Now lets generate our server certificate authority keypair
+~/ssh_cert_authority/server_ca $ # Now let's generate our server certificate authority keypair
 ~/ssh_cert_authority/server_ca $ ssh-keygen -f server_ca -C "companyname_server_ca"
 Generating public/private rsa key pair.
 Enter passphrase (empty for no passphrase): 
@@ -117,11 +117,11 @@ total 8
 
 Notes:
 
-    It’s strongly suggested you not only use a passphrase, but also use a strong one. Anyone who signs with this key will be able to add trusted servers to your network.
+It’s strongly suggested you not only use a passphrase, but also use a strong one. Anyone who signs with this key will be able to add trusted servers to your network.
 
 # Sign Host Keys
 
-Since certificate authentication is an extension to public key authentication, you can use the existing ssh host public keys found in /etc/ssh/ssh_host*key.pub. Any type of ssh host key will do, as long as it’s the public key rsa is only being used as an example.
+Since certificate authentication is an extension to public key authentication, you can use the existing SSH host public keys found in `/etc/ssh/ssh_host*key.pub`. Any type of SSH host key will do, as long as it’s the public key rsa is only being used as an example.
 
 On your preferred certificate authority server run the following commands
 
@@ -157,7 +157,7 @@ Important: You cannot negate the use of the options -I -h -n when creating serve
 
 The -n options must only refer to the relevant host name(s) and ip(s). A blank, wildcard, or ambiguous name will result in interchangeable server certificates.
 
-The -I option can be any text used to identify this certificate and you do not need to follow the same format used above.
+The -I option is any text used to identify this certificate and you do not need to follow the same format used above.
 
 The -h designates the certificate will be a host certificate
 
@@ -167,7 +167,7 @@ The -h designates the certificate will be a host certificate
 HostCertificate /etc/ssh/ssh_host_rsa_key-cert.pub
 ```
 
-Once `/etc/ssh/sshd_config` is saved, restart sshd.
+Once `/etc/ssh/sshd_config` gets saved, restart `sshd`.
 
 
 # Client Configuration Change
@@ -213,11 +213,11 @@ $ # Lets start with good organization
 $ mkdir -p ssh_cert_authority/user_ca
 $ cd ssh_cert_authority/user_ca
 
-~/ssh_cert_authority/user_ca $ # Now lets generate our server certificate authority keypair
+~/ssh_cert_authority/user_ca $ # Now let's generate our server certificate authority keypair
 ~/ssh_cert_authority/user_ca $ ssh-keygen -f user_ca -C "companyname_user_ca"
 Generating public/private rsa key pair.
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
 Your identification has been saved in user_ca.
 Your public key has been saved in user_ca.pub.
 The key fingerprint is:
@@ -233,11 +233,11 @@ total 8
 ~/ssh_cert_authority/user_ca $ scp -rp user_ca.pub root@example.host.net:/etc/ssh
 user_ca.pub                                                                            100%  407     0.4KB/s   00:00
 ```
-Notes: It’s strongly suggested you not only use a passphrase, but also use a strong one. Anyone who signs with this key will be able to allow access to any user on all of your servers on your network.
+Notes: It’s strongly suggested you not only use a passphrase, but also use a strong one. Anyone who signs with this key will be able to allow access to any user on all servers on your network.
 
 # Sign User Key
 
-Have a user create an ssh public-key set, and obtain a copy of their public key.
+Have a user create an SSH public-key set, and obtains a copy of their public key.
 
 Retrieve a copy of the user’s public SSH key and execute the following command:
 
@@ -267,9 +267,9 @@ Important: Keep all pubkeys and certs with the CA. If you need to revoke them, y
 
 Important: You cannot negate the use of the options `-I` or `-n` when creating server certificates.
 
-The `-n` option must only refer to the relevant login usernames, a blank or wildcard name will allow login to any valid user account unless otherwise restricted on the server-side. In this example the usernames “`root`” and “`loginname`” were used.
+The `-n` option must only refer to the relevant login usernames, a blank or wildcard name will allow login to any valid user account unless otherwise restricted on the server-side. In this example the usernames “`root`” and “`loginname`” shows.
 
-The `-I` option can be any text used to identify this certificate and you do not need to follow the same format used above.
+The `-I` option is any text used to identify this certificate and you do not need to follow the same format used above.
 
 # Server Configuration Change
 
@@ -279,11 +279,11 @@ Add the following to `/etc/ssh/sshd_config` on every server you want to enable u
 TrustedUserCAKeys /etc/ssh/user_ca.pub
 ```
 
-Once `sshd_config` is saved, restart `sshd`.
+Once `sshd_config` gets saved, restart `sshd`.
 
 # Testing User Authentication
 
-Delete the user’s public key from all authorized_keys file on the server.
+Delete the user’s public key from all `authorized_keys` file on the server.
 
 Run the following command:
 
@@ -296,7 +296,7 @@ debug1: Server accepts key: pkalg ssh-rsa-cert-v01@openssh.com blen 1101
 ...
 ```
 
-Additionally, on the server you will see the following logs, if you enable debug logging:
+On the server, you will see the following log outputs, if you enable debug logging:
 
 ```console
 Jul 18 23:22:03 localhost sshd[9603]: debug1: list_hostkey_types: ssh-rsa,ssh-rsa-cert-v01@openssh.com [preauth]
@@ -311,8 +311,9 @@ The above steps are the basics for certificate authentication. Now we’ll cover
 
 Granting access to your servers is great, but without the ability to revoke access you will not be able to lock out compromised host-keys or users no longer welcome on your systems.
 
-The following methods also work with public-key authentication. Currently they are the only way to revoke ssh certificates.
-Revoking User Keys
+The following methods also work with public-key authentication. This is the correct way to revoke SSH certificates.
+
+### Revoking User Keys
 
 To enable user revocation, add the following line to your server’s `/etc/ssh/sshd_config`:
 
@@ -323,14 +324,14 @@ RevokedKeys /etc/ssh/ssh_revoked_keys
 Then enter the following commands:
 
 ```console
-~ $ # If the file doesn't exist and is not readable by sshd, **all** users will be denied access.
+~ $ # If the file doesn't exist and is not readable by sshd, **all** users gets denied access.
 ~ $ sudo touch /etc/ssh/ssh_revoked_keys
 ~ $ sudo chmod 644 /etc/ssh/ssh_revoked_keys.
 ```
 
 Once complete, restart `sshd`.
 
-When user access needs to be revoked from a server, simply add their public key or certificate and add it to `/etc/ssh/ssh_revoked_keys`. The file format is similar to authorized_keys, one key or cert per line.
+When wanting to revoke user access from a server, add their public key or certificate and add it to `/etc/ssh/ssh_revoked_keys`. The file format is aliken to `authorized_keys`, one key or cert per line.
 
 ```
 ssh-rsa
@@ -372,9 +373,9 @@ ssh-rsa-cert-v01@openssh.com \
     username@hostname
 ```
 
-Notes: This blocks the public key or certificate from being used system-wide
+Notes: This blocks the public key or certificate system-wide.
 
-* Public-keys are more ideal as they are smaller and block both public-key in addition to certificate authentication
+* Public-keys are ideal as they are smaller and block both public-key along with certificate authentication
 * Certificates work fine here too, but do not block the public-key should it be in an `authorized_keys` file
 
 ```
@@ -383,7 +384,7 @@ Jul 19 00:27:26 localhost sshd[11546]: error: WARNING: authentication attempt wi
 
 ## Revoking Server Keys
 
-Server keys must be revoked in a user’s `known_hosts` file, or in `/etc/ssh/known_hosts` as follows:
+To revoke server keys, add an entry into user’s `known_hosts` file, or in `/etc/ssh/known_hosts` as follows:
 
 ```
 @revoked * ssh-rsa \
@@ -398,11 +399,11 @@ Server keys must be revoked in a user’s `known_hosts` file, or in `/etc/ssh/kn
     root@localhost
 ```
 
-Notes: The wildcard prevents the host-key from being used by any host
+Notes: The wildcard prevents evocation of the host-key on its host.
 
 As above, both public-keys and certificates work, but public key is smaller and more effective
 
-When working with individual known_hosts entries, simply deleting an entry does not prevent the key from being used again
+When working with individual `known_hosts` entries, deleting an entry does not prevent the key usage again.
 
 ```console
 ~ $ ssh example.host.net
@@ -417,14 +418,14 @@ Host key verification failed.
 
 # Applying Controls to Certificates
 
-When signing a certificate, an administrator can apply controls directly into the certificate that cannot be altered without re-signing.
+When signing a certificate, an administrator can apply extra controls directly into a certificate unchanged without re-signing.
 
 
 ## Certificate Expiration
 
-Most organizations apply password expiration policies, and many compliance requirements require regular password and certificate expiration. Unfortunately there have only been ad-hoc methods enforce ssh key rotation.
+Most organizations apply password expiration policies, and compliance requirements often require regular password and certificate expiration. As a warning, ad-hoc methods enforce SSH key rotation.
 
-With certificates, an expiration date can be built into the certificate at the time of signing. This can be done with the -V option using the ssh time format
+With certificates, an optional expiration date gets tacked onto the certificate at the time of signing. Use the -V option with `ssh` time format.
 
 ```
 ~/ssh_cert_authority/user_ca/user_certs $ # Expiration in 52 weeks
@@ -438,9 +439,9 @@ Notes: Expiration's work equally on user and server certificates.
 
 # Login Names
 
-As mentioned earlier, both login-names and server-names can be enforced in the certificate using the `-n` option.
+As mentioned earlier, adding both the enforcement of login-names and server-names gets enforced in the certificate using the `-n` option.
 
-For users, this restricts the user to specific login names on the remote server. Typically this should be a single username, but in some environments they may be a need for multiple names.
+For users, this restricts the user to specific login names on the remote server. Typically, this should be a single username, but in some environments multiple names get required.
 
 The following is an example of allowing multiple login names on a single certificate:
 
@@ -450,7 +451,7 @@ The following is an example of allowing multiple login names on a single certifi
 
 # Options (user certs only)
 
-For user certs, there can be several options built directly into the certificate at the time of signing. Typically these options were applied in `/etc/sshd_config` or in `authorized_keys` file. The options are:
+For user certs, certificate supports added options added at the time of signing. Typically, these options applies in `/etc/sshd_config` or in `authorized_keys` file. The options are:
 
 ```
     clear to assume no default options
@@ -472,15 +473,15 @@ For user certs, there can be several options built directly into the certificate
 ```
 
 
-The above example restrictions an automated batch-job to only be run from specific servers, not allowing pty, forwarding, and forcing a specific command.
+The above example restrictions an automated batch-job to run from specific servers, not allowing pty, forwarding, and forcing a specific command.
 
 # Known Issues
 
 ## Certificate Version Issues
 
-With the release of OpenSSH 6.x, an update was made to the certificates resulting in a compatibility issue with OpenSSH 5.x.
+With the release of OpenSSH 6.x, an update to the certificates resulting in a compatibility issue with OpenSSH 5.x.
 
-OpenSSH 6.x generated certificates will not work with OpenSSH 5.x unless the option “-t v00” option is used. For example:
+OpenSSH 6.x generated certificates will not work with OpenSSH 5.x unless using the option “-t v00” option. For example:
 
 ```
 $ ssh-keygen -t v00 -s ca_key -I key_id host_key.pub
@@ -491,19 +492,19 @@ OpenSSH 6.x appears to be backward compatible with OpenSSH 5.x generated certifi
 
 ## SSH Client Compatibility
 
-Outside of OpenSSH there are few, if any, clients that support certificate based authentication.
+Not many non-OpenSSH clients support certificate-based authentication.
 
-While OpenSSH runs on most common and uncommon operating systems, there will always be other clients out there. Such example is the ever popular Putty for Windows, which does not support certificate authentication, yet. Also, many commercial applications with ssh support do not support certificate authentication – An example is Nexpose by Rapid7.
+While OpenSSH runs on most common and uncommon operating systems, there will always be other clients out there. Such example is the ever popular Putty for Windows, which does not support certificate authentication, yet. Also, many commercial applications with SSH support do not support certificate authentication – An example is Nexpose by Rapid7.
 
-As a result, some environments may be hard, if not impossible, to enforce only certificate based authentication. 
+As a result, some environments are harsh, if not impossible, to enforce certificate-based authentication and nothing else.
 
 # CA Key Management
 
 ## CA Key Security
 
-Centralizing the management of keys simplifies management of authentication. Unfortunately it also simplifies the attack-surface. An attacker only needs to gain access to the CA keys to gain full access to the network.
+Centralizing the management of keys simplifies management of authentication. Centralizing also simplifies the attack-surface. An attacker needs one vector to gain access to the CA keys to gain full access to the network.
 
-As a result, it’s critical that the CA keys be managed under high-security. If possible have them stored where they cannot have network access, and always, always, ensure they are encrypted.
+As a result, it’s critical that the CA keys gets managed under high-security. If possible have them stored where they cannot have network access, and always ensure they get encrypted.
 
 
 Root CA for SSH
@@ -516,11 +517,11 @@ ssh-keygen -f my-enterprise-root-ca  -C "CA key for example.com"
 
 * `-C "CA key for example.com"` - The `-C` option sets a comment in your key file. The default is `user@host`, but since you'll be dealing with a lot of keys at a time now it might be better to give the keys more descriptive names.
 
-Oh, and please note that most other guides will tell you to do these steps as root. There's no real need to generate keys as root - any ordinary user will do fine. So it's probably best if you do use an ordinary user account. 
+Oh, and please note that most other guides will tell you to do these steps as root. There's no real need to generate keys as root - any ordinary user would do fine; it's probably best if you use an ordinary user account. 
 
 Also, it doesn't matter where you generate the key pair - do it on your workstation if you can, not your server. 
 
-Just remember to keep the SSH CA signing keys safe - this one is probably one of those that you should use a password with, because this key is really powerful and you don't need to use it very often.
+Remember to keep the SSH CA signing keys safe - this one is probably one of those that you should use a password with, because this key is powerful and you don't need to use it very often.
 
 and the output is:
 
@@ -559,7 +560,7 @@ Private key, `<filename>.key.pem`, `<filename>`
 Public key, `<filename>.cert.pem`, `<filename>.pub`
 [/jtable]
 
-SECURITY CAVEAT: Yeah, they are that different so pay attention and keep those file permission to a bare minimum for the SSH private key file WITHOUT a filetype.
+SECURITY CAVEAT: Yeah, they are that different so pay attention and keep those file permission to a bare setting for the SSH private key file WITHOUT a filetype.
 
 
 Create Certificates for SSH
@@ -576,9 +577,9 @@ ssh-keygen -h -n hostname \
     -V +52w \
     host_rsa_key
 ```
-SIDEBAR:  I had to rename `my-enterprise-root-ca` by adding a `privatekey.pem` filetype to denote that it is a private key and that it is a PEM-styled file.
+SIDEBAR: Had to rename `my-enterprise-root-ca` by adding a `privatekey.pem` filetype to denote a private key and is a PEM-styled file.
 
-alternatively, you can do this:
+Instead, you can do this:
 ```bash
 ssh-keygen -s /etc/ssh/ca \
      -I "$(hostname --fqdn) host key" \
@@ -589,25 +590,27 @@ ssh-keygen -s /etc/ssh/ca \
      /etc/ssh/ssh_host_dsa_key.pub \
      /etc/ssh/ssh_host_ecdsa_key.pub
 ```
- 
-Options are detailed below:
-* `-s` - This is the private key that we just created that we will use to sign all of the other keys.
-* `-I` - This is a name that is used to identify the certificate. It is used for logging purposes when the certificate is used for authentication.  the certificate's identity, an alphanumeric string that will be visible in SSH logs when the user certificate is presented. I recommend using the email address or internal username of the user that the certificate is for - something which will allow you to uniquely identify a user. This value can also be used to revoke a certificate in future if needed.
-* `-h` - This marks the resulting certificate as a host key, as opposed to a client key.  Without this option, you would be making a user certificate.
-* `-n` - Contains a comma-separated list of the names (user or host) that is associated with this certificate.  For UNIX, the name is the account name used in `/etc/passwd`.  For Kerberos KRB5 and Windows AD, the name is the AD/KRB5 principal name.
-* `-V` - This specifies how long the certificate is valid for. In this instance, we specify that the certificate will expire in one year (52 weeks).
 
-Also the final argument is the file to read for the PRIVATE key in PEM format.  Typically, those keys are found in `/etc/ssh` directory starting with `ssh_host_ecdsa_key.pub`
+Options detailed below:
+* `-s` - private key created to sign other keys.
+* `-I` - name to identify the certificate. For logging purposes when the certificate gets used for authentication.  The certificate's identity, an alphanumeric string, visible in SSH logs when the user certificate gets presented. I recommend using the email address or internal username of the user that the certificate is for - something which will allow you to uniquely identify a user. This value revoke a certificate in the future, if needed.
+* `-h` - marks the resulting certificate as a host key, as opposed to a client key.  Without this option, you create a user certificate.
+* `-n` - Contains a comma-separated list of the names (user or host) associated with this certificate.  For UNIX, the name is the account name used in `/etc/passwd`.  For Kerberos KRB5 and Windows AD, the name is the AD/KRB5 principal name.
+* `-V` - specifies how long the certificate is valid for. In this instance, we specify that the certificate will expire in one year (52 weeks).
+
+Also, the final argument is the file to read for the PRIVATE key in PEM format.  Typically, those keys are in `/etc/ssh` directory starting with `ssh_host_ecdsa_key.pub`
 
 How To Configure Host Certificates
 ==================================
 
 Let us start by configuring certificates that will authenticate our servers to our clients. This will allow our clients to connect to our servers without needing to question the authenticity of the server.
 
-Begin on the machine that that will be using as the certificate authority. In this example, we’ll refer to this as “auth.example.com”.
-Generating Signing Keys
+On the certificate authority machine, we’ll refer to this as “auth.example.com”.
 
-First, we need to generate some RSA keys that will function as the signing keys. Use any user you’d like, but the root user is probably a good idea. Create these keys called “server_ca” and “server_ca.pub” since these will be used to authenticate our servers.
+Generating Signing Keys
+----
+
+First, we need to generate some RSA keys that function as the signing keys. Use any user you’d like, but the root user is probably a good idea. Create these keys called `server_ca` and `server_ca.pub` since these authenticate our servers.
 
 Let’s create these keys in our home directory:
 
@@ -616,7 +619,7 @@ cd ~
 ssh-keygen -f server_ca
 ```
 
-You will be asked if you’d like to create a passphrase. This will add an additional layer of protection to your key in the event that it falls into the wrong hands. Once this is finished, you’ll have a private and public key in your home directory:
+It prompts if you’d like to create a passphrase. This will add another layer of protection to your key should it falls into the wrong hands. Once done, you’ll have a private and public key in your home directory:
 
 ```console
 $ ls
@@ -626,7 +629,7 @@ server_ca   server_ca.pub
 Signing Host Keys
 =================
 
-Now that we have our keys, we can begin signing our host keys.
+Now that we have our keys, we begin signing our host keys.
 
 Start by signing the host key of the certificate authority itself. Use the following syntax:
 
@@ -639,15 +642,15 @@ ssh-keygen \
     -V +52w host_rsa_key
 ```
 
-Let’s go over what all of this means.
+Let’s go over the above options:
 
-    -s: This is the private key that we just created that we will use to sign all of the other keys.
-    -I: This is a name that is used to identify the certificate. It is used for logging purposes when the certificate is used for authentication.
-    -h: This marks the resulting certificate as a host key, as opposed to a client key.
-    -n: This is used to identify the name (user or host) that is associated with this certificate.
-    -V: This specifies how long the certificate is valid for. In this instance, we specify that the certificate will expire in one year (52 weeks).
+    -s: This is the private key used to sign other keys.
+    -I: name identifies the certificate. Used in logging purposes when its certificate gets used for authentication.
+    -h: marks the resulting certificate as a host key, as opposed to a client key.
+    -n: identifies the name (user or host) associated with this certificate.
+    -V: specifies how long the certificate is valid for. In this instance, we specify that the certificate will expire in one year (52 weeks).
 
-Afterwards we specify the key that we want to sign.
+Afterward, we specify the key that we want to sign.
 
 In our case, to sign our own host RSA key, we will use a line that looks like this. identify this server as "`host_auth_server`".  Then a prompt appears for the passphrase we used when creating the signing key:
 
@@ -659,7 +662,7 @@ $ ssh-keygen -s server_ca -I host_auth_server \
 Signed host key `/etc/ssh/ssh_host_rsa_key-cert.pub`: id "host_auth_server" serial 0 for auth.example.com valid from 2014-03-20T12:25:00 to 2015-03-19T12:26:05
 ```
 
-As you can see from the output, our certificate is valid for one year. It has been created in the same directory as our server host key (in `/etc/ssh/` directory) and is called "`ssh_host_rsa_key-cert.pub`".
+As you can see from the output, our certificate remains valid for one year. Gets created in the same directory as our server host key (in `/etc/ssh/` directory) and called "`ssh_host_rsa_key-cert.pub`".
 
 Now that we have signed our host key on the certificate authority itself, we can sign the host key for the separate SSH server we’re trying to authenticate to clients.
 
@@ -670,7 +673,7 @@ $ cd ~
 $ scp root@sshserver.example.com:/etc/ssh/ssh_host_rsa_key.pub .
 ```
 
-Now, create the certificate from this file using the same method we used above. Change some values to refer to the new host that is being signed:
+Now, create the certificate from this file using the same method we used above. Change some values to refer to the new host signed:
 
 ```
 ssh-keygen -s server_ca -I host_sshserver -h -n sshserver.example.com -V +52w ssh_host_rsa_key.pub
@@ -684,13 +687,13 @@ Now, copy the generated certificate file back onto the host. Again, using `scp` 
 $ scp ssh_host_rsa_key-cert.pub root@sshserver.example.com:/etc/ssh/
 ```
 
-Afterwards, we can delete both the SSH server’s public key and certificate from our authentication server:
+Afterward, we can delete both the SSH server’s public key and certificate from our authentication server:
 
 ```bash
 rm ssh_host_rsa_key.pub ssh_host_rsa_key-cert.pub
 ```
 
-We now have the signed certificates in place, we just need to configure our components to use them.
+We now have the signed certificates in place, then we configure our components to use them.
 
 
 # Configuring Components to Use Host Certs
@@ -703,13 +706,13 @@ On both of these machines, we’ll have to edit the main SSH daemon configuratio
 sudo nano /etc/ssh/sshd_config
 ```
 
-If you can find a HostCertificate line, modify it. Otherwise, add this to the bottom of the file. We need to establish to path to our host certificate file:
+If you can find a HostCertificate line, modify this line. Otherwise, add to the bottom of the file. We need to establish to path to our host certificate file:
 
 ```
 HostCertificate /etc/ssh/ssh_host_rsa_key-cert.pub
 ```
 
-Save and close the file when you are finished.
+Save and close the file when you get finished.
 
 Now, restart the SSH daemon to make these changes happen:
 
@@ -717,9 +720,9 @@ Now, restart the SSH daemon to make these changes happen:
 sudo service ssh restart
 ```
 
-Do this on all of the servers you are configuring host certificates for.
+Do this on all servers you are configuring host certificates for.
 
-Now, our servers are configured to use the certificate, but our client does not know how to check the certificate that the server will present.
+Now, our configured servers use this certificate, but our client does not know how to check the certificate that the server will present.
 
 On our client machine, which we’ll be referring to as "`client.example.com`", open or create the "`~/.ssh/known_hosts`" file:
 
@@ -729,7 +732,7 @@ nano ~/.ssh/known_hosts
 
 Need to remove any entries that have to do with the servers we’re configuring for certificate entry. It may be best to delete everything.
 
-Afterwards, we need to add a special entry that specifies the public key that we should use to check the certificate that our hosts will give us during login. Start it off with @cert-authority. Afterwards, it can include a domain restriction where the key will be applied, followed by the public certificate authority key that we’ve been signing everything with.
+Add a special entry that specifies the public key that we use to check the certificate that our hosts will give us during login. Start it off with @cert-authority. Afterward, it includes a domain restriction where the key applies, followed by the public certificate authority key that we’ve been signing everything with.
 
 On your certificate authority machine, you can get the public certificate signing key by typing:
 
@@ -747,7 +750,7 @@ Using this information, the line in your `~/.ssh/known_hosts` file should look l
 
 Save and close the file when you’re done.
 
-When you visit the SSH server for the first time from your client (using the full hostname), you should not be asked whether you trust the remote host. This is because the host has presented its host certificate to you, signed by the certificate authority. You’ve checked your `known_hosts` file and verified that the certificate is legitimate.
+When you visit the SSH server for the first time from your client (using the full hostname), no further prompt to ask you asked whether you trust the remote host. This is because the host has presented its host certificate to you, signed by the certificate authority. You’ve checked your `known_hosts` file and verified that the certificate is legitimate.
 
 
 How To Configure User Keys
@@ -761,18 +764,18 @@ As before, this process will start on our certificate authority server. We will 
 ssh-keygen -f users_ca
 ```
 
-Again, select a passphrase so that your key will be protected if someone gains access.
+Again, select a passphrase to protect your key, should someone gains access.
 
 
 ## Configuring Servers to Accept Logins with the User Certification
 
-When you are done, you will need to copy the public key onto each of your SSH servers that need to validate user authenticity. We will do this using scp as usual:
+When done, you will need to copy the public key onto each of your SSH servers for user authenticity. We will do this using scp as usual:
 
 ```
 scp users_ca.pub root@sshserver.example.com:/etc/ssh/
 ```
 
-We need to modify our SSH daemon configuration on our SSH server to look for this key.
+Next, you edit the SSH daemon configuration on an SSH server to look for this key.
 
 On our "`sshserver.example.com`" host, open the configuration file:
 
@@ -780,7 +783,7 @@ On our "`sshserver.example.com`" host, open the configuration file:
 sudo nano /etc/ssh/sshd_config
 ```
 
-At the bottom, below our HostCertificate line, we need to add another line that references the file we just copied over:
+At the bottom, below our HostCertificate line, we need to add another line that references the file we copied over:
 
 ```
 TrustedUserCAKeys /etc/ssh/users_ca.pub
@@ -803,7 +806,7 @@ $ vi user_ca
 <pre> cd ~ scp <span class=“highlight”>username</span>@client.example.com:/home/<span class=“highlight”>username</span>/.ssh/id_rsa.pub . </pre>
 ```
 
-With the key on the cert machine, sign it using our `users_ca` key. This will be very similar to last time the keys got signed using the `server_ca` keys, only now, don’t include the `-h` parameter, because these are for user keys.
+With the key on the cert machine, sign it using our `users_ca` key. Like last time, the keys got signed using the `server_ca` keys, don’t include the `-h` parameter, because these are for user keys.
 
 The command we want is something like this. Change the "`user_username`" value to reflect the name of the user you’re signing for easier management:
 
@@ -814,7 +817,8 @@ $ ssh-keygen -s users_ca \
     -V +52w id_rsa.pub
 Signed user key id_rsa-cert.pub: id “user_username” serial 0 for username valid from 2014-03-20T14:45:00 to 2015-03-19T14:46:52 
 ```
-alternatively
+
+Another way to do this is:
 
 ```bash
 ssh-keygen -s /etc/ssh/ca \
@@ -841,9 +845,9 @@ Log into `sshserver.example.com` from your client computer, this time no prompti
 
 # Conclusion
 
-By signing your host and user keys, you can create a more flexible system for user and server validation. This allows you to set up one centralized authority for your entire infrastructure, in order to validate your servers to your user, and your users to your servers.
+By signing your host and user keys, you create a more flexible system for user and server validation: allows you to set up one centralized authority for your entire infrastructure, your servers validate your user, and your users to your servers.
 
-While perhaps not the most powerful way of creating centralized authentication, it is easy to set up and leverages existing tools without requiring a lot of time and configuration. It also has the advantage of not requiring the CA server to be online to check the certificates.
+While perhaps not the most powerful way of creating centralized authentication, it remains easy to set up and leverages existing tools without requiring a lot of time and configuration. It also has the advantage of not requiring the CA server to be online to check the certificates.
 
 
 Verifying SSH Certificate Key
@@ -861,7 +865,7 @@ ssh-keyscan -c ssh-ca.my-server.test -t ssh-rsa-cert-v01@openssh.com
 
 Then, you can extract the certificate details, including the Signing CA's public key, with `ssh-keygen -L -f <certfile>`. 
 
-Note: If you use (lowercase) -l instead, then ssh-keygen only outputs the information about the underlying (public) host key embedded in the certificate, rather than all of the certificate elements.
+Note: If you use (lowercase) -l instead, then ssh-keygen only outputs the information about the underlying (public) host key embedded in the certificate, rather than certificate elements.
 
 ```bash
 ssh-keygen -L ssh-ca.my-server.test
