@@ -1,0 +1,171 @@
+digraph malloc_fully_annotated {
+    rankdir=LR;
+    node [shape=box, style=rounded, fontname="Helvetica", fontsize=10];
+
+    start [label="Start:\nWhat dominates your workload?"];
+
+    // Primary branches
+    start -> cas [label=<High thread contention / <B>CAS</B>>];
+    start -> latency [label="Tail latency / low jitter"];
+    start -> numa [label="NUMA / multi-socket / heterogeneous memory"];
+    start -> throughput [label="High throughput (small allocs)"];
+    start -> legacy [label="Legacy / compatibility"];
+    start -> security [label="Security / isolation required"];
+
+    // === CAS branch ===
+    cas [label="Allocator metadata contention?"];
+    cas -> jemalloc [label="High / Shared metadata"];
+    cas -> hoard [label="Moderate contention"];
+    cas -> mimalloc_cas [label="Avoid shared state"];
+
+jemalloc [
+    label=<
+        <FONT FACE="Courier">jemalloc()</FONT><BR/>
+        • Multi-arena allocator<BR/>
+        • Low shared CAS<BR/>
+        • Best general-purpose<BR/>
+        • ENV: <FONT FACE="Courier"><B>MALLOC_ARENA_MAX=&lt;num&gt;</B></FONT><BR/>
+        • Thread binding: per-arena hot threads<BR/>
+        • OS: optional <FONT FACE="Courier"><B>MADV_HUGEPAGE</B></FONT> for large regions
+        >
+    ];
+
+    hoard [label=<
+        Hoard<BR/>
+        • False-sharing resistant<BR/>
+        • Moderate contention<BR/>
+        • ENV: <FONT FACE="Courier"><B>HOARD_*</B></FONT> tuning variables<BR/>
+        • Notes: per-processor heaps
+        >
+    ];
+    mimalloc_cas [label=<
+        <FONT FACE="Courier">mimalloc()</FONT><BR/>
+        • Minimal atomic ops<BR/>
+        • Predictable allocation latency<BR/>
+        • ENV: <FONT FACE="Courier"><B>MIMALLOC_SHOW_STATS=1</B></FONT> (debug)<BR/>
+        • OS: Thread-local heaps, reset pages with OS page size alignment
+        >
+    ];
+
+    // === Latency branch ===
+    latency [label="Hard tail latency requirement?"];
+    latency -> mimalloc [label="Yes"];
+    latency -> jemalloc_latency [label="No / Soft"];
+
+    mimalloc [label=<
+        <FONT FACE="Courier">mimalloc()</FONT><BR/>
+        • Low variance allocation<BR/>
+        • Thread-local heaps<BR/>
+        • ENV: <FONT FACE="Courier"><B>MIMALLOC_VALIDATE=1</B></FONT> for debugging<BR/>
+        • OS: pre-touch large arenas to avoid page faults
+        >
+    ];
+        
+    jemalloc_latency [
+        label=<
+            <FONT FACE="Courier">jemalloc()</FONT><BR/>
+            • Arena binding for hot threads<BR/>
+            • <FONT FACE="Courier"><B>MALLOC_CONF="narenas:&lt;num&gt;,lg_chunk:&lt;power&gt;"</B></FONT> for tuning<BR/>
+            • OS: optional <FONT FACE="Courier"><B>MADV_HUGEPAGE</B></FONT>
+        >
+    ];
+
+
+    // === NUMA branch ===
+    numa [label="Explicit NUMA placement needed?"];
+    numa -> snmalloc [label="Yes"];
+    numa -> jemalloc_numa [label="No, OS first-touch acceptable"];
+
+    snmalloc [label=<
+        <FONT FACE="Courier">snmalloc()</FONT><BR/>
+        • NUMA-aware allocation<BR/>
+        • Message-passing model<BR/>
+        • Thread-local heaps per NUMA node<BR/>
+        • OS: bind threads to local heaps via <FONT FACE="Courier"><B>numactl</B> / <B>sched_setaffinity</B></FONT><BR/>
+        • MADV: use huge pages to improve TLB coverage<BR/>
+        • Optional: secure mode for isolation
+        >
+    ];
+    jemalloc_numa [label=<
+        <FONT FACE="Courier">jemalloc()</FONT> + NUMA tuning<BR/>
+        • Arena binding per NUMA node<BR/>
+        • <FONT FACE="Courier"><B>numactl --cpunodebind / --membind</B></FONT><BR/>
+        • <FONT FACE="Courier"><B>MALLOC_CONF="narenas:&lt;num&gt;,lg_chunk:&lt;power&gt;"</B></FONT><BR/>
+        • <FONT FACE="Courier"><B>MADV_HUGEPAGE</B></FONT> for large allocations
+        >
+    ];
+
+    // === Throughput branch ===
+    throughput [label="Mostly small objects (<256B)?"];
+    throughput -> tcmalloc [label="Yes"];
+    throughput -> jemalloc_throughput [label="Mixed / large objects"];
+
+    tcmalloc [label=<
+        <FONT FACE="Courier">tcmalloc()</FONT><BR/>
+        • Per-CPU caches<BR/>
+        • High small-object throughput<BR/>
+        • ENV: <FONT FACE="Courier"><B>TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES=&lt;num&gt;</B></FONT><BR/>
+        • ENV: <FONT FACE="Courier"><B>TCMALLOC_SAMPLE_PARAMETER</B></FONT> for profiling<BR/>
+        • OS: thread pinning optional for hot threads
+        >
+    ];
+    jemalloc_throughput [label=<
+        <FONT FACE="Courier">jemalloc()</FONT><BR/>
+        • Good for mixed-size allocations<BR/>
+        • Arena-local allocations for concurrency<BR/>
+        • <FONT FACE="Courier"><B>MALLOC_CONF</B></FONT> tunables<BR/>
+        • OS: optional <FONT FACE="Courier"><B>MADV_HUGEPAGE</B></FONT>>
+    ];
+
+    // === Legacy / Compatibility branch ===
+    legacy [label="Multithreaded?"];
+    legacy -> glibc [label="Yes"];
+    legacy -> dlmalloc [label="No"];
+
+    glibc [label=<
+        glibc malloc()<BR/>
+        • Default system allocator<BR/>
+        • Optionally enable arenas: <FONT FACE="Courier"><B>MALLOC_ARENA_MAX</B></FONT><BR/>
+        • OS: relies on first-touch NUMA policy
+        >
+    ];
+    dlmalloc [label=<
+        <FONT FACE="Courier">dlmalloc()</FONT><BR/>
+        • Single-threaded, minimal overhead<BR/>
+        • Good for embedded / low-memory systems
+        >
+    ];
+
+    // === Security branch ===
+    security [label="Need strong isolation / UAF defense?"];
+    security -> snmalloc_sec [label="Yes"];
+    security -> mimalloc_sec [label="Moderate"];
+    security -> jemalloc_sec [label="Performance first"];
+    security -> glibc_sec [label="Compatibility / fallback"];
+
+    snmalloc_sec [label=<
+        <FONT FACE="Courier">snmalloc()</FONT><BR/>
+        • Isolation + invariants<BR/>
+        • Thread-local heaps<BR/>
+        • NUMA-aware<BR/>
+        • Optional secure mode (heap resets, guard pages)
+        >
+    ];
+    mimalloc_sec [label=<
+        <FONT FACE="Courier">mimalloc()</FONT><BR/>
+        • Secure mode enabled<BR/>
+        • Guard pages and page resets<BR/>
+        • OS: pre-touch arenas
+        >
+    ];
+    jemalloc_sec [label=<
+        <FONT FACE="Courier">jemalloc()</FONT><BR/>
+        • tcache quarantine enabled (<FONT FACE="Courier"><B>MALLOC_CONF="tcache:1"</B></FONT>)<BR/>
+        • Optional guard pages for debugging
+        >
+    ];
+    glibc_sec [label="glibc malloc\n• Compatible\n• Minimal tuning options"];
+
+    // Styling to help readability
+    edge [fontsize=9];
+}

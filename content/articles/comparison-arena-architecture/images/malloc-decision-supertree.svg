@@ -1,0 +1,385 @@
+<svg width="1222pt" height="1096pt" viewBox="0.00 0.00 1222.00 1096.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1092)">
+<title>malloc_fully_annotated</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-1092 1218.23,-1092 1218.23,4 -4,4"/>
+<!-- start -->
+<g id="node1" class="node">
+<title>start</title>
+<path fill="none" stroke="black" d="M146.85,-540C146.85,-540 12,-540 12,-540 6,-540 0,-534 0,-528 0,-528 0,-516 0,-516 0,-510 6,-504 12,-504 12,-504 146.85,-504 146.85,-504 152.85,-504 158.85,-510 158.85,-516 158.85,-516 158.85,-528 158.85,-528 158.85,-534 152.85,-540 146.85,-540"/>
+<text xml:space="preserve" text-anchor="middle" x="79.42" y="-525" font-family="Helvetica,sans-Serif" font-size="10.00">Start:</text>
+<text xml:space="preserve" text-anchor="middle" x="79.42" y="-513" font-family="Helvetica,sans-Serif" font-size="10.00">What dominates your workload?</text>
+</g>
+<!-- cas -->
+<g id="node2" class="node">
+<title>cas</title>
+<path fill="none" stroke="black" d="M616.44,-943C616.44,-943 486.57,-943 486.57,-943 480.57,-943 474.57,-937 474.57,-931 474.57,-931 474.57,-919 474.57,-919 474.57,-913 480.57,-907 486.57,-907 486.57,-907 616.44,-907 616.44,-907 622.44,-907 628.44,-913 628.44,-919 628.44,-919 628.44,-931 628.44,-931 628.44,-937 622.44,-943 616.44,-943"/>
+<text xml:space="preserve" text-anchor="middle" x="551.51" y="-922" font-family="Helvetica,sans-Serif" font-size="10.00">Allocator metadata contention?</text>
+</g>
+<!-- start&#45;&gt;cas -->
+<g id="edge1" class="edge">
+<title>start-&gt;cas</title>
+<path fill="none" stroke="black" d="M85.2,-540.4C95.85,-578.36 124.81,-666.38 176.85,-721 264.06,-812.55 401.57,-872.84 483.21,-902.77"/>
+<polygon fill="black" stroke="black" points="481.84,-905.99 492.44,-906.1 484.22,-899.41 481.84,-905.99"/>
+<text xml:space="preserve" text-anchor="start" x="225.64" y="-891.03" font-family="Times,serif" font-size="14.00">High thread contention / </text>
+<text xml:space="preserve" text-anchor="start" x="365.6" y="-891.03" font-family="Times,serif" font-weight="bold" font-size="14.00">CAS</text>
+</g>
+<!-- latency -->
+<g id="node3" class="node">
+<title>latency</title>
+<path fill="none" stroke="black" d="M614.2,-758C614.2,-758 488.81,-758 488.81,-758 482.81,-758 476.81,-752 476.81,-746 476.81,-746 476.81,-734 476.81,-734 476.81,-728 482.81,-722 488.81,-722 488.81,-722 614.2,-722 614.2,-722 620.2,-722 626.2,-728 626.2,-734 626.2,-734 626.2,-746 626.2,-746 626.2,-752 620.2,-758 614.2,-758"/>
+<text xml:space="preserve" text-anchor="middle" x="551.51" y="-737" font-family="Helvetica,sans-Serif" font-size="10.00">Hard tail latency requirement?</text>
+</g>
+<!-- start&#45;&gt;latency -->
+<g id="edge2" class="edge">
+<title>start-&gt;latency</title>
+<path fill="none" stroke="black" d="M106.27,-540.4C125.27,-553.47 152,-570.96 176.85,-584 282.44,-639.44 412.19,-689.91 487.7,-717.65"/>
+<polygon fill="black" stroke="black" points="486.42,-720.91 497.01,-721.06 488.82,-714.34 486.42,-720.91"/>
+<text xml:space="preserve" text-anchor="middle" x="309.62" y="-704.22" font-family="Times,serif" font-size="14.00">Tail latency / low jitter</text>
+</g>
+<!-- numa -->
+<g id="node4" class="node">
+<title>numa</title>
+<path fill="none" stroke="black" d="M624.77,-591C624.77,-591 478.24,-591 478.24,-591 472.24,-591 466.24,-585 466.24,-579 466.24,-579 466.24,-567 466.24,-567 466.24,-561 472.24,-555 478.24,-555 478.24,-555 624.77,-555 624.77,-555 630.77,-555 636.77,-561 636.77,-567 636.77,-567 636.77,-579 636.77,-579 636.77,-585 630.77,-591 624.77,-591"/>
+<text xml:space="preserve" text-anchor="middle" x="551.51" y="-570" font-family="Helvetica,sans-Serif" font-size="10.00">Explicit NUMA placement needed?</text>
+</g>
+<!-- start&#45;&gt;numa -->
+<g id="edge3" class="edge">
+<title>start-&gt;numa</title>
+<path fill="none" stroke="black" d="M159.32,-533.75C165.24,-534.54 171.14,-535.3 176.85,-536 271.02,-547.49 378.87,-557.88 454.42,-564.7"/>
+<polygon fill="black" stroke="black" points="454.01,-568.17 464.29,-565.58 454.64,-561.2 454.01,-568.17"/>
+<text xml:space="preserve" text-anchor="middle" x="309.62" y="-567.08" font-family="Times,serif" font-size="14.00">NUMA / multi-socket / heterogeneous memory</text>
+</g>
+<!-- throughput -->
+<g id="node5" class="node">
+<title>throughput</title>
+<path fill="none" stroke="black" d="M614.34,-510C614.34,-510 488.67,-510 488.67,-510 482.67,-510 476.67,-504 476.67,-498 476.67,-498 476.67,-486 476.67,-486 476.67,-480 482.67,-474 488.67,-474 488.67,-474 614.34,-474 614.34,-474 620.34,-474 626.34,-480 626.34,-486 626.34,-486 626.34,-498 626.34,-498 626.34,-504 620.34,-510 614.34,-510"/>
+<text xml:space="preserve" text-anchor="middle" x="551.51" y="-489" font-family="Helvetica,sans-Serif" font-size="10.00">Mostly small objects (&lt;256B)?</text>
+</g>
+<!-- start&#45;&gt;throughput -->
+<g id="edge4" class="edge">
+<title>start-&gt;throughput</title>
+<path fill="none" stroke="black" d="M159.1,-516.98C243.65,-511.58 377.6,-503.03 464.78,-497.47"/>
+<polygon fill="black" stroke="black" points="464.96,-500.97 474.72,-496.84 464.51,-493.98 464.96,-500.97"/>
+<text xml:space="preserve" text-anchor="middle" x="309.62" y="-519.72" font-family="Times,serif" font-size="14.00">High throughput (small allocs)</text>
+</g>
+<!-- legacy -->
+<g id="node6" class="node">
+<title>legacy</title>
+<path fill="none" stroke="black" d="M580.58,-358C580.58,-358 522.43,-358 522.43,-358 516.43,-358 510.43,-352 510.43,-346 510.43,-346 510.43,-334 510.43,-334 510.43,-328 516.43,-322 522.43,-322 522.43,-322 580.58,-322 580.58,-322 586.58,-322 592.58,-328 592.58,-334 592.58,-334 592.58,-346 592.58,-346 592.58,-352 586.58,-358 580.58,-358"/>
+<text xml:space="preserve" text-anchor="middle" x="551.51" y="-337" font-family="Helvetica,sans-Serif" font-size="10.00">Multithreaded?</text>
+</g>
+<!-- start&#45;&gt;legacy -->
+<g id="edge5" class="edge">
+<title>start-&gt;legacy</title>
+<path fill="none" stroke="black" d="M119.09,-503.67C136.59,-495.57 157.63,-486.11 176.85,-478.2 290.77,-431.33 427.04,-382.78 499.42,-357.58"/>
+<polygon fill="black" stroke="black" points="500.32,-360.97 508.62,-354.38 498.02,-354.36 500.32,-360.97"/>
+<text xml:space="preserve" text-anchor="middle" x="309.62" y="-482.4" font-family="Times,serif" font-size="14.00">Legacy / compatibility</text>
+</g>
+<!-- security -->
+<g id="node7" class="node">
+<title>security</title>
+<path fill="none" stroke="black" d="M630.61,-160C630.61,-160 472.4,-160 472.4,-160 466.4,-160 460.4,-154 460.4,-148 460.4,-148 460.4,-136 460.4,-136 460.4,-130 466.4,-124 472.4,-124 472.4,-124 630.61,-124 630.61,-124 636.61,-124 642.61,-130 642.61,-136 642.61,-136 642.61,-148 642.61,-148 642.61,-154 636.61,-160 630.61,-160"/>
+<text xml:space="preserve" text-anchor="middle" x="551.51" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00">Need strong isolation / UAF defense?</text>
+</g>
+<!-- start&#45;&gt;security -->
+<g id="edge6" class="edge">
+<title>start-&gt;security</title>
+<path fill="none" stroke="black" d="M87.43,-503.64C100.69,-470.86 132.16,-401.58 176.85,-357.2 270.38,-264.31 412.04,-197.39 491.36,-164.66"/>
+<polygon fill="black" stroke="black" points="492.31,-168.05 500.25,-161.03 489.67,-161.57 492.31,-168.05"/>
+<text xml:space="preserve" text-anchor="middle" x="309.62" y="-361.4" font-family="Times,serif" font-size="14.00">Security / isolation required</text>
+</g>
+<!-- jemalloc -->
+<g id="node8" class="node">
+<title>jemalloc</title>
+<path fill="none" stroke="black" d="M1158.83,-1088C1158.83,-1088 900.4,-1088 900.4,-1088 894.4,-1088 888.4,-1082 888.4,-1076 888.4,-1076 888.4,-1022 888.4,-1022 888.4,-1016 894.4,-1010 900.4,-1010 900.4,-1010 1158.83,-1010 1158.83,-1010 1164.83,-1010 1170.83,-1016 1170.83,-1022 1170.83,-1022 1170.83,-1076 1170.83,-1076 1170.83,-1082 1164.83,-1088 1158.83,-1088"/>
+<text xml:space="preserve" text-anchor="start" x="988.5" y="-1076" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="1010.72" y="-1076" font-family="Courier,monospace" font-size="10.00">jemalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="967.65" y="-1066" font-family="Helvetica,sans-Serif" font-size="10.00">        • Multi-arena allocator</text>
+<text xml:space="preserve" text-anchor="start" x="975.42" y="-1056" font-family="Helvetica,sans-Serif" font-size="10.00">        • Low shared CAS</text>
+<text xml:space="preserve" text-anchor="start" x="965.14" y="-1046" font-family="Helvetica,sans-Serif" font-size="10.00">        • Best general-purpose</text>
+<text xml:space="preserve" text-anchor="start" x="933.87" y="-1036" font-family="Helvetica,sans-Serif" font-size="10.00">        • ENV: </text>
+<text xml:space="preserve" text-anchor="start" x="993.33" y="-1036" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MALLOC_ARENA_MAX=&lt;num&gt;</text>
+<text xml:space="preserve" text-anchor="start" x="928.72" y="-1026" font-family="Helvetica,sans-Serif" font-size="10.00">        • Thread binding: per-arena hot threads</text>
+<text xml:space="preserve" text-anchor="start" x="896.4" y="-1016" font-family="Helvetica,sans-Serif" font-size="10.00">        • OS: optional </text>
+<text xml:space="preserve" text-anchor="start" x="987.55" y="-1016" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MADV_HUGEPAGE</text>
+<text xml:space="preserve" text-anchor="start" x="1065.56" y="-1016" font-family="Helvetica,sans-Serif" font-size="10.00"> for large regions        </text>
+</g>
+<!-- cas&#45;&gt;jemalloc -->
+<g id="edge7" class="edge">
+<title>cas-&gt;jemalloc</title>
+<path fill="none" stroke="black" d="M595.64,-943.48C615.22,-951.43 638.84,-960.39 660.61,-967 730.76,-988.31 809.98,-1006.67 876.9,-1020.58"/>
+<polygon fill="black" stroke="black" points="875.97,-1023.97 886.48,-1022.56 877.39,-1017.11 875.97,-1023.97"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-1012.64" font-family="Times,serif" font-size="14.00">High / Shared metadata</text>
+</g>
+<!-- hoard -->
+<g id="node9" class="node">
+<title>hoard</title>
+<path fill="none" stroke="black" d="M1115.09,-992C1115.09,-992 944.13,-992 944.13,-992 938.13,-992 932.13,-986 932.13,-980 932.13,-980 932.13,-946 932.13,-946 932.13,-940 938.13,-934 944.13,-934 944.13,-934 1115.09,-934 1115.09,-934 1121.09,-934 1127.09,-940 1127.09,-946 1127.09,-946 1127.09,-980 1127.09,-980 1127.09,-986 1121.09,-992 1115.09,-992"/>
+<text xml:space="preserve" text-anchor="start" x="1004.88" y="-980" font-family="Helvetica,sans-Serif" font-size="10.00">        Hoard</text>
+<text xml:space="preserve" text-anchor="start" x="962.37" y="-970" font-family="Helvetica,sans-Serif" font-size="10.00">        • False-sharing resistant</text>
+<text xml:space="preserve" text-anchor="start" x="967.36" y="-960" font-family="Helvetica,sans-Serif" font-size="10.00">        • Moderate contention</text>
+<text xml:space="preserve" text-anchor="start" x="942.47" y="-950" font-family="Helvetica,sans-Serif" font-size="10.00">        • ENV: </text>
+<text xml:space="preserve" text-anchor="start" x="1001.93" y="-950" font-family="Courier,monospace" font-weight="bold" font-size="10.00">HOARD_*</text>
+<text xml:space="preserve" text-anchor="start" x="1043.94" y="-950" font-family="Helvetica,sans-Serif" font-size="10.00"> tuning variables</text>
+<text xml:space="preserve" text-anchor="start" x="940.13" y="-940" font-family="Helvetica,sans-Serif" font-size="10.00">        • Notes: per-processor heaps        </text>
+</g>
+<!-- cas&#45;&gt;hoard -->
+<g id="edge8" class="edge">
+<title>cas-&gt;hoard</title>
+<path fill="none" stroke="black" d="M628.74,-931.08C707.71,-937.39 831.82,-947.29 920.82,-954.4"/>
+<polygon fill="black" stroke="black" points="920.29,-957.86 930.53,-955.17 920.84,-950.89 920.29,-957.86"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-950.48" font-family="Times,serif" font-size="14.00">Moderate contention</text>
+</g>
+<!-- mimalloc_cas -->
+<g id="node10" class="node">
+<title>mimalloc_cas</title>
+<path fill="none" stroke="black" d="M1199.86,-916C1199.86,-916 859.36,-916 859.36,-916 853.36,-916 847.36,-910 847.36,-904 847.36,-904 847.36,-870 847.36,-870 847.36,-864 853.36,-858 859.36,-858 859.36,-858 1199.86,-858 1199.86,-858 1205.86,-858 1211.86,-864 1211.86,-870 1211.86,-870 1211.86,-904 1211.86,-904 1211.86,-910 1205.86,-916 1199.86,-916"/>
+<text xml:space="preserve" text-anchor="start" x="988.5" y="-904" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="1010.72" y="-904" font-family="Courier,monospace" font-size="10.00">mimalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="970.15" y="-894" font-family="Helvetica,sans-Serif" font-size="10.00">        • Minimal atomic ops</text>
+<text xml:space="preserve" text-anchor="start" x="948.18" y="-884" font-family="Helvetica,sans-Serif" font-size="10.00">        • Predictable allocation latency</text>
+<text xml:space="preserve" text-anchor="start" x="918.25" y="-874" font-family="Helvetica,sans-Serif" font-size="10.00">        • ENV: </text>
+<text xml:space="preserve" text-anchor="start" x="977.71" y="-874" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MIMALLOC_SHOW_STATS=1</text>
+<text xml:space="preserve" text-anchor="start" x="1103.73" y="-874" font-family="Helvetica,sans-Serif" font-size="10.00"> (debug)</text>
+<text xml:space="preserve" text-anchor="start" x="855.36" y="-864" font-family="Helvetica,sans-Serif" font-size="10.00">        • OS: Thread-local heaps, reset pages with OS page size alignment        </text>
+</g>
+<!-- cas&#45;&gt;mimalloc_cas -->
+<g id="edge9" class="edge">
+<title>cas-&gt;mimalloc_cas</title>
+<path fill="none" stroke="black" d="M628.66,-916.32C639.38,-915.21 650.27,-914.13 660.61,-913.2 717.42,-908.08 779.25,-903.35 835.72,-899.36"/>
+<polygon fill="black" stroke="black" points="835.7,-902.87 845.43,-898.68 835.21,-895.89 835.7,-902.87"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-917.4" font-family="Times,serif" font-size="14.00">Avoid shared state</text>
+</g>
+<!-- mimalloc -->
+<g id="node11" class="node">
+<title>mimalloc</title>
+<path fill="none" stroke="black" d="M1158.46,-840C1158.46,-840 900.77,-840 900.77,-840 894.77,-840 888.77,-834 888.77,-828 888.77,-828 888.77,-794 888.77,-794 888.77,-788 894.77,-782 900.77,-782 900.77,-782 1158.46,-782 1158.46,-782 1164.46,-782 1170.46,-788 1170.46,-794 1170.46,-794 1170.46,-828 1170.46,-828 1170.46,-834 1164.46,-840 1158.46,-840"/>
+<text xml:space="preserve" text-anchor="start" x="988.5" y="-828" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="1010.72" y="-828" font-family="Courier,monospace" font-size="10.00">mimalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="960.97" y="-818" font-family="Helvetica,sans-Serif" font-size="10.00">        • Low variance allocation</text>
+<text xml:space="preserve" text-anchor="start" x="970.14" y="-808" font-family="Helvetica,sans-Serif" font-size="10.00">        • Thread-local heaps</text>
+<text xml:space="preserve" text-anchor="start" x="910.91" y="-798" font-family="Helvetica,sans-Serif" font-size="10.00">        • ENV: </text>
+<text xml:space="preserve" text-anchor="start" x="970.36" y="-798" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MIMALLOC_VALIDATE=1</text>
+<text xml:space="preserve" text-anchor="start" x="1084.38" y="-798" font-family="Helvetica,sans-Serif" font-size="10.00"> for debugging</text>
+<text xml:space="preserve" text-anchor="start" x="896.77" y="-788" font-family="Helvetica,sans-Serif" font-size="10.00">        • OS: pre-touch large arenas to avoid page faults        </text>
+</g>
+<!-- latency&#45;&gt;mimalloc -->
+<g id="edge10" class="edge">
+<title>latency-&gt;mimalloc</title>
+<path fill="none" stroke="black" d="M626.55,-754.96C637.94,-757.1 649.57,-759.18 660.61,-761 731.72,-772.73 810.89,-783.75 877.53,-792.44"/>
+<polygon fill="black" stroke="black" points="876.67,-795.86 887.03,-793.67 877.57,-788.92 876.67,-795.86"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-789.21" font-family="Times,serif" font-size="14.00">Yes</text>
+</g>
+<!-- jemalloc_latency -->
+<g id="node12" class="node">
+<title>jemalloc_latency</title>
+<path fill="none" stroke="black" d="M1202.1,-764C1202.1,-764 857.13,-764 857.13,-764 851.13,-764 845.13,-758 845.13,-752 845.13,-752 845.13,-728 845.13,-728 845.13,-722 851.13,-716 857.13,-716 857.13,-716 1202.1,-716 1202.1,-716 1208.1,-716 1214.1,-722 1214.1,-728 1214.1,-728 1214.1,-752 1214.1,-752 1214.1,-758 1208.1,-764 1202.1,-764"/>
+<text xml:space="preserve" text-anchor="start" x="982.94" y="-752" font-family="Helvetica,sans-Serif" font-size="10.00">            </text>
+<text xml:space="preserve" text-anchor="start" x="1016.28" y="-752" font-family="Courier,monospace" font-size="10.00">jemalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="942.9" y="-742" font-family="Helvetica,sans-Serif" font-size="10.00">            • Arena binding for hot threads</text>
+<text xml:space="preserve" text-anchor="start" x="853.13" y="-732" font-family="Helvetica,sans-Serif" font-size="10.00">            • </text>
+<text xml:space="preserve" text-anchor="start" x="897.58" y="-732" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MALLOC_CONF="narenas:&lt;num&gt;,lg_chunk:&lt;power&gt;"</text>
+<text xml:space="preserve" text-anchor="start" x="1161.63" y="-732" font-family="Helvetica,sans-Serif" font-size="10.00"> for tuning</text>
+<text xml:space="preserve" text-anchor="start" x="928.36" y="-722" font-family="Helvetica,sans-Serif" font-size="10.00">            • OS: optional </text>
+<text xml:space="preserve" text-anchor="start" x="1030.63" y="-722" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MADV_HUGEPAGE</text>
+<text xml:space="preserve" text-anchor="start" x="1108.64" y="-722" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+</g>
+<!-- latency&#45;&gt;jemalloc_latency -->
+<g id="edge11" class="edge">
+<title>latency-&gt;jemalloc_latency</title>
+<path fill="none" stroke="black" d="M626.64,-740C682.07,-740 760.57,-740 833.5,-740"/>
+<polygon fill="black" stroke="black" points="833.17,-743.5 843.17,-740 833.17,-736.5 833.17,-743.5"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-744.2" font-family="Times,serif" font-size="14.00">No / Soft</text>
+</g>
+<!-- snmalloc -->
+<g id="node13" class="node">
+<title>snmalloc</title>
+<path fill="none" stroke="black" d="M1202.23,-698C1202.23,-698 857,-698 857,-698 851,-698 845,-692 845,-686 845,-686 845,-632 845,-632 845,-626 851,-620 857,-620 857,-620 1202.23,-620 1202.23,-620 1208.23,-620 1214.23,-626 1214.23,-632 1214.23,-632 1214.23,-686 1214.23,-686 1214.23,-692 1208.23,-698 1202.23,-698"/>
+<text xml:space="preserve" text-anchor="start" x="988.5" y="-686" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="1010.72" y="-686" font-family="Courier,monospace" font-size="10.00">snmalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="960.42" y="-676" font-family="Helvetica,sans-Serif" font-size="10.00">        • NUMA-aware allocation</text>
+<text xml:space="preserve" text-anchor="start" x="958.75" y="-666" font-family="Helvetica,sans-Serif" font-size="10.00">        • Message-passing model</text>
+<text xml:space="preserve" text-anchor="start" x="932.9" y="-656" font-family="Helvetica,sans-Serif" font-size="10.00">        • Thread-local heaps per NUMA node</text>
+<text xml:space="preserve" text-anchor="start" x="853" y="-646" font-family="Helvetica,sans-Serif" font-size="10.00">        • OS: bind threads to local heaps via </text>
+<text xml:space="preserve" text-anchor="start" x="1044.21" y="-646" font-family="Courier,monospace" font-weight="bold" font-size="10.00">numactl</text>
+<text xml:space="preserve" text-anchor="start" x="1086.21" y="-646" font-family="Courier,monospace" font-size="10.00"> / </text>
+<text xml:space="preserve" text-anchor="start" x="1104.22" y="-646" font-family="Courier,monospace" font-weight="bold" font-size="10.00">sched_setaffinity</text>
+<text xml:space="preserve" text-anchor="start" x="902.89" y="-636" font-family="Helvetica,sans-Serif" font-size="10.00">        • MADV: use huge pages to improve TLB coverage</text>
+<text xml:space="preserve" text-anchor="start" x="924.57" y="-626" font-family="Helvetica,sans-Serif" font-size="10.00">        • Optional: secure mode for isolation        </text>
+</g>
+<!-- numa&#45;&gt;snmalloc -->
+<g id="edge12" class="edge">
+<title>numa-&gt;snmalloc</title>
+<path fill="none" stroke="black" d="M637.16,-589.59C645.09,-591.1 653,-592.59 660.61,-594 716.67,-604.4 777.62,-615.32 833.49,-625.17"/>
+<polygon fill="black" stroke="black" points="832.64,-628.58 843.1,-626.87 833.86,-621.68 832.64,-628.58"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-627.35" font-family="Times,serif" font-size="14.00">Yes</text>
+</g>
+<!-- jemalloc_numa -->
+<g id="node14" class="node">
+<title>jemalloc_numa</title>
+<path fill="none" stroke="black" d="M1174.31,-602C1174.31,-602 884.92,-602 884.92,-602 878.92,-602 872.92,-596 872.92,-590 872.92,-590 872.92,-556 872.92,-556 872.92,-550 878.92,-544 884.92,-544 884.92,-544 1174.31,-544 1174.31,-544 1180.31,-544 1186.31,-550 1186.31,-556 1186.31,-556 1186.31,-590 1186.31,-590 1186.31,-596 1180.31,-602 1174.31,-602"/>
+<text xml:space="preserve" text-anchor="start" x="953.06" y="-590" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="975.29" y="-590" font-family="Courier,monospace" font-size="10.00">jemalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="1035.3" y="-590" font-family="Helvetica,sans-Serif" font-size="10.00"> + NUMA tuning</text>
+<text xml:space="preserve" text-anchor="start" x="944.85" y="-580" font-family="Helvetica,sans-Serif" font-size="10.00">        • Arena binding per NUMA node</text>
+<text xml:space="preserve" text-anchor="start" x="913.93" y="-570" font-family="Helvetica,sans-Serif" font-size="10.00">        • </text>
+<text xml:space="preserve" text-anchor="start" x="947.27" y="-570" font-family="Courier,monospace" font-weight="bold" font-size="10.00">numactl --cpunodebind / --membind</text>
+<text xml:space="preserve" text-anchor="start" x="880.92" y="-560" font-family="Helvetica,sans-Serif" font-size="10.00">        • </text>
+<text xml:space="preserve" text-anchor="start" x="914.26" y="-560" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MALLOC_CONF="narenas:&lt;num&gt;,lg_chunk:&lt;power&gt;"</text>
+<text xml:space="preserve" text-anchor="start" x="918.08" y="-550" font-family="Helvetica,sans-Serif" font-size="10.00">        • </text>
+<text xml:space="preserve" text-anchor="start" x="951.42" y="-550" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MADV_HUGEPAGE</text>
+<text xml:space="preserve" text-anchor="start" x="1029.43" y="-550" font-family="Helvetica,sans-Serif" font-size="10.00"> for large allocations        </text>
+</g>
+<!-- numa&#45;&gt;jemalloc_numa -->
+<g id="edge13" class="edge">
+<title>numa-&gt;jemalloc_numa</title>
+<path fill="none" stroke="black" d="M637.08,-573C699.22,-573 785.69,-573 861.57,-573"/>
+<polygon fill="black" stroke="black" points="861.17,-576.5 871.17,-573 861.17,-569.5 861.17,-576.5"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-577.2" font-family="Times,serif" font-size="14.00">No, OS first-touch acceptable</text>
+</g>
+<!-- tcmalloc -->
+<g id="node15" class="node">
+<title>tcmalloc</title>
+<path fill="none" stroke="black" d="M1184.36,-526C1184.36,-526 874.86,-526 874.86,-526 868.86,-526 862.86,-520 862.86,-514 862.86,-514 862.86,-470 862.86,-470 862.86,-464 868.86,-458 874.86,-458 874.86,-458 1184.36,-458 1184.36,-458 1190.36,-458 1196.36,-464 1196.36,-470 1196.36,-470 1196.36,-514 1196.36,-514 1196.36,-520 1190.36,-526 1184.36,-526"/>
+<text xml:space="preserve" text-anchor="start" x="988.5" y="-514" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="1010.72" y="-514" font-family="Courier,monospace" font-size="10.00">tcmalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="975.71" y="-504" font-family="Helvetica,sans-Serif" font-size="10.00">        • Per-CPU caches</text>
+<text xml:space="preserve" text-anchor="start" x="949.3" y="-494" font-family="Helvetica,sans-Serif" font-size="10.00">        • High small-object throughput</text>
+<text xml:space="preserve" text-anchor="start" x="870.86" y="-484" font-family="Helvetica,sans-Serif" font-size="10.00">        • ENV: </text>
+<text xml:space="preserve" text-anchor="start" x="930.32" y="-484" font-family="Courier,monospace" font-weight="bold" font-size="10.00">TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES=&lt;num&gt;</text>
+<text xml:space="preserve" text-anchor="start" x="898.75" y="-474" font-family="Helvetica,sans-Serif" font-size="10.00">        • ENV: </text>
+<text xml:space="preserve" text-anchor="start" x="958.21" y="-474" font-family="Courier,monospace" font-weight="bold" font-size="10.00">TCMALLOC_SAMPLE_PARAMETER</text>
+<text xml:space="preserve" text-anchor="start" x="1108.23" y="-474" font-family="Helvetica,sans-Serif" font-size="10.00"> for profiling</text>
+<text xml:space="preserve" text-anchor="start" x="907.6" y="-464" font-family="Helvetica,sans-Serif" font-size="10.00">        • OS: thread pinning optional for hot threads        </text>
+</g>
+<!-- throughput&#45;&gt;tcmalloc -->
+<g id="edge14" class="edge">
+<title>throughput-&gt;tcmalloc</title>
+<path fill="none" stroke="black" d="M626.64,-492C686.55,-492 773.39,-492 851.03,-492"/>
+<polygon fill="black" stroke="black" points="850.9,-495.5 860.9,-492 850.9,-488.5 850.9,-495.5"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-496.2" font-family="Times,serif" font-size="14.00">Yes</text>
+</g>
+<!-- jemalloc_throughput -->
+<g id="node16" class="node">
+<title>jemalloc_throughput</title>
+<path fill="none" stroke="black" d="M1128.44,-440C1128.44,-440 930.79,-440 930.79,-440 924.79,-440 918.79,-434 918.79,-428 918.79,-428 918.79,-394 918.79,-394 918.79,-388 924.79,-382 930.79,-382 930.79,-382 1128.44,-382 1128.44,-382 1134.44,-382 1140.44,-388 1140.44,-394 1140.44,-394 1140.44,-428 1140.44,-428 1140.44,-434 1134.44,-440 1128.44,-440"/>
+<text xml:space="preserve" text-anchor="start" x="988.5" y="-428" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="1010.72" y="-428" font-family="Courier,monospace" font-size="10.00">jemalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="943.19" y="-418" font-family="Helvetica,sans-Serif" font-size="10.00">        • Good for mixed-size allocations</text>
+<text xml:space="preserve" text-anchor="start" x="926.79" y="-408" font-family="Helvetica,sans-Serif" font-size="10.00">        • Arena-local allocations for concurrency</text>
+<text xml:space="preserve" text-anchor="start" x="959.65" y="-398" font-family="Helvetica,sans-Serif" font-size="10.00">        • </text>
+<text xml:space="preserve" text-anchor="start" x="992.99" y="-398" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MALLOC_CONF</text>
+<text xml:space="preserve" text-anchor="start" x="1059" y="-398" font-family="Helvetica,sans-Serif" font-size="10.00"> tunables</text>
+<text xml:space="preserve" text-anchor="start" x="945.03" y="-388" font-family="Helvetica,sans-Serif" font-size="10.00">        • OS: optional </text>
+<text xml:space="preserve" text-anchor="start" x="1036.18" y="-388" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MADV_HUGEPAGE</text>
+</g>
+<!-- throughput&#45;&gt;jemalloc_throughput -->
+<g id="edge15" class="edge">
+<title>throughput-&gt;jemalloc_throughput</title>
+<path fill="none" stroke="black" d="M626.6,-477.46C637.98,-475.31 649.6,-473.16 660.61,-471.2 742.74,-456.58 835.43,-441.43 907.23,-429.98"/>
+<polygon fill="black" stroke="black" points="907.75,-433.44 917.08,-428.42 906.65,-426.53 907.75,-433.44"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-475.4" font-family="Times,serif" font-size="14.00">Mixed / large objects</text>
+</g>
+<!-- glibc -->
+<g id="node17" class="node">
+<title>glibc</title>
+<path fill="none" stroke="black" d="M1148.38,-364C1148.38,-364 910.84,-364 910.84,-364 904.84,-364 898.84,-358 898.84,-352 898.84,-352 898.84,-328 898.84,-328 898.84,-322 904.84,-316 910.84,-316 910.84,-316 1148.38,-316 1148.38,-316 1154.38,-316 1160.38,-322 1160.38,-328 1160.38,-328 1160.38,-352 1160.38,-352 1160.38,-358 1154.38,-364 1148.38,-364"/>
+<text xml:space="preserve" text-anchor="start" x="989.05" y="-352" font-family="Helvetica,sans-Serif" font-size="10.00">        glibc malloc()</text>
+<text xml:space="preserve" text-anchor="start" x="959.59" y="-342" font-family="Helvetica,sans-Serif" font-size="10.00">        • Default system allocator</text>
+<text xml:space="preserve" text-anchor="start" x="906.84" y="-332" font-family="Helvetica,sans-Serif" font-size="10.00">        • Optionally enable arenas: </text>
+<text xml:space="preserve" text-anchor="start" x="1056.37" y="-332" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MALLOC_ARENA_MAX</text>
+<text xml:space="preserve" text-anchor="start" x="919.31" y="-322" font-family="Helvetica,sans-Serif" font-size="10.00">        • OS: relies on first-touch NUMA policy        </text>
+</g>
+<!-- legacy&#45;&gt;glibc -->
+<g id="edge16" class="edge">
+<title>legacy-&gt;glibc</title>
+<path fill="none" stroke="black" d="M592.69,-340C657.03,-340 786.2,-340 887.32,-340"/>
+<polygon fill="black" stroke="black" points="887.05,-343.5 897.05,-340 887.05,-336.5 887.05,-343.5"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-344.2" font-family="Times,serif" font-size="14.00">Yes</text>
+</g>
+<!-- dlmalloc -->
+<g id="node18" class="node">
+<title>dlmalloc</title>
+<path fill="none" stroke="black" d="M1148.99,-298C1148.99,-298 910.24,-298 910.24,-298 904.24,-298 898.24,-292 898.24,-286 898.24,-286 898.24,-272 898.24,-272 898.24,-266 904.24,-260 910.24,-260 910.24,-260 1148.99,-260 1148.99,-260 1154.99,-260 1160.99,-266 1160.99,-272 1160.99,-272 1160.99,-286 1160.99,-286 1160.99,-292 1154.99,-298 1148.99,-298"/>
+<text xml:space="preserve" text-anchor="start" x="988.5" y="-286" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="1010.72" y="-286" font-family="Courier,monospace" font-size="10.00">dlmalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="935.4" y="-276" font-family="Helvetica,sans-Serif" font-size="10.00">        • Single-threaded, minimal overhead</text>
+<text xml:space="preserve" text-anchor="start" x="906.24" y="-266" font-family="Helvetica,sans-Serif" font-size="10.00">        • Good for embedded / low-memory systems        </text>
+</g>
+<!-- legacy&#45;&gt;dlmalloc -->
+<g id="edge17" class="edge">
+<title>legacy-&gt;dlmalloc</title>
+<path fill="none" stroke="black" d="M592.93,-331.41C613.18,-327.32 638.12,-322.59 660.61,-319.2 734.96,-308.01 818.21,-298.65 886.69,-291.78"/>
+<polygon fill="black" stroke="black" points="886.88,-295.28 896.48,-290.81 886.19,-288.32 886.88,-295.28"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-323.4" font-family="Times,serif" font-size="14.00">No</text>
+</g>
+<!-- snmalloc_sec -->
+<g id="node19" class="node">
+<title>snmalloc_sec</title>
+<path fill="none" stroke="black" d="M1163.74,-242C1163.74,-242 895.49,-242 895.49,-242 889.49,-242 883.49,-236 883.49,-230 883.49,-230 883.49,-196 883.49,-196 883.49,-190 889.49,-184 895.49,-184 895.49,-184 1163.74,-184 1163.74,-184 1169.74,-184 1175.74,-190 1175.74,-196 1175.74,-196 1175.74,-230 1175.74,-230 1175.74,-236 1169.74,-242 1163.74,-242"/>
+<text xml:space="preserve" text-anchor="start" x="988.5" y="-230" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="1010.72" y="-230" font-family="Courier,monospace" font-size="10.00">snmalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="967.22" y="-220" font-family="Helvetica,sans-Serif" font-size="10.00">        • Isolation + invariants</text>
+<text xml:space="preserve" text-anchor="start" x="970.14" y="-210" font-family="Helvetica,sans-Serif" font-size="10.00">        • Thread-local heaps</text>
+<text xml:space="preserve" text-anchor="start" x="982.94" y="-200" font-family="Helvetica,sans-Serif" font-size="10.00">        • NUMA-aware</text>
+<text xml:space="preserve" text-anchor="start" x="891.49" y="-190" font-family="Helvetica,sans-Serif" font-size="10.00">        • Optional secure mode (heap resets, guard pages)        </text>
+</g>
+<!-- security&#45;&gt;snmalloc_sec -->
+<g id="edge18" class="edge">
+<title>security-&gt;snmalloc_sec</title>
+<path fill="none" stroke="black" d="M642.98,-159.97C648.94,-161.03 654.85,-162.05 660.61,-163 729.77,-174.41 806.55,-185.14 872.01,-193.72"/>
+<polygon fill="black" stroke="black" points="871.39,-197.17 881.76,-194.99 872.29,-190.23 871.39,-197.17"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-191.21" font-family="Times,serif" font-size="14.00">Yes</text>
+</g>
+<!-- mimalloc_sec -->
+<g id="node20" class="node">
+<title>mimalloc_sec</title>
+<path fill="none" stroke="black" d="M1108.44,-166C1108.44,-166 950.79,-166 950.79,-166 944.79,-166 938.79,-160 938.79,-154 938.79,-154 938.79,-130 938.79,-130 938.79,-124 944.79,-118 950.79,-118 950.79,-118 1108.44,-118 1108.44,-118 1114.44,-118 1120.44,-124 1120.44,-130 1120.44,-130 1120.44,-154 1120.44,-154 1120.44,-160 1114.44,-166 1108.44,-166"/>
+<text xml:space="preserve" text-anchor="start" x="988.5" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="1010.72" y="-154" font-family="Courier,monospace" font-size="10.00">mimalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="964.02" y="-144" font-family="Helvetica,sans-Serif" font-size="10.00">        • Secure mode enabled</text>
+<text xml:space="preserve" text-anchor="start" x="946.79" y="-134" font-family="Helvetica,sans-Serif" font-size="10.00">        • Guard pages and page resets</text>
+<text xml:space="preserve" text-anchor="start" x="954.03" y="-124" font-family="Helvetica,sans-Serif" font-size="10.00">        • OS: pre-touch arenas        </text>
+</g>
+<!-- security&#45;&gt;mimalloc_sec -->
+<g id="edge19" class="edge">
+<title>security-&gt;mimalloc_sec</title>
+<path fill="none" stroke="black" d="M642.9,-142C723.99,-142 842.86,-142 927.17,-142"/>
+<polygon fill="black" stroke="black" points="927.06,-145.5 937.06,-142 927.06,-138.5 927.06,-145.5"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-146.2" font-family="Times,serif" font-size="14.00">Moderate</text>
+</g>
+<!-- jemalloc_sec -->
+<g id="node21" class="node">
+<title>jemalloc_sec</title>
+<path fill="none" stroke="black" d="M1171.95,-100C1171.95,-100 887.28,-100 887.28,-100 881.28,-100 875.28,-94 875.28,-88 875.28,-88 875.28,-74 875.28,-74 875.28,-68 881.28,-62 887.28,-62 887.28,-62 1171.95,-62 1171.95,-62 1177.95,-62 1183.95,-68 1183.95,-74 1183.95,-74 1183.95,-88 1183.95,-88 1183.95,-94 1177.95,-100 1171.95,-100"/>
+<text xml:space="preserve" text-anchor="start" x="988.5" y="-88" font-family="Helvetica,sans-Serif" font-size="10.00">        </text>
+<text xml:space="preserve" text-anchor="start" x="1010.72" y="-88" font-family="Courier,monospace" font-size="10.00">jemalloc()</text>
+<text xml:space="preserve" text-anchor="start" x="883.28" y="-78" font-family="Helvetica,sans-Serif" font-size="10.00">        • tcache quarantine enabled (</text>
+<text xml:space="preserve" text-anchor="start" x="1040.6" y="-78" font-family="Courier,monospace" font-weight="bold" font-size="10.00">MALLOC_CONF="tcache:1"</text>
+<text xml:space="preserve" text-anchor="start" x="1172.62" y="-78" font-family="Helvetica,sans-Serif" font-size="10.00">)</text>
+<text xml:space="preserve" text-anchor="start" x="922.05" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">        • Optional guard pages for debugging        </text>
+</g>
+<!-- security&#45;&gt;jemalloc_sec -->
+<g id="edge20" class="edge">
+<title>security-&gt;jemalloc_sec</title>
+<path fill="none" stroke="black" d="M642.95,-124.04C648.92,-123.02 654.84,-122.07 660.61,-121.2 726.86,-111.22 800.17,-102.71 863.81,-96.12"/>
+<polygon fill="black" stroke="black" points="864.07,-99.61 873.66,-95.1 863.36,-92.64 864.07,-99.61"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-125.4" font-family="Times,serif" font-size="14.00">Performance first</text>
+</g>
+<!-- glibc_sec -->
+<g id="node22" class="node">
+<title>glibc_sec</title>
+<path fill="none" stroke="black" d="M1080.92,-44C1080.92,-44 978.31,-44 978.31,-44 972.31,-44 966.31,-38 966.31,-32 966.31,-32 966.31,-12 966.31,-12 966.31,-6 972.31,0 978.31,0 978.31,0 1080.92,0 1080.92,0 1086.92,0 1092.92,-6 1092.92,-12 1092.92,-12 1092.92,-32 1092.92,-32 1092.92,-38 1086.92,-44 1080.92,-44"/>
+<text xml:space="preserve" text-anchor="middle" x="1029.61" y="-31" font-family="Helvetica,sans-Serif" font-size="10.00">glibc malloc</text>
+<text xml:space="preserve" text-anchor="middle" x="1029.61" y="-19" font-family="Helvetica,sans-Serif" font-size="10.00">• Compatible</text>
+<text xml:space="preserve" text-anchor="middle" x="1029.61" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">• Minimal tuning options</text>
+</g>
+<!-- security&#45;&gt;glibc_sec -->
+<g id="edge21" class="edge">
+<title>security-&gt;glibc_sec</title>
+<path fill="none" stroke="black" d="M578.31,-123.66C599.43,-109.55 630.63,-90.74 660.61,-80.2 758.85,-45.66 879.06,-31.55 954.76,-25.83"/>
+<polygon fill="black" stroke="black" points="954.83,-29.33 964.55,-25.12 954.32,-22.35 954.83,-29.33"/>
+<text xml:space="preserve" text-anchor="middle" x="743.8" y="-84.4" font-family="Times,serif" font-size="14.00">Compatibility / fallback</text>
+</g>
+</g>
+</svg>

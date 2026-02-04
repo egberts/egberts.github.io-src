@@ -110,7 +110,7 @@ jemalloc , Jason Evans ("Facebook, FreeBSD") , [whitepaper](https://people.freeb
 sfmalloc , "SNU, Korea" , ,
 Streamflow , , ,
 ptmalloc3 , , [website](http://www.malloc.de/en/)[tarball] (http://www.malloc.de/malloc/ptmalloc3-current.tar.gz),
-nedmalloc-1.02 , , ,
+nedmalloc-1.02 , , [website](https://github.com/ned14/nedmalloc) ,
 lockless , , ,
 ptmalloc2 , GNU Libc (dlmalloc-forked) , [website](http://www.malloc.de/en/) [tarball](http://www.malloc.de/malloc/ptmalloc2-current.tar.gz) ,
 Hoard , , ,
@@ -205,3 +205,4 @@ References
 * [The Memory Fragmentation Problem: Solved? Johnstone 1997](https://www.cs.tufts.edu/~nr/cs257/archive/paul-wilson/fragmentation.pdf)
 * [Simulation of High-Performance Memory Allocators, Risco-Martin](https://arxiv.org/pdf/2406.15776)
 * [Dynamic Storage Allocation: A Survey and Critical Review](https://www.cs.hmc.edu/~oneill/gc-library/Wilson-Alloc-Survey-1995.pdf), very useful chronological order of malloc()
+* [nedmalloc](https://github.com/ned14/nedmalloc)

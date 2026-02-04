@@ -35,6 +35,7 @@ Env. varname, description, type, source
 `TERM`, The terminal handling environment variable., `tty_name`, `mux.c` `ssh.c`
 `TMPDIR`, Specifies a temporary directory for scratch space., dirpath, `misc.c`
 `TZ`, Specifies the timezone., 3-char timezone string, `auth-pam.c` `session.c`
+`WAYLAND_DISPLAY`, The default host/display number and screen of the current desktop session. Set by ssh to point to a value of the form “hostname:n” for X11 forwarding., `<host>:<display-id>.<screen-id>`, `channels.c` `mux.c` `readpass.c` `ssh.c`
 [/jtable]
 
 ### SSH server (daemon)
@@ -52,6 +53,8 @@ For the OpenSSH agent, the list of environment variables are:
 
 [jtable]
 Env. varname, description, type, source
+`LISTEN_FDS`, File descriptior, integer, `ssh-agent.c`
+`LISTEN_PID`, UNIX process ID, process ID integer, `ssh-agent.c`
 `SHELL`, The file path to the user's shell executable image as specified by the password database., filepath, `readconf.c` `sftp.c` `ssh-agent.c` `sshconnect.c`
 `SSH_AGENTPID_ENV_NAME`, Name of the environment variable containing the process ID of the authentication agent., process ID, `ssh-agent.c`
 `SSH_AUTHSOCKET_ENV_NAME`, Name of the environment variable containing the pathname of the authentication socket., filepath, `authfd.c`
@@ -76,7 +79,7 @@ Env. varname, description, type, source
 [/jtable]
 
 ### SSH session forwarder
-For the OpenSSH session forwarder, the list of environment variables are:
+For the OpenSSH session forwarder (used by `sftp`, `sctp`, and `ssh`), the list of environment variables are:
 
 [jtable]
 Env. varname, description, type, source
