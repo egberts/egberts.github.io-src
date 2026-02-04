@@ -25,13 +25,13 @@ Env. varname, description, type, source
 `LANG`, The locale of the OS system., locale category, `misc.c`
 `PATH`, A set of directories where executable programs are located., list of filepaths, `session.c`
 `SHELL`, The file path to the user's shell executable image as specified by the password database., filepath, `readconf.c` `sftp.c` `ssh-agent.c` `sshconnect.c`
-`SSH_ASKPASS`, If ssh needs a passphrase, it will execute the program specified by `SSH_ASKPASS` to open an X11 window for passphrase input., filepath, `readpass.c`
+`SSH_ASKPASS`, If ssh needs a passphrase; it will execute the program specified by `SSH_ASKPASS` to open an X11 window for passphrase input., filepath, `readpass.c`
 `SSH_ASKPASS_ENV`, Alternative to `SSH_ASKPASS`, filepath, `readpass.c`
 `SSH_ASKPASS_REQUIRE`, Controls use of the askpass program. Can be set to `never`, `prefer`, or `force`., 'never' or 'prefer', `readpass.c`
 `SSH_ASKPASS_REQUIRE_ENV`, Alternative to `SSH_ASKPASS_REQUIRE`, filepath, `readpass.c`
 `SSH_PKCS11_HELPER`, Used with HMS vault., filepath, `ssh-pkcs11-client.c`
 `SSH_SK_HELPER`, Security Key helper binary file for FIDO2 or U2F security keys., filepath, `ssh-sk-client.c`
-`SSH_SOCKS_SERVER`, SOCKS firewall connection info, set by the SSH user before ssh(1) is called., string, 
+`SSH_SOCKS_SERVER`, SOCKS firewall connection info; set by the SSH user before ssh(1) is called., string, 
 `TERM`, The terminal handling environment variable., `tty_name`, `mux.c` `ssh.c`
 `TMPDIR`, Specifies a temporary directory for scratch space., dirpath, `misc.c`
 `TZ`, Specifies the timezone., 3-char timezone string, `auth-pam.c` `session.c`
@@ -86,7 +86,7 @@ Env. varname, description, type, source
 `DISPLAY`, The default host/display number and screen of the current desktop session., string, `channels.c` `mux.c` `readpass.c` `ssh.c`
 `HOME`, The path of the user home directory as specified by the password database., filepath, `sshconnect.c`
 `LOGIN`, UNIX user name (used only on IBM AIX)., string, `session.c`
-`LOGNAME`, Synonym for `USER`, set for compatibility with systems that use this variable., string, `session.c`
+`LOGNAME`, Synonym for `USER`; set for compatibility with systems that use this variable., string, `session.c`
 `KRB5CCNAME`, MIT Kerberos 5 session name (only used in KRB5 environment)., string, `session.c`
 `MAIL`, Set to the filepath of a user local inbox for UNIX Maildir system., filepath or directory path, `session.c`
 `PATH`, A set of directories where executable programs are located., list of filepaths, `session.c`
